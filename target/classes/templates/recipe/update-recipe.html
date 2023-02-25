@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <th:block th:include="~{fragments/head}"></th:block>
+  <title>All Recipes</title>
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <th:block th:include="~{fragments/nav-bar}"></th:block>
+  </header>
+ <!-- End Header -->
+
+  <main id="main">
+    <input type="hidden" name="recipeId" th:field="*{id}">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 data-aos="fade-up">
+
+            <div class="section-header">
+              <p  th:text="${recipe.name}"></p>
+            </div>
+
+          </h2>
+          <ol>
+            <li><a th:href="@{/home}">Home</a></li>
+            <li>Recipe Details</li>
+          </ol>
+        </div>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Gallery Section ======= -->
+    <section id="gallery" class="gallery section-bg pb-0">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <p th:text="${recipe.name}"></p>
+        </div>
+<!--            for each picture...-->
+        <div class="gallery-slider swiper">
+          <div class="swiper-wrapper align-items-center" >
+            <div class="swiper-slide" th:each="picture:${pictures}">
+              <a class="glightbox" data-gallery="images-gallery" th:href="${picture.getPictureUrl}" ><img th:src="${picture.getPictureUrl}" class="img-fluid rounded-5" alt="" src=""></a>
+            </div>
+          </div>
+          <div class="swiper-pagination m-3"></div>
+        </div>
+
+      </div>
+    </section><!-- End Gallery Section -->
+
+    <section id="why-us" class="why-us section-bg">
+      <div class="container justify-content-center" data-aos="fade-up">
+
+        <div class="col-lg-12 justify-content-center" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="row lg-12 justify-content-center">
+              <div class="col-lg-6 justify-content-center rounded-5" data-aos="fade-up" data-aos-delay="200">
+                <form action="#" th:action="@{/update-recipe/{id}(id=*{id})}" th:object="${recipe}" th:method="PUT">
+
+                  <div class="text-center mt-3" >
+                    <h4 class="mt-4 mb-0">Recipe name</h4>
+                    <input type="text" th:field="*{name}" class="form-control mb-4 col-4">
+                    <h4 class="mt-2 mb-0">Description</h4>
+                    <textarea type="text" th:field="*{description}" class="form-control mb-4 col-4" rows="5">
+                    </textarea>
+
+                    <h4 class="mt-2 mb-0">Category</h4>
+                    <select id="category"
+                            name="category"
+                            class="form-control-color w-75">
+                      <option value="">Select category</option>
+                      <option th:each="c : ${T(com.example.myshoppingapp.domain.enums.Category).values()}"
+                              th:text="${c}"
+                              th:value="${c}"
+                              th:field="*{category}"
+                              th:selected="${e} == *{category}">
+                        Category type
+                      </option>
+                    </select>
+
+                    <h4 class="mt-2 mb-0">Update Recipe url</h4>
+                    <input type="text"  class="form-control mb-4 col-4"
+                           id="url"
+                           name="url"
+                           th:field="*{url}">
+                    <h4 class="mt-2 mb-0">Add additional picture</h4>
+                    <input type="text"  class="form-control mb-4 col-4"
+                           id="imageUrl"
+                           name="imageUrl"
+                           placeholder="Additional picture link ...">
+                  </div>
+                  <button type="submit" class="btn btn-info col-5"> Update </button>
+                </form>
+                <hr class="bg-hero hr-2"/>
+                <a th:href="@{/delete-recipe/{id}(id=*{id})}"
+                   class="btn btn-light text-danger">Delete recipe</a>
+                <hr class="bg-hero hr-2"/>
+
+                <a th:href="@{/home}"
+                   class="btn btn-light text-body-secondary">Back to home</a>
+              </div>
+              <div class="col-lg-5 justify-content-center rounded-5 mt-10" >
+                <div class="icon-box d-flex flex-column align-items-center rounded-5 mt-10">
+                  <h4>Needed products</h4>
+                  <h6 th:if="${recipe.productList.isEmpty()}">
+                    <hr class="bg-hero hr-4 bg-body-secondary aos-animate"/>
+                    No product added for this recipe yet <br>
+                    Add the first needed product <br>
+                    <i class="bi bi-box-arrow-in-down-left"></i>
+                  </h6>
+                  <table class="table table-responsive-sm  rounded-3 bg-white"  th:unless="${recipe.productList.isEmpty()}">
+                    <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr   th:each="product:${recipe.productList}">
+                      <td  >
+                        <a class="bi bi-cart-plus" href="#" th:href="@{/add-product-to-shopping-list/{name}(name =${product.name})}"></a>
+                        <a th:href="@{#}" class="btn btn-light " th:text="${product.name}"> </a>
+                      </td>
+                      <td>
+                        <!--                remove Product-->
+                        <a th:href="@{/delete-product-from-recipe/{id}/{productId}(id = ${recipe.id}, productId = ${product.id})}"  class="btn btn-light "><i class="fa-solid fa-xmark"></i></a>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  <div class="col-lg-8 justify-content-center">
+                    <form  th:method="post" th:action="@{/add-product-to-recipe/{id}(id = ${recipe.id})}">
+                      <input type="text" class="form-control" id="addItems" placeholder="Add item . . ." name="productName">
+                    </form>
+                  </div>
+                </div>
+              </div><!-- End Icon Box -->
+            </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+  </footer>
+
+</body>
+
+</html>

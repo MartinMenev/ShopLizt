@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <th:block th:include="~{fragments/head}"></th:block>
+  <title>All Recipes</title>
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <th:block th:include="~{fragments/nav-bar}"></th:block>
+  </header>
+ <!-- End Header -->
+
+  <main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container align-content-center">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 data-aos="fade-up">
+
+            <div class="section-header align-content-center">
+              <p > <span>My products</span>
+              </p>
+            </div>
+
+          </h2>
+          <ol>
+            <li><a th:href="@{/home}">Home</a></li>
+            <li>My Shopping list</li>
+          </ol>
+        </div>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+
+    <section id="why-us" class="why-us section-bg">
+      <div class="container justify-content-center" >
+        <div class="row justify-content-center">
+              <div class="col-lg-7 justify-content-center rounded-5" >
+                <div class="icon-box d-flex flex-column align-items-center rounded-5 ">
+                  <h2>My shopping list</h2>
+                  <h6 th:if="${products.isEmpty()}">
+                    <hr class="bg-hero hr-4 bg-body-secondary aos-animate"/>
+                    Nothing yet. <br>
+                    Add your first product <br>
+                    <i class="bi bi-box-arrow-in-down-left"></i>
+                  <div class="col-lg-8 justify-content-center">
+                    <form  th:method="post" th:action="@{/add-product}">
+                      <input type="text" class="form-control" id="addItem" placeholder="Add item . . ." name="name">
+                    </form>
+                  </div>
+                  </h6>
+                  <table class="table table-responsive-sm  rounded-3 bg-white"  th:if="${!products.isEmpty()}">
+                    <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr   th:each="product:${products}">
+                      <td  >
+                        <a title="Mark as Done" class="bi-check2-circle" href="#" th:href="@{/buy-product/{id}(id=${product.id})}"></a>
+                        <a th:href="@{#}" class="btn btn-light " th:text="${product.name}"> </a>
+                      </td>
+                      <td>
+
+                                              <!--               moveUp Product-->
+                        <a  title="Move up" th:href="@{/moveUpProduct/{position}(position=${product.position})}" class="btn btn-light"> <i class="bi bi-arrow-up"></i> </a>
+
+
+                          <!--                moveDown Product-->
+                        <a  title="Move down" th:href="@{/moveDownProduct/{position}(position=${product.position})}" class="btn btn-light "> <i class="bi bi-arrow-down"></i> </a>
+
+
+                          <!--                update Product&ndash;&gt;-->
+                        <a title="Edit item" th:href="@{/product/updateProduct/{id}(id=${product.id})}" class="btn btn-light "> <i class="bi bi-pencil-square"></i> </a>
+
+
+
+                          <!--                remove Product-->
+                        <a title="Delete item" th:href="@{/deleteProduct/{id}(id=${product.id})}" class="btn btn-light "><i class="fa-solid fa-xmark"></i></a>
+
+
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+
+
+                </div>
+              </div><!-- End Icon Box -->
+
+              <div class="col-lg-5 justify-content-center rounded-5" th:if="${!boughtProducts.isEmpty()}">
+                <div class="icon-box d-flex flex-column align-items-center rounded-5 bg-body-secondary">
+                  <h4><i>You might want them again</i></h4>
+                  <table class="table table-responsive-sm  rounded-3 bg-body-secondary" >
+                    <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr   th:each="product:${boughtProducts}">
+                      <td  >
+                        <a title="Return item to my Shopping list" class="bi bi-arrow-clockwise" href="#" th:href="@{/reuse-product/{id}(id=${product.id})}"></a>
+                        <a th:href="@{#}" class="btn bg-body-secondary " th:text="${product.name}"> </a>
+                      </td>
+                      <td>
+
+                        <a  th:href="@{#}" class="btn bg-body-secondary " th:text="${product.boughtOn}"> </a>
+
+                        <!--                remove Product-->
+                        <a title="Delete item" th:href="@{/deleteProduct/{id}(id=${product.id})}" class="btn btn-light bg-body-secondary"><i class="fa-solid fa-xmark bg-body-secondary"></i></a>
+
+
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+
+
+                </div>
+              </div><!-- End Icon Box -->
+
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+  </footer>
+
+</body>
+
+</html>

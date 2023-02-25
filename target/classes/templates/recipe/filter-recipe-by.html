@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <th:block th:include="~{fragments/head}"></th:block>
+  <title>All Recipes</title>
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <th:block th:include="~{fragments/nav-bar}"></th:block>
+  </header>
+ <!-- End Header -->
+
+  <main id="main-recipes">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 data-aos="fade-up">Inspiration</h2>
+
+          <button th:if="${@loggedUser.id}"  class="btn bg-body-secondary rounded-5" >
+            <a  th:href="@{/add-recipe}"
+               class="btn btn-light"> <i class="fa-solid fa-book-open-reader"></i> Add recipe </a>
+          </button>
+          <form  th:method="get" th:action="@{/search-recipes}">
+            <input type="text" class="form-control" id="searchRecipe" placeholder="Search recipe . . ." name="text">
+          </form>
+          <form  th:method="get" th:action="@{/filter-recipes}"
+                 th:if="${@loggedUser.id}"  class="btn bg-body-secondary rounded-5" >
+            <select class="form-control-color w-75" name = "category" onchange="this.form.submit()">
+              <option value="">  Filter by  </option>
+              <option th:each="category : ${T(com.example.myshoppingapp.domain.enums.Category).values()}"
+                      th:text="${category}"
+                      th:value="${category}">
+              </option>
+            </select>
+          </form>
+
+          <ol>
+            <li><a th:href="@{/all-recipes}">Go back</a></li>
+            <li>Recipes by <span th:text="${category}"></span></li>
+          </ol>
+        </div>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+
+
+
+    <!-- ======= Recipes Section ======= -->
+    <section id="chefs" class="chefs section-bg">
+      <div class="container aos-init aos-animate" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Recipes</h2>
+          <p>Category <span th:text="${category}"></span></p>
+        </div>
+
+        <div class="row gy-4" th:unless="${recipes.isEmpty()}">
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up" data-aos-delay="100"
+               th:each="recipe : ${recipes}"
+               th:object="${recipe}">
+
+            <div class="chef-member bg-secondary-subtle rounded-4 border-1">
+              <div class="member-img">
+                <img th:src="*{imageUrl}" class="img-fluid" alt="">
+
+              </div>
+              <div class="member-info">
+                <h4 th:text="*{name}"></h4>
+                <span th:text="*{getAuthorName}">(added by)</span>
+                <p th:text="*{description}"></p>
+              </div>
+              <a class="button" href="#" th:href="@{/recipe/{id}(id=*{id})}">Details</a>
+              <a class="button" href="#" th:href="*{url}">Open link</a>
+            </div>
+
+
+
+          </div><!-- End Recipes Member -->
+
+
+        </div>
+
+        <div class="row gy-4" th:if="${recipes.isEmpty()}">
+          <p class="justify-content-center">
+            <h6 class="align-content-center">
+              Sorry, we still don't have any recipes with Category: "<span th:text="${category}"></span>" <br>
+              But you can review our latest ones and chose from them...
+            </h6>
+
+          </p>
+            <!-- ======= Recipes Section ======= -->
+          <section id="events" class="events" th:unless="${allRecipes.isEmpty()}" >
+            <div class="container" data-aos="fade-up">
+              <div class="section-header align-content-center">
+                <h2>Recipes</h2>
+                <p>Latest Recipes <span>You might like</span> </p>
+                <button class="btn glow-button rounded-1" >
+                  <a th:href="@{/all-recipes}"
+                     class="btn btn-light"> <i class="bi bi-link-45deg"> OPEN ALL </i> </a>
+                </button>
+              </div>
+
+              <div class="slides-3 swiper rounded-1" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide event-item d-flex flex-column justify-content-end"
+                       th:each="recipe : ${allRecipes}"
+                       th:style="'background-image:url(' + ${recipe.imageUrl} + ');'">
+
+                    <h3 th:text="${recipe.name}"></h3>
+                    <div class="price align-self-start" th:text="${recipe.authorName}"></div>
+                    <p class="description" th:text="${recipe.description}"> </p>
+                  </div>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+            </div>
+          </section><!-- End Recipes Section -->
+
+
+
+
+
+        </div>
+
+
+      </div>
+    </section><!-- End Chefs Section -->
+
+
+
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+  </footer>
+
+</body>
+
+</html>

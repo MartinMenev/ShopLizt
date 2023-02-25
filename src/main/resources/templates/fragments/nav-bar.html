@@ -1,0 +1,74 @@
+<th:block th:fragment="nav-bar" >
+    <div class="container d-flex align-items-center justify-content-between bg-gradient rounded-5">
+        <h3>
+            <a href="/" class="logo d-flex align-items-center me-auto me-lg-0">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <!-- <img src="assets/img/logo.png" alt=""> -->
+                 Sh <i class="fa-solid fa-cart-arrow-down"></i> pLizt</a>
+        </h3>
+        <nav id="navbar" class="navbar">
+            <th:block th:if="${@loggedUser.id}">
+                <ul>
+                    <li>
+                    <span type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Add item
+                    </span>
+                    </li>
+                    <li>
+                        <form  th:method="post" th:action="@{/add-product}">
+                            <input type="text" class="form-control" id="addItem" placeholder="Add item . . ." name="name">
+                        </form>
+                    </li>
+                    <li><a th:href="@{/home}">Home</a></li>
+                    <li><a th:href="@{/product-list}">Item list</a></li>
+                    <li><a th:href="@{/all-recipes}">Recipes</a></li>
+                    <li><a th:href="@{/export/export-all-products}">Print</a></li>
+                    <li class="dropdown"><a href="#">Welcome, &nbsp; <span class="text-dark" th:text="${@loggedUser.getUsername()}"></span> </a>
+                        <ul>
+                            <li><a th:href="@{/user/profile}">View profile</a></li>
+                            <li><a th:href="@{/update-user}">Edit profile</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <form th:if="${@loggedUser.id}" th:action="@{/users/logout}" method="post">
+                            <button type="submit" class="btn bg-body-primary" name="button">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </th:block>
+        </nav>
+        <!-- .navbar -->
+        <a th:unless="${@loggedUser.id}"   class="btn-book-a-table" th:href="@{/users/login}">login</a>
+        <i th:if="${@loggedUser.id}" class="mobile-nav-toggle mobile-nav-show bi bi-list"> </i>
+        <i th:if="${@loggedUser.id}" class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+    </div>
+
+    <!-- Adding Product with Modal box -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-5" id="exampleModalLabel">
+                        <h2 class="logo-home-text">
+                            add item
+                        </h2>
+
+                    </h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form  th:method="post" th:action="@{/add-product}">
+                        <label>
+                            <input type="text" class="form-control"  placeholder="add item . . ." name="name">
+                        </label>
+                        <button type="submit" class="btn btn-lg">
+                            <i class="fa-solid fa-cart-plus "> s a v e</i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+</th:block>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <th:block th:include="~{fragments/head}"></th:block>
+  <title>All Recipes</title>
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <th:block th:include="~{fragments/nav-bar}"></th:block>
+  </header>
+ <!-- End Header -->
+
+  <main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container align-content-center">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 data-aos="fade-up">
+            <div class="section-header align-content-center">
+              <p > <span>Register</span>
+              </p>
+            </div>
+          </h2>
+          <ol>
+            <li><a th:href="@{/users/login}">Go back</a></li>
+            <li>Register</li>
+          </ol>
+        </div>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+
+    <section id="why-us" class="why-us section-bg">
+      <div class="container justify-content-center" data-aos="fade-up">
+
+        <div class="col-lg-12 justify-content-center" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="row lg-12 justify-content-center">
+              <div class="col-lg-6 justify-content-center rounded-5" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon-box d-flex flex-column align-items-center rounded-5 ">
+
+                  <form class="mx-auto w-60" th:method="post" th:action="@{/users/register}"
+                  th:object="${registerUserDTO}">
+                    <input type="hidden" name="_csrf" value="c95ccb2b-1afa-47bd-bf7b-a5b72739470b">
+                    <div class="form-group p-2">
+                      <label for="inputUsername" class="text-black mb-1">Username</label>
+                      <input type="text" class="form-control" id="inputUsername" placeholder="Username..." name="username"
+                             th:field="*{username}"
+                             th:errorclass="is-invalid"
+                             required
+                             minlength="5" maxlength="20"
+                             aria-describedby="usernameHelpInline" >
+                      <small id="usernameUniqueError" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                             class="text-danger">Username is already occupied</small>
+
+                    </div>
+                    <div class="form-group p-2">
+                      <label for="inputPassword" class="text-black mb-1">Password</label>
+                      <input type="password" class="form-control" id="inputPassword" placeholder="Password..." name="password"
+                             th:field="*{password}"
+                             th:errorclass="is-invalid"
+                             required minlength="8" maxlength="20"
+                             aria-describedby="passwordHelpInline">
+                      <small id="passwordError" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                             class="text-danger">
+                        Password length must be between 8 and 20 characters and passwords should match.
+                      </small>
+
+
+                    </div>
+                    <div class="form-group p-2">
+                      <label for="inputConfirmPassword" class="text-black mb-1">Confirm Password</label>
+                      <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password..."
+                             name="confirmPassword"
+                             th:field="*{confirmPassword}"
+                             th:errorclass="is-invalid"
+                             required minlength="8" maxlength="20"
+                             aria-describedby="confirmPasswordHelpInline"/>
+                      <small id="confirmPasswordError" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
+                             class="text-danger">
+                        Password length must be between 8 and 20 characters and passwords should match.
+                      </small>
+                    </div>
+                    <div class="form-group p-2">
+                      <label for="inputEmail" class="text-black mb-1">Email</label>
+                      <input type="text" class="form-control" id="inputEmail" placeholder="Email..." name="email"
+                             th:field="*{email}"
+                             th:errorclass="is-invalid"
+                             required
+                             aria-describedby="emailHelpInline"/>
+
+                      <small id="emailError" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                             class="text-danger">
+                        Email must be valid
+                      </small>
+                    </div>
+                    <hr class="bg-hero hr-2"/>
+                    <div class="button-holder mt-3 d-flex justify-content-center">
+                      <button type="submit" class="btn bg-light glow-button">Register</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  </main><!-- End #main -->
+  <!-- ======= Footer ======= -->
+  <footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+  </footer>
+</body>
+</html>
