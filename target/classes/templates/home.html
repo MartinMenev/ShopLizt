@@ -40,18 +40,17 @@
       </div>
     </div><!-- End Breadcrumbs -->
 
-    <section id="why-us" class="why-us section-bg" th:if="${username != null}">
-      <div class="container justify-content-center" data-aos="fade-up">
-        <div class="col-lg-12 justify-content-center" data-aos="fade-up" data-aos-delay="100">
-          <div class="row lg-12 justify-content-center">
-
-            <div class="col-lg-4   rounded-5" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon-box  rounded-5">
+    <section id="why-us" class="why-us section-bg h-50" th:if="${username != null}">
+      <div class="container justify-content-center h-50" data-aos="fade-up">
+        <div class="col-lg-12 h-50 justify-content-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="row lg-12 mt-3 h-50 justify-content-center">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon-box  rounded-1 h-50 overflow-y-scroll">
                 <i class="bi bi-basket"></i>
                 <article>
                   <section class="box-info lead-box pt-3">
                     <article class="box-head align-content-center">
-                      <h3 class="box-title">My Shopping List</h3>
+                      <h3 class="box-title text-bg-secondary rounded-5">My Shopping List</h3>
                       <hr class="bg-hero hr-4 bg-body-secondary aos-animate"/>
                     </article>
                     <article class="box-body pt-2 pb-2 text-left">
@@ -81,20 +80,20 @@
                       </section>
                     </article>
                     <article class="bottom-nav h-25">
-                      <a class="button bg-body-secondary rounded-5" th:href="@{/product-list}">  Open Your Shopping list
+                      <a class="button" th:href="@{/product-list}">  Open Your Shopping list
                       </a>
                     </article>
                   </section>
                 </article>
               </div>
             </div><!-- End Icon Box -->
-            <div class="col-lg-4   rounded-5" data-aos="fade-up" data-aos-delay="200" >
-              <div class="icon-box  rounded-5 max-h-100">
+            <div class="col-lg-4  col-md-6" data-aos="fade-up" data-aos-delay="200" >
+              <div class="icon-box  rounded-1 h-50 overflow-y-scroll">
                 <i class="bi bi-card-list"></i>
                 <article>
                   <section class="box-info lead-box pt-3">
                     <article class="box-head align-content-center">
-                      <h3 class="box-title">My Recipe Collection</h3>
+                      <h3 class="box-title text-bg-success rounded-5">My Recipe Collection</h3>
                       <hr class="bg-hero hr-4 bg-body-secondary aos-animate"/>
                     </article>
                     <article class="box-body pt-2 pb-2 align-content-start">
@@ -126,20 +125,20 @@
                       </div>
                     </article>
                     <article class="bottom-nav h-25">
-                      <a class="button bg-body-secondary rounded-5" th:href="@{/product-list}">  Open Your Recipes (TBA!)
+                      <a class="button" th:href="@{/product-list}">  Open Your Recipes (TBA!)
                       </a>
                     </article>
                   </section>
                 </article>
               </div>
             </div><!-- End Icon Box -->
-            <div class="col-lg-4   rounded-5" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon-box  rounded-5">
+            <div class="col-lg-4  col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon-box  rounded-1 h-50 overflow-y-scroll">
                 <i class="bi bi-suit-heart-fill"></i>
                 <article>
                   <section class="box-info lead-box pt-3">
                     <article class="box-head align-content-center">
-                      <h3 class="box-title">You might like our recently added recipes</h3>
+                      <h3 class="box-title text-success">You might like our recently added recipes</h3>
                       <hr class="bg-hero hr-4 bg-body-secondary aos-animate"/>
                     </article>
                     <article class="box-body pt-2 pb-2 align-content-start align-text-top">
@@ -154,12 +153,12 @@
                           <div class="d-flex w-100 justify-content-between">
                             <i class="bi bi-pin-angle"></i>
                             <h6 class="mb-1 text-body-secondary" th:text="${recipe.name}"></h6>
-                            <small ><img  th:src="${recipe.imageUrl}" width="50" height="50" class="square rounded-1" alt=""></small>
+                            <small ><img  th:src="${recipe.imageUrl}" width="50" height="40" class="square rounded-1" alt=""></small>
                           </div>
-                          <p class="mb-1" th:text="${recipe.getAuthor().getUsername()}">Author</p>
-                          <small class="mb-6 text-body-secondary" th:text="${recipe.getRating()}"></small>
+                          <p class="mb-1" >Added by: <span th:text="${recipe.getAuthor().getUsername()}"></span></p>
+                          <small class="mb-6 text-body-secondary" >Rating: <span th:text="${recipe.getRating()}"></span></small>
                         </a>
-                        <hr class="bg-hero hr-2 bg-body-secondary w-75 aos-animate"/>
+                        <hr class="bg-hero hr-2 bg-body-secondary aos-animate"/>
                       </div>
                       <div>
                         <h6 th:if="${othersRecipes.isEmpty()}">
@@ -173,15 +172,10 @@
                             </button>
                           </div>
                         </h6>
-
                       </div>
-
-
-
-
                     </article>
                     <article class="bottom-nav h-25">
-                      <a class="button bg-body-secondary rounded-5" th:href="@{/all-recipes}">  Open All Recipes
+                      <a class="button" th:href="@{/all-recipes}">  Open All Recipes
                       </a>
                     </article>
                   </section>

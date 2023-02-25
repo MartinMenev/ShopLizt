@@ -10,11 +10,6 @@
             <th:block th:if="${@loggedUser.id}">
                 <ul>
                     <li>
-                    <span type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Add item
-                    </span>
-                    </li>
-                    <li>
                         <form  th:method="post" th:action="@{/add-product}">
                             <input type="text" class="form-control" id="addItem" placeholder="Add item . . ." name="name">
                         </form>
@@ -43,32 +38,7 @@
         <i th:if="${@loggedUser.id}" class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
     </div>
 
-    <!-- Adding Product with Modal box -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title fs-5" id="exampleModalLabel">
-                        <h2 class="logo-home-text">
-                            add item
-                        </h2>
 
-                    </h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form  th:method="post" th:action="@{/add-product}">
-                        <label>
-                            <input type="text" class="form-control"  placeholder="add item . . ." name="name">
-                        </label>
-                        <button type="submit" class="btn btn-lg">
-                            <i class="fa-solid fa-cart-plus "> s a v e</i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 </th:block>
