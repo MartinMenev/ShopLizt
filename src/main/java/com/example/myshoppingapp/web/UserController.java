@@ -50,7 +50,7 @@ public class UserController {
         UserOutputDTO currentUser = this.userService.getLoggedUserDTO();
         model.addAttribute("userEntity", currentUser);
         userService.updateUser(userInputDTO);
-        return "redirect:/user/profile";
+        return "redirect:/users/login";
     }
 
     @GetMapping("/delete-profile/{id}")

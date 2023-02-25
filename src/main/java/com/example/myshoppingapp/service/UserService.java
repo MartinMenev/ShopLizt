@@ -11,6 +11,7 @@ import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -28,14 +29,18 @@ public class UserService {
     private ProductRepository productRepository;
     private final ModelMapper modelMapper;
     private final LoggedUser loggedUser;
+    private final PasswordEncoder passwordEncoder;
 
+    private final AuthService authService;
     @Autowired
-    public UserService(UserRepository userRepository, ProductRepository productRepository, ModelMapper modelMapper, LoggedUser loggedUser
-                      ) {
+    public UserService(UserRepository userRepository, ProductRepository productRepository, ModelMapper modelMapper, LoggedUser loggedUser,
+                       PasswordEncoder passwordEncoder, AuthService authService) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
         this.loggedUser = loggedUser;
+        this.passwordEncoder = passwordEncoder;
+        this.authService = authService;
     }
 
 
@@ -54,16 +59,18 @@ public class UserService {
         return this.modelMapper.map(userEntity, UserOutputDTO.class);
     }
 
+    @Transactional
+    @Modifying
     public void updateUser(UserInputDTO userInputDTO) {
         UserEntity user = this.getLoggedUser();
 
-        if (!userInputDTO.getUsername().equals(this.loggedUser.getUsername())) {
-            this.loggedUser.setUsername(userInputDTO.getUsername());
+        user.setUsername(userInputDTO.getUsername())
+                .setEmail(userInputDTO.getEmail());
 
-            user.setPassword(userInputDTO.getPassword())
-                    .setUsername(userInputDTO.getUsername())
-                    .setEmail(userInputDTO.getEmail());
+        if (!userInputDTO.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(userInputDTO.getPassword()));
         }
+
         this.userRepository.saveAndFlush(user);
 
     }
@@ -76,7 +83,9 @@ public class UserService {
                this.productRepository.deleteById(userProduct.getId());
             }
         }
+        this.authService.logout();
         this.userRepository.deleteById(id);
+
     }
 
     public void addBoughtProductToUser(Product product) {
