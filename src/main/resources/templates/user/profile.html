@@ -42,25 +42,23 @@
 
         <div class="col-lg-12 justify-content-center" data-aos="fade-up" data-aos-delay="100">
 
-            <div class="row lg-12 justify-content-center" th:object="${userEntity}">
+            <div class="row lg-12 justify-content-center" th:object="${user}">
               <div class="col-lg-6 justify-content-center rounded-5" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 ">
                   <div class="text-center">
                     <!--                        DEFAULT PICTURE-->
-                    <img th:if="${pictureUrl != null}" th:src="${pictureUrl}" width="100" class="rounded-circle" alt="picture">
-                    <img th:unless="${pictureUrl != null}" th:src="@{'/images/default-userEntity-pic.jpg'}" width="100" />
+                    <img th:unless="${user.picture == null}" th:src="${user.picture.pictureUrl}" width="100" class="rounded-circle" alt="picture">
+                    <img th:if="${user.picture == null}" th:src="@{'/images/default-user-pic.jpg'}" width="100" />
 
-                    <div class="text-center mt-3" th:object="${userEntity}">
+                    <div class="text-center mt-3" th:object="${user}">
                       <a th:href="@{/update-user}"
                          class="btn btn-light"> <i class="fa-regular fa-pen-to-square"></i> </a>
                       <h4 class="mt-4 mb-0">Username</h4>
-                      <span class="mt-2 mb-0 text-body-secondary" th:text="${userEntity.username}" ></span>
-                      <h4 class="mt-2 mb-0">Password</h4>
-                      <span class="mt-2 mb-0 text-body-secondary" th:text="${userEntity.password}"></span>
+                      <span class="mt-2 mb-0 text-body-secondary" th:text="${user.username}" ></span>
                       <h4 class="mt-2 mb-0">Email</h4>
-                      <span class="mt-2 mb-0 text-body-secondary" th:text="${userEntity.email}"></span>
+                      <span class="mt-2 mb-0 text-body-secondary" th:text="${user.email}"></span>
                       <h4 class="mt-2 mb-0">Role</h4>
-                      <span class="logo-home-text" th:text="${userEntity.userRole}"></span>
+                      <span class="logo-home-text" th:text="${user.userRole}"></span>
                     </div>
                   </div>
 

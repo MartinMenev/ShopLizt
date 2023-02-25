@@ -65,20 +65,20 @@
                     </section>
 
 
-                    <form action="#" th:action="@{/update-userEntity}" th:object="${userEntity}" th:method="PUT">
+                    <form action="#" th:action="@{/update-user}" th:object="${user}" th:method="PUT">
 
-                      <div class="text-center mt-3" th:object="${userEntity}">
-                        <h4 class="mt-4 mb-0">Username</h4>
+                      <div class="text-center mt-3" th:object="${user}">
+                        <h4 class="mt-4 mb-0">Change username</h4>
                         <input type="text" th:field="*{username}" class="form-control mb-4 col-4">
-                        <h4 class="mt-2 mb-0">Password</h4>
-                        <input type="text" th:field="*{password}" class="form-control mb-4 col-4">
-                        <h4 class="mt-2 mb-0">Email</h4>
+                        <h4 class="mt-2 mb-0">Change password</h4>
+                        <input type="text" name = "password" class="form-control mb-4 col-4">
+                        <h4 class="mt-2 mb-0">Change email</h4>
                         <input type="text" th:field="*{email}" class="form-control mb-4 col-4">
                       </div>
                       <button type="submit" class="btn btn-info col-5"> Update </button>
                     </form>
                     <hr class="bg-hero hr-2"/>
-                    <a th:href="@{/delete-profile/{id}(id=${userEntity.id})}"
+                    <a th:href="@{/delete-profile/{id}(id=${user.id})}"
                        class="btn btn-light text-danger">Delete profile</a>
                     <hr class="bg-hero hr-2"/>
                     <a th:href="@{/home}"

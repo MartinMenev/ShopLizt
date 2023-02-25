@@ -34,7 +34,7 @@ public class UserController {
         //TODO
 //        String currentUrl = this.pictureService.getPictureUrlByLoggedUser();
 //        model.addAttribute("pictureUrl", currentUrl);
-        model.addAttribute("userEntity", userOutputDTO);
+        model.addAttribute("user", userOutputDTO);
         return "user/profile";
     }
 
