@@ -27,7 +27,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("recipes", recipeService.showLast5Recipes());
+        model.addAttribute("recipes", recipeService.showLastAddedRecipes());
         model.addAttribute("comments", commentService.showTopRatedComments());
 
         return "index";
@@ -39,7 +39,8 @@ public class HomeController {
     public String home(Model model) {
         model.addAttribute("username", userService.getLoggedUserDTO().getUsername());
         model.addAttribute("products", productService.getListedProducts());
-        model.addAttribute("recipes", recipeService.showLast5Recipes());
+        model.addAttribute("othersRecipes", recipeService.showLast5Recipes());
+        model.addAttribute("recipes", recipeService.showLastAddedRecipes());
         model.addAttribute("myRecipes", recipeService.showRecipesByLoggedUser());
         return "home";
     }

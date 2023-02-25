@@ -143,7 +143,7 @@
                       <hr class="bg-hero hr-4 bg-body-secondary aos-animate"/>
                     </article>
                     <article class="box-body pt-2 pb-2 align-content-start align-text-top">
-                      <div class="list-group overflow-auto" th:unless="${recipes.isEmpty()}" th:each="recipe:${recipes}">
+                      <div class="list-group overflow-auto" th:unless="${othersRecipes.isEmpty()}" th:each="recipe:${othersRecipes}">
 
                         <a  title="Add recipe to my Favorite collection!" th:href="@{/save-recipe-to-favorites/{id}(id=${recipe.id})}">
                           <i class="bi bi-bookmark-heart"></i> <span title="Number of Saves" th:text="${recipe.numberOfSaves}" > Saves </span>
@@ -162,7 +162,7 @@
                         <hr class="bg-hero hr-2 bg-body-secondary w-75 aos-animate"/>
                       </div>
                       <div>
-                        <h6 th:if="${recipes.isEmpty()}">
+                        <h6 th:if="${othersRecipes.isEmpty()}">
                           No new recipes yet. <br>
                           But you can add a recipe <br>
                           <i class="bi bi-box-arrow-in-down-left"></i>

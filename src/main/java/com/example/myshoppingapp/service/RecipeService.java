@@ -194,4 +194,14 @@ public class RecipeService {
 
 
     }
+
+    public List<OutputRecipeDTO> showLastAddedRecipes() {
+        return this.recipeRepository
+                .findAll()
+                .stream()
+                .map(recipe -> modelMapper.map(recipe, OutputRecipeDTO.class))
+                .sorted((a, b) -> b.getId().compareTo(a.getId()))
+                .limit(10)
+                .toList();
+    }
 }
