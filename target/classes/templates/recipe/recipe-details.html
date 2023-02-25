@@ -24,19 +24,19 @@
 
             <div class="section-header">
 
-              <button class="btn glow-button rounded-1" >
-                <a th:href="@{#}"
-                   class="btn btn-light"> <i class="bi bi-heart-fill"> Add to Favorites </i> </a>
+              <button class="btn glow-button rounded-1 bg-transparent" >
+                <a th:href="@{/save-recipe-to-favorites/{id}(id=*{id})}"
+                   class="button"> <i class="bi bi-heart-fill"> Add to Favorites </i> </a>
               </button>
 
-              <button class="btn glow-button rounded-1" >
+              <button class="btn glow-button rounded-1 bg-transparent" >
                 <a th:href="@{/edit-recipe/{Id}(Id=*{id})}"
-                   class="btn btn-light"> <i class="bi bi-pencil-square"> Edit </i> </a>
+                   class="button"> <i class="bi bi-pencil-square"> Edit </i> </a>
               </button>
 
-              <button class="btn glow-button rounded-1" >
+              <button class="btn glow-button rounded-1 bg-transparent" >
                 <a th:href="${recipe.url}"
-                   class="btn btn-light"> <i class="bi bi-link-45deg"> Link </i> </a>
+                   class="button"> <i class="bi bi-link-45deg"> Link </i> </a>
               </button>
 
             </div>

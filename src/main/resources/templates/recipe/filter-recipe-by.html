@@ -67,7 +67,7 @@
                th:each="recipe : ${recipes}"
                th:object="${recipe}">
 
-            <div class="chef-member bg-secondary-subtle rounded-4 border-1">
+            <div class="chef-member rounded-4 border-1">
               <div class="member-img">
                 <img th:src="*{imageUrl}" class="img-fluid" alt="">
                 <div class="social">
@@ -118,7 +118,7 @@
 
                     <h3 th:text="${recipe.name}"></h3>
                     <div class="price align-self-start" th:text="${recipe.authorName}"></div>
-                    <p class="description" th:text="${recipe.description}"> </p>
+                    <p class="description" th:text="${recipe.category.name}"> </p>
                   </div>
                 </div>
                 <div class="swiper-pagination"></div>

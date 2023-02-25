@@ -139,7 +139,7 @@ public class RecipeController {
     public String reviewRecipe(@RequestParam(value = "category") String category, Model model) {
         List<OutputRecipeDTO> recipeDTOList = this.recipeService.getRecipesByCategory(category);
         model.addAttribute("recipes", recipeDTOList);
-        model.addAttribute("allRecipes", recipeService.showLast5Recipes());
+        model.addAttribute("allRecipes", recipeService.showLastAddedRecipes());
         model.addAttribute("category", category);
         return "recipe/filter-recipe-by";
     }
@@ -148,7 +148,7 @@ public class RecipeController {
     public String searchRecipes(@RequestParam(value = "text") String text, Model model) {
         List<OutputRecipeDTO> recipeDTOList = this.recipeService.getRecipesByTextContent(text);
         model.addAttribute("recipes", recipeDTOList);
-        model.addAttribute("allRecipes", recipeService.showLast5Recipes());
+        model.addAttribute("allRecipes", recipeService.showLastAddedRecipes());
         model.addAttribute("text", text);
         return "recipe/search-recipes";
     }

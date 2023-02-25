@@ -478,7 +478,7 @@ section {
     top: 0;
     right: -100%;
     width: 100%;
-    max-width: 400px;
+    max-width: 200px;
     border-left: 1px solid #666;
     bottom: 0;
     transition: 0.3s;
@@ -500,7 +500,7 @@ section {
   .navbar a:focus {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: left;
     padding: 10px 20px;
     font-family: var(--font-secondary);
     border-bottom: 2px solid rgba(255, 255, 255, 0.8);
