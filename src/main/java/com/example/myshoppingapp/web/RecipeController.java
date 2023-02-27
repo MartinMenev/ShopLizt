@@ -153,4 +153,11 @@ public class RecipeController {
         return "recipe/search-recipes";
     }
 
+    @GetMapping("/my-collection")
+    public String myCollection(Model model) {
+        model.addAttribute("myRecipes", recipeService.showRecipesByLoggedUser());
+        model.addAttribute("allRecipes", recipeService.showLastAddedRecipes());
+        return "recipe/my-recipe-collection";
+    }
+
 }

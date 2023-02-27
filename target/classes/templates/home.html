@@ -125,25 +125,24 @@
                       </div>
                     </article>
                     <article class="bottom-nav h-25">
-                      <a class="button" th:href="@{/product-list}">  Open Your Recipes (TBA!)
+                      <a class="button" th:href="@{/my-collection}">  Open Your Recipe Collection
                       </a>
                     </article>
                   </section>
                 </article>
               </div>
             </div><!-- End Icon Box -->
-            <div class="col-lg-4  col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-lg-4  col-md-6" data-aos="fade-up" data-aos-delay="200" th:unless="${othersRecipes.isEmpty()}">
               <div class="icon-box  rounded-5 h-50 overflow-y-scroll">
                 <i class="bi bi-suit-heart-fill"></i>
                 <article>
                   <section class="box-info lead-box pt-3">
                     <article class="box-head align-content-center">
-                      <h4 class="box-title text-success">You might like our recently added recipes</h4>
+                      <h3 class="box-title text-success">You might like our recently added recipes</h3>
                       <hr class="bg-hero hr-4 bg-body-secondary aos-animate"/>
                     </article>
                     <article class="box-body pt-2 pb-2 align-content-start align-text-top">
-                      <div class="list-group overflow-auto" th:unless="${othersRecipes.isEmpty()}" th:each="recipe:${othersRecipes}">
-
+                      <div class="list-group overflow-auto"  th:each="recipe:${othersRecipes}">
                         <a  title="Add recipe to my Favorite collection!" th:href="@{/save-recipe-to-favorites/{id}(id=${recipe.id})}">
                           <i class="bi bi-bookmark-heart"></i> <span title="Number of Saves" th:text="${recipe.numberOfSaves}" > Saves </span>
                           | Add to my collection
@@ -159,19 +158,6 @@
                           <small class="mb-6 text-body-secondary" >Rating: <span th:text="${recipe.getRating()}"></span></small>
                         </a>
                         <hr class="bg-hero hr-2 bg-body-secondary aos-animate"/>
-                      </div>
-                      <div>
-                        <h6 th:if="${othersRecipes.isEmpty()}">
-                          No new recipes yet. <br>
-                          But you can add a recipe <br>
-                          <i class="bi bi-box-arrow-in-down-left"></i>
-                          <div class="col-lg-8 justify-content-center">
-                            <button class="btn glow-button rounded-5" >
-                              <a th:href="@{/add-recipe}"
-                                 class="btn btn-light"> <i class="fa-solid fa-book-open-reader"></i> Add recipe </a>
-                            </button>
-                          </div>
-                        </h6>
                       </div>
                     </article>
                     <article class="bottom-nav h-25">
