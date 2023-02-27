@@ -160,4 +160,10 @@ public class RecipeController {
         return "recipe/my-recipe-collection";
     }
 
+    @GetMapping("/remove-from-favorites/{id}")
+    public String removeFromMyCollection(@PathVariable(value = "id") long id) {
+        recipeService.removeRecipeFromMyCollection(id);
+        return "redirect:/my-collection";
+    }
+
 }

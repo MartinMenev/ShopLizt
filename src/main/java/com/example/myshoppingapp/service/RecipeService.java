@@ -9,6 +9,7 @@ import com.example.myshoppingapp.domain.recipes.OutputRecipeDTO;
 import com.example.myshoppingapp.domain.recipes.Recipe;
 import com.example.myshoppingapp.domain.users.UserEntity;
 import com.example.myshoppingapp.repository.RecipeRepository;
+import com.example.myshoppingapp.repository.UserRepository;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ import java.util.NoSuchElementException;
 @Service
 public class RecipeService {
     private final RecipeRepository recipeRepository;
+
+    private final UserRepository userRepository;
     private final UserService userService;
     private final ModelMapper modelMapper;
     private final LoggedUser loggedUser;
@@ -33,10 +36,11 @@ public class RecipeService {
 
 
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository, UserService userService,
+    public RecipeService(RecipeRepository recipeRepository, UserRepository userRepository, UserService userService,
                          ModelMapper modelMapper, LoggedUser loggedUser,
                          ProductService productService) {
         this.recipeRepository = recipeRepository;
+        this.userRepository = userRepository;
         this.userService = userService;
         this.modelMapper = modelMapper;
         this.loggedUser = loggedUser;
@@ -203,5 +207,18 @@ public class RecipeService {
                 .sorted((a, b) -> b.getId().compareTo(a.getId()))
                 .limit(10)
                 .toList();
+    }
+
+    @Transactional
+    @Modifying
+    public void removeRecipeFromMyCollection(long id) {
+        Recipe recipeToRemove = this.recipeRepository.findById(id).get();
+        UserEntity user = this.userService.getLoggedUser();
+        if (user.getFavoriteRecipes().contains(recipeToRemove)) {
+            user.getFavoriteRecipes().remove(recipeToRemove);
+            userRepository.saveAndFlush(user);
+            return;
+        }
+        this.recipeRepository.delete(recipeToRemove);
     }
 }
