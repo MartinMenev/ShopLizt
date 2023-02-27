@@ -34,8 +34,8 @@
 body {
   font-family: var(--font-default);
   color: var(--color-default);
-  background: url("../images/app-images/ShopLIZT.png") no-repeat fixed;
   background-size: 100%;
+  background: #E9ECEF url("../images/app-images/ShopLIZT.png") no-repeat fixed;
 }
 
 a {
@@ -1823,6 +1823,13 @@ table > tbody {
   background-size: 100%;
 
 }
+
+#why-us > div > div > div > div > div > article > section > article.box-head.align-content-center > h3 {
+  font-family: cursive;
+}
+
+
+
 
 
 
