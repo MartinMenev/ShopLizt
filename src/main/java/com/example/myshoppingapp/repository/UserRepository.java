@@ -18,14 +18,5 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> findUserEntityByUsername (String username);
 
-    @Modifying
-    @Transactional
-    @Query("update UserEntity u " +
-            "set u.username = :newUsername, "+
-            "u.password = :newPassword, " +
-            "u.email = :newEmail " +
-            "where u.id = :id"
-    )
-    void updateUser(Long id, String newUsername, String newPassword, String newEmail);
 
 }

@@ -21,16 +21,7 @@ import org.springframework.web.context.annotation.SessionScope;
 @Configuration
 public class SecurityConfiguration {
 
-        @Bean
-        public ModelMapper modelMapper() {
-            return new ModelMapper();
-        }
 
-        @Bean
-        @SessionScope
-        public LoggedUser loggedUser() {
-            return new LoggedUser();
-        }
 
         @Bean
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

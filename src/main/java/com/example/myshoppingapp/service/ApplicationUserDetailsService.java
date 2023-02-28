@@ -24,7 +24,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     return
             userRepository.
-                    findByEmail(username).
+                    findUserEntityByUsername(username).
                     map(this::map).
                     orElseThrow(() -> new UsernameNotFoundException("User with name " + username + " not found!"));
   }
