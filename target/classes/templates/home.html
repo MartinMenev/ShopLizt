@@ -144,7 +144,7 @@
                     <article class="box-body pt-2 pb-2 align-content-start align-text-top">
                       <div class="list-group overflow-auto"  th:each="recipe:${othersRecipes}">
                         <a  title="Add recipe to my Favorite collection!" th:href="@{/save-recipe-to-favorites/{id}(id=${recipe.id})}">
-                          <i class="bi bi-bookmark-heart"></i> <span title="Number of Saves" th:text="${recipe.numberOfSaves}" > Saves </span>
+                          <i class="bi bi-bookmark-heart"></i> <span title="Number of Saves" th:unless="${recipe.numberOfSaves == 0}" th:text="${recipe.numberOfSaves}" > Saves </span>
                           | Add to my collection
                         </a>
                         <a title="Open recipe" class="list-group-item list-group-item-action active bg-transparent border-0"  aria-current="true"

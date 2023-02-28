@@ -61,7 +61,7 @@
           <p>Recipes containing: <span th:text="${text}"></span></p>
         </div>
 
-        <div class="row gy-4" th:unless="${recipes.isEmpty()}">
+        <div class="row gy-4 justify-content-center" th:unless="${recipes.isEmpty()}">
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up" data-aos-delay="100"
                th:each="recipe : ${recipes}"
@@ -72,7 +72,7 @@
                 <img th:src="*{imageUrl}" class="img-fluid" alt="">
                 <div class="social">
                   <a title="Add recipe to my Favorite collection" th:href="@{/save-recipe-to-favorites/{id}(id=*{id})}">
-                    <i class="bi bi-suit-heart-fill"></i> <span title="Number of Saves" class ="text-dark" th:text="*{numberOfSaves}" > Saves </span></a>
+                    <i class="bi bi-suit-heart-fill"></i> <span title="Number of Saves" class ="text-dark" th:unless="*{numberOfSaves == 0}" th:text="*{numberOfSaves}" > Saves </span></a>
                   <a class="button text-dark" href="#" th:href="@{/recipe/{id}(id=*{id})}">Open details</a>
                 </div>
               </div>
@@ -91,9 +91,9 @@
 
         </div>
 
-        <div class="row gy-4" th:if="${recipes.isEmpty()}">
+        <div class="row gy-4 justify-content-center" th:if="${recipes.isEmpty()}">
           <p class="justify-content-center">
-            <h6 class="align-content-center">
+            <h6 class="text-center">
               Sorry, we still don't have any recipes containing "<span th:text="${text}"></span>" <br>
               But you can review our latest ones and chose from them...
             </h6>

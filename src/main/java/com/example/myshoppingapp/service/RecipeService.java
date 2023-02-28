@@ -217,6 +217,8 @@ public class RecipeService {
         if (user.getFavoriteRecipes().contains(recipeToRemove)) {
             user.getFavoriteRecipes().remove(recipeToRemove);
             userRepository.saveAndFlush(user);
+            recipeToRemove.setNumberOfSaves(recipeToRemove.getNumberOfSaves() -1);
+            this.recipeRepository.saveAndFlush(recipeToRemove);
             return;
         }
         this.recipeRepository.delete(recipeToRemove);
