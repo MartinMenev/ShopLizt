@@ -65,7 +65,7 @@
                     </section>
 
 
-                    <form action="#" th:action="@{/update-user}" th:object="${user}" th:method="PUT">
+                    <form action="#" th:action="@{/update-user}" th:object="${user}" th:method="PATCH">
 
                       <div class="text-center mt-3" th:object="${user}">
                         <h4 class="mt-4 mb-0">Change username</h4>
@@ -78,8 +78,10 @@
                       <button type="submit" class="btn btn-info col-5"> Update </button>
                     </form>
                     <hr class="bg-hero hr-2"/>
-                    <a th:href="@{/delete-profile/{id}(id=${user.id})}"
-                       class="btn btn-light text-danger">Delete profile</a>
+                    <form th:action="@{/delete-profile/{id}(id=${user.id})}" th:method="delete"
+                       class="btn btn-light text-danger">
+                      <input type="submit" class="btn btn-light text-danger" value="Delete profile" />
+                    </form>
                     <hr class="bg-hero hr-2"/>
                     <a th:href="@{/home}"
                        class="btn btn-light text-white">Back to home</a>

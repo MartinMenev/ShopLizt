@@ -4,6 +4,7 @@ import com.example.myshoppingapp.domain.users.LoginDTO;
 import com.example.myshoppingapp.domain.users.RegisterUserDTO;
 import com.example.myshoppingapp.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +52,19 @@ public class AuthController {
         this.authService.logout();
         return "redirect:/users/login";
     }
+
+//
+//    @PostMapping("/users/login-error")
+//    public String onFailedLogin(
+//            @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username,
+//            RedirectAttributes redirectAttributes) {
+//
+//        redirectAttributes.addFlashAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY, username);
+//        redirectAttributes.addFlashAttribute("bad_credentials", true);
+//
+//        return "redirect:/users/login";
+//    }
+
 
 
     @GetMapping("/users/register")

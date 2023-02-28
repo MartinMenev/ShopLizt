@@ -83,7 +83,7 @@ public class UserService {
                this.productRepository.deleteById(userProduct.getId());
             }
         }
-        this.authService.logout();
+//        this.authService.logout();
         this.userRepository.deleteById(id);
 
     }

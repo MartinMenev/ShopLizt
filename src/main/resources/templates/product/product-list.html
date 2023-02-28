@@ -70,7 +70,7 @@
                       <td>
 
                                               <!--               moveUp Product-->
-                        <a  title="Move up" th:href="@{/moveUpProduct/{position}(position=${product.position})}" class="btn btn-light"> <i class="bi bi-arrow-up"></i> </a>
+                        <a  title="Move up" th:href="@{/moveUpProduct/{position}(position=${product.position})}"  class="btn btn-light"> <i class="bi bi-arrow-up"></i> </a>
 
 
                           <!--                moveDown Product-->
@@ -83,7 +83,9 @@
 
 
                           <!--                remove Product-->
-                        <a title="Delete item" th:href="@{/deleteProduct/{id}(id=${product.id})}" class="btn btn-light "><i class="fa-solid fa-xmark"></i></a>
+                        <a title="Delete item" th:href="@{/deleteProduct/{id}(id=${product.id})}" class="btn btn-light">
+                          <i class="fa-solid fa-xmark"></i>
+                        </a>
 
 
                       </td>
