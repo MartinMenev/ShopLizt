@@ -9,6 +9,7 @@ import com.example.myshoppingapp.domain.recipes.OutputRecipeDTO;
 import com.example.myshoppingapp.domain.recipes.Recipe;
 import com.example.myshoppingapp.domain.users.UserEntity;
 import com.example.myshoppingapp.repository.RecipeRepository;
+import com.example.myshoppingapp.repository.RecipeSpecification;
 import com.example.myshoppingapp.repository.UserRepository;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
@@ -70,6 +71,8 @@ public class RecipeService {
                 map(recipe -> this.modelMapper.map(recipe, OutputRecipeDTO.class));
 
     }
+
+
 
     @Transactional
     public List<OutputRecipeDTO> showLast5Recipes() {
