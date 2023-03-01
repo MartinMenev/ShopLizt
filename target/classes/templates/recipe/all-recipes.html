@@ -90,8 +90,8 @@
 
         </div>
 
-        <div class="container-fluid container-fluid row justify-content-center">
-          <nav>
+        <div class="container -fluid row justify-content-center mt-5">
+          <nav class="col-1 justify-content-center">
             <ul class="pagination">
               <li class="page-item" th:classappend="${recipes.isFirst()} ? 'disabled' : ''">
                 <a th:unless="${recipes.isFirst()}"
@@ -102,7 +102,7 @@
               </li>
             </ul>
           </nav>
-          <nav>
+          <nav class="col-1 justify-content-center">
             <ul class="pagination">
               <li class="page-item" th:classappend="${recipes.hasPrevious() ? '' : 'disabled'}">
                 <a th:if="${recipes.hasPrevious()}"
@@ -113,7 +113,7 @@
               </li>
             </ul>
           </nav>
-          <nav>
+          <nav class="col-1 justify-content-center">
             <ul class="pagination">
               <li class="page-item" th:classappend="${recipes.hasNext() ? '' : 'disabled'}">
                 <a th:if="${recipes.hasNext()}"
@@ -124,7 +124,7 @@
               </li>
             </ul>
           </nav>
-          <nav>
+          <nav class="col-1 justify-content-center">
             <ul class="pagination">
               <li class="page-item" th:classappend="${recipes.isLast()} ? 'disabled' : ''">
                 <a th:unless="${recipes.isLast()}"
