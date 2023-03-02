@@ -82,56 +82,39 @@
               </div>
               <a class="button btn-outline-secondary" href="#" th:href="*{url}">Open link</a>
             </div>
-
-
-
           </div><!-- End Recipes Member -->
-
-
         </div>
 
-        <div class="container -fluid row justify-content-center mt-5">
-          <nav class="col-1 justify-content-center">
-            <ul class="pagination">
+        <div class="container  mt-5">
+          <nav aria-label="pagination" >
+            <ul class="pagination justify-content-center">
               <li class="page-item" th:classappend="${recipes.isFirst()} ? 'disabled' : ''">
                 <a th:unless="${recipes.isFirst()}"
-                   th:href="@{/all-recipes(size=${recipes.getSize()},page=0)}"
-                   class="page-link" href="#">First</a>
+                   th:href="@{/all-recipes(page=1)}"
+                   class="page-link text-dark" href="#"><i class="bi bi-skip-backward"></i></a>
                 <a th:if="${recipes.isFirst()}"
-                   class="page-link" href="#">First</a>
+                   class="page-link text-dark" href="#"><i class="bi bi-skip-backward"></i></a>
               </li>
-            </ul>
-          </nav>
-          <nav class="col-1 justify-content-center">
-            <ul class="pagination">
               <li class="page-item" th:classappend="${recipes.hasPrevious() ? '' : 'disabled'}">
                 <a th:if="${recipes.hasPrevious()}"
-                   th:href="@{/all-recipes(size=${recipes.getSize()},page=${recipes.getNumber() - 1})}"
-                   class="page-link" href="#">Previous</a>
+                   th:href="@{/all-recipes(page=${recipes.getNumber()})}"
+                   class="page-link text-dark" href="#"><i class="bi bi-caret-left"></i></a>
                 <a th:unless="${recipes.hasPrevious()}"
-                   class="page-link" href="#">Previous</a>
+                   class="page-link text-dark" href="#"><i class="bi bi-caret-left"></i></a>
               </li>
-            </ul>
-          </nav>
-          <nav class="col-1 justify-content-center">
-            <ul class="pagination">
               <li class="page-item" th:classappend="${recipes.hasNext() ? '' : 'disabled'}">
                 <a th:if="${recipes.hasNext()}"
-                   th:href="@{/all-recipes(size=${recipes.getSize()},page=${recipes.getNumber() + 1})}"
-                   class="page-link" href="#">Next</a>
+                   th:href="@{/all-recipes(page=${recipes.getNumber() + 2})}"
+                   class="page-link text-dark" href="#"><i class="bi bi-caret-right"></i></a>
                 <a th:unless="${recipes.hasNext()}"
-                   class="page-link" href="#">Next</a>
+                   class="page-link text-dark" href="#"><i class="bi bi-caret-right"></i></a>
               </li>
-            </ul>
-          </nav>
-          <nav class="col-1 justify-content-center">
-            <ul class="pagination">
               <li class="page-item" th:classappend="${recipes.isLast()} ? 'disabled' : ''">
                 <a th:unless="${recipes.isLast()}"
-                   th:href="@{/all-recipes(size=${recipes.getSize()},page=${recipes.getTotalPages() - 1})}"
-                   class="page-link" href="#">Last</a>
+                   th:href="@{/all-recipes(page=${recipes.getTotalPages()})}"
+                   class="page-link text-dark" href="#"><i class="bi bi-skip-forward"></i></a>
                 <a th:if="${recipes.isLast()}"
-                   class="page-link" href="#">Last</a>
+                   class="page-link text-dark" href="#"><i class="bi bi-skip-forward"></i></a>
               </li>
             </ul>
           </nav>

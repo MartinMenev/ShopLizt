@@ -30,6 +30,10 @@ spring:
                 format_sql: true
         defer-datasource-initialization: true
 
+    data:
+        web:
+            pageable:
+                one-indexed-parameters: true
 
     #Cloudinary Properties cloud
     #cloudinary:
