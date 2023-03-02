@@ -85,7 +85,8 @@
           </div><!-- End Recipes Member -->
         </div>
 
-        <div class="container  mt-5">
+<!--        Pagination-->
+        <div class="container  mt-5" th:unless="${recipes.getTotalPages() == 1}">
           <nav aria-label="pagination" >
             <ul class="pagination justify-content-center">
               <li class="page-item" th:classappend="${recipes.isFirst()} ? 'disabled' : ''">
