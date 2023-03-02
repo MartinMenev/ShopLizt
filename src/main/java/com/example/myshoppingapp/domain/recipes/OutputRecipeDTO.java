@@ -13,6 +13,8 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.List;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -42,5 +44,9 @@ public class OutputRecipeDTO {
 
     public boolean hasImageUrl(){
         return this.imageUrl != null;
+    }
+
+    public long getDays() {
+        return DAYS.between(this.getDateAdded(), LocalDate.now()) ;
     }
 }

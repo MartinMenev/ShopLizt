@@ -103,7 +103,7 @@ public class RecipeService {
         this.recipeRepository.saveAndFlush(recipe);
     }
 
-    public List<Recipe> showRecipesByLoggedUser() {
+    public List<OutputRecipeDTO> showRecipesByLoggedUser() {
         List<Recipe> myRecipes = this.recipeRepository
                 .findAllByAuthorOrderByIdDesc(this.userService.getLoggedUser());
 
@@ -111,7 +111,9 @@ public class RecipeService {
         if (myFavorites.size() != 0) {
             myRecipes.addAll(myFavorites);
         }
-        return myRecipes;
+        return myRecipes.stream()
+                .map(recipe -> modelMapper.map(recipe, OutputRecipeDTO.class))
+                .toList();
     }
 
     public List<OutputRecipeDTO> getRecipesByCategory(String category) {

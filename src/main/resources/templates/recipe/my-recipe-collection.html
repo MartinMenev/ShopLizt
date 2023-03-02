@@ -67,9 +67,9 @@
                th:each="myRecipe : ${myRecipes}"
                th:object="${myRecipes}">
 
-            <div class="chef-member rounded-4 border-1">
-              <div class="member-img">
-                <img th:src="${myRecipe.imageUrl}" class="img-fluid" alt="">
+            <div class="chef-member rounded-4 border-1 bg-body-secondary">
+              <div class="member-img bg-body-secondary">
+                <img th:src="${myRecipe.imageUrl}" width="350" height="300" class="square" alt="">
                 <div class="social">
                   <a title="Remove from collection" th:href="@{/remove-from-favorites/{id}(id = ${myRecipe.id})}">
                     <i class="bi bi-x"></i> <span> Remove </span> </a>
@@ -77,9 +77,13 @@
                   <a class="button text-dark" href="#" th:href="@{/recipe/{id}(id=${myRecipe.id})}">Open details</a>
                 </div>
               </div>
-              <div class="member-info">
+              <div class="member-info bg-transparent">
                 <h4 th:text="${myRecipe.name}"></h4>
-                <h5 >Added by <span th:text="${myRecipe.author.username}"></span ></h5>
+                 <span > Added by
+                   <th:block class="text-dark" th:text="${myRecipe.author.username}"> </th:block>
+                  <th:block  th:text="${myRecipe.getDays()}"></th:block>
+                   days ago
+                 </span >
               </div>
               <a class="button" href="#" th:href="@{/recipe/{id}(id=${myRecipe.id})}">Details</a>
               <a class="button" href="#" th:href="${myRecipe.url}">Open link</a>
