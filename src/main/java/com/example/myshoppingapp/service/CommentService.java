@@ -22,23 +22,23 @@ public class CommentService {
     private final ModelMapper modelMapper;
     private final UserService userService;
     private final RecipeService recipeService;
-    private final LoggedUser loggedUser;
+
 
 
     @Autowired
-    public CommentService(CommentRepository commentRepository, ModelMapper modelMapper, UserService userService, RecipeService recipeService, LoggedUser loggedUser) {
+    public CommentService(CommentRepository commentRepository, ModelMapper modelMapper, UserService userService, RecipeService recipeService) {
         this.commentRepository = commentRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
         this.recipeService = recipeService;
-        this.loggedUser = loggedUser;
+
     }
 
 
     public void addComment(InputCommentDTO inputCommentDTO, Long recipeId) {
         inputCommentDTO.setId(null);
         Comment comment = modelMapper.map(inputCommentDTO, Comment.class);
-        UserEntity author = this.userService.findByUsername(this.loggedUser.getUsername());
+        UserEntity author = this.userService.getLoggedUser();
         Recipe recipe = this.recipeService.getRecipeRepository().getById(recipeId);
         comment.setRecipe(recipe);
         if (author != null) {

@@ -52,35 +52,18 @@ public class AuthService {
         return true;
     }
 
-
-    public void login(LoginDTO loginDTO) {
-        UserEntity userEntity = userRepository.findUserEntityByUsername(loginDTO.getUsername()).get();
-        this.loggedUser
-                .setId(userEntity.getId())
-                .setUsername(userEntity.getUsername())
-                .setUserRole(userEntity.getUserRole());
-
-    }
-
-    public void logout() {
-        this.loggedUser.clearFields();
-    }
-
 //
-//    public void login(String userName) {
-//        UserDetails userDetails =
-//                userDetailsService.loadUserByUsername(userName);
+//    public void login(LoginDTO loginDTO) {
+//        UserEntity userEntity = userRepository.findUserEntityByUsername(loginDTO.getUsername()).get();
+//        this.loggedUser
+//                .setId(userEntity.getId())
+//                .setUsername(userEntity.getUsername())
+//                .setUserRole(userEntity.getUserRole());
 //
-//        Authentication auth =
-//                new UsernamePasswordAuthenticationToken(
-//                        userDetails,
-//                        userDetails.getPassword(),
-//                        userDetails.getAuthorities()
-//                );
+//    }
 //
-//        SecurityContextHolder.
-//                getContext().
-//                setAuthentication(auth);
+//    public void logout() {
+//        this.loggedUser.clearFields();
 //    }
 
 

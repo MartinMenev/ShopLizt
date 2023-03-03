@@ -31,27 +31,25 @@ public class RecipeService {
     private final UserRepository userRepository;
     private final UserService userService;
     private final ModelMapper modelMapper;
-    private final LoggedUser loggedUser;
 
     private final ProductService productService;
 
 
     @Autowired
     public RecipeService(RecipeRepository recipeRepository, UserRepository userRepository, UserService userService,
-                         ModelMapper modelMapper, LoggedUser loggedUser,
+                         ModelMapper modelMapper,
                          ProductService productService) {
         this.recipeRepository = recipeRepository;
         this.userRepository = userRepository;
         this.userService = userService;
         this.modelMapper = modelMapper;
-        this.loggedUser = loggedUser;
         this.productService = productService;
     }
 
 
 
     public void addRecipe(InputRecipeDTO inputRecipeDTO) {
-        UserEntity authorId = this.userService.findByUsername(loggedUser.getUsername());
+        UserEntity authorId = this.userService.getLoggedUser();
         if (inputRecipeDTO.getImageUrl().isBlank()) {
             inputRecipeDTO.setImageUrl("https://images.pexels.com/photos/4033165/pexels-photo-4033165.jpeg?auto=compress&cs=tinysrgb&w=1600");
         }

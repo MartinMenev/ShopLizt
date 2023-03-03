@@ -27,18 +27,18 @@ public class SecurityConfiguration {
              authorizeHttpRequests().
                     requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                     antMatchers("/", "/users/register", "/users/login", "/users/login-error").permitAll().
-                    anyRequest().permitAll(); // authenticated().
-//                    and().
-//                    formLogin().
-//                    loginPage("/users/login").
-//                    usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY).
-//                    passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
-//                    defaultSuccessUrl("/home").
-//                    failureForwardUrl("/users/login-error").
-//                    and().logout().//configure logout
-//                    logoutUrl("/users/logout").
-//                    logoutSuccessUrl("/").//go to homepage after logout
-//                    invalidateHttpSession(true);
+                    anyRequest().authenticated().
+                    and().
+                    formLogin().
+                    loginPage("/users/login").
+                    usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY).
+                    passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
+                    defaultSuccessUrl("/home", true).
+                    failureForwardUrl("/users/login-error").
+                    and().logout().//configure logout
+                    logoutUrl("/users/logout").
+                    logoutSuccessUrl("/").//go to homepage after logout
+                    invalidateHttpSession(true);
 
             return http.build();
 

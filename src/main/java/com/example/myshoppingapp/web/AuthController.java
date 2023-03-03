@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @Controller
 public class AuthController {
 
-    private AuthService authService;
+    private final AuthService authService;
 
     @Autowired
     public AuthController(AuthService authService) {
@@ -30,40 +30,46 @@ public class AuthController {
         return "user/login";
     }
 
-    @PostMapping("/users/login")
-    public String doLogin(@Valid LoginDTO loginDTO,
-                          BindingResult bindingResult,
-                          RedirectAttributes redirectAttributes)  {
 
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("loginDTO", loginDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginDTO",
-                    bindingResult);
-            return "user/login";
-        }
-
-        authService.login(loginDTO);
-        return "redirect:/home";
-    }
-
-
-    @PostMapping("/users/logout")
-    public String doLogout(){
-        this.authService.logout();
-        return "redirect:/users/login";
-    }
-
+//    @PostMapping("/users/login")
+//    public String doLogin(@Valid LoginDTO loginDTO,
+//                          BindingResult bindingResult,
+//                          RedirectAttributes redirectAttributes)  {
 //
-//    @PostMapping("/users/login-error")
-//    public String onFailedLogin(
-//            @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username,
-//            RedirectAttributes redirectAttributes) {
+//        if (bindingResult.hasErrors()) {
+//            redirectAttributes.addFlashAttribute("loginDTO", loginDTO);
+//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginDTO",
+//                    bindingResult);
+//            return "user/login";
+//        }
 //
-//        redirectAttributes.addFlashAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY, username);
-//        redirectAttributes.addFlashAttribute("bad_credentials", true);
+//        authService.login(loginDTO);
+//        return "redirect:/home";
+//    }
 //
+//
+//    @PostMapping("/users/logout")
+//    public String doLogout(){
+//        this.authService.logout();
 //        return "redirect:/users/login";
 //    }
+
+    //
+//    @ModelAttribute("loginDTO")
+//    public LoginDTO initLoginDTO() {
+//        return new LoginDTO();
+//    }
+
+    @PostMapping("/users/login-error")
+    public String onFailedLogin(
+            @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username,
+            RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY, username);
+        redirectAttributes.addFlashAttribute("bad_credentials", true);
+
+        return "redirect:/users/login";
+    }
 
 
 
@@ -89,10 +95,6 @@ public class AuthController {
         return "redirect:/users/login";
     }
 
-    @ModelAttribute("loginDTO")
-    public LoginDTO initLoginDTO() {
-        return new LoginDTO();
-    }
 
     @ModelAttribute(name = "registerUserDTO")
     public RegisterUserDTO initRegisterUserDTO() {

@@ -11,6 +11,9 @@ import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,18 +31,20 @@ public class UserService {
     private UserRepository userRepository;
     private ProductRepository productRepository;
     private final ModelMapper modelMapper;
-    private final LoggedUser loggedUser;
+
     private final PasswordEncoder passwordEncoder;
+
+    private final UserDetailsService userDetailsService;
 
     private final AuthService authService;
     @Autowired
     public UserService(UserRepository userRepository, ProductRepository productRepository, ModelMapper modelMapper, LoggedUser loggedUser,
-                       PasswordEncoder passwordEncoder, AuthService authService) {
+                       PasswordEncoder passwordEncoder, UserDetailsService userDetailsService, AuthService authService) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
-        this.loggedUser = loggedUser;
         this.passwordEncoder = passwordEncoder;
+        this.userDetailsService = userDetailsService;
         this.authService = authService;
     }
 
@@ -50,13 +55,19 @@ public class UserService {
         return this.userRepository.findUserEntityByUsername(username).orElseThrow(NoSuchElementException::new);
     }
 
+    public UserEntity getLoggedUser(){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return this.userRepository.findUserEntityByUsername(userDetails.getUsername())
+                .orElseThrow(NoSuchElementException::new);
+    }
+
+
     public Long getLoggedUserId() {
-        return this.loggedUser.getId();
+        return this.getLoggedUser().getId();
     }
 
     public UserOutputDTO getLoggedUserDTO() {
-        UserEntity userEntity = this.userRepository.findUserEntityByUsername(this.loggedUser.getUsername()).orElseThrow(NoSuchElementException::new);
-        return this.modelMapper.map(userEntity, UserOutputDTO.class);
+        return this.modelMapper.map(this.getLoggedUser(), UserOutputDTO.class);
     }
 
     @Transactional
@@ -94,9 +105,7 @@ public class UserService {
         this.userRepository.saveAndFlush(userEntity);
     }
 
-    public UserEntity getLoggedUser (){
-        return this.userRepository.findById(this.loggedUser.getId()).orElseThrow(NoSuchElementException::new);
-    }
+
 
 
 

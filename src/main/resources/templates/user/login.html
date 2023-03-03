@@ -46,7 +46,7 @@
               <div class="col-lg-6 justify-content-center rounded-5" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 ">
 
-                  <form class="mx-auto w-60" th:method="POST" th:action="@{/users/login}" th:object="${loginDTO}">
+                  <form class="mx-auto w-60" th:method="POST" th:action="@{/users/login}">
                     <input type="hidden" name="_csrf" value="c95ccb2b-1afa-47bd-bf7b-a5b72739470b">
                     <div class="form-group p-2">
                       <label for="username" class="text-black mb-1">Username</label>
@@ -58,7 +58,7 @@
                       <input type="password" class="form-control" id="password" placeholder="Password..." name="password">
                     </div>
 
-                    <small id="usernameUniqueError" th:if="${#fields.hasErrors('*')}"
+                    <small id="usernameUniqueError" th:if="${bad_credentials}"
                            class=" text-danger">Invalid Username or Password</small>
                     <hr class="bg-hero hr-2"/>
                     <div class="button-holder mt-3 d-flex justify-content-center">

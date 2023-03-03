@@ -21,15 +21,15 @@ public class PictureService {
     private final UserRepository userRepository;
     private final UserService userService;
     private final ModelMapper modelMapper;
-    private final LoggedUser loggedUser;
+
     @Autowired
     public PictureService(PictureRepository pictureRepository, UserRepository userRepository,
-                          UserService userService, ModelMapper modelMapper, LoggedUser loggedUser) {
+                          UserService userService, ModelMapper modelMapper) {
         this.pictureRepository = pictureRepository;
         this.userRepository = userRepository;
         this.userService = userService;
         this.modelMapper = modelMapper;
-        this.loggedUser = loggedUser;
+
     }
 
 
@@ -41,18 +41,18 @@ public class PictureService {
 
         } else {
             picture = new Picture();
-            picture.setAuthor(this.userService.findByUsername(this.loggedUser.getUsername()));
+            picture.setAuthor(this.userService.getLoggedUser());
             picture.setPictureUrl(pictureUrl);
             this.pictureRepository.saveAndFlush(picture);
         }
-        UserEntity userEntity = this.userService.findByUsername(this.loggedUser.getUsername());
+        UserEntity userEntity = this.userService.getLoggedUser();
         userEntity.setPicture(picture);
         this.userRepository.saveAndFlush(userEntity);
 
     }
 
     public String getPictureUrlByLoggedUser(){
-       Optional<Picture> picture = this.pictureRepository.findByAuthorId(this.userService.getLoggedUser().getId());
+       Optional<Picture> picture = this.pictureRepository.findByAuthorId(this.userService.getLoggedUserId());
         String picUrl = picture.map(Picture::getPictureUrl).orElse(null);
         if (picUrl != null) {
             picUrl = "/images/"+picUrl;
