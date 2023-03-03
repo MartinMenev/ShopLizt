@@ -22,7 +22,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2 data-aos="fade-up">Inspiration</h2>
 
-          <button th:if="${@loggedUser.id}"  class="btn glow-button rounded-5 bg-transparent" >
+          <button   class="btn glow-button rounded-5 bg-transparent" >
             <a  th:href="@{/add-recipe}"
                class="button"> <i class="fa-solid fa-book-open-reader"></i> Add recipe </a>
           </button>
@@ -30,7 +30,7 @@
             <input type="text" class="form-control bg-transparent" id="searchRecipe" placeholder="Search recipe . . ." name="text">
           </form>
           <form  th:method="get" th:action="@{/filter-recipes}"
-                 th:if="${@loggedUser.id}"  class="button bg-transparent" >
+                   class="button bg-transparent" >
             <select class="form-control-color w-75 bg-transparent" name = "category" onchange="this.form.submit()">
               <option value="">  Filter by  </option>
               <option th:each="category : ${T(com.example.myshoppingapp.domain.enums.Category).values()}"

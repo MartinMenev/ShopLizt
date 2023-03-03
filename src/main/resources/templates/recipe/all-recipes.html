@@ -30,7 +30,7 @@
             <input type="text" class="form-control bg-transparent" id="searchRecipe" placeholder="Search recipe . . ." name="text">
           </form>
           <form  th:method="get" th:action="@{/filter-recipes}"
-                 th:if="${@loggedUser.id}"  class="bg-transparent" >
+                   class="bg-transparent" >
               <select class="form-control-color w-75 bg-transparent" name = "category" onchange="this.form.submit()">
               <option value="">  Filter by  </option>
               <option th:each="category : ${T(com.example.myshoppingapp.domain.enums.Category).values()}"

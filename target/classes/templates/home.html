@@ -106,8 +106,13 @@
                             <small ><img  th:src="${myRecipe.imageUrl}" width="50" height="50" class="square rounded-1" alt=""></small>
                           </div>
                           <p class="mb-1" th:text="${myRecipe.getRating()}">Rating</p>
-                          <small class="mb-6 text-body-secondary" th:text="${myRecipe.dateAdded}"></small>
+
                         </a>
+                        <div class="d-flex justify-content-end">
+                          <a title="Remove from collection" class="text-danger"  th:href="@{/remove-from-favorites/{id}(id = ${myRecipe.id})}">
+                            <i class="bi bi-x"></i>  </a>
+                        </div>
+
                         <hr class="bg-hero hr-2 bg-body-secondary  aos-animate"/>
                       </div>
                       <div>
@@ -154,8 +159,17 @@
                             <h6 class="mb-1 text-body-secondary" th:text="${recipe.name}"></h6>
                             <small ><img  th:src="${recipe.imageUrl}" width="50" height="40" class="square rounded-1" alt=""></small>
                           </div>
-                          <p class="mb-1" >Added by: <span th:text="${recipe.getAuthor().getUsername()}"></span></p>
-                          <small class="mb-6 text-body-secondary" >Rating: <span th:text="${recipe.getRating()}"></span></small>
+                          <div>
+                            <small class="mb-2 text-body-secondary"> shared by
+                              <th:block  th:text="${recipe.getAuthor().getUsername()}"> </th:block>
+                              <th:block  th:text="${recipe.getDays()}"></th:block>
+                              days ago
+                            </small>
+                            <small class="mb-2 text-body-secondary" >
+                              | Rating: <span th:text="${recipe.getRating()}"></span>
+                            </small>
+                          </div>
+
                         </a>
                         <hr class="bg-hero hr-2 bg-body-secondary aos-animate"/>
                       </div>
