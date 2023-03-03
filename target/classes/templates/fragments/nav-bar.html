@@ -1,4 +1,5 @@
-<th:block th:fragment="nav-bar" >
+
+<th:block th:fragment="nav-bar" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
     <div class="container d-flex align-items-center justify-content-between bg-gradient rounded-5">
         <h3>
             <a href="/" class="logo d-flex align-items-center me-auto me-lg-0">
@@ -7,8 +8,8 @@
                  Sh <i class="fa-solid fa-cart-arrow-down"></i> pLizt</a>
         </h3>
         <nav id="navbar" class="navbar">
-            <th:block th:if="${@loggedUser.id}">
-                <ul>
+            <th:block sec:authorize="isAuthenticated()">
+                <ul >
                     <li>
                         <form  th:method="post" th:action="@{/add-product}">
                             <input type="text" class="form-control" id="addItem" placeholder="Add item . . ." name="name">
@@ -19,14 +20,14 @@
                     <li><a th:href="@{/my-collection}">My Collection</a></li>
                     <li><a th:href="@{/all-recipes}">Recipes</a></li>
 
-                    <li class="dropdown"><a href="#">Welcome, &nbsp; <span class="text-dark" th:text="${@loggedUser.getUsername()}"></span> </a>
+                    <li class="dropdown"><a href="#">Welcome, &nbsp; <th:block sec:authentication="name" ></th:block> </a>
                         <ul>
                             <li><a th:href="@{/user/profile}">View profile</a></li>
                             <li><a th:href="@{/update-user}">Edit profile</a></li>
                         </ul>
                     </li>
                     <li>
-                        <form th:if="${@loggedUser.id}" th:action="@{/users/logout}" th:method="post">
+                        <form sec:authorize="isAuthenticated()" th:action="@{/users/logout}" th:method="post">
                             <button type="submit" class="btn bg-body-primary" name="button">Logout</button>
                         </form>
                     </li>
@@ -34,9 +35,9 @@
             </th:block>
         </nav>
         <!-- .navbar -->
-        <a th:unless="${@loggedUser.id}"   class="btn-book-a-table" th:href="@{/users/login}">login</a>
-        <i th:if="${@loggedUser.id}" class="mobile-nav-toggle mobile-nav-show bi bi-list"> </i>
-        <i th:if="${@loggedUser.id}" class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+        <a sec:authorize="!isAuthenticated()"   class="btn-book-a-table" th:href="@{/users/login}">login</a>
+        <i sec:authorize="isAuthenticated()" class="mobile-nav-toggle mobile-nav-show bi bi-list"> </i>
+        <i sec:authorize="isAuthenticated()" class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
     </div>
 
 

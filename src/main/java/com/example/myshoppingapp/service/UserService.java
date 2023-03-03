@@ -38,7 +38,7 @@ public class UserService {
 
     private final AuthService authService;
     @Autowired
-    public UserService(UserRepository userRepository, ProductRepository productRepository, ModelMapper modelMapper, LoggedUser loggedUser,
+    public UserService(UserRepository userRepository, ProductRepository productRepository, ModelMapper modelMapper,
                        PasswordEncoder passwordEncoder, UserDetailsService userDetailsService, AuthService authService) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;

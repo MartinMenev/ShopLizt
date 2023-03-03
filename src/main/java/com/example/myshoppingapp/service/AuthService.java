@@ -25,16 +25,14 @@ import org.springframework.stereotype.Service;
 public class AuthService {
     private UserRepository userRepository;
     private ModelMapper modelMapper;
-    private LoggedUser loggedUser;
     private final PasswordEncoder passwordEncoder;
 
     private UserDetailsService userDetailsService;
 
     @Autowired
-    public AuthService(UserRepository userRepository, ModelMapper modelMapper, LoggedUser loggedUser, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
+    public AuthService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
-        this.loggedUser = loggedUser;
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
     }
