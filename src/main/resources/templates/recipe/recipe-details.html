@@ -29,12 +29,12 @@
                    class="button"> <i class="bi bi-heart-fill"> Add to Favorites </i> </a>
               </button>
 
-              <button class="btn glow-button rounded-1 bg-transparent" >
+              <button th:if="${recipe.getAuthor().username == #authentication.name}" class="btn glow-button rounded-1 bg-transparent" >
                 <a th:href="@{/edit-recipe/{Id}(Id=*{id})}"
                    class="button"> <i class="bi bi-pencil-square"> Edit </i> </a>
               </button>
 
-              <button class="btn glow-button rounded-1 bg-transparent" >
+              <button th:unless="${recipe.url.isBlank()}" class="btn glow-button rounded-1 bg-transparent" >
                 <a th:href="${recipe.url}"
                    class="button"> <i class="bi bi-link-45deg"> Link </i> </a>
               </button>
@@ -78,7 +78,7 @@
 
             <div class="row lg-12 justify-content-center">
               <!-- Recipe Details -->
-              <div class="col lg-8 md-12">
+              <div class="col lg-6 md-8">
                 <div class="col-lg-12 justify-content-left rounded-5" data-aos="fade-up" data-aos-delay="200">
                   <div class="icon-box d-flex flex-column align-items-center rounded-5 bg-body-secondary">
                     <i class="bi bi-card-checklist"></i>
@@ -99,8 +99,33 @@
                   </div>
                 </div><!-- End Icon Box -->
               </div>
+
+              <div class="col-lg-3 justify-content-center rounded-5 mt-10" th:unless="${recipe.productList.isEmpty()}">
+                <div class="icon-box d-flex flex-column align-items-center rounded-5 mt-10">
+                  <h4>Needed products</h4>
+
+                  <a title = "Add All items to your Shopping list" th:href="@{/add-all-products-to-shopping-list/{id}(id =${recipe.id})}" class="btn btn-light " > Add all needed products to your Shopping list</a>
+                  <table class="table table-responsive-sm  rounded-3 bg-white"  >
+                    <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr   th:each="product:${recipe.productList}">
+                      <td  >
+                        <a title = "Add this item to your Shopping list" class="bi bi-cart-plus" href="#" th:href="@{/add-product-to-shopping-list/{id}/{name}(id = ${recipe.id}, name =${product.name})}"></a>
+                        <a th:href="@{#}" class="btn btn-light " th:text="${product.name}"> </a>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div><!-- End Icon Box -->
+
               <!-- Post new comment -->
-              <div class="col-lg-4 justify-content-center  rounded-5" data-aos="fade-up" data-aos-delay="200">
+              <div class="col-lg-3 justify-content-center  rounded-5" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 bg-body-secondary">
                   <i class="bi bi-pencil-fill"></i>
                   <div>
@@ -149,29 +174,7 @@
               <div class="row lg-12 justify-content-center mt-10">
                 <!-- ======= Testimonials Section ======= -->
 
-                <div class="col-lg-3 justify-content-center rounded-5 mt-10" th:unless="${recipe.productList.isEmpty()}">
-                  <div class="icon-box d-flex flex-column align-items-center rounded-5 mt-10">
-                    <h4>Needed products</h4>
 
-                    <a th:href="@{/add-all-products-to-shopping-list/{id}(id =${recipe.id})}" class="btn btn-light " > Add all needed products to your Shopping list</a>
-                    <table class="table table-responsive-sm  rounded-3 bg-white"  >
-                      <thead>
-                      <tr>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr   th:each="product:${recipe.productList}">
-                        <td  >
-                          <a class="bi bi-cart-plus" href="#" th:href="@{/add-product-to-shopping-list/{id}/{name}(id = ${recipe.id}, name =${product.name})}"></a>
-                          <a th:href="@{#}" class="btn btn-light " th:text="${product.name}"> </a>
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div><!-- End Icon Box -->
 
 
 

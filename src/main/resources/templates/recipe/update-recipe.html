@@ -126,12 +126,12 @@
                     <tbody>
                     <tr   th:each="product:${recipe.productList}">
                       <td  >
-                        <a class="bi bi-cart-plus" href="#" th:href="@{/add-product-to-shopping-list/{name}(name =${product.name})}"></a>
+                        <a title = "Add this item to your Shopping list" class="bi bi-cart-plus" href="#" th:href="@{/add-product-to-shopping-list/{name}(name =${product.name})}"></a>
                         <a th:href="@{#}" class="btn btn-light " th:text="${product.name}"> </a>
                       </td>
                       <td>
                         <!--                remove Product-->
-                        <a th:href="@{/delete-product-from-recipe/{id}/{productId}(id = ${recipe.id}, productId = ${product.id})}"  class="btn btn-light "><i class="fa-solid fa-xmark"></i></a>
+                        <a title = "Delete this item from Ingredients" th:href="@{/delete-product-from-recipe/{id}/{productId}(id = ${recipe.id}, productId = ${product.id})}"  class="btn btn-light "><i class="fa-solid fa-xmark"></i></a>
                       </td>
                     </tr>
                     </tbody>

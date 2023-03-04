@@ -69,11 +69,15 @@
 
             <div class="chef-member bg-body-secondary rounded-4 border-1">
               <div class="member-img bg-body-secondary">
-                <img th:src="*{imageUrl}" width="250" height="200" class="square" alt="">
+                <img th:src="*{imageUrl}" width="250" height="150" class="square" alt="">
                 <div class="social">
-                  <a title="Add recipe to my Favorite collection" th:href="@{/save-recipe-to-favorites/{id}(id=*{id})}">
-                    <i class="bi bi-suit-heart-fill"></i> <span title="Number of Saves" class ="text-dark" th:unless="*{numberOfSaves == 0}" th:text="*{numberOfSaves}" > Saves </span></a>
-                  <a class="button text-dark" href="#" th:href="@{/recipe/{id}(id=*{id})}">Open details</a>
+                  <a title="Add recipe to my Favorite collection" class="button text-success" th:href="@{/save-recipe-to-favorites/{id}(id=*{id})}">
+                    <i class="bi bi-suit-heart-fill"> Save </i>
+                    <span title="Number of Saves" class ="text-dark" th:unless="*{numberOfSaves == 0}"  >
+                      ( <th:block th:text="*{numberOfSaves}"></th:block> ) </span>
+                  </a>
+                  <hr class="bg-hero hr-1 bg-body-secondary"/>
+                  <a title="Open recipe details" class="button text-dark" href="#" th:href="@{/recipe/{id}(id=*{id})}"><i class="bi bi-link-45deg"> Open </i></a>
                 </div>
               </div>
               <div class="member-info bg-transparent">
@@ -84,8 +88,6 @@
                    days ago
                  </span >
               </div>
-              <a class="button" href="#" th:href="@{/recipe/{id}(id=*{id})}">Details</a>
-              <a class="button" href="#" th:href="*{url}">Open link</a>
             </div>
 
 
