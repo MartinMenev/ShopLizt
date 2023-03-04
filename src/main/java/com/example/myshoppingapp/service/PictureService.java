@@ -1,6 +1,5 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.beans.LoggedUser;
 import com.example.myshoppingapp.domain.pictures.OutputPictureDTO;
 import com.example.myshoppingapp.domain.pictures.Picture;
 import com.example.myshoppingapp.domain.users.UserEntity;

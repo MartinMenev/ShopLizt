@@ -1,7 +1,5 @@
 package com.example.myshoppingapp.web;
 
-import com.example.myshoppingapp.domain.enums.Category;
-import com.example.myshoppingapp.domain.products.InputProductDTO;
 import com.example.myshoppingapp.domain.recipes.InputRecipeDTO;
 import com.example.myshoppingapp.domain.recipes.OutputRecipeDTO;
 import com.example.myshoppingapp.service.CommentService;

@@ -1,6 +1,5 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.beans.LoggedUser;
 import com.example.myshoppingapp.domain.enums.Category;
 import com.example.myshoppingapp.domain.pictures.Picture;
 import com.example.myshoppingapp.domain.products.Product;
@@ -9,7 +8,6 @@ import com.example.myshoppingapp.domain.recipes.OutputRecipeDTO;
 import com.example.myshoppingapp.domain.recipes.Recipe;
 import com.example.myshoppingapp.domain.users.UserEntity;
 import com.example.myshoppingapp.repository.RecipeRepository;
-import com.example.myshoppingapp.repository.RecipeSpecification;
 import com.example.myshoppingapp.repository.UserRepository;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;

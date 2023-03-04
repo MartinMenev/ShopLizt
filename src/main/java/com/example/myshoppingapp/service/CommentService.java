@@ -1,6 +1,5 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.beans.LoggedUser;
 import com.example.myshoppingapp.domain.comments.Comment;
 import com.example.myshoppingapp.domain.comments.InputCommentDTO;
 import com.example.myshoppingapp.domain.comments.OutputCommentDTO;

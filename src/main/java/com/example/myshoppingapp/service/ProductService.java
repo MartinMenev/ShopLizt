@@ -1,6 +1,5 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.beans.LoggedUser;
 import com.example.myshoppingapp.domain.products.InputProductDTO;
 import com.example.myshoppingapp.domain.products.OutputProductDTO;
 import com.example.myshoppingapp.domain.products.Product;

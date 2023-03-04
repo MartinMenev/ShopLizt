@@ -1,6 +1,5 @@
 package com.example.myshoppingapp.domain.products;
 
-import com.example.myshoppingapp.domain.enums.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

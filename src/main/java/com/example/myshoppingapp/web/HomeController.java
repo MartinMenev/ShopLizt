@@ -1,6 +1,9 @@
 package com.example.myshoppingapp.web;
 
-import com.example.myshoppingapp.service.*;
+import com.example.myshoppingapp.service.CommentService;
+import com.example.myshoppingapp.service.ProductService;
+import com.example.myshoppingapp.service.RecipeService;
+import com.example.myshoppingapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

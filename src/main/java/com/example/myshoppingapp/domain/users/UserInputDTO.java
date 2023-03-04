@@ -1,7 +1,6 @@
 package com.example.myshoppingapp.domain.users;
 
 import com.example.myshoppingapp.domain.enums.UserRole;
-import com.example.myshoppingapp.domain.pictures.Picture;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

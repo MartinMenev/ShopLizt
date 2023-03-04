@@ -1,8 +1,6 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.beans.LoggedUser;
 import com.example.myshoppingapp.domain.enums.UserRole;
-import com.example.myshoppingapp.domain.users.LoginDTO;
 import com.example.myshoppingapp.domain.users.RegisterUserDTO;
 import com.example.myshoppingapp.domain.users.UserEntity;
 import com.example.myshoppingapp.repository.UserRepository;
@@ -11,10 +9,6 @@ import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

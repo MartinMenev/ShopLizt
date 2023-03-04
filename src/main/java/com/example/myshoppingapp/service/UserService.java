@@ -1,9 +1,10 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.beans.LoggedUser;
 import com.example.myshoppingapp.domain.products.Product;
 import com.example.myshoppingapp.domain.recipes.Recipe;
-import com.example.myshoppingapp.domain.users.*;
+import com.example.myshoppingapp.domain.users.UserEntity;
+import com.example.myshoppingapp.domain.users.UserInputDTO;
+import com.example.myshoppingapp.domain.users.UserOutputDTO;
 import com.example.myshoppingapp.repository.ProductRepository;
 import com.example.myshoppingapp.repository.UserRepository;
 import lombok.Getter;
