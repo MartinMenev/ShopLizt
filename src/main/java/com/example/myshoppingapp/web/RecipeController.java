@@ -122,13 +122,13 @@ public class RecipeController {
     }
 
 
-    @PutMapping("/update-recipe/{id}")
+    @PatchMapping("/update-recipe/{id}")
     public String doEditRecipe(@PathVariable(value = "id") Long id, Model model, InputRecipeDTO inputRecipeDTO) {
         recipeService.updateRecipe(inputRecipeDTO);
         return "redirect:/recipe/{id}";
     }
 
-    @GetMapping("/delete-recipe/{id}")
+    @DeleteMapping("/delete-recipe/{id}")
     public String deleteById(@PathVariable(value = "id") long id) {
         recipeService.deleteById(id);
         return "redirect:/all-recipes";

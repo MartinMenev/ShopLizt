@@ -63,7 +63,7 @@
 
             <div class="row lg-12 justify-content-center">
               <div class="col-lg-6 justify-content-center rounded-5" data-aos="fade-up" data-aos-delay="200">
-                <form action="#" th:action="@{/update-recipe/{id}(id=*{id})}" th:object="${recipe}" th:method="PUT">
+                <form action="#" th:action="@{/update-recipe/{id}(id=*{id})}" th:object="${recipe}" th:method="PATCH">
 
                   <div class="text-center mt-3" >
                     <h4 class="mt-4 mb-0">Recipe name</h4>
@@ -100,8 +100,10 @@
                   <button type="submit" class="btn btn-info col-5"> Update </button>
                 </form>
                 <hr class="bg-hero hr-2"/>
-                <a th:href="@{/delete-recipe/{id}(id=*{id})}"
-                   class="btn btn-light text-danger">Delete recipe</a>
+                <form action="#" th:action="@{/delete-recipe/{id}(id=*{id})}" th:method="DELETE">
+                  <input type="submit" class="btn btn-light text-danger" value="Delete recipe" />
+                </form>
+
                 <hr class="bg-hero hr-2"/>
 
                 <a th:href="@{/home}"
@@ -126,12 +128,12 @@
                     <tbody>
                     <tr   th:each="product:${recipe.productList}">
                       <td  >
-                        <a class="bi bi-cart-plus" href="#" th:href="@{/add-product-to-shopping-list/{name}(name =${product.name})}"></a>
+                        <a title = "Add this item to your Shopping list" class="bi bi-cart-plus" href="#" th:href="@{/add-product-to-shopping-list/{name}(name =${product.name})}"></a>
                         <a th:href="@{#}" class="btn btn-light " th:text="${product.name}"> </a>
                       </td>
                       <td>
                         <!--                remove Product-->
-                        <a th:href="@{/delete-product-from-recipe/{id}/{productId}(id = ${recipe.id}, productId = ${product.id})}"  class="btn btn-light "><i class="fa-solid fa-xmark"></i></a>
+                        <a title = "Delete this item from Ingredients" th:href="@{/delete-product-from-recipe/{id}/{productId}(id = ${recipe.id}, productId = ${product.id})}"  class="btn btn-light "><i class="fa-solid fa-xmark"></i></a>
                       </td>
                     </tr>
                     </tbody>
