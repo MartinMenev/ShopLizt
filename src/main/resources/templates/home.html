@@ -40,17 +40,79 @@
       </div>
     </div><!-- End Breadcrumbs -->
 
-    <section id="why-us" class="why-us section-bg h-50" th:if="${username != null}">
-      <div class="container justify-content-center h-50" data-aos="fade-up">
-        <div class="col-lg-12 h-50 justify-content-center" data-aos="fade-up" data-aos-delay="100">
-          <div class="row lg-12 mt-3 h-50 justify-content-center">
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon-box  rounded-5 h-50 overflow-y-scroll">
+    <section id="why-us" class="why-us section-bg " th:if="${username != null}">
+      <div class="container justify-content-center " data-aos="fade-up">
+        <div class="col-lg-12 justify-content-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="row lg-12 mt-3 h-100 justify-content-center">
+            <div class="col-lg-10  col-md-6 mb-auto " data-aos="fade-up" data-aos-delay="200" >
+              <div class="icon-box h-100 rounded-5 bg-body-secondary ">
+                <article>
+                  <section class="box-info lead-box p-0">
+                    <article class="box-body align-content-start">
+                      <div class="list-group overflow-auto" th:unless="${myRecipes.isEmpty()}">
+                        <section id="gallery" class="gallery section-bg pb-0">
+                          <div class="container" data-aos="fade-up">
+                            <div class="section-header">
+                               <h3 class="box-title text-secondary">My Recipe Collection</h3>
+                            </div>
+                            <!--            for each picture...-->
+                            <div class="gallery-slider swiper" >
+                              <div class="swiper-wrapper align-items-center" >
+                                <div class="swiper-slide" th:each="myRecipe:${myRecipes}">
+                                  <img th:src="${myRecipe.imageUrl}" class="img-fluid rounded-3" alt="" src="">
+                                  <a title="Open recipe" class="list-group-item list-group-item-action active bg-transparent border-0"  aria-current="true"
+                                     th:href="@{/recipe/{id}(id=${myRecipe.id})}" >
+                                    <div class="d-flex w-100 justify-content-center">
+                                      <h6 class="mb-1 text-body-secondary" th:text="${myRecipe.name}"></h6>
+                                    </div>
+                                    <p class="mb-1" th:text="${myRecipe.getRating()}">Rating</p>
+                                  </a>
+                                  <div class="d-flex justify-content-end">
+                                    <a title="Remove from collection" class="text-danger"  th:href="@{/remove-from-favorites/{id}(id = ${myRecipe.id})}">
+                                      <i class="bi bi-x"></i>  </a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="swiper-pagination m-3"></div>
+                            </div>
+
+                          </div>
+                        </section><!-- End Gallery Section -->
+
+
+
+                        <hr class="bg-hero hr-2 bg-body-secondary  aos-animate"/>
+                      </div>
+                      <div>
+                        <p th:if="${myRecipes.isEmpty()}">
+                          Your Recipe Collection is empty. <br>
+                          Add your first recipe <br>
+                          or review our recommendations and add some to your Collection <br>
+                          <i class="bi bi-box-arrow-in-down-left"></i>
+                        <div class="col justify-content-center">
+                          <button class="btn glow-button rounded-5" >
+                            <a th:href="@{/add-recipe}"
+                               class="btn btn-light"> <i class="fa-solid fa-book-open-reader"></i> Add recipe </a>
+                          </button>
+                        </div>
+                        </p>
+                      </div>
+                    </article>
+                    <article class="bottom-nav h-25">
+                      <a class="button" th:href="@{/my-collection}">  Open Your Recipe Collection
+                      </a>
+                    </article>
+                  </section>
+                </article>
+              </div>
+            </div><!-- End Icon Box -->
+            <div class="col-lg-4 col-md-6 mt-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon-box rounded-5 h-50 overflow-y-scroll">
                 <i class="bi bi-basket"></i>
                 <article>
                   <section class="box-info lead-box pt-3">
                     <article class="box-head align-content-center">
-                      <h3 class="box-title text-secondary rounded-5">My Shopping List</h3>
+                      <h3 class="box-title text-secondary">My Shopping List</h3>
                       <hr class="bg-hero hr-4 bg-body-secondary aos-animate"/>
                     </article>
                     <article class="box-body pt-2 pb-2 text-left">
@@ -87,58 +149,9 @@
                 </article>
               </div>
             </div><!-- End Icon Box -->
-            <div class="col-lg-4  col-md-6" data-aos="fade-up" data-aos-delay="200" >
-              <div class="icon-box  rounded-5 h-50 overflow-y-scroll">
-                <i class="bi bi-card-list"></i>
-                <article>
-                  <section class="box-info lead-box pt-3">
-                    <article class="box-head align-content-center">
-                      <h3 class="box-title text-danger">My Recipe Collection</h3>
-                      <hr class="bg-hero hr-4 bg-body-secondary aos-animate"/>
-                    </article>
-                    <article class="box-body pt-2 pb-2 align-content-start">
-                      <div class="list-group overflow-auto" th:unless="${myRecipes.isEmpty()}" th:each="myRecipe:${myRecipes}">
-                        <a title="Open recipe" class="list-group-item list-group-item-action active bg-transparent border-0"  aria-current="true"
-                           th:href="@{/recipe/{id}(id=${myRecipe.id})}" >
-                          <div class="d-flex w-100 justify-content-between">
-                            <i class="bi bi-suit-heart"></i>
-                            <h6 class="mb-1 text-body-secondary justify-content-start" th:text="${myRecipe.name}"></h6>
-                            <small ><img  th:src="${myRecipe.imageUrl}" width="50" height="50" class="square rounded-1" alt=""></small>
-                          </div>
-                          <p class="mb-1" th:text="${myRecipe.getRating()}">Rating</p>
 
-                        </a>
-                        <div class="d-flex justify-content-end">
-                          <a title="Remove from collection" class="text-danger"  th:href="@{/remove-from-favorites/{id}(id = ${myRecipe.id})}">
-                            <i class="bi bi-x"></i>  </a>
-                        </div>
-
-                        <hr class="bg-hero hr-2 bg-body-secondary  aos-animate"/>
-                      </div>
-                      <div>
-                        <p th:if="${myRecipes.isEmpty()}">
-                          Nothing yet. <br>
-                          Add your first recipe <br>
-                          <i class="bi bi-box-arrow-in-down-left"></i>
-                        <div class="col justify-content-center">
-                        <button class="btn glow-button rounded-5" >
-                          <a th:href="@{/add-recipe}"
-                             class="btn btn-light"> <i class="fa-solid fa-book-open-reader"></i> Add recipe </a>
-                        </button>
-                        </div>
-                        </p>
-                      </div>
-                    </article>
-                    <article class="bottom-nav h-25">
-                      <a class="button" th:href="@{/my-collection}">  Open Your Recipe Collection
-                      </a>
-                    </article>
-                  </section>
-                </article>
-              </div>
-            </div><!-- End Icon Box -->
-            <div class="col-lg-4  col-md-6" data-aos="fade-up" data-aos-delay="200" th:unless="${othersRecipes.isEmpty()}">
-              <div class="icon-box  rounded-5 h-50 overflow-y-scroll">
+            <div class="col-lg-6  col-md-6 mt-4" data-aos="fade-up" data-aos-delay="200" th:unless="${othersRecipes.isEmpty()}">
+              <div class="icon-box rounded-5 h-50 bg-info overflow-y-scroll">
                 <i class="bi bi-suit-heart-fill"></i>
                 <article>
                   <section class="box-info lead-box pt-3">
@@ -148,16 +161,12 @@
                     </article>
                     <article class="box-body pt-2 pb-2 align-content-start align-text-top">
                       <div class="list-group overflow-auto"  th:each="recipe:${othersRecipes}">
-                        <a  title="Add recipe to my Favorite collection!" th:href="@{/save-recipe-to-favorites/{id}(id=${recipe.id})}">
-                          <i class="bi bi-bookmark-heart"></i> <span title="Number of Saves" th:unless="${recipe.numberOfSaves == 0}" th:text="${recipe.numberOfSaves}" > Saves </span>
-                          | Add to my collection
-                        </a>
                         <a title="Open recipe" class="list-group-item list-group-item-action active bg-transparent border-0"  aria-current="true"
                            th:href="@{/recipe/{id}(id=${recipe.id})}" >
                           <div class="d-flex w-100 justify-content-between">
                             <i class="bi bi-pin-angle"></i>
                             <h6 class="mb-1 text-body-secondary" th:text="${recipe.name}"></h6>
-                            <small ><img  th:src="${recipe.imageUrl}" width="50" height="40" class="square rounded-1" alt=""></small>
+                            <small ><img  th:src="${recipe.imageUrl}" width="70" height="40" class="square rounded-1" alt=""></small>
                           </div>
                           <div>
                             <small class="mb-2 text-body-secondary"> shared by
@@ -170,6 +179,11 @@
                             </small>
                           </div>
 
+                        </a>
+                        <a title="Add recipe to my Favorite collection" class="button text-success" th:href="@{/save-recipe-to-favorites/{id}(id=${recipe.id})}">
+                          <i class="bi bi-suit-heart-fill"> Save </i>
+                          <span title="Number of Saves" class ="text-dark" th:unless="${recipe.numberOfSaves == 0}"  >
+                      ( <th:block th:text="${recipe.numberOfSaves}"></th:block> ) </span>
                         </a>
                         <hr class="bg-hero hr-2 bg-body-secondary aos-animate"/>
                       </div>

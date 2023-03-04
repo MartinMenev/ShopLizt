@@ -4,46 +4,48 @@
         <div class="container">
             <div class="row gy-3">
                 <div class="col-lg-3 col-md-6 d-flex">
-                    <i class="bi bi-geo-alt icon"></i>
+                    <i class="bi bi-basket icon"></i>
                     <div>
-                        <h4>Address</h4>
+                        <h4>My Shopping list</h4>
                         <p>
-                            A108 Adam Street <br>
-                            New York, NY 535022 - US<br>
+                        <a th:href="@{/product-list}" class="text-light">Open Item list</a><br>
+                        <form  th:method="post" th:action="@{/add-product}">
+                            <input type="text" class="form-control" id="addItem" placeholder="Add item . . ." name="name">
+                        </form> <br>
                         </p>
                     </div>
 
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links d-flex">
-                    <i class="bi bi-telephone icon"></i>
+                    <i class="bi bi-layout-text-sidebar-reverse icon"></i>
                     <div>
-                        <h4>Reservations</h4>
+                        <h4>My Recipe Collection</h4>
                         <p>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
+                            <a th:href="@{/my-collection}"  class="text-light">View collection</a><br>
+                            <a th:href="@{/add-recipe}" class="text-light">Add recipe</a><br>
                         </p>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links d-flex">
-                    <i class="bi bi-clock icon"></i>
+                    <i class="bi bi-star-half icon"></i>
                     <div>
-                        <h4>Opening Hours</h4>
+                        <h4>Inspiration</h4>
                         <p>
-                            <strong>Mon-Sat: 11AM</strong> - 23PM<br>
-                            Sunday: Closed
+                            <a th:href="@{/all-recipes}"  class="text-light">View our recommendations</a><br>
                         </p>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Follow Us</h4>
-                    <div class="social-links d-flex">
-                        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-person-bounding-box icon"></i>
+                    <div>
+                        <h4>My Profile</h4>
+                        <p>
+                            <a th:href="@{/user/profile}"  class="text-light">View profile</a><br>
+                            <a th:href="@{/update-user}"  class="text-light">Update profile</a><br>
+                        </p>
                     </div>
                 </div>
 
@@ -52,7 +54,7 @@
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span>ShopLizt</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>ShopLizt 2023</span></strong>. All Rights Reserved
             </div>
         </div>
 

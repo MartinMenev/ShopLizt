@@ -66,12 +66,12 @@ section {
 }
 
 .section-bg {
-  min-height: 50rem;
+  /*min-height: 50rem;*/
 }
 
 .section-header {
   text-align: center;
-  padding-bottom: 30px;
+  /*padding-bottom: 30px;*/
 }
 
 .section-header h2 {
@@ -1627,7 +1627,7 @@ section {
 --------------------------------------------------------------*/
 .footer {
   font-size: 14px;
-  background-color: #1f1f24;
+  background-color: #546054;
   padding: 50px 0;
   color: rgba(255, 255, 255, 0.7);
 }
