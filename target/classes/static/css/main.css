@@ -35,7 +35,7 @@ body {
   font-family: var(--font-default);
   color: var(--color-default);
   background-size: 100%;
-  background: #E9ECEF url("../images/app-images/ShopLIZT.png") no-repeat fixed;
+  background: #E1EEEC;
 }
 
 a {
@@ -490,7 +490,7 @@ section {
     inset: 0;
     padding: 50px 0 10px 0;
     margin: 0;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(224, 239, 241, 0.48);
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
@@ -1819,7 +1819,7 @@ table > tbody {
 }
 
 #main-recipes {
-  background: url("../images/app-images/bg10.png") no-repeat fixed #cbccce;
+  background: #E6E3E3;
   background-size: 100%;
 
 }
