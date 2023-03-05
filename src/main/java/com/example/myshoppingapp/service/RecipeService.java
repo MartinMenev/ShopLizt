@@ -13,6 +13,7 @@ import lombok.Getter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Getter
 @Service
@@ -113,6 +116,11 @@ public class RecipeService {
         return myRecipes.stream()
                 .map(recipe -> modelMapper.map(recipe, OutputRecipeDTO.class))
                 .toList();
+    }
+
+    public Page<OutputRecipeDTO> showMyPageableRecipes(Pageable pageable) {
+        return new PageImpl<>(showRecipesByLoggedUser(), pageable, showRecipesByLoggedUser().size());
+
     }
 
     public List<OutputRecipeDTO> getRecipesByCategory(String category) {
