@@ -59,7 +59,13 @@
                       <hr class="bg-hero hr-2 w-25 bg-body-secondary"/>
                       <h6 th:text="${comment.author.username}"></h6>
                       <h6 th:text="${comment.getDate()}"></h6>
-                      <h6><span>Rating: </span> <span th:text="${comment.rating}"></span></h6>
+                      <div class="rating" >
+                        <span class= "rating" th:if="${comment.rating > 4.5}"><i class="bi bi-star-fill"></i></span>
+                        <span class= "rating" th:if="${comment.rating > 3.5}"><i class="bi bi-star-fill"></i></span>
+                        <span class= "rating" th:if="${comment.rating > 2.5}"><i class="bi bi-star-fill"></i></span>
+                        <span class= "rating" th:if="${comment.rating > 1.5}"><i class="bi bi-star-fill"></i></span>
+                        <span class= "rating" th:if="${comment.rating >= 1}"><i class="bi bi-star-fill"></i></span>
+                      </div>
                     </div>
                   </div>
                 </div>

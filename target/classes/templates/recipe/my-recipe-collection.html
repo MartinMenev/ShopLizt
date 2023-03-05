@@ -47,6 +47,7 @@
         </div>
 
       </div>
+
     </div><!-- End Breadcrumbs -->
 
 
@@ -61,29 +62,36 @@
           <p>My <span >Collection</span></p>
         </div>
 
-        <div class="row gy-4 justify-content-center" th:unless="${myRecipes.isEmpty()}">
+        <div class="row gy-4 justify-content-center" th:unless="${recipes.isEmpty()}">
 
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up" data-aos-delay="100"
-               th:each="myRecipe : ${myRecipes}"
-               th:object="${myRecipes}">
+               th:each="myRecipe : ${recipes}"
+               th:object="${myRecipe}">
 
             <div class="chef-member rounded-4 border-1 bg-body-secondary">
               <div class="member-img bg-body-secondary">
-                <img th:src="${myRecipe.imageUrl}" width="350" height="250" class="square" alt="">
+                <img th:src="*{imageUrl}" width="350" height="250" class="square" alt="">
                 <div class="social">
-                  <a title="Remove from My Collection" class="text-danger" th:href="@{/remove-from-favorites/{id}(id = ${myRecipe.id})}">
+                  <a title="Remove from My Collection" class="text-danger" th:href="@{/remove-from-favorites/{id}(id = *{id})}">
                     <i class="bi bi-x"> Remove</i> </a>
                   <hr class="bg-hero hr-4 bg-body-secondary"/>
-                  <a title="Open recipe details" class="button text-dark" href="#" th:href="@{/recipe/{id}(id=${myRecipe.id})}"><i class="bi bi-link-45deg"> Open </i></a>
+                  <a title="Open recipe details" class="button text-dark" href="#" th:href="@{/recipe/{id}(id=*{id})}"><i class="bi bi-link-45deg"> Open </i></a>
                 </div>
               </div>
               <div class="member-info bg-transparent">
-                <h4 th:text="${myRecipe.name}"></h4>
+                <h4 th:text="*{name}"></h4>
                  <span > Added by
-                   <th:block class="text-dark" th:text="${myRecipe.author.username}"> </th:block>
-                  <th:block  th:text="${myRecipe.getDays()}"></th:block>
+                   <th:block class="text-dark" th:text="*{author.username}"> </th:block>
+                  <th:block  th:text="*{getDays()}"></th:block>
                    days ago
                  </span >
+                <div class="rating" >
+                  <span class= "rating" th:if="${myRecipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></span>
+                  <span class= "rating" th:if="${myRecipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></span>
+                  <span class= "rating" th:if="${myRecipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></span>
+                  <span class= "rating" th:if="${myRecipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></span>
+                  <span class= "rating" th:if="${myRecipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></span>
+                </div>
               </div>
             </div>
 
@@ -91,10 +99,9 @@
 
           </div><!-- End Recipes Member -->
 
-
         </div>
 
-        <div class="row gy-4" th:if="${myRecipes.isEmpty()}">
+        <div class="row gy-4" th:if="${recipes.isEmpty()}">
           <p class="justify-content-center">
             <h6 class="text-center">
               Your collection is still empty. <br>

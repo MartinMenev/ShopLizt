@@ -153,12 +153,8 @@ public class RecipeController {
 
 
     @GetMapping("/my-collection")
-    public String myCollection(Model model,
-                               @PageableDefault(
-                                    sort = "id",
-                                    direction = Sort.Direction.DESC,
-                                    size = 5) Pageable pageable) {
-        model.addAttribute("recipes", recipeService.showMyPageableRecipes(pageable));
+    public String myCollection(Model model) {
+        model.addAttribute("recipes", recipeService.showRecipesByLoggedUser());
         model.addAttribute("allRecipes", recipeService.showLastAddedRecipes());
         return "recipe/my-recipe-collection";
     }

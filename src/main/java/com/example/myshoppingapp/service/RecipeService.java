@@ -12,8 +12,10 @@ import com.example.myshoppingapp.repository.UserRepository;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
@@ -118,10 +120,9 @@ public class RecipeService {
                 .toList();
     }
 
-    public Page<OutputRecipeDTO> showMyPageableRecipes(Pageable pageable) {
-        return new PageImpl<>(showRecipesByLoggedUser(), pageable, showRecipesByLoggedUser().size());
 
-    }
+
+
 
     public List<OutputRecipeDTO> getRecipesByCategory(String category) {
         return this.recipeRepository.findAllByCategory(Category.valueOf(category)).orElseThrow(null)

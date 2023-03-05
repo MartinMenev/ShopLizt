@@ -65,7 +65,13 @@
                                     <div class="d-flex w-100 justify-content-center">
                                       <h6 class="mb-1 text-body-secondary" th:text="${myRecipe.name}"></h6>
                                     </div>
-                                    <p class="mb-1" th:text="${myRecipe.getRating()}">Rating</p>
+                                    <div class="rating" >
+                                      <span class= "rating" th:if="${myRecipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></span>
+                                      <span class= "rating" th:if="${myRecipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></span>
+                                      <span class= "rating" th:if="${myRecipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></span>
+                                      <span class= "rating" th:if="${myRecipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></span>
+                                      <span class= "rating" th:if="${myRecipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></span>
+                                    </div>
                                   </a>
                                   <div class="d-flex justify-content-end">
                                     <a title="Remove from collection" class="text-danger"  th:href="@{/remove-from-favorites/{id}(id = ${myRecipe.id})}">
@@ -175,7 +181,14 @@
                               days ago
                             </small>
                             <small class="mb-2 text-body-secondary" >
-                              | Rating: <span th:text="${recipe.getRating()}"></span>
+                              <div class="rating" >
+                                <span class= "rating" th:if="${recipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></span>
+                                <span class= "rating" th:if="${recipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></span>
+                                <span class= "rating" th:if="${recipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></span>
+                                <span class= "rating" th:if="${recipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></span>
+                                <span class= "rating" th:if="${recipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></span>
+                              </div>
+
                             </small>
                           </div>
 
@@ -220,7 +233,16 @@
                  th:style="'background-image:url(' + ${recipe.imageUrl} + ');'">
 
               <h3 th:text="${recipe.name}"></h3>
-              <div class="price align-self-start" th:text="${recipe.authorName}"></div>
+              <div class="price align-self-start">
+                <div class="rating" >
+                  <span class= "rating" th:if="${recipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></span>
+                  <span class= "rating" th:if="${recipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></span>
+                  <span class= "rating" th:if="${recipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></span>
+                  <span class= "rating" th:if="${recipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></span>
+                  <span class= "rating" th:if="${recipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></span>
+                </div>
+
+              </div>
               <p class="description" th:text="${recipe.category.name}"> </p>
             </div>
           </div>
@@ -242,6 +264,7 @@
   <footer>
     <th:block th:include="~{fragments/footer}"></th:block>
   </footer>
+
 
 </body>
 

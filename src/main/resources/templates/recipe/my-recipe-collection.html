@@ -65,7 +65,7 @@
         <div class="row gy-4 justify-content-center" th:unless="${recipes.isEmpty()}">
 
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up" data-aos-delay="100"
-               th:each="myRecipe : ${recipes.getContent()}"
+               th:each="myRecipe : ${recipes}"
                th:object="${myRecipe}">
 
             <div class="chef-member rounded-4 border-1 bg-body-secondary">
@@ -85,49 +85,19 @@
                   <th:block  th:text="*{getDays()}"></th:block>
                    days ago
                  </span >
+                <div class="rating" >
+                  <span class= "rating" th:if="${myRecipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></span>
+                  <span class= "rating" th:if="${myRecipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></span>
+                  <span class= "rating" th:if="${myRecipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></span>
+                  <span class= "rating" th:if="${myRecipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></span>
+                  <span class= "rating" th:if="${myRecipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></span>
+                </div>
               </div>
             </div>
 
 
 
           </div><!-- End Recipes Member -->
-
-          <!--        Pagination-->
-          <div class="container  mt-5" th:unless="${recipes.getTotalPages() == 1}">
-            <nav aria-label="pagination" >
-              <ul class="pagination justify-content-center">
-                <li class="page-item" th:classappend="${recipes.isFirst()} ? 'disabled' : ''">
-                  <a th:unless="${recipes.isFirst()}"
-                     th:href="@{/my-collection(page=1)}"
-                     class="page-link text-dark" href="#"><i class="bi bi-skip-backward"></i></a>
-                  <a th:if="${recipes.isFirst()}"
-                     class="page-link text-dark" href="#"><i class="bi bi-skip-backward"></i></a>
-                </li>
-                <li class="page-item" th:classappend="${recipes.hasPrevious() ? '' : 'disabled'}">
-                  <a th:if="${recipes.hasPrevious()}"
-                     th:href="@{/my-collection(page=${recipes.getNumber()})}"
-                     class="page-link text-dark" href="#"><i class="bi bi-caret-left"></i></a>
-                  <a th:unless="${recipes.hasPrevious()}"
-                     class="page-link text-dark" href="#"><i class="bi bi-caret-left"></i></a>
-                </li>
-                <li class="page-item" th:classappend="${recipes.hasNext() ? '' : 'disabled'}">
-                  <a th:if="${recipes.hasNext()}"
-                     th:href="@{/my-collection(page=${recipes.getNumber() + 2})}"
-                     class="page-link text-dark" href="#"><i class="bi bi-caret-right"></i></a>
-                  <a th:unless="${recipes.hasNext()}"
-                     class="page-link text-dark" href="#"><i class="bi bi-caret-right"></i></a>
-                </li>
-                <li class="page-item" th:classappend="${recipes.isLast()} ? 'disabled' : ''">
-                  <a th:unless="${recipes.isLast()}"
-                     th:href="@{/my-collection(page=${recipes.getTotalPages()})}"
-                     class="page-link text-dark" href="#"><i class="bi bi-skip-forward"></i></a>
-                  <a th:if="${recipes.isLast()}"
-                     class="page-link text-dark" href="#"><i class="bi bi-skip-forward"></i></a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-
 
         </div>
 
