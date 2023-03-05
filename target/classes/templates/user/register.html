@@ -48,7 +48,7 @@
                   th:object="${registerUserDTO}">
                     <input type="hidden" name="_csrf" value="c95ccb2b-1afa-47bd-bf7b-a5b72739470b">
                     <div class="form-group p-2">
-                      <label for="inputUsername" class="text-black mb-1">Username</label>
+                      <label for="inputUsername" class="text-dark font-monospace mb-1"><strong>Username</strong></label>
                       <input type="text" class="form-control" id="inputUsername" placeholder="Username..." name="username"
                              th:field="*{username}"
                              th:errorclass="is-invalid"
@@ -60,7 +60,7 @@
 
                     </div>
                     <div class="form-group p-2">
-                      <label for="inputPassword" class="text-black mb-1">Password</label>
+                      <label for="inputPassword" class="text-dark font-monospace mb-1"><strong>Password</strong></label>
                       <input type="password" class="form-control" id="inputPassword" placeholder="Password..." name="password"
                              th:field="*{password}"
                              th:errorclass="is-invalid"
@@ -74,7 +74,7 @@
 
                     </div>
                     <div class="form-group p-2">
-                      <label for="inputConfirmPassword" class="text-black mb-1">Confirm Password</label>
+                      <label for="inputConfirmPassword" class="text-dark font-monospace mb-1"><strong> Confirm Password</strong></label>
                       <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password..."
                              name="confirmPassword"
                              th:field="*{confirmPassword}"
@@ -87,7 +87,7 @@
                       </small>
                     </div>
                     <div class="form-group p-2">
-                      <label for="inputEmail" class="text-black mb-1">Email</label>
+                      <label for="inputEmail" class="text-dark font-monospace mb-1"><strong>Email </strong></label>
                       <input type="text" class="form-control" id="inputEmail" placeholder="Email..." name="email"
                              th:field="*{email}"
                              th:errorclass="is-invalid"
@@ -101,7 +101,7 @@
                     </div>
                     <hr class="bg-hero hr-2"/>
                     <div class="button-holder mt-3 d-flex justify-content-center">
-                      <button type="submit" class="btn bg-light glow-button">Register</button>
+                      <button type="submit" class="btn bg-light glow-button"><strong>Register</strong></button>
                     </div>
                   </form>
                 </div>

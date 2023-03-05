@@ -35,7 +35,7 @@ body {
   font-family: var(--font-default);
   color: var(--color-default);
   background-size: 100%;
-  background: #E1EEEC;
+  background: #edf6f6;
 }
 
 a {
@@ -1828,7 +1828,9 @@ table > tbody {
   font-family: cursive;
 }
 
-
+#why-us > div > div > div > div.col-lg-6.col-md-6.mt-4.aos-init.aos-animate > div {
+  background-color: #deeeee;
+}
 
 
 

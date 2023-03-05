@@ -87,12 +87,12 @@
                   <th:block  th:text="*{getDays()}"></th:block>
                    days ago
                  </span >
-                <div class="rating" >
-                  <span class= "rating" th:if="${recipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></span>
-                  <span class= "rating" th:if="${recipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></span>
-                  <span class= "rating" th:if="${recipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></span>
-                  <span class= "rating" th:if="${recipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></span>
-                  <span class= "rating" th:if="${recipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></span>
+                <div class="stars" >
+                  <th:block class= "rating" th:if="${recipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></th:block>
+                  <th:block class= "rating" th:if="${recipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></th:block>
+                  <th:block class= "rating" th:if="${recipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></th:block>
+                  <th:block class= "rating" th:if="${recipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></th:block>
+                  <th:block class= "rating" th:if="${recipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></th:block>
                 </div>
               </div>
             </div>

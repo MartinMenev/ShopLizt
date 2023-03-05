@@ -130,8 +130,12 @@
                       <h6 th:text="${comment.getDate()}"></h6>
                       <hr class="bg-hero hr-2 w-25 bg-body-secondary"/>
                       <h6 th:text="${comment.getRecipeName()}"></h6>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      <div class="stars" >
+                        <th:block class= "rating" th:if="${comment.rating > 4.5}"><i class="bi bi-star-fill"></i></th:block>
+                        <th:block class= "rating" th:if="${comment.rating > 3.5}"><i class="bi bi-star-fill"></i></th:block>
+                        <th:block class= "rating" th:if="${comment.rating > 2.5}"><i class="bi bi-star-fill"></i></th:block>
+                        <th:block class= "rating" th:if="${comment.rating > 1.5}"><i class="bi bi-star-fill"></i></th:block>
+                        <th:block class= "rating" th:if="${comment.rating >= 1}"><i class="bi bi-star-fill"></i></th:block>
                       </div>
                     </div>
                   </div>
@@ -164,12 +168,12 @@
 
               <h3 th:text="${recipe.name}"></h3>
               <div class="price align-self-start" >
-                <div class="rating" >
-                  <span class= "rating" th:if="${recipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></span>
-                  <span class= "rating" th:if="${recipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></span>
-                  <span class= "rating" th:if="${recipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></span>
-                  <span class= "rating" th:if="${recipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></span>
-                  <span class= "rating" th:if="${recipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></span>
+                <div class="stars" >
+                  <th:block class= "rating" th:if="${recipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></th:block>
+                  <th:block class= "rating" th:if="${recipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></th:block>
+                  <th:block class= "rating" th:if="${recipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></th:block>
+                  <th:block class= "rating" th:if="${recipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></th:block>
+                  <th:block class= "rating" th:if="${recipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></th:block>
                 </div>
 
 
