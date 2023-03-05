@@ -6,16 +6,21 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
 public class InputCommentDTO {
-    private Long id;
+
+    @NotNull
+    @Size(min = 5, max = 100)
     private String text;
     private LocalDateTime dateAdded;
-    private long rating;
+
+    private Long rating;
     private UserEntity author;
     private Recipe recipe;
 

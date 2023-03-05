@@ -93,10 +93,13 @@ public class RecipeService {
 
     @Transactional
     @Modifying
-    public void addRecipeRating(double rating, long id) {
-        Recipe recipe = this.recipeRepository.getById(id);
-        recipe.addRating(rating);
-        this.recipeRepository.saveAndFlush(recipe);
+    public void addRecipeRating(Long rating, long id) {
+        if (rating != 0) {
+            Recipe recipe = this.recipeRepository.getById(id);
+            recipe.addRating(rating);
+            this.recipeRepository.saveAndFlush(recipe);
+        }
+
     }
 
     public List<OutputRecipeDTO> showRecipesByLoggedUser() {

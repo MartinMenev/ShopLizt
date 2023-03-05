@@ -35,7 +35,7 @@ public class CommentService {
 
 
     public void addComment(InputCommentDTO inputCommentDTO, Long recipeId) {
-        inputCommentDTO.setId(null);
+//        inputCommentDTO.setId(null);
         Comment comment = modelMapper.map(inputCommentDTO, Comment.class);
         UserEntity author = this.userService.getLoggedUser();
         Recipe recipe = this.recipeService.getRecipeRepository().getById(recipeId);
