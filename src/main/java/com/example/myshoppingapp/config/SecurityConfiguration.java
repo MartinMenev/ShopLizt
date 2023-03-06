@@ -35,7 +35,8 @@ public class SecurityConfiguration {
                     and().logout().//configure logout
                     logoutUrl("/users/logout").
                     logoutSuccessUrl("/").//go to homepage after logout
-                    invalidateHttpSession(true);
+                    deleteCookies("JSESSIONID").
+                    clearAuthentication(true);
 
             return http.build();
 
