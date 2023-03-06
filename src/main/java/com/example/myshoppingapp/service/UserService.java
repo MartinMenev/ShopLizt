@@ -1,11 +1,14 @@
 package com.example.myshoppingapp.service;
 
+import com.example.myshoppingapp.domain.comments.Comment;
 import com.example.myshoppingapp.domain.products.Product;
 import com.example.myshoppingapp.domain.recipes.Recipe;
 import com.example.myshoppingapp.domain.users.UserEntity;
 import com.example.myshoppingapp.domain.users.UserInputDTO;
 import com.example.myshoppingapp.domain.users.UserOutputDTO;
+import com.example.myshoppingapp.repository.CommentRepository;
 import com.example.myshoppingapp.repository.ProductRepository;
+import com.example.myshoppingapp.repository.RecipeRepository;
 import com.example.myshoppingapp.repository.UserRepository;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,15 +41,23 @@ public class UserService {
     private final UserDetailsService userDetailsService;
 
     private final AuthService authService;
+
+    private final RecipeRepository recipeRepository;
+
+    private final CommentRepository commentRepository;
+
     @Autowired
     public UserService(UserRepository userRepository, ProductRepository productRepository, ModelMapper modelMapper,
-                       PasswordEncoder passwordEncoder, UserDetailsService userDetailsService, AuthService authService) {
+                       PasswordEncoder passwordEncoder, UserDetailsService userDetailsService,
+                       AuthService authService, RecipeRepository recipeRepository, CommentRepository commentRepository) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
         this.authService = authService;
+        this.recipeRepository = recipeRepository;
+        this.commentRepository = commentRepository;
     }
 
 
@@ -87,16 +98,42 @@ public class UserService {
 
     }
 
-    //delete user, but first delete all his product lists (if any)!
-    public void deleteUserById(long id) {
+    @Transactional
+    @Modifying
+    public void deleteUserEntityById(long id) {
         Optional<List<Product>> userProducts= this.productRepository.findAllByUserEntityId(id);
+
         if (userProducts.isPresent()) {
             for (Product userProduct : userProducts.get()) {
                this.productRepository.deleteById(userProduct.getId());
             }
         }
-//        this.authService.logout();
-        this.userRepository.deleteById(id);
+
+        UserEntity userEntity = this.userRepository.getReferenceById(id);
+        List<Recipe> usersFavorites = userEntity.getFavoriteRecipes();
+        if (usersFavorites.size() > 0) {
+            usersFavorites.clear();
+        }
+        Optional<List<Recipe>> userRecipes = this.recipeRepository.findAllByAuthorId(this.getLoggedUserId());
+
+        if (userRecipes.isPresent()) {
+            for (Recipe recipe : userRecipes.get()) {
+                Optional<List<Comment>> comments = this.commentRepository.findAllByRecipeId(recipe.getId());
+                comments.ifPresent(this.commentRepository::deleteAll);
+
+                Optional<List<UserEntity>> userSavedThisRecipe =  userRepository.findAllByFavoriteRecipesContains(recipe);
+                if (userSavedThisRecipe.isPresent()) {
+                    for (UserEntity user : userSavedThisRecipe.get()) {
+                        user.getFavoriteRecipes().remove(recipe);
+                        this.userRepository.save(user);
+                    }
+                }
+                this.recipeRepository.delete(recipe);
+            }
+        }
+
+
+        this.userRepository.delete(userEntity);
 
     }
 

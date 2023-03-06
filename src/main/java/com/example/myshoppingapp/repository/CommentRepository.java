@@ -12,4 +12,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     Optional<List<Comment>> findAllByRecipeIdOrderByIdDesc(Long recipeId);
 
 
+    Optional<List<Comment>> findAllByRecipeId (Long id);
+
 }

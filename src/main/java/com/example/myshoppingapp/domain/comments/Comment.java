@@ -6,10 +6,7 @@ import com.example.myshoppingapp.domain.users.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
@@ -29,7 +26,7 @@ public class Comment extends BaseEntity {
    @ManyToOne
     private UserEntity author;
 
-    @ManyToOne
+    @ManyToOne( cascade = CascadeType.REMOVE)
     private Recipe recipe;
 
     public Comment() {

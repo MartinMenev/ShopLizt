@@ -8,6 +8,7 @@ import com.example.myshoppingapp.domain.products.Product;
 import com.example.myshoppingapp.domain.users.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -43,7 +44,7 @@ public class Recipe extends BaseEntity {
    @ElementCollection
    private List<Double> ratingList;
 
-   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
    @JoinColumn
    private UserEntity author;
 

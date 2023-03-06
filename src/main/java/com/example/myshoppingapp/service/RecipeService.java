@@ -13,6 +13,7 @@ import lombok.Getter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -32,6 +33,7 @@ public class RecipeService {
     private final RecipeRepository recipeRepository;
 
     private final UserRepository userRepository;
+
     private final UserService userService;
     private final ModelMapper modelMapper;
 
@@ -236,4 +238,7 @@ public class RecipeService {
         }
         this.recipeRepository.delete(recipeToRemove);
     }
+
+
+
 }

@@ -26,4 +26,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long>,
     @Query(value = "select * from recipes as r where locate(:text, r.name) > 0 "+
         "or locate(:text, r.description) > 0", nativeQuery = true)
     Optional<List<Recipe>> findAllContainingSearchText(String text);
+
+    Optional<List<Recipe>> findAllByAuthorId(Long id);
 }

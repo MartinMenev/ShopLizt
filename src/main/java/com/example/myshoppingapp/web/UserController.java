@@ -48,14 +48,14 @@ public class UserController {
     @PatchMapping("/update-user")
     public String doUpdateProduct(Model model, UserInputDTO userInputDTO) {
         UserOutputDTO currentUser = this.userService.getLoggedUserDTO();
-        model.addAttribute("userEntity", currentUser);
+        model.addAttribute("user", currentUser);
         userService.updateUser(userInputDTO);
         return "redirect:/users/login";
     }
 
     @DeleteMapping("/delete-profile/{id}")
     public String deleteById(@PathVariable(value = "id") long id) {
-        userService.deleteUserById(id);
+        userService.deleteUserEntityById(id);
         return "redirect:/";
     }
 
