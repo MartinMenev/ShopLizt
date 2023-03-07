@@ -100,8 +100,9 @@ public class UserService {
 
     @Transactional
     @Modifying
-    public void deleteUserEntityById(long id) {
-        Optional<List<Product>> userProducts= this.productRepository.findAllByUserEntityId(id);
+    public void deleteUserEntityById() {
+        UserEntity userEntity = this.getLoggedUser();
+        Optional<List<Product>> userProducts= this.productRepository.findAllByUserEntityId(userEntity.getId());
 
         if (userProducts.isPresent()) {
             for (Product userProduct : userProducts.get()) {
@@ -109,17 +110,14 @@ public class UserService {
             }
         }
 
-        UserEntity userEntity = this.userRepository.getReferenceById(id);
         List<Recipe> usersFavorites = userEntity.getFavoriteRecipes();
         if (usersFavorites.size() > 0) {
             usersFavorites.clear();
         }
-        Optional<List<Recipe>> userRecipes = this.recipeRepository.findAllByAuthorId(this.getLoggedUserId());
+        Optional<List<Recipe>> userRecipes = this.recipeRepository.findAllByAuthor(userEntity);
 
         if (userRecipes.isPresent()) {
             for (Recipe recipe : userRecipes.get()) {
-                Optional<List<Comment>> comments = this.commentRepository.findAllByRecipeId(recipe.getId());
-                comments.ifPresent(this.commentRepository::deleteAll);
 
                 Optional<List<UserEntity>> userSavedThisRecipe =  userRepository.findAllByFavoriteRecipesContains(recipe);
                 if (userSavedThisRecipe.isPresent()) {
@@ -132,6 +130,8 @@ public class UserService {
             }
         }
 
+        Optional<List<Comment>> comments = this.commentRepository.findAllByAuthor(userEntity);
+             comments.ifPresent(this.commentRepository::deleteAll);
 
         this.userRepository.delete(userEntity);
 
