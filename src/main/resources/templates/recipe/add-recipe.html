@@ -78,13 +78,7 @@
                           <label for="inputDescription" class="col-form-label text-body-secondary ">Description</label>
                         </div>
                         <div class="form-group">
-                          <textarea name="description"
-                                    th:value="*{description}"
-                                    placeholder="Describe your recipe here or leave it for later (optional)"
-                                    required minlength="5"
-                                    id="inputDescription"
-                                    class="form-control">
-                          </textarea>
+                          <textarea name="description" th:value="*{description}"  required minlength="5" id="inputDescription" class="form-control"></textarea>
                         </div>
                       </div>
                       <div class="mt-6">

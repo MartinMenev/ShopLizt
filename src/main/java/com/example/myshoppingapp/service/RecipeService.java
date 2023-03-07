@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -142,7 +143,17 @@ public class RecipeService {
     @Modifying
     @Transactional
     public void deleteById(long id) {
-        this.recipeRepository.deleteById(id);
+        Recipe recipe = this.recipeRepository.findById(id).get();
+
+        Optional<List<UserEntity>> userSavedThisRecipe =  userRepository.findAllByFavoriteRecipesContains(recipe);
+        if (userSavedThisRecipe.isPresent()) {
+            for (UserEntity user : userSavedThisRecipe.get()) {
+                user.getFavoriteRecipes().remove(recipe);
+                this.userRepository.save(user);
+            }
+        }
+
+        this.recipeRepository.delete(recipe);
     }
 
     @Modifying

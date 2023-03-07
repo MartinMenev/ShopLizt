@@ -78,7 +78,7 @@
                       <button type="submit" class="btn btn-info col-5"> Update </button>
                     </form>
                     <hr class="bg-hero hr-2"/>
-                    <form th:action="@{/delete-profile/{id}(id=${user.id})}" th:method="delete"
+                    <form th:action="@{/delete-profile}" th:method="delete"
                        class="btn btn-light text-danger">
                       <input type="submit" class="btn btn-light text-danger" value="Delete profile" />
                     </form>

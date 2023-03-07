@@ -23,10 +23,10 @@ public class Comment extends BaseEntity {
     @Column
     private long rating;
 
-   @ManyToOne
+   @ManyToOne (cascade = CascadeType.DETACH)
     private UserEntity author;
 
-    @ManyToOne( cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.DETACH)
     private Recipe recipe;
 
     public Comment() {

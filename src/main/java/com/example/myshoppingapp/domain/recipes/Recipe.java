@@ -44,7 +44,7 @@ public class Recipe extends BaseEntity {
    @ElementCollection
    private List<Double> ratingList;
 
-   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
    @JoinColumn
    private UserEntity author;
 
@@ -56,7 +56,7 @@ public class Recipe extends BaseEntity {
    private String imageUrl;
 
    @OneToMany(targetEntity = Comment.class, mappedBy= "recipe",
-           cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+           cascade = {CascadeType.REMOVE})
    @LazyCollection(LazyCollectionOption.FALSE)
    private List<Comment> commentList;
 

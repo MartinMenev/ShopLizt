@@ -24,6 +24,7 @@ public class SecurityConfiguration {
              authorizeHttpRequests().
                     requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                     antMatchers("/", "/users/register", "/users/login", "/users/login-error").permitAll().
+                    antMatchers("/admin").hasRole("ADMIN").
                     anyRequest().authenticated().
                     and().
                     formLogin().
@@ -36,7 +37,9 @@ public class SecurityConfiguration {
                     logoutUrl("/users/logout").
                     logoutSuccessUrl("/").//go to homepage after logout
                     deleteCookies("JSESSIONID").
-                    clearAuthentication(true);
+                    clearAuthentication(true).
+                    and().
+                    csrf();
 
             return http.build();
 

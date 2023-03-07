@@ -1,6 +1,7 @@
 package com.example.myshoppingapp.repository;
 
 import com.example.myshoppingapp.domain.comments.Comment;
+import com.example.myshoppingapp.domain.users.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,5 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     Optional<List<Comment>> findAllByRecipeId (Long id);
 
+    Optional<List<Comment>> findAllByAuthor  (UserEntity userEntity);
 }
