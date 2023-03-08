@@ -58,7 +58,7 @@
                       <h4 class="mt-2 mb-0">Email</h4>
                       <span class="mt-2 mb-0 text-body-secondary" th:text="${user.email}"></span>
                       <h4 class="mt-2 mb-0">Role</h4>
-                      <span class="logo-home-text" th:text="${user.userRole}"></span>
+                      <span class="logo-home-text" th:text="${user.getUserRole().getRole().name()}"></span>
                     </div>
                   </div>
 

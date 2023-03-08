@@ -5,6 +5,7 @@ import com.example.myshoppingapp.domain.enums.UserRole;
 import com.example.myshoppingapp.domain.pictures.Picture;
 import com.example.myshoppingapp.domain.products.Product;
 import com.example.myshoppingapp.domain.recipes.Recipe;
+import com.example.myshoppingapp.domain.roles.RoleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.hibernate.annotations.LazyCollection;
@@ -13,6 +14,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @AllArgsConstructor
@@ -29,8 +31,10 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private UserRole userRole;
+
+   @ManyToMany
+   @LazyCollection(LazyCollectionOption.FALSE)
+    private List<RoleEntity> roles;
 
     @OneToOne
     private Picture picture;
@@ -46,6 +50,7 @@ public class UserEntity extends BaseEntity {
     public UserEntity() {
         this.boughtProducts = new ArrayList<>();
         this.favoriteRecipes = new ArrayList<>();
+        this.roles = new ArrayList<>();
     }
 
     public UserEntity setUsername(String username) {
@@ -63,8 +68,8 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
-    public UserEntity setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public UserEntity addRole(RoleEntity role) {
+        this.roles.add(role);
         return this;
     }
 

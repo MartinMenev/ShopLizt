@@ -3,6 +3,7 @@ package com.example.myshoppingapp.domain.users;
 import com.example.myshoppingapp.domain.enums.UserRole;
 import com.example.myshoppingapp.domain.pictures.Picture;
 import com.example.myshoppingapp.domain.recipes.Recipe;
+import com.example.myshoppingapp.domain.roles.RoleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ public class UserOutputDTO implements Serializable {
     private String username;
     private String password;
     private String email;
-    private UserRole userRole;
+    private RoleEntity userRole;
     private Picture picture;
 
     private List<Recipe> favoriteRecipes;
