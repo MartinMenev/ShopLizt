@@ -22,10 +22,15 @@ public class UserOutputDTO implements Serializable {
     private String username;
     private String password;
     private String email;
-    private RoleEntity userRole;
+    private List<RoleEntity> roles;
     private Picture picture;
 
     private List<Recipe> favoriteRecipes;
+
+    public String getRoles() {
+        List<String> roleNames = this.roles.stream().map(r -> r.getRole().name()).toList();
+        return String.format(String.join(" ,", roleNames));
+    }
 
 
 }
