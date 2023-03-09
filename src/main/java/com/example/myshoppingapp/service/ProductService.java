@@ -1,5 +1,6 @@
 package com.example.myshoppingapp.service;
 
+import com.example.myshoppingapp.domain.exceptions.ObjectNotFoundException;
 import com.example.myshoppingapp.domain.products.InputProductDTO;
 import com.example.myshoppingapp.domain.products.OutputProductDTO;
 import com.example.myshoppingapp.domain.products.Product;
@@ -15,6 +16,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Getter
@@ -84,9 +86,11 @@ public class ProductService {
     }
 
     public OutputProductDTO getProductById(Long id) {
-        Product product = this.productRepository
-                .getProductById(id)
-                .orElseThrow(NoSuchElementException::new);
+        Optional<Product> product = this.productRepository
+                .getProductById(id);
+        if (product.isEmpty()) {
+            throw new ObjectNotFoundException(id);
+        }
         return modelMapper.map(product, OutputProductDTO.class);
     }
 

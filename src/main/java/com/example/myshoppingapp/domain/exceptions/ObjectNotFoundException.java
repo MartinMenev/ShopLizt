@@ -8,7 +8,7 @@ public class ObjectNotFoundException extends RuntimeException {
   private final long objectId;
 
 
-  public ObjectNotFoundException(long objectId) {
+  public ObjectNotFoundException(Long objectId) {
 
     super("Object with ID " + objectId +  " not found!");
 

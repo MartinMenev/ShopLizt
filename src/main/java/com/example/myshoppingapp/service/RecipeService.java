@@ -96,8 +96,13 @@ public class RecipeService {
     public OutputRecipeDTO getRecipeById(Long id) {
         Optional<Recipe> recipe = this.recipeRepository
                 .getRecipeById(id);
+        if (recipe.isEmpty()) {
+            throw new ObjectNotFoundException(id);
+        }
         return modelMapper.map(recipe, OutputRecipeDTO.class);
     }
+
+
 
     @Transactional
     @Modifying
