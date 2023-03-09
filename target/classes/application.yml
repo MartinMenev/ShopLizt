@@ -48,3 +48,9 @@ logging:
 
 server:
     port: 8000
+
+#    error:
+##        include-exception: true
+##        include-stacktrace: always
+#        whitelabel:
+#          enabled: off

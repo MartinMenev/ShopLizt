@@ -1,5 +1,6 @@
 package com.example.myshoppingapp.web;
 
+import com.example.myshoppingapp.domain.exceptions.ObjectNotFoundException;
 import com.example.myshoppingapp.domain.recipes.InputRecipeDTO;
 import com.example.myshoppingapp.domain.recipes.OutputRecipeDTO;
 import com.example.myshoppingapp.service.CommentService;
@@ -9,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -83,6 +86,16 @@ public class RecipeController {
         model.addAttribute("pictures", outputRecipeDTO.getPictureList());
         return "recipe/recipe-details";
     }
+
+//    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+//    @ExceptionHandler(ObjectNotFoundException.class)
+//    public ModelAndView onProductNotFound(ObjectNotFoundException onfe) {
+//        ModelAndView modelAndView = new ModelAndView("object-not-found");
+//
+//        modelAndView.addObject("objectId", onfe.getObjectId());
+//
+//        return modelAndView;
+//    }
 
     @GetMapping("/edit-recipe/{id}")
     public String editRecipe(@PathVariable(value = "id") Long id, Model model) {
@@ -164,5 +177,6 @@ public class RecipeController {
         recipeService.removeRecipeFromMyCollection(id);
         return "redirect:/my-collection";
     }
+
 
 }

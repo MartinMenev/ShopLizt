@@ -1,6 +1,7 @@
 package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.domain.enums.Category;
+import com.example.myshoppingapp.domain.exceptions.ObjectNotFoundException;
 import com.example.myshoppingapp.domain.pictures.Picture;
 import com.example.myshoppingapp.domain.products.Product;
 import com.example.myshoppingapp.domain.recipes.InputRecipeDTO;
@@ -93,9 +94,8 @@ public class RecipeService {
 
     @Transactional
     public OutputRecipeDTO getRecipeById(Long id) {
-        Recipe recipe = this.recipeRepository
-                .getRecipeById(id)
-                .orElseThrow(NoSuchElementException::new);
+        Optional<Recipe> recipe = this.recipeRepository
+                .getRecipeById(id);
         return modelMapper.map(recipe, OutputRecipeDTO.class);
     }
 
