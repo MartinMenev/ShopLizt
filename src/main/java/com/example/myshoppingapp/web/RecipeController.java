@@ -81,6 +81,8 @@ public class RecipeController {
     @GetMapping("/recipe/{id}")
     public String reviewRecipe(@PathVariable(value = "id") Long id, Model model) {
         OutputRecipeDTO outputRecipeDTO = recipeService.getRecipeById(id);
+
+
         model.addAttribute("recipe", outputRecipeDTO);
         model.addAttribute("comments", commentService.showLatestComments(id));
         model.addAttribute("pictures", outputRecipeDTO.getPictureList());

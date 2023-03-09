@@ -147,7 +147,7 @@
                           th:method="POST">
 
                       <div class="rate text-bg-body-primary rounded-3">
-                        <h6 class="mb-0">Rate this recipe</h6>
+                        <h6 class="mb-0"><small class="text-danger"> * </small> Rate this recipe </h6>
                         <div class="rating" >
 <!--                          <input type="hidden" name="rating" th:value="0" id="0">-->
                           <input type="radio" name="rating" th:value="5" id="5"><label for="5" >☆</label>
@@ -164,7 +164,7 @@
 
                       <div class="form-group mt-3">
 
-                        <h4>Leave a comment</h4>
+                        <h4><small class="text-danger"> * </small> Leave a comment </h4>
                         <label for="text"></label>
                         <textarea name="text"
                                   id="text"
