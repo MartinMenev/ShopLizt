@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <th:block th:include="~{fragments/head}"></th:block>
@@ -22,7 +23,7 @@
           <h2 data-aos="fade-up">Plan Your Shopping<br>And get inspired</h2>
           <p data-aos="fade-up" data-aos-delay="100">Make a list of items easily and don't forget a single product while shopping</p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a th:href="@{/users/login}" class="btn-book-a-table">Get started</a>
+            <a th:href="@{/users/login}" sec:authorize="isAnonymous()" class="btn-book-a-table">Get started</a>
           </div>
         </div>
         <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">

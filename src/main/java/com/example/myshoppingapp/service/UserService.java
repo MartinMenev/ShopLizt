@@ -67,11 +67,11 @@ public class UserService {
 
 
 
-    public UserEntity findByUsername(String username) {
+    UserEntity findByUsername(String username) {
         return this.userRepository.findUserEntityByUsername(username).orElseThrow(NoSuchElementException::new);
     }
 
-    public UserEntity getLoggedUser(){
+    UserEntity getLoggedUser(){
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return this.userRepository.findUserEntityByUsername(userDetails.getUsername())
                 .orElseThrow(NoSuchElementException::new);
@@ -79,7 +79,7 @@ public class UserService {
     }
 
 
-    public Long getLoggedUserId() {
+    protected Long getLoggedUserId() {
         return this.getLoggedUser().getId();
     }
 

@@ -51,7 +51,7 @@
                     <img th:if="${user.picture == null}" th:src="@{'/images/default-user-pic.jpg'}" width="100" />
 
                     <div class="text-center mt-3" th:object="${user}">
-                      <a th:href="@{/update-user}"
+                      <a title="Update your profile" th:href="@{/update-user}"
                          class="btn btn-light"> <i class="fa-regular fa-pen-to-square"></i> </a>
                       <h4 class="mt-4 mb-0">Username</h4>
                       <span class="mt-2 mb-0 text-body-secondary" th:text="${user.username}" ></span>
