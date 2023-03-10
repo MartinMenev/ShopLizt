@@ -1,5 +1,6 @@
 package com.example.myshoppingapp.service;
 
+import com.example.myshoppingapp.domain.AppUserDetails;
 import com.example.myshoppingapp.domain.comments.Comment;
 import com.example.myshoppingapp.domain.products.Product;
 import com.example.myshoppingapp.domain.recipes.Recipe;
@@ -15,6 +16,8 @@ import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -46,6 +49,7 @@ public class UserService {
 
     private final CommentRepository commentRepository;
 
+
     @Autowired
     public UserService(UserRepository userRepository, ProductRepository productRepository, ModelMapper modelMapper,
                        PasswordEncoder passwordEncoder, UserDetailsService userDetailsService,
@@ -71,6 +75,7 @@ public class UserService {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return this.userRepository.findUserEntityByUsername(userDetails.getUsername())
                 .orElseThrow(NoSuchElementException::new);
+
     }
 
 

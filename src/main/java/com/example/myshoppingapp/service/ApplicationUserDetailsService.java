@@ -1,4 +1,5 @@
 package com.example.myshoppingapp.service;
+import com.example.myshoppingapp.domain.AppUserDetails;
 import com.example.myshoppingapp.domain.enums.UserRole;
 import com.example.myshoppingapp.domain.roles.RoleEntity;
 import com.example.myshoppingapp.domain.users.UserEntity;
@@ -25,7 +26,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     return userRepository.findUserEntityByUsername(username)
-            .map(u -> new User(
+            .map(u -> new AppUserDetails(
                     u.getUsername(),
                     u.getPassword(),
                     u.getRoles().stream()
