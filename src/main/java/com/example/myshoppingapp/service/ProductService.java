@@ -1,6 +1,6 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.exceptions.ObjectNotFoundException;
+import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
 import com.example.myshoppingapp.domain.products.InputProductDTO;
 import com.example.myshoppingapp.domain.products.OutputProductDTO;
 import com.example.myshoppingapp.domain.products.Product;

@@ -1,7 +1,7 @@
 package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.domain.enums.Category;
-import com.example.myshoppingapp.domain.exceptions.ObjectNotFoundException;
+import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
 import com.example.myshoppingapp.domain.pictures.Picture;
 import com.example.myshoppingapp.domain.products.Product;
 import com.example.myshoppingapp.domain.recipes.InputRecipeDTO;
@@ -13,21 +13,14 @@ import com.example.myshoppingapp.repository.UserRepository;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.support.PagedListHolder;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Getter
 @Service

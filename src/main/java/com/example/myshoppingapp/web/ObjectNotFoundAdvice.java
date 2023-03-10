@@ -1,6 +1,6 @@
 package com.example.myshoppingapp.web;
 
-import com.example.myshoppingapp.domain.exceptions.ObjectNotFoundException;
+import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
