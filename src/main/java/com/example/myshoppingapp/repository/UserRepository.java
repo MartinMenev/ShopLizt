@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<List<UserEntity>> findAllByFavoriteRecipesContains(Recipe recipe);
 
-    @Query(value = "select * from users as u where locate(:text, u.username) > 0 ", nativeQuery = true)
+    @Query(value = "select * from users as u where locate(:text, u.username) > 0", nativeQuery = true)
     Optional<List<UserEntity>> findAllContainingSearchText(String text);
 
 }

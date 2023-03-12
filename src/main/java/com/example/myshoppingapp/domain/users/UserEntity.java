@@ -73,6 +73,15 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
+    public boolean isAdmin() {
+        for (RoleEntity role : roles) {
+            if (role.getRole().equals(UserRole.ADMIN)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public UserEntity setPicture(Picture picture) {
         this.picture = picture;
         return this;

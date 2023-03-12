@@ -38,6 +38,13 @@ public class CommentController {
         return "redirect:/recipe/{id}";
     }
 
+
+    @GetMapping("/approve-comment/{id}")
+    public String approveComment(@PathVariable(value = "id") long id) {
+        commentService.approveComment(id);
+
+        return "redirect:/admin";
+    }
     @ModelAttribute(name = "commentAddModel")
     public InputCommentDTO initInputCommentDTO() {
         return new InputCommentDTO();

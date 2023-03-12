@@ -2,9 +2,12 @@ package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.domain.AppUserDetails;
 import com.example.myshoppingapp.domain.comments.Comment;
+import com.example.myshoppingapp.domain.comments.OutputCommentDTO;
+import com.example.myshoppingapp.domain.enums.UserRole;
 import com.example.myshoppingapp.domain.products.Product;
 import com.example.myshoppingapp.domain.recipes.OutputRecipeDTO;
 import com.example.myshoppingapp.domain.recipes.Recipe;
+import com.example.myshoppingapp.domain.roles.RoleEntity;
 import com.example.myshoppingapp.domain.users.UserEntity;
 import com.example.myshoppingapp.domain.users.UserInputDTO;
 import com.example.myshoppingapp.domain.users.UserOutputDTO;
@@ -27,6 +30,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -174,6 +178,16 @@ public class UserService {
                 .toList();
 
 
+    }
+
+    public Object findAllUserNotAdmin() {
+        return this.userRepository
+                .findAll()
+                .stream()
+                .filter(user -> !user.isAdmin())
+                .map(comment -> modelMapper.map(comment, UserOutputDTO.class))
+                .sorted(Comparator.comparing(UserOutputDTO::getId))
+                .toList();
     }
 }
 

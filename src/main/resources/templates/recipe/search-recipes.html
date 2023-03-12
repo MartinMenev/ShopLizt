@@ -27,7 +27,7 @@
                class="button"> <i class="fa-solid fa-book-open-reader"></i> Add recipe </a>
           </button>
           <form  th:method="get" th:action="@{/search-recipes}">
-            <input type="text" class="form-control bg-transparent" id="searchRecipe" placeholder="Search recipe . . ." name="text">
+            <input type="text" class="form-control" id="searchRecipe" placeholder="Search recipe . . ." name="text">
           </form>
           <form  th:method="get" th:action="@{/filter-recipes}"
                    class="button bg-transparent" >

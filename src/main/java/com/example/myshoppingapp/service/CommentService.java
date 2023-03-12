@@ -9,8 +9,10 @@ import com.example.myshoppingapp.repository.CommentRepository;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -81,5 +83,13 @@ public class CommentService {
                 .map(comment -> modelMapper.map(comment, OutputCommentDTO.class))
                 .sorted(Comparator.comparing(OutputCommentDTO::getId))
                 .toList();
+    }
+
+    @Transactional
+    @Modifying
+    public void approveComment(long id) {
+        Comment comment = this.commentRepository.getReferenceById(id);
+        comment.setApproved();
+        this.commentRepository.saveAndFlush(comment);
     }
 }

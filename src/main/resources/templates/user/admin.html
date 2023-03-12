@@ -47,7 +47,6 @@
                     <hr class="bg-hero hr-4 bg-body-secondary aos-animate"/>
                     No new comment yet. <br>
                     You can check again later. <br>
-                    <i class="bi bi-box-arrow-in-down-left"></i>
                   </h6>
                   <table class="table table-responsive-sm  rounded-3 bg-white"  th:unless="${comments.isEmpty()}">
                     <thead>
@@ -59,7 +58,7 @@
                     <tbody>
                     <tr   th:each="comment:${comments}">
                       <td  >
-                        <a title="Mark as Approved" class="bi-check2-circle" href="#" th:href="@{/approve-comment/{id}(id=*{id})}"></a>
+                        <a title="Mark as Approved" class="bi-check2-circle" href="#" th:href="@{/approve-comment/{id}(id=${comment.id})}"></a>
                         <a th:href="@{#}" class="btn btn-light " th:text="${comment.text}"> </a>
                       </td>
                       <td>
@@ -81,8 +80,8 @@
 
               <div class="col-lg-5 justify-content-center rounded-5" >
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 bg-body-secondary">
-                  <h4><i>Search Users by name</i></h4>
-                  <table class="table table-responsive-sm  rounded-3 bg-body-secondary" th:unless="${searchedUsers == null}" >
+                  <h4><i>All Users (not admin)</i></h4>
+                  <table class="table table-responsive-sm  rounded-3 bg-body-secondary" >
                     <thead>
                     <tr>
                       <th></th>
@@ -90,16 +89,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr   th:each="user:${searchedUsers}">
+                    <tr   th:each="user:${users}">
                       <td  >
-                        <a title="Return item to my Shopping list" class="bi bi-arrow-clockwise" href="#" th:href="@{/reuse-product/{id}(id=${product.id})}"></a>
                         <a th:href="@{#}" class="btn bg-body-secondary " th:text="${user.username}"> </a>
                       </td>
                       <td>
 
 
-                        <!--                remove Product-->
-                        <a title="Grant Admin role" th:href="@{/make-admin/{id}(id=${user.id})}" class="btn btn-light bg-body-secondary"><i class="fa-solid fa-xmark bg-body-secondary"></i></a>
+                        <!--                grant Admin role-->
+                        <a title="Grant Admin role" th:href="@{/make-admin/{id}(id=${user.id})}" class="btn btn-light bg-body-secondary"><i class="bi bi-person-plus bg-body-secondary"></i></a>
 
 
                       </td>
