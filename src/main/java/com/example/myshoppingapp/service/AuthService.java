@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Getter
 @Setter
 @Service
@@ -40,6 +42,7 @@ public class AuthService {
     }
 
     @Modifying
+    @Transactional
     public void register(RegisterUserDTO registerUserDTO) {
         UserEntity userEntity = this.modelMapper.map(registerUserDTO, UserEntity.class);
         userEntity.setPassword(passwordEncoder.encode(registerUserDTO.getPassword()));
@@ -50,8 +53,8 @@ public class AuthService {
         }
         userRepository.save(userEntity);
 
-        this.emailService.sendRegistrationEmail(registerUserDTO.getEmail(), registerUserDTO.getUsername());
 
+            this.emailService.sendRegistrationEmail(registerUserDTO.getEmail(), registerUserDTO.getUsername());
 
     }
 
