@@ -1,7 +1,6 @@
 package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.domain.enums.UserRole;
-import com.example.myshoppingapp.domain.roles.RoleEntity;
 import com.example.myshoppingapp.domain.users.RegisterUserDTO;
 import com.example.myshoppingapp.domain.users.UserEntity;
 import com.example.myshoppingapp.repository.RoleRepository;
@@ -11,8 +10,6 @@ import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,13 +26,17 @@ public class AuthService {
 
     private UserDetailsService userDetailsService;
 
+    private final EmailService emailService;
+
     @Autowired
-    public AuthService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, RoleRepository roleRepository, UserDetailsService userDetailsService) {
+    public AuthService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder,
+                       RoleRepository roleRepository, UserDetailsService userDetailsService, EmailService emailService) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
         this.userDetailsService = userDetailsService;
+        this.emailService = emailService;
     }
 
     @Modifying
@@ -48,6 +49,8 @@ public class AuthService {
             userEntity.addRole(this.roleRepository.findRoleEntityByRole(UserRole.USER).orElseThrow());
         }
         userRepository.save(userEntity);
+
+        this.emailService.sendRegistrationEmail(registerUserDTO.getEmail(), registerUserDTO.getUsername());
 
 
     }
