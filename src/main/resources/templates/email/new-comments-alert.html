@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+
+
+
+  <h2 class="mt-2 mb-0 font-monospace">
+    Hello, Admin!
+  </h2>
+  <p>
+    There are <strong> <th:block th:text="${numberComments}"></th:block> new comment(s) </strong> added recently, so you need to review them and approve/reject. <br>
+    When you have some free time, login to ShopLizt app and find them under "Admin" section. <br>
+  </p>
+
+  <p>
+  Best regards,
+  </p>
+  <h4>
+    <i>ShopLizt team</i>
+  </h4>
+
+</body>
+</html>
