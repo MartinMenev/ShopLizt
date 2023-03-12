@@ -25,7 +25,7 @@ public class NewCommentsScheduler {
         this.emailService = emailService;
     }
 
-    @Scheduled(cron = "0 10/20/30 * * * *")
+    @Scheduled(cron = "0 0/30 * * * *")
     public void checkForNewComments() {
         List<String> adminEmails = this.userService.findAllAdminEmails();
 
