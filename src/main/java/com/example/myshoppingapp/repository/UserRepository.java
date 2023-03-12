@@ -3,6 +3,7 @@ package com.example.myshoppingapp.repository;
 import com.example.myshoppingapp.domain.recipes.Recipe;
 import com.example.myshoppingapp.domain.users.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,4 +20,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
 
     Optional<List<UserEntity>> findAllByFavoriteRecipesContains(Recipe recipe);
+
+    @Query(value = "select * from users as u where locate(:text, u.username) > 0 ", nativeQuery = true)
+    Optional<List<UserEntity>> findAllContainingSearchText(String text);
+
 }

@@ -3,10 +3,12 @@ package com.example.myshoppingapp.service;
 import com.example.myshoppingapp.domain.AppUserDetails;
 import com.example.myshoppingapp.domain.comments.Comment;
 import com.example.myshoppingapp.domain.products.Product;
+import com.example.myshoppingapp.domain.recipes.OutputRecipeDTO;
 import com.example.myshoppingapp.domain.recipes.Recipe;
 import com.example.myshoppingapp.domain.users.UserEntity;
 import com.example.myshoppingapp.domain.users.UserInputDTO;
 import com.example.myshoppingapp.domain.users.UserOutputDTO;
+import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
 import com.example.myshoppingapp.repository.CommentRepository;
 import com.example.myshoppingapp.repository.ProductRepository;
 import com.example.myshoppingapp.repository.RecipeRepository;
@@ -164,6 +166,14 @@ public class UserService {
         UserEntity userEntity = this.getLoggedUser();
         userEntity.getFavoriteRecipes().add(recipe);
         this.userRepository.saveAndFlush(userEntity);
+    }
+
+    public List<UserOutputDTO> searchUsersByName(String text) {
+        return this.userRepository.findAllContainingSearchText(text).orElseThrow(null)
+                .stream().map(u -> (modelMapper.map(u, UserOutputDTO.class)))
+                .toList();
+
+
     }
 }
 

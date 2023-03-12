@@ -11,8 +11,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Getter
 @Service
@@ -68,6 +70,16 @@ public class CommentService {
                 .map(comment -> modelMapper.map(comment, OutputCommentDTO.class))
                 .sorted((a, b) -> b.getRating().compareTo(a.getRating()))
                 .limit(4)
+                .toList();
+    }
+
+    public List<OutputCommentDTO> getAllUnapprovedComments() {
+        return this.commentRepository
+                .findAll()
+                .stream()
+                .filter(comment -> !comment.isApproved())
+                .map(comment -> modelMapper.map(comment, OutputCommentDTO.class))
+                .sorted(Comparator.comparing(OutputCommentDTO::getId))
                 .toList();
     }
 }

@@ -17,6 +17,9 @@ public class Comment extends BaseEntity {
 
     @Column(columnDefinition = "TEXT")
     private String text;
+
+    @Column
+    private boolean isApproved;
     @Column
     private LocalDateTime dateAdded;
 
@@ -31,6 +34,11 @@ public class Comment extends BaseEntity {
 
     public Comment() {
         this.dateAdded = LocalDateTime.now();
+        this.isApproved = false;
+    }
+
+    public void setApproved() {
+        isApproved = true;
     }
 
     public String getAuthorPicUrl() {

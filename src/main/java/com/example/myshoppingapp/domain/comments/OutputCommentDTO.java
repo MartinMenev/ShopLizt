@@ -20,6 +20,7 @@ public class OutputCommentDTO {
 
     private Long id;
     private String text;
+    private boolean isApproved;
     private LocalDateTime dateAdded;
     private Long rating;
     private UserEntity author;
