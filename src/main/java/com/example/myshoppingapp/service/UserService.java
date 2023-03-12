@@ -1,28 +1,19 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.AppUserDetails;
 import com.example.myshoppingapp.domain.comments.Comment;
-import com.example.myshoppingapp.domain.comments.OutputCommentDTO;
 import com.example.myshoppingapp.domain.enums.UserRole;
 import com.example.myshoppingapp.domain.products.Product;
-import com.example.myshoppingapp.domain.recipes.OutputRecipeDTO;
 import com.example.myshoppingapp.domain.recipes.Recipe;
 import com.example.myshoppingapp.domain.roles.RoleEntity;
 import com.example.myshoppingapp.domain.users.UserEntity;
 import com.example.myshoppingapp.domain.users.UserInputDTO;
 import com.example.myshoppingapp.domain.users.UserOutputDTO;
-import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
-import com.example.myshoppingapp.repository.CommentRepository;
-import com.example.myshoppingapp.repository.ProductRepository;
-import com.example.myshoppingapp.repository.RecipeRepository;
-import com.example.myshoppingapp.repository.UserRepository;
+import com.example.myshoppingapp.repository.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -55,11 +46,14 @@ public class UserService {
 
     private final CommentRepository commentRepository;
 
+    private final RoleRepository roleRepository;
+
 
     @Autowired
     public UserService(UserRepository userRepository, ProductRepository productRepository, ModelMapper modelMapper,
                        PasswordEncoder passwordEncoder, UserDetailsService userDetailsService,
-                       AuthService authService, RecipeRepository recipeRepository, CommentRepository commentRepository) {
+                       AuthService authService, RecipeRepository recipeRepository, CommentRepository commentRepository,
+                       RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
@@ -68,6 +62,7 @@ public class UserService {
         this.authService = authService;
         this.recipeRepository = recipeRepository;
         this.commentRepository = commentRepository;
+        this.roleRepository = roleRepository;
     }
 
 
@@ -180,7 +175,7 @@ public class UserService {
 
     }
 
-    public Object findAllUserNotAdmin() {
+    public List<UserOutputDTO> findAllUserNotAdmin() {
         return this.userRepository
                 .findAll()
                 .stream()
@@ -188,6 +183,24 @@ public class UserService {
                 .map(comment -> modelMapper.map(comment, UserOutputDTO.class))
                 .sorted(Comparator.comparing(UserOutputDTO::getId))
                 .toList();
+    }
+
+    public List<String> findAllAdminEmails() {
+        return this.userRepository
+                .findAll()
+                .stream()
+                .filter(UserEntity::isAdmin)
+                .map(UserEntity::getEmail)
+                .toList();
+    }
+
+    @Transactional
+    @Modifying
+    public void makeUserAdmin(Long id) {
+        UserEntity userEntity = this.userRepository.getReferenceById(id);
+        RoleEntity role = this.roleRepository.findRoleEntityByRole(UserRole.ADMIN).get();
+        userEntity.addRole(role);
+        this.userRepository.saveAndFlush(userEntity);
     }
 }
 

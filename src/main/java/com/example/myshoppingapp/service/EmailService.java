@@ -8,6 +8,7 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 import java.util.Locale;
 
 @Service
@@ -44,6 +45,36 @@ public class EmailService {
     }
 
   }
+
+  public void sendAlertForNewComments(List<String> usernameList, Integer numberComments) {
+    MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+    MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+
+    for (String userEmail : usernameList) {
+      try {
+        mimeMessageHelper.setFrom("admin@ShopLizt.com");
+        mimeMessageHelper.setTo(userEmail);
+        //TODO: i18n
+        mimeMessageHelper.setSubject("New comments awaiting admin-review");
+        mimeMessageHelper.setText(generateNewCommentsEmail(numberComments), true);
+
+        javaMailSender.send(mimeMessageHelper.getMimeMessage());
+
+      } catch (MessagingException e) {
+        throw new RuntimeException(e);
+      }
+    }
+
+  }
+
+  private String generateNewCommentsEmail(long numberComments) {
+    Context ctx = new Context();
+    ctx.setLocale(Locale.getDefault());
+    ctx.setVariable("numberComments", numberComments);
+    return templateEngine.process("email/new-comments-alert", ctx);
+  }
+
 
   private String generateEmailText(String userName) {
     Context ctx = new Context();

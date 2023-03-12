@@ -59,4 +59,10 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/make-admin/{id}")
+    public String saveRecipeToMyFavorites(@PathVariable(value = "id") Long id) {
+        this.userService.makeUserAdmin(id);
+        return "redirect:/admin";
+    }
+
 }
