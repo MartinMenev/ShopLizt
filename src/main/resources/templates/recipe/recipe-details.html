@@ -24,26 +24,11 @@
 
             <div class="section-header">
 
-              <button class="btn glow-button rounded-1 bg-transparent" >
-                <a th:href="@{/save-recipe-to-favorites/{id}(id=*{id})}"
-                   class="button"> <i class="bi bi-heart-fill"> Add to Favorites </i> </a>
-              </button>
-
-              <button th:if="${recipe.getAuthor().username == #authentication.name}" class="btn glow-button rounded-1 bg-transparent" >
-                <a th:href="@{/edit-recipe/{Id}(Id=*{id})}"
-                   class="button"> <i class="bi bi-pencil-square"> Edit </i> </a>
-              </button>
-
-              <button th:unless="${recipe.url.isBlank()}" class="btn glow-button rounded-1 bg-transparent" >
-                <a th:href="${recipe.url}"
-                   class="button"> <i class="bi bi-link-45deg"> Link </i> </a>
-              </button>
-
             </div>
 
           </h2>
           <ol>
-            <li><a th:href="@{/home}">Home</a></li>
+            <li><a onclick="history.back()"> Back </a></li>
             <li>Recipe Details</li>
           </ol>
         </div>
@@ -72,9 +57,19 @@
     </section><!-- End Gallery Section -->
 
     <div class="row mt-3 justify-content-center">
-      <button class="btn col-lg-2 col-md-3 glow-button rounded-5 bg-light " >
+      <button type="button" class="btn btn-outline-dark col-1 rounded-5 mx-1" >
         <a th:href="@{/save-recipe-to-favorites/{id}(id=*{id})}"
-           class="button"> <i class="bi bi-heart icon"> Add to Favorites </i> </a>
+           class="button"> <i class="bi bi-heart-fill"> Save </i> </a>
+      </button>
+
+      <button type="button" th:if="${recipe.getAuthor().username == #authentication.name}" class="btn btn-outline-dark col-1 rounded-5 mx-1" >
+        <a th:href="@{/edit-recipe/{Id}(Id=*{id})}"
+           class="button"> <i class="bi bi-pencil-square"> Edit </i> </a>
+      </button>
+
+      <button type="button" th:unless="${recipe.url.isBlank()}" class="btn btn-outline-dark col-1 rounded-5 mx-1" >
+        <a th:href="${recipe.url}"
+           class="button"> <i class="bi bi-link-45deg"> Link </i> </a>
       </button>
     </div>
 

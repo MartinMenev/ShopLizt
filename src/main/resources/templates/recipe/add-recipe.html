@@ -28,8 +28,8 @@
 
           </h2>
           <ol>
-            <li><a th:href="@{/home}">Home</a></li>
-            <li>Recipe Details</li>
+            <li><a onclick="history.back()"> Back </a></li>
+            <li> Add Recipe </li>
           </ol>
         </div>
 
@@ -46,62 +46,66 @@
               <div class="col-lg-6 justify-content-center rounded-5" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 ">
                   <i class="bi bi-file-earmark-plus"></i>
-                  <div class="row justify-content-center ">
+                  <div class="row justify-content-start ">
                     <form id="add-route-form" class="rounded text-white mt-5"
                           th:action="@{/add-recipe}"
                           th:method="POST"
                           th:object="${recipeAddModel}"
                           enctype="multipart/form-data">
-                      <h1 class="logo-home-text text-body-secondary">Add recipe</h1>
+                      <h2 class="logo-home-text text-body-secondary">Add recipe</h2>
                       <hr class="bg-hero hr-2 bg-body-secondary"/>
                       <div>
                         <div class="form-group">
-                          <label for="inputName" class="col-form-label text-body-secondary ">Name</label>
+                          <label for="inputName" class="col-form-label text-body-secondary "> <strong>Title</strong> </label>
                         </div>
                         <div class="form-group">
                           <input name="name"
                                  th:value="*{name}"
                                  th:errorclass="is-invalid"
-                                 placeholder="add name"
                                  required minlength="5" maxlength="100"
                                  type="text"
                                  id="inputName"
-                                 class="form-control"
+                                 class="form-control rounded-5"
                                  aria-describedby="inputNameError">
                           <small class="text-danger" th:if="${#fields.hasErrors('name')}">
-                            Name length must be between 5 and 100 characters
+                            Title length must be between 5 and 100 characters
                           </small>
                         </div>
                       </div>
                       <div>
                         <div class="form-group">
-                          <label for="inputDescription" class="col-form-label text-body-secondary ">Description</label>
+                          <label for="textarea" class="col-form-label text-body-secondary "> <strong>Description</strong>  </label>
                         </div>
                         <div class="form-group">
-                          <textarea name="description" th:value="*{description}"  required minlength="5" id="inputDescription" class="form-control"></textarea>
+                          <textarea
+                                  style="width:510px;max-height:200px;overflow-y:auto;text-align:left;"
+                                  id="textarea"
+                                  rows="5"
+                                  name="description" th:value="*{description}"  required minlength="5"  class="form-control rounded-5"></textarea>
+
                         </div>
                       </div>
-                      <div class="mt-6">
+                      <div class="mt-6 align-items-center">
                         <div class="form-group">
-                          <label for="image" class="col-form-label text-body-secondary">Picture</label>
+                          <label for="image" class="col-form-label text-body-secondary"> <strong>Picture</strong>  </label>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group rounded-5">
                           <input type="file" name="image"
                                  id="image"
                                  accept="image/*"
                                  class="form-control-file text-body-secondary"
                                  aria-describedby="imageError">
                           <small id="imageError"
-                                 class="invalid-feedback  form-text bg-danger rounded">Invalid picture</small>
+                                 class="invalid-feedback  form-text bg-danger rounded"> Invalid picture </small>
                         </div>
                       </div>
                       <div class="mt-6">
                         <div class="form-group">
-                          <label class="text-center text-body-secondary mt-6" for="category">Category</label>
+                          <label class="text-center text-body-secondary mt-6" for="category"> <strong>Category</strong>  </label>
                           <select id="category"
                                   name="category"
-                                  class="form-control-color w-75">
-                            <option value="">Select category</option>
+                                  class="form-control-color w-50 m-2 rounded-5 text-center">
+                            <option value=""> Select </option>
                             <option th:each="c : ${T(com.example.myshoppingapp.domain.enums.Category).values()}"
                             th:text="${c}"
                             th:value="${c}"
@@ -117,21 +121,21 @@
                       <div>
 
                         <div class="form-group">
-                          <label for="url" class="col-form-label text-body-secondary">Recipe Url</label>
+                          <label for="url" class="col-form-label text-body-secondary"> <strong>Recipe Url</strong> </label>
                           <input id="url" type="text"
                                  name="url"
-                                 class="form-control" placeholder="Add recipe link ...">
+                                 class="form-control rounded-5" placeholder="Add recipe link ...">
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label for="imageUrl" class="col-form-label text-body-secondary">Picture Url</label>
+                        <label for="imageUrl" class="col-form-label text-body-secondary"> <strong>Picture Url</strong> </label>
                         <input id="imageUrl" type="text"
                                name="imageUrl"
-                               class="form-control" placeholder="Add picture ...">
+                               class="form-control rounded-5" placeholder="Add picture ...">
                       </div>
                       <div class="d-flex justify-content-center mt-4">
-                        <button class="btn btn-primary w-50 text-dark" type="submit">Save</button>
+                        <button class="btn btn-outline-dark  rounded-5 mx-1" type="submit"><strong>Save</strong></button>
                       </div>
                     </form>
                   </div>
@@ -142,7 +146,6 @@
         </div>
       </div>
     </section>
-
 
 
 

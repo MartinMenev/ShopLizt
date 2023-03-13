@@ -28,7 +28,7 @@
 
           </h2>
           <ol>
-            <li><a th:href="@{/home}">Home</a></li>
+            <li><a onclick="history.back()" > Back </a></li>
             <li>Recipe Details</li>
           </ol>
         </div>
@@ -61,22 +61,22 @@
 
         <div class="col-lg-12 justify-content-center" data-aos="fade-up" data-aos-delay="100">
 
-            <div class="row lg-12 justify-content-center">
-              <div class="col-lg-6 justify-content-center rounded-5" data-aos="fade-up" data-aos-delay="200">
+            <div class="row lg-12 justify-content-start">
+              <div class="col-lg-6 justify-content-start rounded-5" data-aos="fade-up" data-aos-delay="200">
                 <form action="#" th:action="@{/update-recipe/{id}(id=*{id})}" th:object="${recipe}" th:method="PATCH">
 
-                  <div class="text-center mt-3" >
-                    <h4 class="mt-4 mb-0">Recipe name</h4>
+                  <div >
+                    <h5 class="mt-4 mb-0"> Title </h5>
                     <input type="text" th:field="*{name}" class="form-control mb-4 col-4">
-                    <h4 class="mt-2 mb-0">Description</h4>
+                    <h5 class="mt-2 mb-0"> Description </h5>
                     <textarea type="text" th:field="*{description}" class="form-control mb-4 col-4" rows="5">
                     </textarea>
 
-                    <h4 class="mt-2 mb-0">Category</h4>
+                    <h5 class="mt-2 mb-0"> Category </h5>
                     <select id="category"
                             name="category"
-                            class="form-control-color w-75">
-                      <option value="">Select category</option>
+                            class="form-control-color w-25 m-2 rounded-5 text-center">
+                      <option value=""> Select </option>
                       <option th:each="c : ${T(com.example.myshoppingapp.domain.enums.Category).values()}"
                               th:text="${c}"
                               th:value="${c}"
@@ -86,30 +86,36 @@
                       </option>
                     </select>
 
-                    <h4 class="mt-2 mb-0">Update Recipe url</h4>
+                    <h5 class="mt-2 mb-0"> Update Recipe url </h5>
                     <input type="text"  class="form-control mb-4 col-4"
                            id="url"
                            name="url"
                            th:field="*{url}">
-                    <h4 class="mt-2 mb-0">Add additional picture</h4>
+                    <h5 class="mt-2 mb-0"> Add additional picture </h5>
                     <input type="text"  class="form-control mb-4 col-4"
                            id="imageUrl"
                            name="imageUrl"
                            placeholder="Additional picture link ...">
                   </div>
-                  <button type="submit" class="btn btn-info col-5"> Update </button>
+                  <button type="submit" class="btn btn-outline-dark col-2 rounded-5 mx-1"> Update </button>
                 </form>
                 <hr class="bg-hero hr-2"/>
-                <form action="#" th:action="@{/delete-recipe/{id}(id=*{id})}" th:method="DELETE">
-                  <input type="submit" class="btn btn-light text-danger" value="Delete recipe" />
-                </form>
+                <div class="row">
+                  <div class="col-2">
+                    <form  action="#" th:action="@{/delete-recipe/{id}(id=*{id})}" th:method="DELETE">
+                      <input type="submit" class="btn btn-outline-dark rounded-5 mx-1 text-danger" value="Delete" />
+                    </form>
+                  </div>
+                  <div class="col-2">
+                    <a th:href="@{/home}"
+                       class="btn btn-outline-dark rounded-5 mx-1" onclick="history.back()"> Back </a>
+                  </div>
+                </div>
 
-                <hr class="bg-hero hr-2"/>
 
-                <a th:href="@{/home}"
-                   class="btn btn-light text-body-secondary">Back to home</a>
+
               </div>
-              <div class="col-lg-5 justify-content-center rounded-5 mt-10" >
+              <div class="col-lg-4 justify-content-center rounded-5 mt-10" >
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 mt-10">
                   <h4>Needed products</h4>
                   <h6 th:if="${recipe.productList.isEmpty()}">
