@@ -1832,7 +1832,11 @@ table > tbody {
   background-color: #deeeee;
 }
 
-
+textarea {
+  font-family: serif;
+  font-size: 1rem;
+  font-style: italic;
+}
 
 
 

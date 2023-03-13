@@ -101,7 +101,8 @@
 
                     <section class="route-description text-center">
                       <h4>Description:</h4>
-                      <p id="description" th:text="${recipe.description}">Description: </p>
+                      <label for="description"></label>
+                      <textarea id="description" rows="16" cols="80" class="bg-transparent rounded-5 p-5  " th:text="${recipe.description}" readonly>Description: </textarea>
                     </section>
                   </div>
                 </div><!-- End Icon Box -->
