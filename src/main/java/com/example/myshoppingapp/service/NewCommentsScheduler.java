@@ -1,7 +1,6 @@
 package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.domain.comments.OutputCommentDTO;
-import com.example.myshoppingapp.domain.users.UserOutputDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -25,7 +24,7 @@ public class NewCommentsScheduler {
         this.emailService = emailService;
     }
 
-    @Scheduled(cron = "0 0/30 * * * *")
+    @Scheduled(cron = "0 0 8,17 * * *")
     public void checkForNewComments() {
         List<String> adminEmails = this.userService.findAllAdminEmails();
 
