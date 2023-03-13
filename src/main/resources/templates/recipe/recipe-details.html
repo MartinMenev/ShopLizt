@@ -74,7 +74,7 @@
     </div>
 
 
-    <section id="why-us" class="why-us section-bg">
+    <section class="why-us section-bg" id="why-us">
       <div class="container justify-content-center" data-aos="fade-up">
 
         <div class="col-lg-12 justify-content-center" data-aos="fade-up" data-aos-delay="100">
@@ -84,26 +84,36 @@
               <div class="col lg-6 md-8">
                 <div class="col-lg-12 justify-content-left rounded-5" data-aos="fade-up" data-aos-delay="200">
                   <div class="icon-box d-flex flex-column align-items-center rounded-5 bg-body-secondary">
-                    <i class="bi bi-card-checklist icon"></i>
-                    <h3 th:text="${recipe.name}"></h3>
-                    <p>added on <span id="dateAdded" th:text="${recipe.dateAdded}"></span></p>
-                    <p>by <span id="getAuthorName" th:text="${recipe.authorName}"></span></p>
-                    <hr class="bg-hero hr-2"/>
 
-                    <p>Category: <span id="category" th:text="${recipe.category}"></span></p>
-                    <div class="rating" >
-                      <span class= "rating" th:if="${recipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></span>
-                      <span class= "rating" th:if="${recipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></span>
-                      <span class= "rating" th:if="${recipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></span>
-                      <span class= "rating" th:if="${recipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></span>
-                      <span class= "rating" th:if="${recipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></span>
+                    <div class="row justify-content-center">
+                      <div class="col-lg-8">
+                        <small class="mb-2 text-body-secondary"> shared by
+                          <th:block  th:text="${recipe.getAuthor().getUsername()}"> </th:block>
+                          <th:block  th:text="${recipe.getDays()}"></th:block>
+                          days ago
+                        </small>
+                        <small class="mb-2 text-body-secondary" >
+                          <div class="rating" >
+                            <span class= "rating" th:if="${recipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></span>
+                            <span class= "rating" th:if="${recipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></span>
+                            <span class= "rating" th:if="${recipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></span>
+                            <span class= "rating" th:if="${recipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></span>
+                            <span class= "rating" th:if="${recipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></span>
+                          </div>
+
+                        </small>
+                      </div>
+                      <div class="col-lg-4">
+                        <h6>Category: <span id="category" th:text="${recipe.category}"></span></h6>
+                      </div>
+
                     </div>
 
-                    <section class="route-description text-center">
-                      <h4>Description:</h4>
+                    <div  >
+                      <h1 style="font-family: serif; font-size: 24px"><strong>Description:</strong> </h1>
                       <label for="description"></label>
                       <textarea id="description" rows="16" cols="80" class="bg-transparent rounded-5 p-5  " th:text="${recipe.description}" readonly>Description: </textarea>
-                    </section>
+                    </div>
                   </div>
                 </div><!-- End Icon Box -->
               </div>
