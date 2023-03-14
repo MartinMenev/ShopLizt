@@ -28,7 +28,7 @@
 
           </h2>
           <ol>
-            <li><a th:href="@{/home}">Home</a></li>
+            <li><a onclick="history.back()">Back</a></li>
             <li>Profile</li>
           </ol>
         </div>
@@ -53,11 +53,11 @@
                     <div class="text-center mt-3" th:object="${user}">
                       <a title="Update your profile" th:href="@{/update-user}"
                          class="btn btn-light"> <i class="fa-regular fa-pen-to-square"></i> </a>
-                      <h4 class="mt-4 mb-0">Username</h4>
+                      <h4 class="mt-4 mb-0"><strong>Username</strong></h4>
                       <span class="mt-2 mb-0 text-body-secondary" th:text="${user.username}" ></span>
-                      <h4 class="mt-2 mb-0">Email</h4>
+                      <h4 class="mt-2 mb-0"><strong>Email</strong></h4>
                       <span class="mt-2 mb-0 text-body-secondary" th:text="${user.email}"></span>
-                      <h4 class="mt-2 mb-0">Role</h4>
+                      <h4 class="mt-2 mb-0"><strong>Role</strong></h4>
                       <span class="logo-home-text" th:text="${user.getRoles()}"></span>
                     </div>
                   </div>

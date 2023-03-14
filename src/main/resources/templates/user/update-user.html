@@ -28,7 +28,7 @@
 
           </h2>
           <ol>
-            <li><a th:href="@{/home}">Home</a></li>
+            <li><a onclick="history.back()">Back</a></li>
             <li>Update Profile</li>
           </ol>
         </div>
@@ -46,19 +46,22 @@
               <div class="col-lg-6 justify-content-center rounded-5" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 border-dark ">
                   <div class="profile-card p-3 py-4">
-                    <section class="my-5">
+                    <section>
                       <div class="container">
                         <div class="row">
                           <div class="col-md-8 mx-auto">
-                            <h4>Upload Image</h4>
-                            <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
+                            <!--                        DEFAULT PICTURE-->
+                            <img th:unless="${user.imageEntity == null}" th:src="@{/download/{id}(id=${user.imageEntity.id})}" width="100" class="rounded-circle">
+                            <img th:if="${user.imageEntity == null}" th:src="@{'/images/default-user-pic.jpg'}" width="100" />
+
+<!--                            <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>-->
 
                             <form th:method="post" th:action="@{/addImgToUser}" enctype="multipart/form-data">
-                              <div>
-                                <label for="upload-image">Image to upload</label>
-                                <input type="file" id="upload-image" name="img" required="required">
+                              <div class="mt-3">
+                                <label for="upload-image"> <i>choose picture</i> </label>
+                                <input  type="file" id="upload-image" class="btn-outline-dark rounded-5" name="img" required="required">
                               </div>
-                              <input type="submit"
+                              <input type="submit" class="btn-outline-dark rounded-5 mt-4"
                                      th:value="Submit"/>
                             </form>
 
@@ -73,23 +76,22 @@
                     <form action="#" th:action="@{/update-user}" th:object="${user}" th:method="PATCH">
 
                       <div class="text-center mt-3" th:object="${user}">
-                        <h4 class="mt-4 mb-0">Change username</h4>
-                        <input type="text" th:field="*{username}" class="form-control mb-4 col-4">
-                        <h4 class="mt-2 mb-0">Change password</h4>
-                        <input type="text" name = "password" class="form-control mb-4 col-4">
-                        <h4 class="mt-2 mb-0">Change email</h4>
-                        <input type="text" th:field="*{email}" class="form-control mb-4 col-4">
+                        <h4 class="my-3"><strong> Edit your Username </strong></h4>
+                        <input type="text" th:field="*{username}" class="form-control rounded-5">
+                        <h4 class="my-3"><strong> Change password </strong></h4>
+                        <input type="text" name = "password" class="form-control rounded-5">
+                        <h4 class="my-3"><strong> Update email </strong></h4>
+                        <input type="text" th:field="*{email}" class="form-control rounded-5">
                       </div>
-                      <button type="submit" class="btn btn-info col-5"> Update </button>
+                      <button type="submit" class="btn btn-outline-dark rounded-5 my-3"> Update </button>
                     </form>
                     <hr class="bg-hero hr-2"/>
-                    <form th:action="@{/delete-profile}" th:method="delete"
-                       class="btn btn-light text-danger">
-                      <input type="submit" class="btn btn-light text-danger" value="Delete profile" />
+                    <form th:action="@{/delete-profile}" th:method="delete">
+                      <input type="submit" class="btn btn-outline-dark rounded-5 text-danger" value="Delete" />
                     </form>
                     <hr class="bg-hero hr-2"/>
-                    <a th:href="@{/home}"
-                       class="btn btn-light text-white">Back to home</a>
+                    <a onclick="history.back()"
+                       class="btn btn-outline-dark text-body-secondary rounded-5">Back</a>
                   </div>
 
 
