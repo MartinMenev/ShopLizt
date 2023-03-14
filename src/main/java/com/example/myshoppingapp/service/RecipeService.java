@@ -1,13 +1,13 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.enums.Category;
+import com.example.myshoppingapp.model.enums.Category;
 import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
-import com.example.myshoppingapp.domain.pictures.Picture;
-import com.example.myshoppingapp.domain.products.Product;
-import com.example.myshoppingapp.domain.recipes.InputRecipeDTO;
-import com.example.myshoppingapp.domain.recipes.OutputRecipeDTO;
-import com.example.myshoppingapp.domain.recipes.Recipe;
-import com.example.myshoppingapp.domain.users.UserEntity;
+import com.example.myshoppingapp.model.pictures.Picture;
+import com.example.myshoppingapp.model.products.Product;
+import com.example.myshoppingapp.model.recipes.InputRecipeDTO;
+import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
+import com.example.myshoppingapp.model.recipes.Recipe;
+import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.repository.RecipeRepository;
 import com.example.myshoppingapp.repository.UserRepository;
 import lombok.Getter;

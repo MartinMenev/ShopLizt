@@ -1,10 +1,10 @@
 package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
-import com.example.myshoppingapp.domain.products.InputProductDTO;
-import com.example.myshoppingapp.domain.products.OutputProductDTO;
-import com.example.myshoppingapp.domain.products.Product;
-import com.example.myshoppingapp.domain.users.UserEntity;
+import com.example.myshoppingapp.model.products.InputProductDTO;
+import com.example.myshoppingapp.model.products.OutputProductDTO;
+import com.example.myshoppingapp.model.products.Product;
+import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.repository.ProductRepository;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;

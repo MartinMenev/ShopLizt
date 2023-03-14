@@ -1,6 +1,6 @@
 package com.example.myshoppingapp.repository;
 
-import com.example.myshoppingapp.domain.pictures.Picture;
+import com.example.myshoppingapp.model.pictures.Picture;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package com.example.myshoppingapp.repository;
 
-import com.example.myshoppingapp.domain.products.Product;
+import com.example.myshoppingapp.model.products.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,10 +1,10 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.comments.Comment;
-import com.example.myshoppingapp.domain.comments.InputCommentDTO;
-import com.example.myshoppingapp.domain.comments.OutputCommentDTO;
-import com.example.myshoppingapp.domain.recipes.Recipe;
-import com.example.myshoppingapp.domain.users.UserEntity;
+import com.example.myshoppingapp.model.comments.Comment;
+import com.example.myshoppingapp.model.comments.InputCommentDTO;
+import com.example.myshoppingapp.model.comments.OutputCommentDTO;
+import com.example.myshoppingapp.model.recipes.Recipe;
+import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.repository.CommentRepository;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
@@ -16,7 +16,6 @@ import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Getter
 @Service

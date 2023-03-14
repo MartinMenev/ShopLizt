@@ -77,7 +77,7 @@
                             name="category"
                             class="form-control-color w-25 m-2 rounded-5 text-center">
                       <option value=""> Select </option>
-                      <option th:each="c : ${T(com.example.myshoppingapp.domain.enums.Category).values()}"
+                      <option th:each="c : ${T(com.example.myshoppingapp.model.enums.Category).values()}"
                               th:text="${c}"
                               th:value="${c}"
                               th:field="*{category}"

@@ -1,10 +1,8 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.enums.UserRole;
-import com.example.myshoppingapp.domain.roles.RoleEntity;
-import com.example.myshoppingapp.domain.users.UserEntity;
+import com.example.myshoppingapp.model.enums.UserRole;
+import com.example.myshoppingapp.model.roles.RoleEntity;
 import com.example.myshoppingapp.repository.RoleRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;

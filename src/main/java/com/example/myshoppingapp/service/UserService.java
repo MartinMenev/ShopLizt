@@ -1,13 +1,14 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.comments.Comment;
-import com.example.myshoppingapp.domain.enums.UserRole;
-import com.example.myshoppingapp.domain.products.Product;
-import com.example.myshoppingapp.domain.recipes.Recipe;
-import com.example.myshoppingapp.domain.roles.RoleEntity;
-import com.example.myshoppingapp.domain.users.UserEntity;
-import com.example.myshoppingapp.domain.users.UserInputDTO;
-import com.example.myshoppingapp.domain.users.UserOutputDTO;
+import com.example.myshoppingapp.model.comments.Comment;
+import com.example.myshoppingapp.model.enums.UserRole;
+import com.example.myshoppingapp.model.pictures.ImageEntity;
+import com.example.myshoppingapp.model.products.Product;
+import com.example.myshoppingapp.model.recipes.Recipe;
+import com.example.myshoppingapp.model.roles.RoleEntity;
+import com.example.myshoppingapp.model.users.UserEntity;
+import com.example.myshoppingapp.model.users.UserInputDTO;
+import com.example.myshoppingapp.model.users.UserOutputDTO;
 import com.example.myshoppingapp.repository.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,12 +49,14 @@ public class UserService {
 
     private final RoleRepository roleRepository;
 
+    private final ImageService imageService;
+
 
     @Autowired
     public UserService(UserRepository userRepository, ProductRepository productRepository, ModelMapper modelMapper,
                        PasswordEncoder passwordEncoder, UserDetailsService userDetailsService,
                        AuthService authService, RecipeRepository recipeRepository, CommentRepository commentRepository,
-                       RoleRepository roleRepository) {
+                       RoleRepository roleRepository, ImageService imageService) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
@@ -63,6 +66,7 @@ public class UserService {
         this.recipeRepository = recipeRepository;
         this.commentRepository = commentRepository;
         this.roleRepository = roleRepository;
+        this.imageService = imageService;
     }
 
 
@@ -201,6 +205,19 @@ public class UserService {
         RoleEntity role = this.roleRepository.findRoleEntityByRole(UserRole.ADMIN).get();
         userEntity.addRole(role);
         this.userRepository.saveAndFlush(userEntity);
+    }
+
+    @Transactional
+    @Modifying
+    public void addImageToUser(long imageId) {
+        ImageEntity image = this.imageService.findById(imageId).orElseThrow();
+        UserEntity userEntity = this.getLoggedUser();
+        if (userEntity.getImageEntity() != null) {
+            this.getImageService().deleteById(userEntity.getImageEntity());
+        }
+        userEntity.setImageEntity(image);
+        userRepository.saveAndFlush(userEntity);
+
     }
 }
 

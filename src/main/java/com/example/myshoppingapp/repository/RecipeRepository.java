@@ -1,8 +1,8 @@
 package com.example.myshoppingapp.repository;
 
-import com.example.myshoppingapp.domain.enums.Category;
-import com.example.myshoppingapp.domain.recipes.Recipe;
-import com.example.myshoppingapp.domain.users.UserEntity;
+import com.example.myshoppingapp.model.enums.Category;
+import com.example.myshoppingapp.model.recipes.Recipe;
+import com.example.myshoppingapp.model.users.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;

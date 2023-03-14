@@ -1,8 +1,8 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.enums.UserRole;
-import com.example.myshoppingapp.domain.users.RegisterUserDTO;
-import com.example.myshoppingapp.domain.users.UserEntity;
+import com.example.myshoppingapp.model.enums.UserRole;
+import com.example.myshoppingapp.model.users.RegisterUserDTO;
+import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.repository.RoleRepository;
 import com.example.myshoppingapp.repository.UserRepository;
 import lombok.Getter;

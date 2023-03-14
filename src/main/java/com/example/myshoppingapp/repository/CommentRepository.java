@@ -1,7 +1,7 @@
 package com.example.myshoppingapp.repository;
 
-import com.example.myshoppingapp.domain.comments.Comment;
-import com.example.myshoppingapp.domain.users.UserEntity;
+import com.example.myshoppingapp.model.comments.Comment;
+import com.example.myshoppingapp.model.users.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

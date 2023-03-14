@@ -33,7 +33,7 @@
               <form  th:method="get" th:action="@{/filter-recipes}">
                 <select class="form-control-color rounded-5 text-center w-100" name = "category" onchange="this.form.submit()">
                   <option value="">  Filter by  </option>
-                  <option th:each="category : ${T(com.example.myshoppingapp.domain.enums.Category).values()}"
+                  <option th:each="category : ${T(com.example.myshoppingapp.model.enums.Category).values()}"
                           th:text="${category}"
                           th:value="${category}">
                   </option>

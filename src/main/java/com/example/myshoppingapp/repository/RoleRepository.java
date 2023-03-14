@@ -1,7 +1,7 @@
 package com.example.myshoppingapp.repository;
 
-import com.example.myshoppingapp.domain.enums.UserRole;
-import com.example.myshoppingapp.domain.roles.RoleEntity;
+import com.example.myshoppingapp.model.enums.UserRole;
+import com.example.myshoppingapp.model.roles.RoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

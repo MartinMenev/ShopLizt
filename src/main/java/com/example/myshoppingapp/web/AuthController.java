@@ -1,6 +1,6 @@
 package com.example.myshoppingapp.web;
 
-import com.example.myshoppingapp.domain.users.RegisterUserDTO;
+import com.example.myshoppingapp.model.users.RegisterUserDTO;
 import com.example.myshoppingapp.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;

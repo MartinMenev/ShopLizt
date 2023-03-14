@@ -1,7 +1,7 @@
 package com.example.myshoppingapp.repository;
 
-import com.example.myshoppingapp.domain.recipes.OutputRecipeDTO;
-import com.example.myshoppingapp.domain.recipes.Recipe;
+import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
+import com.example.myshoppingapp.model.recipes.Recipe;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;

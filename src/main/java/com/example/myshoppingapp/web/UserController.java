@@ -1,7 +1,7 @@
 package com.example.myshoppingapp.web;
 
-import com.example.myshoppingapp.domain.users.UserInputDTO;
-import com.example.myshoppingapp.domain.users.UserOutputDTO;
+import com.example.myshoppingapp.model.users.UserInputDTO;
+import com.example.myshoppingapp.model.users.UserOutputDTO;
 import com.example.myshoppingapp.service.PictureService;
 import com.example.myshoppingapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

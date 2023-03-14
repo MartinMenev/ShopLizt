@@ -1,12 +1,11 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.comments.OutputCommentDTO;
+import com.example.myshoppingapp.model.comments.OutputCommentDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 
 @Service

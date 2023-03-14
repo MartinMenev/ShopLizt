@@ -1,8 +1,8 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.domain.pictures.OutputPictureDTO;
-import com.example.myshoppingapp.domain.pictures.Picture;
-import com.example.myshoppingapp.domain.users.UserEntity;
+import com.example.myshoppingapp.model.pictures.OutputPictureDTO;
+import com.example.myshoppingapp.model.pictures.Picture;
+import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.repository.PictureRepository;
 import com.example.myshoppingapp.repository.UserRepository;
 import lombok.Getter;

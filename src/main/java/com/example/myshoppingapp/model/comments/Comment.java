@@ -1,0 +1,73 @@
+package com.example.myshoppingapp.model.comments;
+
+import com.example.myshoppingapp.model.BaseEntity;
+import com.example.myshoppingapp.model.recipes.Recipe;
+import com.example.myshoppingapp.model.users.UserEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Getter
+@AllArgsConstructor
+@Entity
+@Table(name = "comments")
+public class Comment extends BaseEntity {
+
+    @Column(columnDefinition = "TEXT")
+    private String text;
+
+    @Column
+    private boolean isApproved;
+    @Column
+    private LocalDateTime dateAdded;
+
+    @Column
+    private long rating;
+
+   @ManyToOne (cascade = CascadeType.DETACH)
+    private UserEntity author;
+
+    @ManyToOne(cascade = CascadeType.DETACH)
+    private Recipe recipe;
+
+    public Comment() {
+        this.dateAdded = LocalDateTime.now();
+        this.isApproved = false;
+    }
+
+    public void setApproved() {
+        isApproved = true;
+    }
+
+    public String getAuthorPicUrl() {
+
+        String url = this.getAuthor().getPicture().getPictureUrl();
+        if (url == null) {
+            return "/images/default-user-pic.jpg";
+        }
+
+        return "/images/"+url;
+    }
+
+    public Comment setText(String text) {
+        this.text = text;
+        return this;
+    }
+
+    public Comment setAuthor(UserEntity author) {
+        this.author = author;
+        return this;
+    }
+
+    public Comment setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+        return this;
+    }
+
+    public Comment setRating(long rating) {
+        this.rating = rating;
+        return this;
+    }
+}

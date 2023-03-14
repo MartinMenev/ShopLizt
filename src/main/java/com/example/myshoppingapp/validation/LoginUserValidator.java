@@ -1,7 +1,7 @@
 package com.example.myshoppingapp.validation;
 
-import com.example.myshoppingapp.domain.users.LoginDTO;
-import com.example.myshoppingapp.domain.users.UserEntity;
+import com.example.myshoppingapp.model.users.LoginDTO;
+import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
