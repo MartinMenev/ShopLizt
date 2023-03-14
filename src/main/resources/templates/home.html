@@ -45,7 +45,7 @@
         <div class="col-lg-12 justify-content-center" data-aos="fade-up" data-aos-delay="100">
           <div class="row lg-12 mt-3 h-100 justify-content-center">
             <div class="col-lg-10  col-md-6 mb-auto " data-aos="fade-up" data-aos-delay="200" >
-              <div class="icon-box h-100 rounded-5 bg-body-secondary ">
+              <div class="icon-box h-100 rounded-5 bg-body-secondary border-dark ">
                 <article>
                   <section class="box-info lead-box p-0">
                     <article class="box-body align-content-start">
@@ -112,7 +112,7 @@
               </div>
             </div><!-- End Icon Box -->
             <div class="col-lg-4 col-md-6 mt-4" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon-box rounded-5 h-50 overflow-y-scroll">
+              <div class="icon-box rounded-5 h-50 overflow-y-scroll border-dark">
                 <i class="bi bi-basket"></i>
                 <article>
                   <section class="box-info lead-box pt-3">
@@ -139,6 +139,10 @@
                           <div class="col align-content-center" >
                             <form  th:method="post" th:action="@{/add-product}">
                               <input type="text" class="form-control" id="addItem" placeholder="Add item . . ." name="name">
+                              <input type="submit"
+                                     class="btn btn-outline-dark rounded-5 mt-3"
+                                     id="postItem"
+                                     value="Add"/>
                             </form>
                           </div>
                           </p>
@@ -156,7 +160,7 @@
             </div><!-- End Icon Box -->
 
             <div class="col-lg-6  col-md-6 mt-4" data-aos="fade-up" data-aos-delay="200" th:unless="${othersRecipes.isEmpty()}">
-              <div class="icon-box rounded-5 h-50 overflow-y-scroll">
+              <div class="icon-box rounded-5 h-50 overflow-y-scroll border-dark">
                 <i class="bi bi-suit-heart-fill"></i>
                 <article>
                   <section class="box-info lead-box pt-3">

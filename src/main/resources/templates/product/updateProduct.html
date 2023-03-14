@@ -44,14 +44,15 @@
 
             <div class="row lg-12 justify-content-center">
               <div class="col-lg-6 justify-content-center rounded-5" data-aos="fade-up" data-aos-delay="200">
-                <div class="icon-box d-flex flex-column align-items-center rounded-5 ">
+                <div class="icon-box d-flex flex-column align-items-center rounded-5 border-dark ">
+                  <h4><i>Want to edit this item?</i></h4>
 
                   <form action="#" th:action="@{/product/updateProduct/{id}(id=${product.id})}" th:object="${product}" th:method="PUT">
                     <!-- Add hidden form field to handle update -->
                     <input type="hidden" th:field="*{id}"/>
-                    <input type="text" th:field="*{name}" class="form-control mb-4 col-7">
+                    <input type="text" th:field="*{name}" class="form-control mb-4 col-7 rounded-5">
 
-                    <button type="submit" class="btn btn-info col-7 mb-4"> Update </button>
+                    <button type="submit" class="btn btn-outline-dark rounded-5 col-7 mb-4"> Update </button>
                   </form>
 
                   <a th:href="@{/product-list}" th:color="white"> Back to Product List </a>

@@ -41,16 +41,21 @@
       <div class="container justify-content-center" >
         <div class="row justify-content-center">
               <div class="col-lg-5 col-md-12 justify-content-center rounded-5" >
-                <div class="icon-box d-flex flex-column align-items-center rounded-5 ">
+                <div class="icon-box d-flex flex-column align-items-center rounded-5 border-dark ">
                   <h2>My shopping list</h2>
                   <h6 th:if="${products.isEmpty()}">
                     <hr class="bg-hero hr-4 bg-body-secondary aos-animate"/>
                     Nothing yet. <br>
                     Add your first product <br>
                     <i class="bi bi-box-arrow-in-down-left"></i>
-                  <div class="col mt-10 align-content-center">
+
+                  <div class="col mt-3 align-content-center">
                     <form  th:method="post" th:action="@{/add-product}">
                       <input type="text" class="form-control" id="addItem" placeholder="Add item . . ." name="name">
+                      <input type="submit"
+                             class="btn btn-outline-dark rounded-5 mt-3"
+                             id="postItem"
+                             value="Add"/>
                     </form>
                   </div>
                   </h6>

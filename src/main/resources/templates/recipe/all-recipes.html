@@ -23,22 +23,31 @@
           <h2 data-aos="fade-up">Inspiration</h2>
 
 
-            <a  th:href="@{/add-recipe}"
-               class="button bg-transparent"> <i class="fa-solid fa-book-open-reader"></i> Add recipe </a>
-
-          <form  th:method="get" th:action="@{/search-recipes}">
-            <input type="text" class="form-control" id="searchRecipe" placeholder="Search recipe . . ." name="text">
-          </form>
-          <form  th:method="get" th:action="@{/filter-recipes}"
-                   class="bg-transparent" >
-              <select class="form-control-color w-75 bg-transparent" name = "category" onchange="this.form.submit()">
-              <option value="">  Filter by  </option>
-              <option th:each="category : ${T(com.example.myshoppingapp.domain.enums.Category).values()}"
-                      th:text="${category}"
-                      th:value="${category}">
-              </option>
-              </select>
-          </form>
+          <!--          buttons-->
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 col-sm-8 col-xs-8 justify-content-center">
+              <form  th:method="get" th:action="@{/search-recipes}">
+                <input type="text" class="form-control rounded-5 border-dark" id="searchRecipe" placeholder="Search recipe . . ." name="text">
+              </form>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-8 col-xs-8 justify-content-center">
+              <form  th:method="get" th:action="@{/filter-recipes}">
+                <select class="form-control-color rounded-5 text-center w-100" name = "category" onchange="this.form.submit()">
+                  <option value="">  Filter by  </option>
+                  <option th:each="category : ${T(com.example.myshoppingapp.domain.enums.Category).values()}"
+                          th:text="${category}"
+                          th:value="${category}">
+                  </option>
+                </select>
+              </form>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-8 col-xs-8 justify-content-center">
+              <button  class="btn btn-outline-dark rounded-5 w-100" >
+                <a  th:href="@{/add-recipe}"
+                    class="button"> <i class="fa-solid fa-book-open-reader"></i> Add recipe </a>
+              </button>
+            </div>
+          </div>
 
           <ol>
             <li><a onclick="history.back()">Go back</a></li>
@@ -67,7 +76,7 @@
                th:each="recipe : ${recipes.getContent()}"
                th:object="${recipe}">
 
-            <div class="chef-member  rounded-4 border-5 bg-body-secondary">
+            <div class="chef-member  rounded-4 border-dark bg-body-secondary">
               <div class="member-img bg-body-secondary">
                 <img th:src="*{imageUrl}" width="350" height="250" class="square" alt="">
                 <div class="social">

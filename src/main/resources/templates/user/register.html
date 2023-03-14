@@ -42,14 +42,14 @@
 
             <div class="row lg-12 justify-content-center">
               <div class="col-lg-6 justify-content-center rounded-5" data-aos="fade-up" data-aos-delay="200">
-                <div class="icon-box d-flex flex-column align-items-center rounded-5 ">
+                <div class="icon-box d-flex flex-column align-items-center rounded-5 border-dark">
 
                   <form class="mx-auto w-60" th:method="post" th:action="@{/users/register}"
                   th:object="${registerUserDTO}">
                     <input type="hidden" name="_csrf" value="c95ccb2b-1afa-47bd-bf7b-a5b72739470b">
                     <div class="form-group p-2">
                       <label for="inputUsername" class="text-dark font-monospace mb-1"><strong>Username</strong></label>
-                      <input type="text" class="form-control" id="inputUsername" placeholder="Username..." name="username"
+                      <input type="text" class="form-control rounded-5 " id="inputUsername" placeholder="Username..." name="username"
                              th:field="*{username}"
                              th:errorclass="is-invalid"
                              required
@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group p-2">
                       <label for="inputPassword" class="text-dark font-monospace mb-1"><strong>Password</strong></label>
-                      <input type="password" class="form-control" id="inputPassword" placeholder="Password..." name="password"
+                      <input type="password" class="form-control rounded-5 " id="inputPassword" placeholder="Password..." name="password"
                              th:field="*{password}"
                              th:errorclass="is-invalid"
                              required minlength="8" maxlength="20"
@@ -75,7 +75,7 @@
                     </div>
                     <div class="form-group p-2">
                       <label for="inputConfirmPassword" class="text-dark font-monospace mb-1"><strong> Confirm Password</strong></label>
-                      <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password..."
+                      <input type="password" class="form-control rounded-5 " id="inputConfirmPassword" placeholder="Confirm Password..."
                              name="confirmPassword"
                              th:field="*{confirmPassword}"
                              th:errorclass="is-invalid"
@@ -88,7 +88,7 @@
                     </div>
                     <div class="form-group p-2">
                       <label for="inputEmail" class="text-dark font-monospace mb-1"><strong>Email </strong></label>
-                      <input type="text" class="form-control" id="inputEmail" placeholder="Email..." name="email"
+                      <input type="text" class="form-control rounded-5 " id="inputEmail" placeholder="Email..." name="email"
                              th:field="*{email}"
                              th:errorclass="is-invalid"
                              required
