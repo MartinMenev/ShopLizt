@@ -85,6 +85,12 @@
                 <div class="col-lg-12 justify-content-left rounded-5" data-aos="fade-up" data-aos-delay="200">
                   <div class="icon-box d-flex flex-column align-items-center rounded-5 bg-body-secondary">
 
+                    <div  >
+                      <h1 style="font-family: serif; font-size: 24px"><strong>Description:</strong> </h1>
+                      <label for="description"></label>
+                      <textarea id="description" rows="16" cols="80" class="bg-transparent rounded-5 p-5  " th:text="${recipe.description}" readonly>Description: </textarea>
+                    </div>
+
                     <div class="row justify-content-center">
                       <div class="col-lg-8">
                         <small class="mb-2 text-body-secondary"> shared by
@@ -107,12 +113,6 @@
                         <h6>Category: <span id="category" th:text="${recipe.category}"></span></h6>
                       </div>
 
-                    </div>
-
-                    <div  >
-                      <h1 style="font-family: serif; font-size: 24px"><strong>Description:</strong> </h1>
-                      <label for="description"></label>
-                      <textarea id="description" rows="16" cols="80" class="bg-transparent rounded-5 p-5  " th:text="${recipe.description}" readonly>Description: </textarea>
                     </div>
                   </div>
                 </div><!-- End Icon Box -->
@@ -185,9 +185,9 @@
 
                       <div class="form-group mt-2">
                         <input type="submit"
-                               class="btn"
+                               class="btn btn-outline-dark rounded-5"
                                id="postComment"
-                               value="Post Comment"/>
+                               value="Post"/>
                       </div>
                     </form>
                     <!-- Comments submission -->

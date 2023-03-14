@@ -1836,6 +1836,8 @@ textarea {
   font-family: serif;
   font-size: 18px;
   font-style: italic;
+  border: rgba(83, 88, 93, 0.21);
+  outline: #cbccce;
 }
 
 

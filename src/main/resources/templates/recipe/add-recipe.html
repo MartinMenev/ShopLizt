@@ -56,7 +56,9 @@
                       <hr class="bg-hero hr-2 bg-body-secondary"/>
                       <div>
                         <div class="form-group">
-                          <label for="inputName" class="col-form-label text-body-secondary "> <strong>Title</strong> </label>
+                          <label for="inputName" class="col-form-label text-body-secondary ">
+                            <small class="text-danger"> * </small>
+                            <strong> Title </strong> </label>
                         </div>
                         <div class="form-group">
                           <input name="name"
@@ -74,15 +76,11 @@
                       </div>
                       <div>
                         <div class="form-group">
-                          <label for="textarea" class="col-form-label text-body-secondary "> <strong>Description</strong>  </label>
-                        </div>
-                        <div class="form-group">
-                          <textarea
-                                  style="width:510px;max-height:200px;overflow-y:auto;text-align:left;"
-                                  id="textarea"
-                                  rows="5"
-                                  name="description" th:value="*{description}"  required minlength="5"  class="form-control rounded-5"></textarea>
-
+                          <label for="description" class="col-form-label text-body-secondary ">
+                            <small class="text-danger"> * </small>
+                            <strong> Description </strong>
+                          </label>
+                          <textarea style="width:510px;max-height:200px;overflow-y:auto;text-align:left;" id="description" rows="5" name="description"   th:errorclass="is-invalid" required minlength="5" aria-describedby="inputDescriptionError" th:field="*{description}" class="form-control rounded-5"></textarea>
                         </div>
                       </div>
                       <div class="mt-6 align-items-center">
@@ -101,7 +99,10 @@
                       </div>
                       <div class="mt-6">
                         <div class="form-group">
-                          <label class="text-center text-body-secondary mt-6" for="category"> <strong>Category</strong>  </label>
+                          <label class="text-center text-body-secondary mt-6" for="category">
+                            <small class="text-danger"> * </small>
+                            <strong> Category </strong>
+                          </label>
                           <select id="category"
                                   name="category"
                                   class="form-control-color w-50 m-2 rounded-5 text-center">
@@ -113,9 +114,12 @@
                             Category type
                             </option>
                           </select>
-                          <small class="text-danger" th:if="${#fields.hasErrors('category')}">
-                            Category type is required
-                          </small>
+                          <div>
+                            <small class="text-danger" th:if="${#fields.hasErrors('category')}">
+                              Category type is required
+                            </small>
+                          </div>
+
                         </div>
                       </div>
                       <div>
@@ -124,6 +128,8 @@
                           <label for="url" class="col-form-label text-body-secondary"> <strong>Recipe Url</strong> </label>
                           <input id="url" type="text"
                                  name="url"
+                                 th:value="*{url}"
+                                 th:errorclass="is-invalid"
                                  class="form-control rounded-5" placeholder="Add recipe link ...">
                         </div>
                       </div>
@@ -132,7 +138,10 @@
                         <label for="imageUrl" class="col-form-label text-body-secondary"> <strong>Picture Url</strong> </label>
                         <input id="imageUrl" type="text"
                                name="imageUrl"
-                               class="form-control rounded-5" placeholder="Add picture ...">
+                               th:value="*{imageUrl}"
+                               th:errorclass="is-invalid"
+                               class="form-control rounded-5"
+                               placeholder="Add picture ...">
                       </div>
                       <div class="d-flex justify-content-center mt-4">
                         <button class="btn btn-outline-dark  rounded-5 mx-1" type="submit"><strong>Save</strong></button>
