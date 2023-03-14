@@ -53,11 +53,13 @@
                             <h4>Upload Image</h4>
                             <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
 
-                            <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
-                              <div class="form-group">
-                                <input type="file" name="image" accept="image/*" class="form-control-file">
+                            <form th:method="post" th:action="@{/addImgToUser}" enctype="multipart/form-data">
+                              <div>
+                                <label for="upload-image">Image to upload</label>
+                                <input type="file" id="upload-image" name="img" required="required">
                               </div>
-                              <button type="submit" class="btn btn-info col-5">Upload image</button>
+                              <input type="submit"
+                                     th:value="Submit"/>
                             </form>
 
 

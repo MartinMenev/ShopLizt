@@ -22,12 +22,12 @@ public class UploadController {
     }
 
 
-    @GetMapping("/upload")
+    @GetMapping("/addImgToUser")
     public String displayUploadForm() {
         return "user/update-user";
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/addImgToUser")
     public String uploadImage(ImageUploadModel uploadModel) throws IOException {
         this.userService.addImageToUser(imageService.saveImage(uploadModel.getImg()));
         return "redirect:/update-user";
