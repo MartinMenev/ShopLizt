@@ -3,7 +3,7 @@ spring:
         driverClassName: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://localhost:3306/shopping_app?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
         username: root
-        password: roni95
+        password: ${DEFAULT_PASS:roni95}
 
     servlet:
         multipart:
