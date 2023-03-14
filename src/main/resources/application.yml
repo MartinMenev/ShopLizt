@@ -55,6 +55,7 @@ server:
 #        whitelabel:
 #          enabled: off
 
+
 mail:
     host: localhost
     port: 1025
