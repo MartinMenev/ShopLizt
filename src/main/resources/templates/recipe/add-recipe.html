@@ -45,16 +45,14 @@
             <div class="row lg-12 justify-content-center">
               <div class="col-lg-6 justify-content-center rounded-5" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 ">
-                  <i class="bi bi-file-earmark-plus"></i>
-                  <div class="row justify-content-start ">
-                    <form id="add-route-form" class="rounded text-white mt-5 justify-content-center"
+                    <h2>Add</h2>
+
+                    <form id="add-recipe" class=" text-white mt-5 justify-content-center"
                           th:action="@{/add-recipe}"
                           th:method="POST"
                           th:object="${recipeAddModel}"
                           enctype="multipart/form-data">
-                      <h2 class="logo-home-text text-body-secondary">Add recipe</h2>
-                      <hr class="bg-hero hr-2 bg-body-secondary"/>
-                      <div>
+
                         <div class="form-group">
                           <label for="inputName" class="col-form-label text-body-secondary ">
                             <small class="text-danger"> * </small>
@@ -73,17 +71,24 @@
                             Title length must be between 5 and 100 characters
                           </small>
                         </div>
-                      </div>
-                      <div>
+
                         <div class="form-group">
                           <label for="description" class="col-form-label text-body-secondary ">
                             <small class="text-danger"> * </small>
                             <strong> Description </strong>
                           </label>
-                          <textarea style="width:510px;max-height:200px;overflow-y:auto;text-align:left;" id="description" rows="5" name="description"   th:errorclass="is-invalid" required minlength="5" aria-describedby="inputDescriptionError" th:field="*{description}" class="form-control rounded-5"></textarea>
+                          <textarea
+                                  id="description"
+                                  rows="5"
+                                  name="description"
+                                  th:errorclass="is-invalid"
+                                  required minlength="5"
+                                  aria-describedby="inputDescriptionError"
+                                  th:field="*{description}"
+                                  class="form-control rounded-5"></textarea>
                         </div>
-                      </div>
-                      <div class="mt-6 align-items-center">
+
+
                         <div class="form-group">
                           <label for="image" class="col-form-label text-body-secondary"> <strong>Picture</strong>  </label>
                         </div>
@@ -96,8 +101,7 @@
                           <small id="imageError"
                                  class="invalid-feedback  form-text bg-danger rounded"> Invalid picture </small>
                         </div>
-                      </div>
-                      <div class="mt-6">
+
                         <div class="form-group">
                           <label class="text-center text-body-secondary mt-6" for="category">
                             <small class="text-danger"> * </small>
@@ -121,8 +125,8 @@
                           </div>
 
                         </div>
-                      </div>
-                      <div>
+
+
 
                         <div class="form-group">
                           <label for="url" class="col-form-label text-body-secondary"> <strong>Recipe Url</strong> </label>
@@ -132,7 +136,7 @@
                                  th:errorclass="is-invalid"
                                  class="form-control rounded-5" placeholder="Add recipe link ...">
                         </div>
-                      </div>
+
 
                       <div class="form-group">
                         <label for="imageUrl" class="col-form-label text-body-secondary"> <strong>Picture Url</strong> </label>
@@ -147,7 +151,6 @@
                         <button class="btn btn-outline-dark  rounded-5 mx-1" type="submit"><strong>Save</strong></button>
                       </div>
                     </form>
-                  </div>
 
                 </div>
               </div><!-- End Icon Box -->
