@@ -3,6 +3,7 @@ package com.example.myshoppingapp.model.recipes;
 import com.example.myshoppingapp.model.BaseEntity;
 import com.example.myshoppingapp.model.comments.Comment;
 import com.example.myshoppingapp.model.enums.Category;
+import com.example.myshoppingapp.model.pictures.ImageEntity;
 import com.example.myshoppingapp.model.pictures.Picture;
 import com.example.myshoppingapp.model.products.Product;
 import com.example.myshoppingapp.model.users.UserEntity;
@@ -51,6 +52,10 @@ public class Recipe extends BaseEntity {
    @JoinColumn
    private List<Picture> pictureList;
 
+    @OneToMany (cascade = CascadeType.REMOVE)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ImageEntity> imageList;
+
    @Column(columnDefinition = "TEXT")
    private String imageUrl;
 
@@ -79,6 +84,7 @@ public class Recipe extends BaseEntity {
       this.productList = new ArrayList<>();
       this.ratingList = new ArrayList<>();
       this.pictureList = new ArrayList<>();
+      this.imageList = new ArrayList<>();
       this.numberOfSaves = 0;
   }
 
@@ -133,6 +139,11 @@ public class Recipe extends BaseEntity {
     public Recipe addPicture(Picture picture) {
         this.pictureList.add(picture);
         return this;
+    }
+
+    public Recipe addImage (ImageEntity imageEntity) {
+      this.imageList.add(imageEntity);
+      return this;
     }
 
     public Recipe setImageUrl(String imageUrl) {

@@ -24,6 +24,8 @@ public class RecipeController {
     private final CommentService commentService;
     private final PictureService pictureService;
 
+
+
     @Autowired
     public RecipeController(RecipeService recipeService, CommentService commentService, PictureService pictureService) {
         this.recipeService = recipeService;
@@ -48,9 +50,13 @@ public class RecipeController {
             return "redirect:/add-recipe";
         }
 
-            recipeService.addRecipe(inputRecipeDTO);
-        return "redirect:/all-recipes";
+             recipeService.addRecipe(inputRecipeDTO);
+        return "redirect:/my-collection";
     }
+
+
+
+
 
     @ModelAttribute(name = "recipeAddModel")
     public InputRecipeDTO initInputRecipeDTO() {

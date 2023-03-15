@@ -2,6 +2,7 @@ package com.example.myshoppingapp.model.recipes;
 
 import com.example.myshoppingapp.model.comments.Comment;
 import com.example.myshoppingapp.model.enums.Category;
+import com.example.myshoppingapp.model.pictures.ImageEntity;
 import com.example.myshoppingapp.model.pictures.Picture;
 import com.example.myshoppingapp.model.products.Product;
 import com.example.myshoppingapp.model.users.UserEntity;
@@ -28,6 +29,8 @@ public class OutputRecipeDTO {
 
     private double rating;
     private List<Picture> pictureList;
+
+    private List<ImageEntity> imageList;
 
     private String imageUrl;
 

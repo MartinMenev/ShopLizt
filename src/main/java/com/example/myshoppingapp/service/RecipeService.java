@@ -2,6 +2,7 @@ package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.model.enums.Category;
 import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
+import com.example.myshoppingapp.model.pictures.ImageEntity;
 import com.example.myshoppingapp.model.pictures.Picture;
 import com.example.myshoppingapp.model.products.Product;
 import com.example.myshoppingapp.model.recipes.InputRecipeDTO;
@@ -34,33 +35,34 @@ public class RecipeService {
 
     private final ProductService productService;
 
+    private final ImageService imageService;
+
+
+
 
     @Autowired
     public RecipeService(RecipeRepository recipeRepository, UserRepository userRepository, UserService userService,
                          ModelMapper modelMapper,
-                         ProductService productService) {
+                         ProductService productService, ImageService imageService) {
         this.recipeRepository = recipeRepository;
         this.userRepository = userRepository;
         this.userService = userService;
         this.modelMapper = modelMapper;
         this.productService = productService;
+        this.imageService = imageService;
     }
 
 
 
-    public void addRecipe(InputRecipeDTO inputRecipeDTO) {
+    public Long addRecipe(InputRecipeDTO inputRecipeDTO) {
         UserEntity authorId = this.userService.getLoggedUser();
-        if (inputRecipeDTO.getImageUrl().isBlank()) {
             inputRecipeDTO.setImageUrl("https://images.pexels.com/photos/4033165/pexels-photo-4033165.jpeg?auto=compress&cs=tinysrgb&w=1600");
-        }
 
         Recipe recipe = this.modelMapper.map(inputRecipeDTO, Recipe.class);
         recipe
-                .setAuthor(authorId)
-                .addPicture(new Picture(inputRecipeDTO.getImageUrl(), authorId));
+                .setAuthor(authorId);
         this.recipeRepository.saveAndFlush(recipe);
-
-
+        return recipe.getId();
     }
 
     public Page<OutputRecipeDTO> showAllRecipes(Pageable pageable) {
@@ -249,5 +251,12 @@ public class RecipeService {
     }
 
 
-
+    @Transactional
+    @Modifying
+    public void addImageToRecipe(long recipeId, long imageId) {
+        ImageEntity imageEntity = this.imageService.findById(imageId).orElseThrow();
+        Recipe recipe = this.recipeRepository.findById(recipeId).orElseThrow();
+        recipe.addImage(imageEntity);
+        this.recipeRepository.saveAndFlush(recipe);
+    }
 }

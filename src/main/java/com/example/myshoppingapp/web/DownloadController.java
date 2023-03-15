@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class DownloadController {
 
-  private ImageService imageService;
+  private final ImageService imageService;
 
   public DownloadController(ImageService imageService) {
     this.imageService = imageService;
   }
 
 
-  @GetMapping("/show/{fileId}")
-  public String show(@PathVariable("fileId") long fileId, Model model) {
-
-    model.addAttribute("fileId", fileId);
-    return "show";
-  }
+//  @GetMapping("/show/{fileId}")
+//  public String show(@PathVariable("fileId") long fileId, Model model) {
+//
+//    model.addAttribute("fileId", fileId);
+//    return "show";
+//  }
 
   @GetMapping("/download/{imageId}")
   public HttpEntity<byte[]> download(@PathVariable("imageId") long imageId) {
