@@ -46,8 +46,10 @@
 <!--            for each picture...-->
         <div class="gallery-slider swiper">
           <div class="swiper-wrapper align-items-center" >
-            <div class="swiper-slide" th:each="picture:${pictures}">
-              <a class="glightbox" data-gallery="images-gallery" th:href="${picture.getPictureUrl}" ><img th:src="${picture.getPictureUrl}" class="img-fluid rounded-5" alt="" src=""></a>
+            <div class="swiper-slide" th:each="picture:${recipe.getImageList()}">
+
+                <img th:if="${recipe.getLatestSavedId()}"  th:src="@{/download/{id}(id=${picture.id})}" class="img-fluid rounded-5" width="800" height="600"   alt="" src="">
+
             </div>
           </div>
           <div class="swiper-pagination m-3"></div>

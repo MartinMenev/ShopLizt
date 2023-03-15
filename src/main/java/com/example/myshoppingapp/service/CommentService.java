@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Getter
 @Service
@@ -74,14 +75,14 @@ public class CommentService {
                 .toList();
     }
 
-    public List<OutputCommentDTO> getAllUnapprovedComments() {
-        return this.commentRepository
+    public Optional<List<OutputCommentDTO>> getAllUnapprovedComments() {
+        return Optional.of(this.commentRepository
                 .findAll()
                 .stream()
                 .filter(comment -> !comment.isApproved())
                 .map(comment -> modelMapper.map(comment, OutputCommentDTO.class))
                 .sorted(Comparator.comparing(OutputCommentDTO::getId))
-                .toList();
+                .toList());
     }
 
     @Transactional

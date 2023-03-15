@@ -15,6 +15,8 @@ public class ImageEntity {
 
   private String contentType;
 
+
+
   @Lob
   @Column(length = Integer.MAX_VALUE)
   private byte[] data;
@@ -56,4 +58,6 @@ public class ImageEntity {
     this.data = data;
     return this;
   }
+
+
 }

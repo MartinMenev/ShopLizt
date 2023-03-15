@@ -80,7 +80,8 @@
 
             <div class="chef-member rounded-4 border-1 bg-body-secondary">
               <div class="member-img bg-body-secondary">
-                <img th:src="*{imageUrl}" width="350" height="250" class="square" alt="">
+                <img th:unless="*{getLatestSavedId()}" th:src="*{imageUrl}" width="350" height="250" class="square" alt="">
+                <img th:if="*{getLatestSavedId()}" th:src="@{/download/{id}(id=*{getLatestSavedId()})}" width="350" height="250" class="square" alt="">
                 <div class="social">
                   <a title="Remove from My Collection" class="text-danger" th:href="@{/remove-from-favorites/{id}(id = *{id})}">
                     <i class="bi bi-x"> Remove</i> </a>
@@ -120,34 +121,39 @@
 
           </p>
             <!-- ======= Recipes Section ======= -->
-          <section id="events" class="events" th:unless="${allRecipes.isEmpty()}" >
-            <div class="container" data-aos="fade-up">
-              <div class="section-header align-content-center">
-                <h2>Recipes</h2>
-                <p>Latest Recipes <span>You might like</span> </p>
-                <button class="btn btn-outline-dark rounded-5 mb-5">
-                  <a  th:href="@{/all-recipes}"
-                      class="button"> <i class="bi bi-link-45deg"></i> OPEN ALL
-                  </a>
-                </button>
-              </div>
-
-              <div class="slides-3 swiper rounded-1" data-aos="fade-up" data-aos-delay="100">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide event-item d-flex flex-column justify-content-end"
-                       th:each="recipe : ${allRecipes}"
-                       th:style="'background-image:url(' + ${recipe.imageUrl} + ');'">
-
-                    <h3 th:text="${recipe.name}"></h3>
-                    <div class="price align-self-start" th:text="${recipe.authorName}"></div>
-                    <p class="description" th:text="${recipe.category.name}"> </p>
+          <div class="list-group overflow-auto" th:unless="${allRecipes.isEmpty()}">
+            <section id="gallery" class="gallery section-bg pb-0">
+              <div class="container" data-aos="fade-up">
+                <div class="section-header">
+                  <h3 class="box-title text-secondary">Some of the latest recipes</h3>
+                </div>
+                <!--            for each picture...-->
+                <div class="gallery-slider swiper" >
+                  <div class="swiper-wrapper align-items-center" >
+                    <div class="swiper-slide" th:each="recipe:${allRecipes}">
+                      <img th:unless="${recipe.getLatestSavedId()}" th:src="${recipe.imageUrl}" class="img-fluid rounded-3" alt="" src="">
+                      <img th:if="${recipe.getLatestSavedId()}" th:src="@{/download/{id}(id=${recipe.getLatestSavedId()})}" class="img-fluid rounded-3" alt="" src="">
+                      <a title="Open recipe" class="list-group-item list-group-item-action active bg-transparent border-0"  aria-current="true"
+                         th:href="@{/recipe/{id}(id=${recipe.id})}" >
+                        <div class="d-flex w-100 justify-content-center">
+                          <h6 class="mb-1 text-body-secondary" th:text="${recipe.name}"></h6>
+                        </div>
+                        <div class="rating" >
+                          <span class= "rating" th:if="${recipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></span>
+                          <span class= "rating" th:if="${recipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></span>
+                          <span class= "rating" th:if="${recipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></span>
+                          <span class= "rating" th:if="${recipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></span>
+                          <span class= "rating" th:if="${recipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></span>
+                        </div>
+                      </a>
+                    </div>
                   </div>
                 </div>
-                <div class="swiper-pagination"></div>
-              </div>
-            </div>
-          </section><!-- End Recipes Section -->
 
+              </div>
+            </section><!-- End Gallery Section -->
+
+          </div>
 
 
 

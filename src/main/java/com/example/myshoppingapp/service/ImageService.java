@@ -3,6 +3,7 @@ package com.example.myshoppingapp.service;
 import com.example.myshoppingapp.model.pictures.ImageDownloadModel;
 import com.example.myshoppingapp.model.pictures.ImageEntity;
 import com.example.myshoppingapp.repository.ImageRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,8 +17,11 @@ public class ImageService {
 
   private final ImageRepository imageRepository;
 
-  public ImageService(ImageRepository imageRepository) {
+  private final ModelMapper modelMapper;
+
+  public ImageService(ImageRepository imageRepository, ModelMapper modelMapper) {
     this.imageRepository = imageRepository;
+    this.modelMapper = modelMapper;
   }
 
   public long saveImage(MultipartFile file) throws IOException {
@@ -34,6 +38,7 @@ public class ImageService {
     var image = imageRepository.findById(id).orElseThrow();
 
     return Optional.of(new ImageDownloadModel(
+            image.getId(),
         image.getData(),
         image.getContentType(),
         image.getFileName()
@@ -43,6 +48,7 @@ public class ImageService {
   public Optional<ImageEntity> findById(long imageId) {
     return this.imageRepository.findById(imageId);
   }
+
 
   @Modifying
   @Transactional

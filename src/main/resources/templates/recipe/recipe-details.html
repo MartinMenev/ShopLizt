@@ -36,6 +36,16 @@
       </div>
     </div><!-- End Breadcrumbs -->
 
+
+
+
+
+
+
+
+
+
+
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery section-bg pb-0">
       <div class="container" data-aos="fade-up">
@@ -47,7 +57,10 @@
         <div class="gallery-slider swiper" >
           <div class="swiper-wrapper align-items-center" >
             <div class="swiper-slide" th:each="picture :${pictures}">
-              <a class="glightbox" data-gallery="images-gallery" th:href="${picture.pictureUrl}" ><img th:src="${picture.pictureUrl}" class="img-fluid rounded-5" alt="" src=""></a>
+              <a th:if="${recipe.getLatestSavedId()}" class="glightbox" data-gallery="images-gallery" th:src="@{/dbresources/images/{id}(id=${picture.id})}" >
+                <img th:src="@{/download/{id}(id=${picture.id})}" class="img-fluid rounded-5" width="800" height="600"   alt="" src="">
+
+              </a>
             </div>
           </div>
           <div class="swiper-pagination m-3"></div>

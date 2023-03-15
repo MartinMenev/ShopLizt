@@ -88,7 +88,7 @@ public class RecipeController {
 
         model.addAttribute("recipe", outputRecipeDTO);
         model.addAttribute("comments", commentService.showLatestComments(id));
-        model.addAttribute("pictures", outputRecipeDTO.getPictureList());
+        model.addAttribute("pictures", outputRecipeDTO.getImageList());
         return "recipe/recipe-details";
     }
 
