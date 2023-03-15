@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
@@ -23,7 +24,7 @@ public class SecurityConfiguration {
             http.
              authorizeHttpRequests().
                     requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
-                    antMatchers("/", "/users/register", "/users/login", "/users/login-error").permitAll().
+                    antMatchers("/", "/users/register", "/users/login", "/users/login-error", "/download/**").permitAll().
                     antMatchers("/admin").hasRole("ADMIN").
                     anyRequest().authenticated().
                     and().
@@ -46,6 +47,7 @@ public class SecurityConfiguration {
         }
 
 
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new Pbkdf2PasswordEncoder();
@@ -54,6 +56,12 @@ public class SecurityConfiguration {
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
         return new ApplicationUserDetailsService(userRepository);
+    }
+
+
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("/images/**");
     }
 
 }
