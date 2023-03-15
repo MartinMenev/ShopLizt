@@ -118,20 +118,20 @@
         <div class="slides-1 swiper" data-aos="fade-up" data-aos-delay="100">
           <div class="swiper-wrapper">
 
+
             <div class="swiper-slide" th:each="comment:${comments}">
               <div class="testimonial-item">
                 <div class="row gy-4 justify-content-center">
                   <div class="col-lg-6">
                     <div class="testimonial-content">
                       <p>
-                        <i class="bi bi-chat-right-quote">
-                          <span th:text="${comment.text}"></span> </i>
+                        <i class="bi bi-quote quote-icon-left"></i>
+                          <th:block th:text="${comment.text}"></th:block>
+                        <i class="bi bi-quote quote-icon-right"></i>
                       </p>
-                      <h4 th:text="${comment.author.username}"> </h4>
-                      <h6 th:text="${comment.getDate()}"></h6>
-                      <hr class="bg-hero hr-2 w-25 bg-body-secondary"/>
-                      <h6 th:text="${comment.getRecipeName()}"></h6>
-                      <div class="stars" >
+                      <h3 th:text="${comment.author.username}"> </h3>
+                      <h4 th:text="${comment.getRecipeName()}"></h4>
+                      <div class="stars">
                         <th:block class= "rating" th:if="${comment.rating > 4.5}"><i class="bi bi-star-fill"></i></th:block>
                         <th:block class= "rating" th:if="${comment.rating > 3.5}"><i class="bi bi-star-fill"></i></th:block>
                         <th:block class= "rating" th:if="${comment.rating > 2.5}"><i class="bi bi-star-fill"></i></th:block>
@@ -141,14 +141,20 @@
                     </div>
                   </div>
                   <div class="col-lg-2 text-center">
-                    <img src="../../../../../../../../Downloads/YummyExample/Yummy/assets/img/testimonials/testimonials-1.jpg" class="img-fluid testimonial-img" alt="">
+                    <img th:if="${comment.author.imageEntity}" th:src="@{/download/{id}(id=${comment.author.imageEntity.id})}" class="img-fluid testimonial-img" alt="" src="">
+                    <img th:unless="${comment.author.imageEntity}" th:src="@{'/images/default-user-pic.jpg'}" class="img-fluid testimonial-img" alt="" src="">
                   </div>
                 </div>
               </div>
             </div><!-- End testimonial item -->
+
+
+
           </div>
           <div class="swiper-pagination"></div>
         </div>
+
+
       </div>
     </section><!-- End Testimonials Section -->
 

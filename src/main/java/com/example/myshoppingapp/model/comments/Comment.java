@@ -5,6 +5,8 @@ import com.example.myshoppingapp.model.recipes.Recipe;
 import com.example.myshoppingapp.model.users.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -27,6 +29,7 @@ public class Comment extends BaseEntity {
     private long rating;
 
    @ManyToOne (cascade = CascadeType.DETACH)
+   @LazyCollection(LazyCollectionOption.FALSE)
     private UserEntity author;
 
     @ManyToOne(cascade = CascadeType.DETACH)

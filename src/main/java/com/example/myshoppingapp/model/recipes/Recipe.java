@@ -64,7 +64,7 @@ public class Recipe extends BaseEntity {
    @LazyCollection(LazyCollectionOption.FALSE)
    private List<Comment> commentList;
 
-  @ManyToMany (cascade = CascadeType.DETACH)
+  @ManyToMany (cascade = CascadeType.REMOVE)
   @LazyCollection(LazyCollectionOption.FALSE)
    private List<Product> productList;
 
