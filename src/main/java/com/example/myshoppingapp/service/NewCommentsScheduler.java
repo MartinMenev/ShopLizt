@@ -23,7 +23,7 @@ public class NewCommentsScheduler {
         this.emailService = emailService;
     }
 
-    @Scheduled(cron = "0 0 8,17 * * *")
+    @Scheduled(cron = "0 0 8,12 * * *")
     public void checkForNewComments() {
         List<String> adminEmails = this.userService.findAllAdminEmails();
 

@@ -59,8 +59,7 @@ public class Recipe extends BaseEntity {
    @Column(columnDefinition = "TEXT")
    private String imageUrl;
 
-   @OneToMany(targetEntity = Comment.class, mappedBy= "recipe",
-           cascade = {CascadeType.REMOVE})
+   @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE)
    @LazyCollection(LazyCollectionOption.FALSE)
    private List<Comment> commentList;
 
@@ -74,7 +73,8 @@ public class Recipe extends BaseEntity {
     @Column
     private long position;
 
-  @ManyToMany
+  @ManyToMany (cascade = CascadeType.DETACH)
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<UserEntity> fan;
 
 
