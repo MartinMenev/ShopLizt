@@ -37,19 +37,22 @@ public class RecipeService {
 
     private final ImageService imageService;
 
+    private final CommentService commentService;
+
 
 
 
     @Autowired
     public RecipeService(RecipeRepository recipeRepository, UserRepository userRepository, UserService userService,
                          ModelMapper modelMapper,
-                         ProductService productService, ImageService imageService) {
+                         ProductService productService, ImageService imageService, CommentService commentService) {
         this.recipeRepository = recipeRepository;
         this.userRepository = userRepository;
         this.userService = userService;
         this.modelMapper = modelMapper;
         this.productService = productService;
         this.imageService = imageService;
+        this.commentService = commentService;
     }
 
 
@@ -145,6 +148,8 @@ public class RecipeService {
     public void deleteById(long id) {
         Recipe recipe = this.recipeRepository.findById(id).get();
 
+        this.commentService.deleteCommentsByRecipeId(id);
+
         Optional<List<UserEntity>> userSavedThisRecipe =  userRepository.findAllByFavoriteRecipesContains(recipe);
         if (userSavedThisRecipe.isPresent()) {
             for (UserEntity user : userSavedThisRecipe.get()) {
@@ -152,6 +157,8 @@ public class RecipeService {
                 this.userRepository.save(user);
             }
         }
+
+
 
         this.recipeRepository.delete(recipe);
     }
@@ -247,7 +254,7 @@ public class RecipeService {
             this.recipeRepository.saveAndFlush(recipeToRemove);
             return;
         }
-        this.recipeRepository.delete(recipeToRemove);
+        this.deleteById(id);
     }
 
 

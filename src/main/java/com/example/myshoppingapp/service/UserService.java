@@ -45,7 +45,7 @@ public class UserService {
 
     private final RecipeRepository recipeRepository;
 
-    private final CommentRepository commentRepository;
+    private final CommentService commentService;
 
     private final RoleRepository roleRepository;
 
@@ -55,8 +55,8 @@ public class UserService {
     @Autowired
     public UserService(UserRepository userRepository, ProductRepository productRepository, ModelMapper modelMapper,
                        PasswordEncoder passwordEncoder, UserDetailsService userDetailsService,
-                       AuthService authService, RecipeRepository recipeRepository, CommentRepository commentRepository,
-                       RoleRepository roleRepository, ImageService imageService) {
+                       AuthService authService, RecipeRepository recipeRepository,
+                       CommentService commentService, RoleRepository roleRepository, ImageService imageService) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
@@ -64,7 +64,7 @@ public class UserService {
         this.userDetailsService = userDetailsService;
         this.authService = authService;
         this.recipeRepository = recipeRepository;
-        this.commentRepository = commentRepository;
+        this.commentService = commentService;
         this.roleRepository = roleRepository;
         this.imageService = imageService;
     }
@@ -128,7 +128,7 @@ public class UserService {
 
         if (userRecipes.isPresent()) {
             for (Recipe recipe : userRecipes.get()) {
-
+                this.commentService.deleteCommentsByRecipeId(recipe.getId());
                 Optional<List<UserEntity>> userSavedThisRecipe =  userRepository.findAllByFavoriteRecipesContains(recipe);
                 if (userSavedThisRecipe.isPresent()) {
                     for (UserEntity user : userSavedThisRecipe.get()) {
@@ -140,8 +140,8 @@ public class UserService {
             }
         }
 
-        Optional<List<Comment>> comments = this.commentRepository.findAllByAuthor(userEntity);
-             comments.ifPresent(this.commentRepository::deleteAll);
+//        Optional<List<Comment>> comments = this.commentRepository.findAllByAuthor(userEntity);
+//             comments.ifPresent(this.commentRepository::deleteAll);
 
         this.userRepository.delete(userEntity);
 

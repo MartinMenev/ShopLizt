@@ -9,6 +9,7 @@ import com.example.myshoppingapp.repository.CommentRepository;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,7 @@ public class CommentService {
 
 
     @Autowired
+    @Lazy
     public CommentService(CommentRepository commentRepository, ModelMapper modelMapper, UserService userService, RecipeService recipeService) {
         this.commentRepository = commentRepository;
         this.modelMapper = modelMapper;
@@ -92,4 +94,11 @@ public class CommentService {
         comment.setApproved();
         this.commentRepository.saveAndFlush(comment);
     }
+
+    public void deleteCommentsByRecipeId(Long recipeId) {
+       Optional<List<Comment>> comments = this.commentRepository.findAllByRecipeId(recipeId);
+        comments.ifPresent(this.commentRepository::deleteAll);
+
+    }
+
 }
