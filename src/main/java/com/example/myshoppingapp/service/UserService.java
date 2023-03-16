@@ -129,9 +129,9 @@ public class UserService {
         if (userRecipes.isPresent()) {
             for (Recipe recipe : userRecipes.get()) {
                 this.commentService.deleteCommentsByRecipeId(recipe.getId());
-                Optional<List<UserEntity>> userSavedThisRecipe =  userRepository.findAllByFavoriteRecipesContains(recipe);
-                if (userSavedThisRecipe.isPresent()) {
-                    for (UserEntity user : userSavedThisRecipe.get()) {
+                Optional<List<UserEntity>> usersSavedThisRecipe = userRepository.findAllByFavoriteRecipesContains(recipe);
+                if (usersSavedThisRecipe.isPresent()) {
+                    for (UserEntity user : usersSavedThisRecipe.get()) {
                         user.getFavoriteRecipes().remove(recipe);
                         this.userRepository.save(user);
                     }
@@ -140,8 +140,6 @@ public class UserService {
             }
         }
 
-//        Optional<List<Comment>> comments = this.commentRepository.findAllByAuthor(userEntity);
-//             comments.ifPresent(this.commentRepository::deleteAll);
 
         this.userRepository.delete(userEntity);
 
