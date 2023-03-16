@@ -27,8 +27,8 @@ public class NewCommentsScheduler {
     public void checkForNewComments() {
         List<String> adminEmails = this.userService.findAllAdminEmails();
 
-        List<OutputCommentDTO> newComments = this.commentService.getAllUnapprovedComments().orElse(null);
-        if (newComments != null) {
+        List<OutputCommentDTO> newComments = this.commentService.getAllUnapprovedComments();
+        if (newComments.size() != 0) {
             emailService.sendAlertForNewComments(adminEmails, newComments.size());
             LOGGER.info("New comments added. Sent email to ADMIN.");
         }

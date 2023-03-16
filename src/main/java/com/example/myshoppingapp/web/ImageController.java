@@ -2,6 +2,7 @@ package com.example.myshoppingapp.web;
 
 import com.example.myshoppingapp.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,10 +27,10 @@ public class ImageController {
     }
 
     @RequestMapping(value = "/{id}")
-    public void writePicture(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void writePicture(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) {
         try{
             var imageDownloadModel = imageService.getFileById(id).orElseThrow();
-            response.setContentType("image/jpeg");
+            response.setContentType(MediaType.IMAGE_JPEG_VALUE);
             response.setContentLength(imageDownloadModel.getFileData().length);
 
 

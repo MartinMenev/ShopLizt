@@ -57,7 +57,7 @@
         <div class="gallery-slider swiper" >
           <div class="swiper-wrapper align-items-center" >
             <div class="swiper-slide" th:each="picture :${pictures}">
-              <a th:if="${recipe.getLatestSavedId()}" class="glightbox" data-gallery="images-gallery" th:src="@{/dbresources/images/{id}(id=${picture.id})}" >
+              <a th:if="${recipe.getLatestSavedId()}" class="glightbox" data-gallery="images-gallery" th:href="@{/db-resources/images/{id}(id=${picture.id})}" >
                 <img th:src="@{/download/{id}(id=${picture.id})}" class="img-fluid rounded-5" width="800" height="600"   alt="" src="">
 
               </a>

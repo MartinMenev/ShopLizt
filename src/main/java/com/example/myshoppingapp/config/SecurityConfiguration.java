@@ -38,9 +38,9 @@ public class SecurityConfiguration {
                     logoutUrl("/users/logout").
                     logoutSuccessUrl("/").//go to homepage after logout
                     deleteCookies("JSESSIONID").
-                    clearAuthentication(true).
-                    and().
-                    csrf();
+                    clearAuthentication(true);
+
+            http.headers().frameOptions().disable();
 
             return http.build();
 

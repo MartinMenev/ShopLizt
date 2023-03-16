@@ -75,14 +75,14 @@ public class CommentService {
                 .toList();
     }
 
-    public Optional<List<OutputCommentDTO>> getAllUnapprovedComments() {
-        return Optional.of(this.commentRepository
+    public List<OutputCommentDTO> getAllUnapprovedComments() {
+        return this.commentRepository
                 .findAll()
                 .stream()
                 .filter(comment -> !comment.isApproved())
                 .map(comment -> modelMapper.map(comment, OutputCommentDTO.class))
                 .sorted(Comparator.comparing(OutputCommentDTO::getId))
-                .toList());
+                .toList();
     }
 
     @Transactional
