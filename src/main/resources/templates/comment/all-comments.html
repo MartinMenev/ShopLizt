@@ -70,8 +70,8 @@
                     </div>
                   </div>
                   <div class="col-lg-2 text-center">
-                    <img th:if="${comment.author.imageEntity}" th:src="@{/download/{id}(id=${comment.author.imageEntity.id})}" class="img-fluid testimonial-img" alt="" src="">
-                    <img th:unless="${comment.author.imageEntity}" th:src="@{'/images/default-user-pic.jpg'}" class="img-fluid testimonial-img" alt="" src="">
+                    <img th:if="${comment.author.imageEntity}" th:src="@{/download/{id}(id=${comment.author.imageEntity.id})}" width="100" height="100" class="rounded-circle" alt="" src="">
+                    <img th:unless="${comment.author.imageEntity}" th:src="@{'/images/default-user-pic.jpg'}" width="100" height="100" class="rounded-circle" alt="" src="">
                   </div>
                 </div>
               </div>
