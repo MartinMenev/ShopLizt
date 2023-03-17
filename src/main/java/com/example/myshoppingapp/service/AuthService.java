@@ -46,10 +46,9 @@ public class AuthService {
     public void register(RegisterUserDTO registerUserDTO) {
         UserEntity userEntity = this.modelMapper.map(registerUserDTO, UserEntity.class);
         userEntity.setPassword(passwordEncoder.encode(registerUserDTO.getPassword()));
+        userEntity.addRole(this.roleRepository.findRoleEntityByRole(UserRole.USER).orElseThrow());
         if (this.userRepository.count() == 0) {
             userEntity.addRole(this.roleRepository.findRoleEntityByRole(UserRole.ADMIN).orElseThrow());
-        } else {
-            userEntity.addRole(this.roleRepository.findRoleEntityByRole(UserRole.USER).orElseThrow());
         }
         userRepository.save(userEntity);
 

@@ -58,16 +58,20 @@
                     <tbody>
                     <tr   th:each="comment:${comments}">
                       <td  >
-                        <a title="Mark as Approved" class="bi-check2-circle" href="#" th:href="@{/approve-comment/{id}(id=${comment.id})}"></a>
-                        <a th:href="@{#}" class="btn btn-light " th:text="${comment.text}"> </a>
+                        <form title="Mark as Approved" th:action="@{/approve-comment/{id}(id=${comment.id})}" th:method="patch">
+                          <input title="Update item" type="submit" class="btn btn-outline-dark rounded-5" value="Approve" />
+                        </form>
+                      </td>
+                      <td>
+                       <i th:text="${comment.text}"></i>
                       </td>
                       <td>
 
                           <!--                remove Product-->
-                        <a title="Delete item" th:href="@{/delete-comment/{id}(id=${comment.id})}" class="btn btn-light">
-                          <i class="fa-solid fa-xmark"></i>
-                        </a>
 
+                        <form th:action="@{/delete-comment/{id}(id=${comment.id})}" th:method="delete">
+                          <input title="Delete item" type="submit" class="btn btn-outline-dark rounded-5 text-danger" value="Delete" />
+                        </form>
                       </td>
                     </tr>
                     </tbody>
