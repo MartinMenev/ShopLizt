@@ -30,35 +30,6 @@ public class AuthController {
     }
 
 
-//    @PostMapping("/users/login")
-//    public String doLogin(@Valid LoginDTO loginDTO,
-//                          BindingResult bindingResult,
-//                          RedirectAttributes redirectAttributes)  {
-//
-//        if (bindingResult.hasErrors()) {
-//            redirectAttributes.addFlashAttribute("loginDTO", loginDTO);
-//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginDTO",
-//                    bindingResult);
-//            return "user/login";
-//        }
-//
-//        authService.login(loginDTO);
-//        return "redirect:/home";
-//    }
-//
-//
-//    @PostMapping("/users/logout")
-//    public String doLogout(){
-//        this.authService.logout();
-//        return "redirect:/users/login";
-//    }
-
-    //
-//    @ModelAttribute("loginDTO")
-//    public LoginDTO initLoginDTO() {
-//        return new LoginDTO();
-//    }
-
     @PostMapping("/users/login-error")
     public String onFailedLogin(
             @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username,

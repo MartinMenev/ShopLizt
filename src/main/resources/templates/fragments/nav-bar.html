@@ -12,7 +12,7 @@
                 <ul >
                     <li>
                         <form  th:method="post" th:action="@{/add-product}">
-                            <input type="text" class="form-control" id="addItem" placeholder="Add item . . ." name="name">
+                            <input type="text" class="form-control" id="addItem" th:placeholder= " #{navbar_add_item}" name="name">
                         </form>
                     </li>
                     <li><a th:text="#{navbar_home}" th:href="@{/home}">Home</a></li>
