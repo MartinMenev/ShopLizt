@@ -70,12 +70,16 @@
     </section><!-- End Gallery Section -->
 
     <div class="row mt-3 justify-content-center">
-      <button type="button" class="btn btn-outline-dark col-lg-1 col-md-2 col-sm-3 col-xs-3 rounded-5 mx-1" >
+      <button th:if="${recipe.getAuthor().username != #authentication.getName()}"  type="button" class="btn btn-outline-dark col-lg-1 col-md-2 col-sm-3 col-xs-3 rounded-5 mx-1" >
         <a th:href="@{/save-recipe-to-favorites/{id}(id=*{id})}"
-           class="button"> <i class="bi bi-heart-fill"> Save </i> </a>
+           class="button"> <i class="bi bi-heart-fill"> Save </i>
+          <span title="Number of Saves" class ="text-dark" th:unless="${recipe.numberOfSaves == 0}"  >
+                      ( <th:block th:text="${recipe.numberOfSaves}"></th:block> ) </span>
+
+        </a>
       </button>
 
-      <button type="button" th:if="${recipe.getAuthor().username == #authentication.name}" class="btn btn-outline-dark col-lg-1 col-md-2 col-sm-3 col-xs-3 rounded-5 mx-1" >
+      <button type="button" th:if="${recipe.getAuthor().username == #authentication.getName() or #authentication.getAuthorities.size() == 2}" class="btn btn-outline-dark col-lg-1 col-md-2 col-sm-3 col-xs-3 rounded-5 mx-1" >
         <a th:href="@{/edit-recipe/{Id}(Id=*{id})}"
            class="button"> <i class="bi bi-pencil-square"> Edit </i> </a>
       </button>
