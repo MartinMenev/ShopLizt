@@ -15,30 +15,44 @@
                             <input type="text" class="form-control" id="addItem" placeholder="Add item . . ." name="name">
                         </form>
                     </li>
-                    <li><a th:href="@{/home}">Home</a></li>
-                    <li><a th:href="@{/product-list}">Item List</a></li>
-                    <li><a th:href="@{/my-collection}">My Collection</a></li>
-                    <li><a th:href="@{/all-recipes}">Recipes</a></li>
-                    <li sec:authorize="hasRole('ADMIN')">
-                        <a class="text-success" th:href="@{/admin}">ADMIN</a>
-                    </li>
-
-                    <li class="dropdown"><a href="#">Hey, &nbsp; <th:block sec:authentication="name" ></th:block> </a>
-                        <ul>
-                            <li><a th:href="@{/user/profile}">View profile</a></li>
-                            <li><a th:href="@{/update-user}">Edit profile</a></li>
-                        </ul>
+                    <li><a th:text="#{navbar_home}" th:href="@{/home}">Home</a></li>
+                    <li><a th:text="#{navbar_item_list}" th:href="@{/product-list}">Item List</a></li>
+                    <li><a th:text="#{navbar_my_collection}" th:href="@{/my-collection}">My Collection</a></li>
+                    <li><a th:text="#{navbar_recipes}" th:href="@{/all-recipes}">Recipes</a></li>
+                    <li  sec:authorize="hasRole('ADMIN')">
+                        <a th:text="#{navbar_admin}" class="text-success" th:href="@{/admin}">ADMIN</a>
                     </li>
                     <li>
+                        <a class="italic bold" href=""><th:block th:text="#{registration_subject}"></th:block></a>
+                    </li>
+                    <li class="dropdown"><a class="italic bold" th:text="${#authentication.name}" href="#"></a>
+                        <ul>
+                            <li><a th:text="#{navbar_profile}" th:href="@{/user/profile}">View profile</a></li>
+                            <li><a th:text="#{navbar_edit_profile}" th:href="@{/update-user}">Edit profile</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
                         <form sec:authorize="isAuthenticated()" th:action="@{/users/logout}" th:method="post">
-                            <button type="submit" class="btn bg-transparent" name="button">Logout</button>
+                            <button type="submit" th:text="#{navbar_logout}" class="btn bg-transparent" name="button">Logout</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form th:method="get">
+                            <select class="bg-transparent rounded-2 btn-outline-light"
+                                    onchange="this.form.submit()"
+                                    id="lang"
+                                    name="lang">
+                                <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">EN</option>
+                                <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">BG</option>
+                            </select>
                         </form>
                     </li>
                 </ul>
             </th:block>
         </nav>
         <!-- .navbar -->
-        <a sec:authorize="isAnonymous()"   class="btn-book-a-table" th:href="@{/users/login}">login</a>
+        <a sec:authorize="isAnonymous()"  th:text="#{navbar_login}"  class="btn-book-a-table" th:href="@{/users/login}">login</a>
         <i sec:authorize="isAuthenticated()" class="mobile-nav-toggle mobile-nav-show bi bi-list"> </i>
         <i sec:authorize="isAuthenticated()" class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
     </div>
