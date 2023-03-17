@@ -2,9 +2,13 @@ package com.example.myshoppingapp.web;
 
 import com.example.myshoppingapp.model.comments.InputCommentDTO;
 import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
+import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.service.CommentService;
 import com.example.myshoppingapp.service.RecipeService;
+import com.example.myshoppingapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +18,13 @@ public class CommentController {
     private final CommentService commentService;
     private final RecipeService recipeService;
 
+
+
     @Autowired
     public CommentController(CommentService commentService, RecipeService recipeService) {
         this.commentService = commentService;
         this.recipeService = recipeService;
+
     }
 
     @PostMapping("/save-comment/{id}")
@@ -34,7 +41,7 @@ public class CommentController {
     }
 
 
-    @GetMapping("/approve-comment/{id}")
+    @PatchMapping("/approve-comment/{id}")
     public String approveComment(@PathVariable(value = "id") long id) {
         commentService.approveComment(id);
 
@@ -53,6 +60,15 @@ public class CommentController {
         model.addAttribute("comments", commentService.showAllComments(id));
         model.addAttribute("recipe", outputRecipeDTO);
         return "comment/all-comments";
+    }
+
+    @DeleteMapping ("/delete-comment/{id}")
+    public String deleteComment(@PathVariable(value = "id") long id) {
+        this.commentService.deleteComment(id);
+
+
+
+        return "redirect:/home";
     }
 
 }

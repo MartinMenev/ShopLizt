@@ -67,6 +67,11 @@
                         <th:block class= "rating" th:if="${comment.rating > 1.5}"><i class="bi bi-star-fill"></i></th:block>
                         <th:block class= "rating" th:if="${comment.rating >= 1}"><i class="bi bi-star-fill"></i></th:block>
                       </div>
+                      <div class="m-4"  th:if="${comment.getAuthor().username == #authentication.getName() or #authentication.getAuthorities.size() == 2}" >
+                        <form th:action="@{/delete-comment/{id}(id=${comment.id})}" th:method="delete">
+                          <input title="Delete item" type="submit" class="btn btn-light bg-transparent rounded-5 text-danger" value=" Remove " />
+                        </form>
+                      </div>
                     </div>
                   </div>
                   <div class="col-lg-2 text-center">

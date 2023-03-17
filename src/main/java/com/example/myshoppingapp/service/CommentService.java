@@ -14,10 +14,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Comparator;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @Getter
 @Service
@@ -101,4 +98,13 @@ public class CommentService {
 
     }
 
+    @Transactional
+    @Modifying
+    public void deleteComment(long id) {
+        Comment comment = this.commentRepository.getReferenceById(id);
+        UserEntity loggedUser = userService.getLoggedUser();
+        if (Objects.equals(loggedUser.getId(), comment.getAuthor().getId()) || loggedUser.isAdmin()) {
+            this.commentRepository.deleteById(id);
+        }
+    }
 }
