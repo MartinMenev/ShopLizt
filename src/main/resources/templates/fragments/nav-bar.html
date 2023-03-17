@@ -22,10 +22,10 @@
                     <li  sec:authorize="hasRole('ADMIN')">
                         <a th:text="#{navbar_admin}" class="text-success" th:href="@{/admin}">ADMIN</a>
                     </li>
-                    <li>
-                        <a class="italic bold" href=""><th:block th:text="#{registration_subject}"></th:block></a>
-                    </li>
-                    <li class="dropdown"><a class="italic bold" th:text="${#authentication.name}" href="#"></a>
+                    <li class="dropdown">
+                        <a class="text-black italic" href="">
+                            <th:block th:text="#{registration_subject}"></th:block> <th:block  th:text="${#authentication.name}"></th:block>
+                        </a>
                         <ul>
                             <li><a th:text="#{navbar_profile}" th:href="@{/user/profile}">View profile</a></li>
                             <li><a th:text="#{navbar_edit_profile}" th:href="@{/update-user}">Edit profile</a></li>
@@ -33,20 +33,25 @@
                     </li>
 
                     <li>
-                        <form sec:authorize="isAuthenticated()" th:action="@{/users/logout}" th:method="post">
-                            <button type="submit" th:text="#{navbar_logout}" class="btn bg-transparent" name="button">Logout</button>
-                        </form>
+                        <a href="">
+                            <form sec:authorize="isAuthenticated()" th:action="@{/users/logout}" th:method="post">
+                                <button type="submit" th:text="#{navbar_logout}" class="text-black italic btn bg-transparent" name="button">Logout</button>
+                            </form>
+                        </a>
+
                     </li>
                     <li>
-                        <form th:method="get">
-                            <select class="bg-transparent rounded-2 btn-outline-light"
-                                    onchange="this.form.submit()"
-                                    id="lang"
-                                    name="lang">
-                                <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">EN</option>
-                                <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">BG</option>
-                            </select>
-                        </form>
+                        <a href="" onclick="return false">
+                            <form th:method="get">
+                                <select class="bg-transparent rounded-2 btn-outline-light"
+                                        onchange="this.form.submit()"
+                                        id="lang"
+                                        name="lang">
+                                    <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">EN</option>
+                                    <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">BG</option>
+                                </select>
+                            </form>
+                        </a>
                     </li>
                 </ul>
             </th:block>
