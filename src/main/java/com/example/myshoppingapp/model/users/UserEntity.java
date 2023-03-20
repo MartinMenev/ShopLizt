@@ -31,8 +31,12 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
+    public UserEntity setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
+        return this;
+    }
 
-   @ManyToMany
+    @ManyToMany
    @LazyCollection(LazyCollectionOption.FALSE)
     private List<RoleEntity> roles;
 

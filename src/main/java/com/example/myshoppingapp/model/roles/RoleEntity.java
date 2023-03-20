@@ -6,7 +6,6 @@ import lombok.*;
 
 import javax.persistence.*;
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -23,7 +22,8 @@ public class RoleEntity {
   private UserRole role;
 
 
-
-
-
+  public RoleEntity setRole(UserRole role) {
+    this.role = role;
+    return this;
+  }
 }
