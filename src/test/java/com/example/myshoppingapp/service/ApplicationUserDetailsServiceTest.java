@@ -52,10 +52,18 @@ class ApplicationUserDetailsServiceTest {
         UserDetails userDetails = toTest.loadUserByUsername(testUserEntity.getUsername());
 
         // assert
-        Assertions.assertEquals(testUserEntity.getUsername(),userDetails.getUsername());
+        assertEquals(testUserEntity.getUsername(),userDetails.getUsername());
+        assertEquals(testUserEntity.getPassword(), userDetails.getPassword());
 
         var authorities = userDetails.getAuthorities();
-        Assertions.assertEquals(2, authorities.size());
+        assertEquals(2, authorities.size());
+
+        var authoritiesIter = authorities.iterator();
+
+       assertEquals("ROLE_" + UserRole.ADMIN.name(),
+                authoritiesIter.next().getAuthority());
+      assertEquals("ROLE_" + UserRole.USER.name(),
+                authoritiesIter.next().getAuthority());
     }
 
     @Test
@@ -65,7 +73,7 @@ class ApplicationUserDetailsServiceTest {
         // NOTE: No need to arrange anything, mocks return empty optionals.
 
         // act && assert
-        Assertions.assertThrows(
+        assertThrows(
                 UsernameNotFoundException.class,
                 () -> toTest.loadUserByUsername("non-existant@example.com")
         );

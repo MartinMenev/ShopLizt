@@ -13,6 +13,7 @@ spring:
           facebook:
             client-id: your-client-id-here
             client-secret: your-secret-here
+
 mail:
   host: localhost
   port: 1025
