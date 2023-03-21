@@ -25,8 +25,7 @@ public class EmailService {
 
   public void sendRegistrationEmail(
       String userEmail,
-      String userName
-  ) {
+      String userName) {
     MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
     MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
