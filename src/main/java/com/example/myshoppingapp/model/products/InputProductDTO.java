@@ -8,12 +8,11 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class InputProductDTO implements Serializable {
-    private Long id;
+public class InputProductDTO extends Product implements Serializable {
 
     private String name;
+
 
 }

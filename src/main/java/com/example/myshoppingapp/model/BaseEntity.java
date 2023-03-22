@@ -23,4 +23,5 @@ public class BaseEntity {
         this.id = id;
         return this;
     }
+
 }

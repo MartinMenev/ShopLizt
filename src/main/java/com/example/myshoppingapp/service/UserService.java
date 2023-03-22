@@ -94,7 +94,7 @@ public class UserService {
 
     @Transactional
     @Modifying
-    public void updateUser(UserInputDTO userInputDTO) {
+    public UserEntity updateUser(UserInputDTO userInputDTO) {
         UserEntity user = this.getLoggedUser();
 
         user.setUsername(userInputDTO.getUsername())
@@ -105,7 +105,7 @@ public class UserService {
         }
 
         this.userRepository.saveAndFlush(user);
-
+        return user;
     }
 
     @Transactional
@@ -144,14 +144,6 @@ public class UserService {
         this.userRepository.delete(userEntity);
 
     }
-
-    public void addBoughtProductToUser(Product product) {
-        UserEntity userEntity = getLoggedUser();
-        userEntity.getBoughtProducts().add(product);
-        this.userRepository.saveAndFlush(userEntity);
-    }
-
-
 
 
 

@@ -47,9 +47,9 @@
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 border-dark">
                   <div class="text-center">
                     <!--                        DEFAULT PICTURE-->
-                    <img th:unless="${user.imageEntity == null}"
+                    <img th:if="${user.imageEntity}"
                          th:src="@{/download/{id}(id=${user.imageEntity.id})}" width="100" height="100" class="rounded-circle">
-                    <img th:if="${user.imageEntity == null}" th:src="@{'/images/default-user-pic.jpg'}" width="100" height="100" class="rounded-circle" />
+                    <img th:unless="${user.imageEntity}" th:src="@{'/images/default-user-pic.jpg'}" width="100" height="100" class="rounded-circle" />
 
                     <div class="text-center mt-3" th:object="${user}">
                       <a title="Update your profile" th:href="@{/update-user}"

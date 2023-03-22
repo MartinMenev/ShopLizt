@@ -99,4 +99,5 @@ public class UserEntity extends BaseEntity {
         this.picture = picture;
         return this;
     }
+
 }

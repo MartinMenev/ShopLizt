@@ -92,15 +92,6 @@ public class RecipeController {
         return "recipe/recipe-details";
     }
 
-//    @ResponseStatus(value = HttpStatus.NOT_FOUND)
-//    @ExceptionHandler(ObjectNotFoundException.class)
-//    public ModelAndView onProductNotFound(ObjectNotFoundException onfe) {
-//        ModelAndView modelAndView = new ModelAndView("object-not-found");
-//
-//        modelAndView.addObject("objectId", onfe.getObjectId());
-//
-//        return modelAndView;
-//    }
 
     @GetMapping("/edit-recipe/{id}")
     public String editRecipe(@PathVariable(value = "id") Long id, Model model) {
