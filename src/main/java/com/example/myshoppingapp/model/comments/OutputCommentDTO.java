@@ -15,7 +15,6 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class OutputCommentDTO {
 
     private Long id;
@@ -27,6 +26,11 @@ public class OutputCommentDTO {
     private Recipe recipe;
 
     private LocalDate boughtOn;
+
+    public OutputCommentDTO() {
+
+    }
+
     public String getDate(){
         return this.dateAdded.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }

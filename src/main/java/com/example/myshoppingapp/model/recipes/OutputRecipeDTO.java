@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -19,7 +20,6 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class OutputRecipeDTO {
     private Long id;
@@ -43,6 +43,10 @@ public class OutputRecipeDTO {
 
     private LocalDate dateAdded;
 
+    public OutputRecipeDTO() {
+
+    }
+
     public String getAuthorName(){
         return this.author.getUsername();
     }
@@ -54,6 +58,8 @@ public class OutputRecipeDTO {
     public long getDays() {
         return DAYS.between(this.getDateAdded(), LocalDate.now()) ;
     }
+
+
 
     public Long getLatestSavedId() {
         if (!this.getImageList().isEmpty()) {

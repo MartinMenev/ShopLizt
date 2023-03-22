@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/update-user")
-    public String updateProduct(Model model) {
+    public String updateProfile(Model model) {
         UserOutputDTO currentUser = this.userService.getLoggedUserDTO();
         model.addAttribute("user", currentUser);
         return "user/update-user";
@@ -57,7 +57,7 @@ public class UserController {
     }
 
     @GetMapping("/make-admin/{id}")
-    public String saveRecipeToMyFavorites(@PathVariable(value = "id") Long id) {
+    public String makeUserAdmin(@PathVariable(value = "id") Long id) {
         this.userService.makeUserAdmin(id);
         return "redirect:/admin";
     }

@@ -9,16 +9,19 @@ import com.example.myshoppingapp.model.products.InputProductDTO;
 import com.example.myshoppingapp.model.products.Product;
 import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
 import com.example.myshoppingapp.model.recipes.Recipe;
+import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.service.CommentService;
 import com.example.myshoppingapp.service.EmailService;
 import com.example.myshoppingapp.service.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.stubbing.OngoingStubbing;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -45,6 +48,7 @@ class RecipeControllerTestIT {
     @MockBean
     private CommentService mockCommentService;
 
+
     private Recipe testRecipe;
     private OutputCommentDTO testComment;
     private OutputRecipeDTO testRecipeDTO;
@@ -53,20 +57,30 @@ class RecipeControllerTestIT {
     private ImageEntity testImage;
     @BeforeEach
     void setUp(){
+        ModelMapper modelMapper = new ModelMapper();
         testRecipe = new Recipe();
         testRecipe.setId(3L);
         testRecipe.setName("Musaka").setCategory(Category.DINNER);
 
-        testComment = new OutputCommentDTO();
-        testRecipeDTO = new OutputRecipeDTO();
+        UserEntity author = new UserEntity().setUsername("martin");
+        ImageEntity testImage = new ImageEntity();
+        Comment comment = new Comment();
+        testComment = modelMapper.map(comment, OutputCommentDTO.class);
+        testComment.setAuthor(author);
+        testComment.setRecipe(testRecipe);
+        testRecipeDTO = modelMapper.map(testRecipe, OutputRecipeDTO.class);
         testRecipeDTO.setId(3L);
+        testRecipeDTO.setAuthor(author);
+        testRecipeDTO.setUrl("someUrl");
+        testRecipe.setAuthor(author);
+        testRecipe.addImage(testImage);
 
         testProductDTO = new InputProductDTO();
         testProductDTO.setName("bread");
     }
     @Test
     @WithMockUser(
-            username = "admin@example.com",
+            username = "martin",
             roles = {"ADMIN", "USER"}
     )
     void testShowAddRecipePage() throws Exception {
@@ -77,7 +91,7 @@ class RecipeControllerTestIT {
 
     @Test
     @WithMockUser(
-            username = "admin@example.com",
+            username = "martin",
             roles = {"ADMIN", "USER"}
     )
     void testDeletingRecipeSuccessfully() throws Exception {
@@ -114,7 +128,7 @@ class RecipeControllerTestIT {
 
     @Test
     @WithMockUser(
-            username = "admin@example.com",
+            username = "martin",
             roles = {"ADMIN", "USER"}
     )
     void testPostingRecipeWithIncompleteData() throws Exception {
@@ -130,7 +144,7 @@ class RecipeControllerTestIT {
 
     @Test
     @WithMockUser(
-            username = "admin@example.com",
+            username = "martin",
             roles = {"ADMIN", "USER"}
     )
     void testSavingRecipeToFavorites() throws Exception {
@@ -140,21 +154,19 @@ class RecipeControllerTestIT {
                 .andExpect(redirectedUrl("/home"));
     }
 
-//    @Test
-//    @WithMockUser(
-//            username = "admin@example.com",
-//            roles = {"ADMIN", "USER"}
-//    )
-//    void testGetRecipeById() throws Exception {
-//        testImage = new ImageEntity();
-//        mockMvc.perform(get("/recipe/{id}", testRecipeDTO.getId())
-//                        .param("comments", testComment.getText())
-//                        .param("recipe", String.valueOf(testRecipeDTO))
-//                        .param("pictures",testRecipeDTO.getImageList())
-//                        .with(csrf()))
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("recipe/recipe-details"));
-//    }
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testGetRecipeById() throws Exception {
+        when(mockRecipeService.getRecipeById(testRecipeDTO.getId())).thenReturn(testRecipeDTO);
+        when(mockCommentService.showLatestComments(testRecipe.getId())).thenReturn(List.of(testComment));
+
+        mockMvc.perform(get("/recipe/{id}", testRecipeDTO.getId()))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/recipe-details"));
+    }
 
     @Test
     @WithMockUser(

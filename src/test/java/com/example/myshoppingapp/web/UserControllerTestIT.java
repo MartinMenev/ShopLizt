@@ -4,6 +4,8 @@ import com.example.myshoppingapp.model.enums.UserRole;
 import com.example.myshoppingapp.model.pictures.ImageDownloadModel;
 import com.example.myshoppingapp.model.pictures.ImageEntity;
 import com.example.myshoppingapp.model.roles.RoleEntity;
+import com.example.myshoppingapp.model.users.UserEntity;
+import com.example.myshoppingapp.model.users.UserInputDTO;
 import com.example.myshoppingapp.model.users.UserOutputDTO;
 import com.example.myshoppingapp.service.RecipeService;
 import com.example.myshoppingapp.service.UserService;
@@ -24,7 +26,7 @@ import java.util.regex.Matcher;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -67,6 +69,58 @@ class UserControllerTestIT {
                 andExpect(status().isOk()).
                 andExpect(view().name("user/profile"));
     }
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testShowProfileUpdatePage() throws Exception {
+        mockMvc.perform(get("/update-user")).
+                andExpect(status().isOk()).
+                andExpect(view().name("user/update-user"));
+    }
+
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testUpdateUserProfile() throws Exception {
+        UserInputDTO existingUser = new UserInputDTO();
+        UserEntity user = new UserEntity();
+        when(mockUserService.updateUser(existingUser)).thenReturn(user);
+
+        mockMvc.perform(patch("/update-user").
+                param("username", "martin123").
+                param("email", "").
+                with(csrf())).
+                andExpect(status().is3xxRedirection()).
+                andExpect(redirectedUrl("/users/login"));
+    }
+
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testDeleteUserSuccessfully() throws Exception {
+        mockMvc.perform(delete("/delete-profile")
+                        .with(csrf())).
+                andExpect(status().is3xxRedirection()).
+                andExpect((redirectedUrl("/")));
+    }
+
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testMakeUserAdmin() throws Exception {
+        mockMvc.perform(get("/make-admin/{id}",testUser.getId())).
+                andExpect(status().is3xxRedirection()).
+                andExpect(redirectedUrl("/admin"));
+    }
+
 
 
 }
