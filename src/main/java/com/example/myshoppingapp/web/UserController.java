@@ -43,9 +43,7 @@ public class UserController {
     }
 
     @PatchMapping("/update-user")
-    public String doUpdateProduct(Model model, UserInputDTO userInputDTO) {
-        UserOutputDTO currentUser = this.userService.getLoggedUserDTO();
-        model.addAttribute("user", currentUser);
+    public String doUpdateProduct(UserInputDTO userInputDTO) {
         userService.updateUser(userInputDTO);
         return "redirect:/users/login";
     }

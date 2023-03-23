@@ -67,7 +67,8 @@ class UserControllerTestIT {
 
         mockMvc.perform(get("/user/profile")).
                 andExpect(status().isOk()).
-                andExpect(view().name("user/profile"));
+                andExpect(view().name("user/profile")).
+                andExpect(model().attribute("user", testUser));
     }
     @Test
     @WithMockUser(
@@ -77,6 +78,7 @@ class UserControllerTestIT {
     void testShowProfileUpdatePage() throws Exception {
         mockMvc.perform(get("/update-user")).
                 andExpect(status().isOk()).
+                andExpect(model().attribute("user", testUser)).
                 andExpect(view().name("user/update-user"));
     }
 
@@ -86,10 +88,6 @@ class UserControllerTestIT {
             roles = {"ADMIN", "USER"}
     )
     void testUpdateUserProfile() throws Exception {
-        UserInputDTO existingUser = new UserInputDTO();
-        UserEntity user = new UserEntity();
-        when(mockUserService.updateUser(existingUser)).thenReturn(user);
-
         mockMvc.perform(patch("/update-user").
                 param("username", "martin123").
                 param("email", "").

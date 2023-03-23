@@ -22,6 +22,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -65,16 +69,15 @@ class RecipeControllerTestIT {
         UserEntity author = new UserEntity().setUsername("martin");
         ImageEntity testImage = new ImageEntity();
         Comment comment = new Comment();
+        comment.setAuthor(author);
+        comment.setRecipe(testRecipe);
         testComment = modelMapper.map(comment, OutputCommentDTO.class);
-        testComment.setAuthor(author);
-        testComment.setRecipe(testRecipe);
-        testRecipeDTO = modelMapper.map(testRecipe, OutputRecipeDTO.class);
-        testRecipeDTO.setId(3L);
-        testRecipeDTO.setAuthor(author);
-        testRecipeDTO.setUrl("someUrl");
+        testRecipe.setId(3L);
+        testRecipe.setAuthor(author);
+        testRecipe.setUrl("someUrl");
         testRecipe.setAuthor(author);
         testRecipe.addImage(testImage);
-
+        testRecipeDTO = modelMapper.map(testRecipe, OutputRecipeDTO.class);
         testProductDTO = new InputProductDTO();
         testProductDTO.setName("bread");
     }
@@ -170,7 +173,7 @@ class RecipeControllerTestIT {
 
     @Test
     @WithMockUser(
-            username = "admin@example.com",
+            username = "martin",
             roles = {"ADMIN", "USER"}
     )
     void testAddingProductToRecipeFailed() throws Exception {
@@ -180,5 +183,17 @@ class RecipeControllerTestIT {
                 .andExpect(status().is4xxClientError());
     }
 
-
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testShowEditRecipePage() throws Exception {
+        when(mockRecipeService.getRecipeById(3L)).thenReturn(testRecipeDTO);
+        mockMvc.perform(get("/edit-recipe/{id}", testRecipeDTO.getId()))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("recipe", testRecipeDTO))
+                .andExpect(model().attribute("pictures", testRecipeDTO.getPictureList()))
+                .andExpect(view().name("recipe/update-recipe"));
+    }
 }
