@@ -7,6 +7,7 @@ import com.example.myshoppingapp.model.enums.Category;
 import com.example.myshoppingapp.model.pictures.ImageEntity;
 import com.example.myshoppingapp.model.products.InputProductDTO;
 import com.example.myshoppingapp.model.products.Product;
+import com.example.myshoppingapp.model.recipes.InputRecipeDTO;
 import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
 import com.example.myshoppingapp.model.recipes.Recipe;
 import com.example.myshoppingapp.model.users.UserEntity;
@@ -196,4 +197,95 @@ class RecipeControllerTestIT {
                 .andExpect(model().attribute("pictures", testRecipeDTO.getPictureList()))
                 .andExpect(view().name("recipe/update-recipe"));
     }
+
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testAddingProductToRecipe() throws Exception {
+        InputRecipeDTO testInputRecipe = new InputRecipeDTO();
+        testInputRecipe.setId(1L);
+        String productName = "bread";
+        mockMvc.perform(post("/add-product-to-recipe/{id}", testInputRecipe.getId())
+                        .param("productName", productName)
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/edit-recipe/"+ testInputRecipe.getId()));
+    }
+
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testAddingProductToMyShoppingList() throws Exception {
+        String name = "bread";
+        Long id =  3L;
+        mockMvc.perform(get("/add-product-to-shopping-list/{id}/{name}", id, name)
+                        .param("name", name)
+                        .param("id", String.valueOf(id))
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/recipe/"+ id));
+    }
+
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testAddingAllProductsToMyShoppingList() throws Exception {
+        Long id =  3L;
+        mockMvc.perform(get("/add-all-products-to-shopping-list/{id}", id)
+                        .param("id", String.valueOf(id))
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/product-list"));
+    }
+
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testDeletingProductFromRecipe() throws Exception {
+        Long id =  3L;
+        Long productId =  12L;
+        mockMvc.perform(get("/delete-product-from-recipe/{id}/{productId}", id, productId)
+                        .param("id", String.valueOf(id))
+                        .param("productId", String.valueOf(productId))
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/edit-recipe/" + id));
+    }
+
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testUpdatingRecipe() throws Exception {
+        Long id =  3L;
+        mockMvc.perform(patch("/update-recipe/{id}", id)
+                        .param("id", String.valueOf(id))
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/recipe/" + id));
+    }
+
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testRemoveRecipeFromMyFavoriteList() throws Exception {
+        Long id =  3L;
+        mockMvc.perform(get("/remove-from-favorites/{id}", id)
+                        .param("id", String.valueOf(id))
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/my-collection"));
+    }
+
 }
