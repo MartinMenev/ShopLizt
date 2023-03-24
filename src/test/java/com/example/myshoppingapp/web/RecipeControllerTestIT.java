@@ -288,4 +288,52 @@ class RecipeControllerTestIT {
                 .andExpect(redirectedUrl("/my-collection"));
     }
 
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testShowMyCollectionPage() throws Exception {
+        mockMvc.perform(get("/my-collection"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("recipes", mockRecipeService.showRecipesByLoggedUser()))
+                .andExpect(model().attribute("allRecipes", mockRecipeService.showLastAddedRecipes()))
+                .andExpect(view().name("recipe/my-recipe-collection"));
+    }
+
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testShowSearchResultsPage() throws Exception {
+        String text = "someText";
+        when(mockRecipeService.getRecipesByTextContent(text)).thenReturn(List.of(testRecipeDTO));
+
+        mockMvc.perform(get("/search-recipes")
+                        .param("text", text))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("recipes", mockRecipeService.getRecipesByTextContent(text)))
+                .andExpect(model().attribute("allRecipes", mockRecipeService.showLastAddedRecipes()))
+                .andExpect(view().name("recipe/search-recipes"));
+    }
+
+    @Test
+    @WithMockUser(
+            username = "martin",
+            roles = {"ADMIN", "USER"}
+    )
+    void testShowFilterResultsPage() throws Exception {
+        String category = "DINNER";
+        when(mockRecipeService.getRecipesByCategory(category)).thenReturn(List.of(testRecipeDTO));
+
+        mockMvc.perform(get("/filter-recipes")
+                        .param("category", category))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("recipes", mockRecipeService.getRecipesByCategory(category)))
+                .andExpect(model().attribute("allRecipes", mockRecipeService.showLastAddedRecipes()))
+                .andExpect(view().name("recipe/filter-recipe-by"));
+    }
+
+
 }
