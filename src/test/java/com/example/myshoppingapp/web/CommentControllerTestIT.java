@@ -69,12 +69,11 @@ class CommentControllerTestIT {
             roles = {"ADMIN", "USER"}
     )
     void testToSubmitComment() throws Exception {
-        Long id = 4L;
-        mockMvc.perform(post("/save-comment/{id}", id)
+        mockMvc.perform(post("/save-comment/{id}", testRecipe.getId())
                         .param("rating", "5").
                 with(csrf())).
                 andExpect(status().is3xxRedirection()).
-                andExpect(redirectedUrl("/recipe/" + id));
+                andExpect(redirectedUrl("/recipe/" + testRecipe.getId()));
     }
 
     @Test
@@ -84,7 +83,7 @@ class CommentControllerTestIT {
     )
     void testToDeleteComment() throws Exception {
         Long id = 4L;
-        mockMvc.perform(delete("/delete-comment/{id}", id).
+        mockMvc.perform(delete("/delete-comment/{id}", testRecipe.getId()).
                 with(csrf())).
                 andExpect(status().is3xxRedirection()).
                 andExpect(redirectedUrl("/home"));
@@ -97,10 +96,9 @@ class CommentControllerTestIT {
             roles = {"ADMIN", "USER"}
     )
     void testToGetAllComments() throws Exception {
-        Long id = 4L;
-        when(mockCommentService.showAllComments(id)).thenReturn(List.of(testComment));
-        when(mockRecipeService.getRecipeById(id)).thenReturn(testRecipeDTO);
-        mockMvc.perform(get("/comments/{id}", id).
+        when(mockCommentService.showAllComments(testRecipe.getId())).thenReturn(List.of(testComment));
+        when(mockRecipeService.getRecipeById(testRecipe.getId())).thenReturn(testRecipeDTO);
+        mockMvc.perform(get("/comments/{id}", testRecipe.getId()).
                         with(csrf())).
                 andExpect(model().attribute("recipe", testRecipeDTO)).
                 andExpect(status().isOk()).
@@ -113,8 +111,7 @@ class CommentControllerTestIT {
             roles = {"ADMIN", "USER"}
     )
     void testToApproveComment() throws Exception {
-        Long id = 4L;
-        mockMvc.perform(patch("/approve-comment/{id}", id).
+        mockMvc.perform(patch("/approve-comment/{id}", testRecipe.getId()).
                         with(csrf())).
                 andExpect(status().is3xxRedirection()).
                 andExpect(redirectedUrl("/admin"));
