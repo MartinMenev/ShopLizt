@@ -1,15 +1,15 @@
 package com.example.myshoppingapp.web;
 
 import com.example.myshoppingapp.model.pictures.ImageUploadModel;
-import com.example.myshoppingapp.model.recipes.InputRecipeDTO;
 import com.example.myshoppingapp.service.ImageService;
 import com.example.myshoppingapp.service.RecipeService;
 import com.example.myshoppingapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Controller

@@ -1,7 +1,7 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.model.enums.Category;
 import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
+import com.example.myshoppingapp.model.enums.Category;
 import com.example.myshoppingapp.model.pictures.ImageEntity;
 import com.example.myshoppingapp.model.pictures.Picture;
 import com.example.myshoppingapp.model.products.Product;

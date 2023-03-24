@@ -1,7 +1,5 @@
 package com.example.myshoppingapp.web;
 
-import com.example.myshoppingapp.model.pictures.ImageDownloadModel;
-import com.example.myshoppingapp.model.pictures.ImageEntity;
 import com.example.myshoppingapp.service.ImageService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -9,12 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MimeTypeUtils;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class DownloadController {

@@ -13,18 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.OngoingStubbing;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.test.context.support.WithUserDetails;
-
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -51,8 +44,7 @@ class UserServiceTest {
     private RoleRepository mockRoleRepository;
     @Mock
     private ImageService mockImageService;
-    @Mock
-    SecurityContextHolder mockSecurityContextholder;
+
 
 
     private UserService toTest;
@@ -97,12 +89,15 @@ class UserServiceTest {
         testInputUserDTO.setPassword("newPassword");
         testInputUserDTO.setId(testUser.getId());
         String name = testUser.getUsername();
-        UserEntity updatedUser = modelMapper.map(testInputUserDTO, UserEntity.class);
+
 
         when(mockUserRepository.findUserEntityByUsername(name))
                 .thenReturn(Optional.of(testUser));
+        UserEntity updatedUser = toTest.updateUser(testInputUserDTO, name);
 
-        assertEquals(updatedUser.getId(), toTest.updateUser(testInputUserDTO, name).getId());
+        assertEquals(testInputUserDTO.getUsername(), updatedUser.getUsername());
+        assertEquals(testInputUserDTO.getId(), updatedUser.getId());
+        assertEquals(testInputUserDTO.getEmail(), updatedUser.getEmail());
         verify(mockUserRepository).saveAndFlush(testUser);
     }
 

@@ -1,6 +1,5 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.model.comments.Comment;
 import com.example.myshoppingapp.model.enums.UserRole;
 import com.example.myshoppingapp.model.pictures.ImageEntity;
 import com.example.myshoppingapp.model.products.Product;
@@ -9,7 +8,10 @@ import com.example.myshoppingapp.model.roles.RoleEntity;
 import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.model.users.UserInputDTO;
 import com.example.myshoppingapp.model.users.UserOutputDTO;
-import com.example.myshoppingapp.repository.*;
+import com.example.myshoppingapp.repository.ProductRepository;
+import com.example.myshoppingapp.repository.RecipeRepository;
+import com.example.myshoppingapp.repository.RoleRepository;
+import com.example.myshoppingapp.repository.UserRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;

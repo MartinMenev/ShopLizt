@@ -2,13 +2,9 @@ package com.example.myshoppingapp.web;
 
 import com.example.myshoppingapp.model.comments.InputCommentDTO;
 import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
-import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.service.CommentService;
 import com.example.myshoppingapp.service.RecipeService;
-import com.example.myshoppingapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

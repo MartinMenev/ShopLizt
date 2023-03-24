@@ -2,7 +2,10 @@ package com.example.myshoppingapp.model.roles;
 
 
 import com.example.myshoppingapp.model.enums.UserRole;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 @Getter
