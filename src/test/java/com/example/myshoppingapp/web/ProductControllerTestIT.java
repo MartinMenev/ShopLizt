@@ -2,9 +2,11 @@ package com.example.myshoppingapp.web;
 
 import com.example.myshoppingapp.model.products.InputProductDTO;
 import com.example.myshoppingapp.model.products.OutputProductDTO;
+import com.example.myshoppingapp.model.products.Product;
 import com.example.myshoppingapp.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,10 +32,12 @@ class ProductControllerTestIT {
 
     @BeforeEach
     void setUp(){
-        testProduct = new InputProductDTO();
-        testProduct.setId(1L);
-        testProduct.setName("tomato 1 kg");
-        testProduct.setPosition(1L);
+        ModelMapper modelMapper = new ModelMapper();
+        Product product = new Product();
+        product.setId(1L);
+        product.setName("tomato 1kg");
+        product.setPosition(1L);
+        testProduct = modelMapper.map(product, InputProductDTO.class);
 
     }
 
@@ -104,7 +108,7 @@ class ProductControllerTestIT {
             roles = {"ADMIN", "USER"}
     )
     void testToMoveUpProduct() throws Exception {
-        mockMvc.perform(get("/moveUpProduct/{position}", testProduct.getPosition())
+        mockMvc.perform(get("/moveUpProduct/{position}", 1)
                         .with(csrf())).
                 andExpect(status().is3xxRedirection()).
                 andExpect(redirectedUrl("/product-list"));
@@ -116,7 +120,7 @@ class ProductControllerTestIT {
             roles = {"ADMIN", "USER"}
     )
     void testToMoveDownProduct() throws Exception {
-        mockMvc.perform(get("/moveDownProduct/{position}", testProduct.getPosition())
+        mockMvc.perform(get("/moveDownProduct/{position}",1)
                         .with(csrf())).
                 andExpect(status().is3xxRedirection()).
                 andExpect(redirectedUrl("/product-list"));

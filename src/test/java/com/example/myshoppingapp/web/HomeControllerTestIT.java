@@ -69,7 +69,7 @@ class HomeControllerTestIT {
         testRecipe.addImage(testImage);
         testRecipeDTO = modelMapper.map(testRecipe, OutputRecipeDTO.class);
         testProductDTO = new InputProductDTO();
-        testProductDTO.setName("bread");
+
 
     }
 
