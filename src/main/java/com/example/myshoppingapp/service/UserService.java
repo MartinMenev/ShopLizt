@@ -94,8 +94,8 @@ public class UserService {
 
     @Transactional
     @Modifying
-    public UserEntity updateUser(UserInputDTO userInputDTO) {
-        UserEntity user = this.getLoggedUser();
+    public UserEntity updateUser(UserInputDTO userInputDTO, String loggedName) {
+        UserEntity user = this.userRepository.findUserEntityByUsername(loggedName).get();
 
         user.setUsername(userInputDTO.getUsername())
                 .setEmail(userInputDTO.getEmail());

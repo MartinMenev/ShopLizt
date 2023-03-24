@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.security.Principal;
+
 @Controller
 public class UserController {
 
@@ -43,8 +45,8 @@ public class UserController {
     }
 
     @PatchMapping("/update-user")
-    public String doUpdateProduct(UserInputDTO userInputDTO) {
-        userService.updateUser(userInputDTO);
+    public String doUpdateProduct(UserInputDTO userInputDTO, Principal user) {
+        userService.updateUser(userInputDTO, user.getName());
         return "redirect:/users/login";
     }
 

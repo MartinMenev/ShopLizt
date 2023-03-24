@@ -28,4 +28,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long>,
     Optional<List<Recipe>> findAllContainingSearchText(String text);
 
     Optional<List<Recipe>> findAllByAuthor(UserEntity userEntity);
+
+
 }

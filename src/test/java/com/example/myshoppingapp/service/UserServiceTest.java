@@ -8,19 +8,25 @@ import com.example.myshoppingapp.repository.RoleRepository;
 import com.example.myshoppingapp.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.OngoingStubbing;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.test.context.support.WithUserDetails;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,8 +35,8 @@ class UserServiceTest {
     private UserRepository mockUserRepository;
     @Mock
     private ProductRepository mockProductRepository;
-    @Mock
-    private ModelMapper mockModelMapper;
+   @Mock
+    private ModelMapper modelMapper;
     @Mock
     private PasswordEncoder mockPasswordEncoder;
     @Mock
@@ -45,27 +51,59 @@ class UserServiceTest {
     private RoleRepository mockRoleRepository;
     @Mock
     private ImageService mockImageService;
+    @Mock
+    SecurityContextHolder mockSecurityContextholder;
+
 
     private UserService toTest;
+    private UserEntity testUser;
+    private UserInputDTO testInputUserDTO;
+
+    private UserDetails userDetails;
 
     @BeforeEach
     void setUp() {
         toTest = new UserService(
-                mockUserRepository, mockProductRepository, mockModelMapper, mockPasswordEncoder,
+                mockUserRepository, mockProductRepository, modelMapper, mockPasswordEncoder,
                 mockUserDetailsService, mockAuthService, mockRecipeRepository, mockCommentService,
                 mockRoleRepository, mockImageService);
+
+        modelMapper = new ModelMapper();
+
+        testUser = new UserEntity()
+                .setUsername("martin")
+                .setEmail("martin@abv.bg");
+        testUser.setId(3L);
+
+        testInputUserDTO = new UserInputDTO();
+
 
     }
 
     @Test
     public void testFindByUsername(){
-        UserEntity testUser = (UserEntity) new UserEntity().setUsername("martin");
+        UserEntity testUser = new UserEntity().setUsername("martin");
         when(mockUserRepository.findUserEntityByUsername("martin")).
                 thenReturn(Optional.of(testUser));
         Assertions.assertEquals(testUser, toTest.findByUsername("martin"));
-
         }
 
 
+    @Test
+
+    public void testUpdateUserSuccessfully(){
+        testInputUserDTO.setUsername("martin123");
+        testInputUserDTO.setEmail("martin@gmail.com");
+        testInputUserDTO.setPassword("newPassword");
+        testInputUserDTO.setId(testUser.getId());
+        String name = testUser.getUsername();
+        UserEntity updatedUser = modelMapper.map(testInputUserDTO, UserEntity.class);
+
+        when(mockUserRepository.findUserEntityByUsername(name))
+                .thenReturn(Optional.of(testUser));
+
+        assertEquals(updatedUser.getId(), toTest.updateUser(testInputUserDTO, name).getId());
+        verify(mockUserRepository).saveAndFlush(testUser);
+    }
 
 }
