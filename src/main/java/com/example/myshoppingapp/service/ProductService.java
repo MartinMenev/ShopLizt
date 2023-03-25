@@ -37,7 +37,7 @@ public class ProductService {
 
     @Modifying
     public void addProduct(InputProductDTO inputProductDTO, String loggedName) {
-        UserEntity userEntity = userService.findByUsername(userService.getLoggedUser(loggedName).getUsername());
+        UserEntity userEntity = userService.getLoggedUser(loggedName);
         Product product = this.modelMapper.map(inputProductDTO, Product.class);
         product.setUserEntity(userEntity);
         product.setBoughtOn(null);
@@ -49,7 +49,7 @@ public class ProductService {
 
     public String getAllProducts(String loggedName) {
         String currentUsername = userService.getLoggedUser(loggedName).getUsername();
-        Long currentUserId = this.userService.findByUsername(currentUsername).getId();
+        Long currentUserId = this.userService.getLoggedUserId(loggedName);
 
         return this.productRepository.findAllByUserEntityId(currentUserId)
                 .orElseThrow(NoSuchElementException::new)
@@ -61,7 +61,7 @@ public class ProductService {
 
     public List<OutputProductDTO> getListedProducts(String loggedName) {
         String currentUsername =  userService.getLoggedUser(loggedName).getUsername();
-        Long currentUserId = this.userService.findByUsername(currentUsername).getId();
+        Long currentUserId = this.userService.getLoggedUserId(loggedName);
 
         List<OutputProductDTO> outputProductDTOS = this.productRepository.findAllByUserEntityId(currentUserId)
                 .orElseThrow(NoSuchElementException::new)
