@@ -54,7 +54,7 @@ class UserControllerTestIT {
         testRole.setRole(UserRole.USER);
         testUser.setRoles(List.of(testRole));
 
-        when(mockUserService.getLoggedUserDTO()).thenReturn(testUser);
+        when(mockUserService.getLoggedUserDTO(testUser.getUsername())).thenReturn(testUser);
     }
 
     @Test
@@ -63,7 +63,7 @@ class UserControllerTestIT {
             roles = {"ADMIN", "USER"}
     )
     void testShowProfilePage() throws Exception {
-        when(mockUserService.getLoggedUserDTO()).thenReturn(testUser);
+        when(mockUserService.getLoggedUserDTO(testUser.getUsername())).thenReturn(testUser);
 
         mockMvc.perform(get("/user/profile")).
                 andExpect(status().isOk()).

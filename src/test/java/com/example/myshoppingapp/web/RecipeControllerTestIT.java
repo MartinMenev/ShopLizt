@@ -296,7 +296,7 @@ class RecipeControllerTestIT {
     void testShowMyCollectionPage() throws Exception {
         mockMvc.perform(get("/my-collection"))
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("recipes", mockRecipeService.showRecipesByLoggedUser()))
+                .andExpect(model().attribute("recipes", mockRecipeService.showRecipesByLoggedUser(testRecipe.getAuthor().getUsername())))
                 .andExpect(model().attribute("allRecipes", mockRecipeService.showLastAddedRecipes()))
                 .andExpect(view().name("recipe/my-recipe-collection"));
     }

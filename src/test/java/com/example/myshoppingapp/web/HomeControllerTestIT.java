@@ -81,7 +81,7 @@ class HomeControllerTestIT {
     void testShowHomePage() throws Exception {
         UserOutputDTO testUser = new UserOutputDTO();
         testUser.setUsername("martin");
-        when(mockUserService.getLoggedUserDTO()).thenReturn(testUser);
+        when(mockUserService.getLoggedUserDTO(testUser.getUsername())).thenReturn(testUser);
 
         mockMvc.perform(get("/home")).
                 andExpect(status().isOk()).
