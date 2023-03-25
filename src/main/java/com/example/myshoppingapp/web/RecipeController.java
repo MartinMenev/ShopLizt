@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -41,7 +42,8 @@ public class RecipeController {
     @PostMapping("/add-recipe")
     public String doAddRecipe(@Valid @ModelAttribute(name = "recipeAddModel") InputRecipeDTO inputRecipeDTO,
                               BindingResult bindingResult,
-                              RedirectAttributes redirectAttributes){
+                              RedirectAttributes redirectAttributes,
+                              Principal user){
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("recipeAddModel", inputRecipeDTO)
@@ -50,7 +52,7 @@ public class RecipeController {
             return "redirect:/add-recipe";
         }
 
-             recipeService.addRecipe(inputRecipeDTO);
+             recipeService.addRecipe(inputRecipeDTO, user.getName());
         return "redirect:/my-collection";
     }
 
@@ -76,8 +78,9 @@ public class RecipeController {
     }
 
     @GetMapping("/save-recipe-to-favorites/{id}")
-    public String saveRecipeToMyFavorites(@PathVariable(value = "id") Long id) {
-        this.recipeService.saveRecipeToMyFavoriteList(id);
+    public String saveRecipeToMyFavorites(@PathVariable(value = "id") Long id,
+                                          Principal user) {
+        this.recipeService.saveRecipeToMyFavoriteList(id, user.getName());
         return "redirect:/home";
     }
 
@@ -110,14 +113,16 @@ public class RecipeController {
 
     @GetMapping("/add-product-to-shopping-list/{id}/{name}")
     public String addProductToMyList(@PathVariable(value = "name") String name,
-                                     @PathVariable(value = "id") Long id) {
-        this.recipeService.addProductToMyList(name);
+                                     @PathVariable(value = "id") Long id,
+                                     Principal user) {
+        this.recipeService.addProductToMyList(name, user.getName());
         return "redirect:/recipe/{id}";
     }
 
     @GetMapping("/add-all-products-to-shopping-list/{id}")
-    public String addAllProductToMyList(@PathVariable(value = "id") Long id) {
-        this.recipeService.addAllProductsToMyList(id);
+    public String addAllProductToMyList(@PathVariable(value = "id") Long id,
+                                        Principal user) {
+        this.recipeService.addAllProductsToMyList(id, user.getName());
         return "redirect:/product-list";
     }
 
@@ -162,15 +167,16 @@ public class RecipeController {
 
 
     @GetMapping("/my-collection")
-    public String myCollection(Model model) {
-        model.addAttribute("recipes", recipeService.showRecipesByLoggedUser());
+    public String myCollection(Model model, Principal user) {
+        model.addAttribute("recipes", recipeService.showRecipesByLoggedUser(user.getName()));
         model.addAttribute("allRecipes", recipeService.showLastAddedRecipes());
         return "recipe/my-recipe-collection";
     }
 
     @GetMapping("/remove-from-favorites/{id}")
-    public String removeFromMyCollection(@PathVariable(value = "id") long id) {
-        recipeService.removeRecipeFromMyCollection(id);
+    public String removeFromMyCollection(@PathVariable(value = "id") long id,
+                                         Principal user) {
+        recipeService.removeRecipeFromMyCollection(id, user.getName());
         return "redirect:/my-collection";
     }
 

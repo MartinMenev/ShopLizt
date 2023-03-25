@@ -31,15 +31,15 @@ public class UserController {
 
 
     @GetMapping("user/profile")
-    public String ShowUserProfile(Model model){
-        UserOutputDTO userOutputDTO = this.userService.getLoggedUserDTO();
+    public String ShowUserProfile(Model model, Principal user){
+        UserOutputDTO userOutputDTO = this.userService.getLoggedUserDTO(user.getName());
         model.addAttribute("user", userOutputDTO);
         return "user/profile";
     }
 
     @GetMapping("/update-user")
-    public String updateProfile(Model model) {
-        UserOutputDTO currentUser = this.userService.getLoggedUserDTO();
+    public String updateProfile(Model model, Principal user) {
+        UserOutputDTO currentUser = this.userService.getLoggedUserDTO(user.getName());
         model.addAttribute("user", currentUser);
         return "user/update-user";
     }
@@ -51,8 +51,8 @@ public class UserController {
     }
 
     @DeleteMapping("/delete-profile")
-    public String deleteUser() {
-        userService.deleteUserEntityById();
+    public String deleteUser(Principal user) {
+        userService.deleteUserEntityById(user.getName());
         return "redirect:/";
     }
 

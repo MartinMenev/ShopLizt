@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @Controller
 public class CommentController {
     private final CommentService commentService;
@@ -26,11 +28,12 @@ public class CommentController {
     @PostMapping("/save-comment/{id}")
     public String reviewRecipe(@PathVariable(value = "id") long id,
                                InputCommentDTO inputCommentDTO,
-                               @RequestParam(name="rating") Long rating) {
+                               @RequestParam(name="rating") Long rating,
+                               Principal user) {
 
 
 
-        commentService.addComment(inputCommentDTO, id);
+        commentService.addComment(inputCommentDTO, id, user.getName());
         recipeService.addRecipeRating(rating, id);
 
         return "redirect:/recipe/{id}";
@@ -59,8 +62,9 @@ public class CommentController {
     }
 
     @DeleteMapping ("/delete-comment/{id}")
-    public String deleteComment(@PathVariable(value = "id") long id) {
-        this.commentService.deleteComment(id);
+    public String deleteComment(@PathVariable(value = "id") long id,
+                                Principal user) {
+        this.commentService.deleteComment(id, user.getName());
 
 
 

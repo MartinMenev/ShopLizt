@@ -32,26 +32,26 @@ public class PictureService {
     }
 
 
-    public void addPicture(String pictureUrl) {
-        Picture picture = this.pictureRepository.findByAuthorId(userService.getLoggedUserId()).orElse(null);
+    public void addPicture(String pictureUrl, String loggedName) {
+        Picture picture = this.pictureRepository.findByAuthorId(userService.getLoggedUserId(loggedName)).orElse(null);
         if (picture != null) {
             picture.setPictureUrl(pictureUrl);
             this.pictureRepository.saveAndFlush(picture);
 
         } else {
             picture = new Picture();
-            picture.setAuthor(this.userService.getLoggedUser());
+            picture.setAuthor(this.userService.getLoggedUser(loggedName));
             picture.setPictureUrl(pictureUrl);
             this.pictureRepository.saveAndFlush(picture);
         }
-        UserEntity userEntity = this.userService.getLoggedUser();
+        UserEntity userEntity = this.userService.getLoggedUser(loggedName);
         userEntity.setPicture(picture);
         this.userRepository.saveAndFlush(userEntity);
 
     }
 
-    public String getPictureUrlByLoggedUser(){
-       Optional<Picture> picture = this.pictureRepository.findByAuthorId(this.userService.getLoggedUserId());
+    public String getPictureUrlByLoggedUser(String loggedName){
+       Optional<Picture> picture = this.pictureRepository.findByAuthorId(this.userService.getLoggedUserId(loggedName));
         String picUrl = picture.map(Picture::getPictureUrl).orElse(null);
         if (picUrl != null) {
             picUrl = "/images/"+picUrl;

@@ -57,8 +57,8 @@ public class RecipeService {
 
 
 
-    public Long addRecipe(InputRecipeDTO inputRecipeDTO) {
-        UserEntity authorId = this.userService.getLoggedUser();
+    public Long addRecipe(InputRecipeDTO inputRecipeDTO, String loggedName) {
+        UserEntity authorId = this.userService.getLoggedUser(loggedName);
             inputRecipeDTO.setImageUrl("https://images.pexels.com/photos/4033165/pexels-photo-4033165.jpeg?auto=compress&cs=tinysrgb&w=1600");
 
         Recipe recipe = this.modelMapper.map(inputRecipeDTO, Recipe.class);
@@ -78,12 +78,12 @@ public class RecipeService {
 
 
     @Transactional
-    public List<OutputRecipeDTO> showLast5Recipes() {
+    public List<OutputRecipeDTO> showLast5Recipes(String loggedName) {
         return this.recipeRepository
                 .findAll()
                 .stream()
-                .filter(recipe -> !this.userService.getLoggedUser().getFavoriteRecipes().contains(recipe)
-                        && !recipe.getAuthor().equals(this.userService.getLoggedUser()))
+                .filter(recipe -> !this.userService.getLoggedUser(loggedName).getFavoriteRecipes().contains(recipe)
+                        && !recipe.getAuthor().equals(this.userService.getLoggedUser(loggedName)))
                 .map(recipe -> modelMapper.map(recipe, OutputRecipeDTO.class))
                 .sorted((a, b) -> b.getId().compareTo(a.getId()))
                 .limit(5)
@@ -113,11 +113,11 @@ public class RecipeService {
 
     }
 
-    public List<OutputRecipeDTO> showRecipesByLoggedUser() {
+    public List<OutputRecipeDTO> showRecipesByLoggedUser(String loggedName) {
         List<Recipe> myRecipes = this.recipeRepository
-                .findAllByAuthorOrderByIdDesc(this.userService.getLoggedUser());
+                .findAllByAuthorOrderByIdDesc(this.userService.getLoggedUser(loggedName));
 
-        List<Recipe> myFavorites = userService.getLoggedUserFavoriteList();
+        List<Recipe> myFavorites = userService.getLoggedUserFavoriteList(loggedName);
         if (myFavorites.size() != 0) {
             myRecipes.addAll(myFavorites);
         }
@@ -195,8 +195,8 @@ public class RecipeService {
 
     @Transactional
     @Modifying
-    public void addProductToMyList(String name) {
-        this.productService.addProductToMyList(name);
+    public void addProductToMyList(String name, String loggedName) {
+        this.productService.addProductToMyList(name, loggedName);
     }
 
     @Transactional
@@ -211,23 +211,23 @@ public class RecipeService {
 
     @Transactional
     @Modifying
-    public void addAllProductsToMyList(Long id) {
+    public void addAllProductsToMyList(Long id, String loggedName) {
         List<Product> allRecipeProducts = this.recipeRepository
                 .getRecipeById(id).get()
                 .getProductList();
 
         for (Product product : allRecipeProducts) {
-            this.productService.addProductToMyList(product.getName());
+            this.productService.addProductToMyList(product.getName(), loggedName);
         }
     }
 
     @Transactional
     @Modifying
-    public void saveRecipeToMyFavoriteList(Long id) {
+    public void saveRecipeToMyFavoriteList(Long id, String loggedName) {
         Recipe recipe = this.recipeRepository.findById(id).get();
         recipe.setNumberOfSaves(recipe.getNumberOfSaves() + 1);
         this.recipeRepository.saveAndFlush(recipe);
-        this.userService.addRecipeToFavoriteList(recipe);
+        this.userService.addRecipeToFavoriteList(recipe, loggedName);
 
 
     }
@@ -244,9 +244,9 @@ public class RecipeService {
 
     @Transactional
     @Modifying
-    public void removeRecipeFromMyCollection(long id) {
+    public void removeRecipeFromMyCollection(long id, String loggedName) {
         Recipe recipeToRemove = this.recipeRepository.findById(id).get();
-        UserEntity user = this.userService.getLoggedUser();
+        UserEntity user = this.userService.getLoggedUser(loggedName);
         if (user.getFavoriteRecipes().contains(recipeToRemove)) {
             user.getFavoriteRecipes().remove(recipeToRemove);
             userRepository.saveAndFlush(user);

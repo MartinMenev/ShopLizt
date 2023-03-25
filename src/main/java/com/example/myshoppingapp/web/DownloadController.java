@@ -40,17 +40,4 @@ public class DownloadController {
     return new HttpEntity<>(imageDownloadModel.getFileData(), headers);
   }
 
-//  @RequestMapping(value = "/images/", method = RequestMethod.GET)
-//  public void showImage(@RequestParam("id") Long imageId, HttpServletResponse response, HttpServletRequest request)
-//          throws ServletException, IOException {
-//
-//
-//    ImageEntity image = imageService.findById(imageId).orElseThrow();
-//    response.setContentType("image/jpeg" +  "image/jpg, image/png, image/gif");
-//    response.getOutputStream().write(image.getData());
-//
-//
-//    response.getOutputStream().close();
-//  }
-
 }

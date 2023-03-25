@@ -78,26 +78,24 @@ public class UserService {
         return this.userRepository.findUserEntityByUsername(username).orElseThrow(NoSuchElementException::new);
     }
 
-    UserEntity getLoggedUser(){
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return this.userRepository.findUserEntityByUsername(userDetails.getUsername())
-                .orElseThrow(NoSuchElementException::new);
+    UserEntity getLoggedUser(String loggedName){
+        return findByUsername(loggedName);
 
     }
 
 
-    protected Long getLoggedUserId() {
-        return this.getLoggedUser().getId();
+    protected Long getLoggedUserId(String loggedName) {
+        return this.getLoggedUser(loggedName).getId();
     }
 
-    public UserOutputDTO getLoggedUserDTO() {
-        return this.modelMapper.map(this.getLoggedUser(), UserOutputDTO.class);
+    public UserOutputDTO getLoggedUserDTO(String loggedName) {
+        return this.modelMapper.map(this.getLoggedUser(loggedName), UserOutputDTO.class);
     }
 
     @Transactional
     @Modifying
     public UserEntity updateUser(UserInputDTO userInputDTO, String loggedName) {
-        UserEntity user = this.userRepository.findUserEntityByUsername(loggedName).get();
+        UserEntity user = getLoggedUser(loggedName);
 
         user.setUsername(userInputDTO.getUsername())
                 .setEmail(userInputDTO.getEmail());
@@ -112,8 +110,8 @@ public class UserService {
 
     @Transactional
     @Modifying
-    public void deleteUserEntityById() {
-        UserEntity userEntity = this.getLoggedUser();
+    public void deleteUserEntityById(String loggedName) {
+        UserEntity userEntity = this.getLoggedUser(loggedName);
         Optional<List<Product>> userProducts= this.productRepository.findAllByUserEntityId(userEntity.getId());
 
         if (userProducts.isPresent()) {
@@ -150,15 +148,15 @@ public class UserService {
 
 
 
-    public List<Recipe> getLoggedUserFavoriteList () {
-       return this.getLoggedUser()
+    public List<Recipe> getLoggedUserFavoriteList (String loggedName) {
+       return this.getLoggedUser(loggedName)
                .getFavoriteRecipes();
     }
 
     @Transactional
     @Modifying
-    public void addRecipeToFavoriteList(Recipe recipe) {
-        UserEntity userEntity = this.getLoggedUser();
+    public void addRecipeToFavoriteList(Recipe recipe, String loggedName) {
+        UserEntity userEntity = this.getLoggedUser(loggedName);
         userEntity.getFavoriteRecipes().add(recipe);
         this.userRepository.saveAndFlush(userEntity);
     }
@@ -201,9 +199,9 @@ public class UserService {
 
     @Transactional
     @Modifying
-    public void addImageToUser(long imageId) {
+    public void addImageToUser(long imageId, String loggedName) {
         ImageEntity image = this.imageService.findById(imageId).orElseThrow();
-        UserEntity userEntity = this.getLoggedUser();
+        UserEntity userEntity = this.getLoggedUser(loggedName);
         if (userEntity.getImageEntity() != null) {
             this.getImageService().deleteById(userEntity.getImageEntity());
         }

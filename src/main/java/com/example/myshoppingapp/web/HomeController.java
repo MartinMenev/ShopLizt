@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
+
 @Controller
 public class HomeController {
 
@@ -36,12 +38,12 @@ public class HomeController {
 
 
     @GetMapping("home")
-    public String home(Model model) {
-        model.addAttribute("username", userService.getLoggedUserDTO().getUsername());
-        model.addAttribute("products", productService.getListedProducts());
-        model.addAttribute("othersRecipes", recipeService.showLast5Recipes());
+    public String home(Model model, Principal user) {
+        model.addAttribute("username", userService.getLoggedUserDTO(user.getName()).getUsername());
+        model.addAttribute("products", productService.getListedProducts(user.getName()));
+        model.addAttribute("othersRecipes", recipeService.showLast5Recipes(user.getName()));
         model.addAttribute("recipes", recipeService.showLastAddedRecipes());
-        model.addAttribute("myRecipes", recipeService.showRecipesByLoggedUser());
+        model.addAttribute("myRecipes", recipeService.showRecipesByLoggedUser(user.getName()));
         return "home";
     }
 }

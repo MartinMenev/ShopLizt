@@ -37,10 +37,10 @@ public class CommentService {
     }
 
 
-    public void addComment(InputCommentDTO inputCommentDTO, Long recipeId) {
-//        inputCommentDTO.setId(null);
+    public void addComment(InputCommentDTO inputCommentDTO, Long recipeId, String loggedName ) {
+
         Comment comment = modelMapper.map(inputCommentDTO, Comment.class);
-        UserEntity author = this.userService.getLoggedUser();
+        UserEntity author = this.userService.getLoggedUser(loggedName);
         Recipe recipe = this.recipeService.getRecipeRepository().getById(recipeId);
         comment.setRecipe(recipe);
         if (author != null) {
@@ -100,9 +100,9 @@ public class CommentService {
 
     @Transactional
     @Modifying
-    public void deleteComment(long id) {
+    public void deleteComment(long id, String loggedName) {
         Comment comment = this.commentRepository.getReferenceById(id);
-        UserEntity loggedUser = userService.getLoggedUser();
+        UserEntity loggedUser = userService.getLoggedUser(loggedName);
         if (Objects.equals(loggedUser.getId(), comment.getAuthor().getId()) || loggedUser.isAdmin()) {
             this.commentRepository.deleteById(id);
         }

@@ -36,8 +36,8 @@ public class ProductService {
     }
 
     @Modifying
-    public void addProduct(InputProductDTO inputProductDTO) {
-        UserEntity userEntity = userService.findByUsername(userService.getLoggedUser().getUsername());
+    public void addProduct(InputProductDTO inputProductDTO, String loggedName) {
+        UserEntity userEntity = userService.findByUsername(userService.getLoggedUser(loggedName).getUsername());
         Product product = this.modelMapper.map(inputProductDTO, Product.class);
         product.setUserEntity(userEntity);
         product.setBoughtOn(null);
@@ -47,8 +47,8 @@ public class ProductService {
 
     }
 
-    public String getAllProducts() {
-        String currentUsername = userService.getLoggedUser().getUsername();
+    public String getAllProducts(String loggedName) {
+        String currentUsername = userService.getLoggedUser(loggedName).getUsername();
         Long currentUserId = this.userService.findByUsername(currentUsername).getId();
 
         return this.productRepository.findAllByUserEntityId(currentUserId)
@@ -59,8 +59,8 @@ public class ProductService {
                 .collect(Collectors.joining(System.lineSeparator()));
     }
 
-    public List<OutputProductDTO> getListedProducts() {
-        String currentUsername =  userService.getLoggedUser().getUsername();
+    public List<OutputProductDTO> getListedProducts(String loggedName) {
+        String currentUsername =  userService.getLoggedUser(loggedName).getUsername();
         Long currentUserId = this.userService.findByUsername(currentUsername).getId();
 
         List<OutputProductDTO> outputProductDTOS = this.productRepository.findAllByUserEntityId(currentUserId)
@@ -94,8 +94,8 @@ public class ProductService {
         return modelMapper.map(product, OutputProductDTO.class);
     }
 
-    public void moveUpProduct(long position) {
-        long userId = this.userService.getLoggedUserId();
+    public void moveUpProduct(long position, String loggedName) {
+        long userId = this.userService.getLoggedUserId(loggedName);
         if (this.productRepository.findFirstByPositionGreaterThanAndUserEntityIdOrderByPositionAsc(position, userId) !=null) {
             long newPosition = this.productRepository.
                     findFirstByPositionGreaterThanAndUserEntityIdOrderByPositionAsc(position, userId).getPosition();
@@ -104,8 +104,8 @@ public class ProductService {
 
     }
 
-    public void moveDownProduct(long position) {
-        long userId = this.userService.getLoggedUserId();
+    public void moveDownProduct(long position, String loggedName) {
+        long userId = this.userService.getLoggedUserId(loggedName);
         if (this.productRepository.findFirstByPositionLessThanAndUserEntityIdOrderByPositionDesc(position, userId) != null) {
             long newPosition = this.productRepository.
                     findFirstByPositionLessThanAndUserEntityIdOrderByPositionDesc(position, userId).getPosition();
@@ -115,16 +115,16 @@ public class ProductService {
 
     @Transactional
     @Modifying
-    public void buyProduct(long id) {
+    public void buyProduct(long id, String loggedName) {
         Product product = this.productRepository.getProductById(id).orElseThrow(NoSuchElementException::new);
         product.setBoughtOn(LocalDate.now());
-        UserEntity userEntity = this.userService.getLoggedUser();
+        UserEntity userEntity = this.userService.getLoggedUser(loggedName);
         product.setBuyer(userEntity);
         this.productRepository.save(product);
     }
 
-    public List<OutputProductDTO> showBoughtProducts() {
-        Long userId = this.userService.getLoggedUserId();
+    public List<OutputProductDTO> showBoughtProducts(String loggedName) {
+        Long userId = this.userService.getLoggedUserId(loggedName);
         return this.productRepository.findAllByBuyerId(userId)
                 .orElseThrow(NoSuchElementException::new)
                 .stream()
@@ -149,9 +149,9 @@ public class ProductService {
 
     @Transactional
     @Modifying
-    public void addProductToMyList(String name) {
+    public void addProductToMyList(String name, String loggedName) {
        Product product = new Product(name);
-        UserEntity userEntity = userService.getLoggedUser();
+        UserEntity userEntity = userService.getLoggedUser(loggedName);
         product.setUserEntity(userEntity);
         product.setBoughtOn(null);
         this.productRepository.saveAndFlush(product);

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
+import java.security.Principal;
 
 @Controller
 public class UploadController {
@@ -33,8 +34,8 @@ public class UploadController {
     }
 
     @PostMapping("/addImgToUser")
-    public String uploadImage(ImageUploadModel uploadModel) throws IOException {
-        this.userService.addImageToUser(imageService.saveImage(uploadModel.getImg()));
+    public String uploadImage(ImageUploadModel uploadModel, Principal user) throws IOException {
+        this.userService.addImageToUser(imageService.saveImage(uploadModel.getImg()), user.getName());
         return "redirect:/update-user";
     }
 

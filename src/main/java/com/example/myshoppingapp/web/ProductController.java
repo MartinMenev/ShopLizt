@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -27,16 +28,16 @@ public class ProductController {
     }
 
     @GetMapping("/product-list")
-    public String showProductListPage(Model model) {
-        List<OutputProductDTO> products = this.productService.getListedProducts();
+    public String showProductListPage(Model model, Principal user) {
+        List<OutputProductDTO> products = this.productService.getListedProducts(user.getName());
         model.addAttribute("products", products);
-        model.addAttribute("boughtProducts", this.productService.showBoughtProducts());
+        model.addAttribute("boughtProducts", this.productService.showBoughtProducts(user.getName()));
         return "product/product-list";
     }
 
     @PostMapping("/add-product")
-    public String doAddProduct(InputProductDTO inputProductDTO) {
-        productService.addProduct(inputProductDTO);
+    public String doAddProduct(InputProductDTO inputProductDTO, Principal user) {
+        productService.addProduct(inputProductDTO, user.getName());
         return "redirect:/product-list";
     }
 
@@ -56,14 +57,16 @@ public class ProductController {
     }
 
     @GetMapping("/moveUpProduct/{position}")
-    public String moveUpProduct(@PathVariable(value = "position") long position) {
-        productService.moveUpProduct(position);
+    public String moveUpProduct(@PathVariable(value = "position") long position,
+                                Principal user) {
+        productService.moveUpProduct(position, user.getName());
         return "redirect:/product-list";
     }
 
     @GetMapping("/moveDownProduct/{position}")
-    public String moveDownProduct(@PathVariable(value = "position") long position) {
-        productService.moveDownProduct(position);
+    public String moveDownProduct(@PathVariable(value = "position") long position,
+                                  Principal user) {
+        productService.moveDownProduct(position, user.getName());
         return "redirect:/product-list";
     }
 
@@ -75,8 +78,9 @@ public class ProductController {
     }
 
     @GetMapping("/buy-product/{id}")
-    public String buyProduct(@PathVariable(value = "id") long id) {
-        productService.buyProduct(id);
+    public String buyProduct(@PathVariable(value = "id") long id,
+                             Principal user) {
+        productService.buyProduct(id, user.getName());
         return "redirect:/product-list";
     }
 
