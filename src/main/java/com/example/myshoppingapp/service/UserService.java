@@ -73,16 +73,10 @@ public class UserService {
 
 
 
-
-    UserEntity findByUsername(String username) {
-        return this.userRepository.findUserEntityByUsername(username).orElseThrow(NoSuchElementException::new);
-    }
-
     UserEntity getLoggedUser(String loggedName){
-        return findByUsername(loggedName);
+        return this.userRepository.findUserEntityByUsername(loggedName).orElseThrow(NoSuchElementException::new);
 
     }
-
 
     protected Long getLoggedUserId(String loggedName) {
         return this.getLoggedUser(loggedName).getId();
@@ -155,10 +149,11 @@ public class UserService {
 
     @Transactional
     @Modifying
-    public void addRecipeToFavoriteList(Recipe recipe, String loggedName) {
+    public Recipe addRecipeToFavoriteList(Recipe recipe, String loggedName) {
         UserEntity userEntity = this.getLoggedUser(loggedName);
         userEntity.getFavoriteRecipes().add(recipe);
         this.userRepository.saveAndFlush(userEntity);
+        return recipe;
     }
 
     public List<UserOutputDTO> searchUsersByName(String text) {
@@ -199,7 +194,7 @@ public class UserService {
 
     @Transactional
     @Modifying
-    public void addImageToUser(long imageId, String loggedName) {
+    public ImageEntity addImageToUser(long imageId, String loggedName) {
         ImageEntity image = this.imageService.findById(imageId).orElseThrow();
         UserEntity userEntity = this.getLoggedUser(loggedName);
         if (userEntity.getImageEntity() != null) {
@@ -207,7 +202,7 @@ public class UserService {
         }
         userEntity.setImageEntity(image);
         userRepository.saveAndFlush(userEntity);
-
+        return image;
     }
 
 
