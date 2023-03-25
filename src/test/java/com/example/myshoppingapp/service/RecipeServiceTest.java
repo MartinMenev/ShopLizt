@@ -1,0 +1,223 @@
+package com.example.myshoppingapp.service;
+
+import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
+import com.example.myshoppingapp.model.enums.Category;
+import com.example.myshoppingapp.model.recipes.InputRecipeDTO;
+import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
+import com.example.myshoppingapp.model.recipes.Recipe;
+import com.example.myshoppingapp.model.users.UserEntity;
+import com.example.myshoppingapp.repository.RecipeRepository;
+import com.example.myshoppingapp.repository.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+
+@ExtendWith(MockitoExtension.class)
+class RecipeServiceTest {
+
+    @Mock
+    private RecipeRepository mockRecipeRepository;
+    @Mock
+    private UserRepository mockUserRepository;
+    @Mock
+    private UserService mockUserService;
+    @Spy
+    ModelMapper modelMapper = new ModelMapper();
+    @Mock
+    private ProductService mockProductService;
+    @Mock
+    private ImageService mockImageService;
+    @Mock
+    private CommentService mockCommentService;
+
+    private RecipeService toTest;
+    private Recipe testRecipe;
+    private String name;
+
+    private UserEntity testAuthor;
+
+    @BeforeEach
+    void setUp() {
+        toTest = new RecipeService(mockRecipeRepository, mockUserRepository, mockUserService,
+                modelMapper, mockProductService, mockImageService, mockCommentService);
+
+
+        testRecipe = new Recipe()
+                .setAuthor(new UserEntity())
+                .setName("Musaka")
+                .setCategory(Category.DINNER);
+        testRecipe.setId(1L);
+
+        name = "martin";
+
+        testAuthor = new UserEntity();
+        testAuthor.setUsername("Martin");
+        testAuthor.setId(3L);
+    }
+
+    @Test
+    public void testAddingRecipe() {
+        InputRecipeDTO inputRecipeDTO = new InputRecipeDTO();
+        inputRecipeDTO.setId(1L);
+
+
+        when(mockUserService.getLoggedUser(name)).thenReturn(new UserEntity());
+
+        assertEquals(inputRecipeDTO.getId(), toTest.addRecipe(inputRecipeDTO, name));
+
+    }
+
+    @Test
+    public void testShowLast5Recipes() {
+        UserEntity anotherAuthor = new UserEntity();
+        anotherAuthor.setId(1L);
+        anotherAuthor.setUsername("pesho");
+
+        List<Recipe> recipesToShow = new ArrayList<>();
+        Recipe recipe1 = new Recipe().setAuthor(anotherAuthor);
+        recipe1.setId(1L);
+        Recipe recipe2 = new Recipe().setAuthor(anotherAuthor);
+        recipe1.setId(2L);
+        recipesToShow.add(recipe1);
+        recipesToShow.add(recipe2);
+
+        when(mockRecipeRepository.findAll()).thenReturn(recipesToShow);
+
+        when(mockUserService.getLoggedUser(name)).thenReturn(testAuthor);
+
+        List<OutputRecipeDTO> resultedRecipeList = toTest.showLast5Recipes(name);
+
+        assertEquals(2, resultedRecipeList.size());
+
+    }
+
+    @Test
+    public void testToGetRecipeById() {
+        when(mockRecipeRepository.getRecipeById(testRecipe.getId())).thenReturn(Optional.of(testRecipe));
+
+        assertEquals(testRecipe.getId(), toTest.getRecipeById(testRecipe.getId()).getId());
+
+    }
+
+    @Test
+    public void testIfThrowsGettingWrongRecipeById() {
+        when(mockRecipeRepository.getRecipeById(0L)).thenThrow(ObjectNotFoundException.class);
+
+        assertThrows(ObjectNotFoundException.class,
+                ()-> toTest.getRecipeById(0L));
+
+    }
+
+
+    @Test
+    public void testToAddRecipeRating() {
+        Long testRating = 4L;
+        when(mockRecipeRepository.getById(testRecipe.getId())).thenReturn(testRecipe);
+        assertEquals(testRating, toTest.addRecipeRating(testRating, testRecipe.getId()));
+
+    }
+
+    @Test
+    public void testShowRecipesOfLoggedUser() {
+        UserEntity anotherAuthor = new UserEntity();
+        anotherAuthor.setId(1L);
+        anotherAuthor.setUsername("pesho");
+
+        List<Recipe> recipesToShow = new ArrayList<>();
+        Recipe recipe1 = new Recipe().setAuthor(testAuthor);
+        recipe1.setId(1L);
+        Recipe recipe2 = new Recipe().setAuthor(testAuthor);
+        recipe1.setId(2L);
+        recipesToShow.add(recipe1);
+        recipesToShow.add(recipe2);
+
+        when(mockUserService.getLoggedUserFavoriteList(name)).thenReturn(recipesToShow);
+
+        when(mockRecipeRepository.findAllByAuthorOrderByIdDesc(testAuthor)).thenReturn(recipesToShow);
+
+        when(mockUserService.getLoggedUser(name)).thenReturn(testAuthor);
+
+        List<OutputRecipeDTO> resultedRecipeList = toTest.showRecipesByLoggedUser(name);
+
+        assertEquals(4, resultedRecipeList.size());
+
+    }
+
+    @Test
+    public void testGetRecipesByCategory() {
+
+        List<Recipe> recipesToShow = new ArrayList<>();
+        Recipe recipe1 = new Recipe().setAuthor(testAuthor);
+        recipe1.setId(1L);
+        Recipe recipe2 = new Recipe().setAuthor(testAuthor);
+        recipe1.setId(2L);
+        recipesToShow.add(recipe1);
+        recipesToShow.add(recipe2);
+
+        when(mockRecipeRepository.findAllByCategory(Category.DINNER)).thenReturn(Optional.of(recipesToShow));
+
+        List<OutputRecipeDTO> resultedList = toTest.getRecipesByCategory(String.valueOf(Category.DINNER));
+
+        assertEquals(2, resultedList.size());
+    }
+
+    @Test
+    public void testGetRecipesByTextContent() {
+
+        List<Recipe> recipesToShow = new ArrayList<>();
+        Recipe recipe1 = new Recipe().setAuthor(testAuthor);
+        recipe1.setId(1L);
+        Recipe recipe2 = new Recipe().setAuthor(testAuthor);
+        recipe1.setId(2L);
+        recipesToShow.add(recipe1);
+        recipesToShow.add(recipe2);
+
+        String text = "searchText";
+
+        when(mockRecipeRepository.findAllContainingSearchText(text)).thenReturn(Optional.of(recipesToShow));
+
+        List<OutputRecipeDTO> resultedList = toTest.getRecipesByTextContent(text);
+
+        assertEquals(2, resultedList.size());
+    }
+
+    @Test
+    public void testToDeleteRecipeSuccessfully() {
+
+        when(mockRecipeRepository.findById(testRecipe.getId())).thenReturn(Optional.of(testRecipe));
+
+        when(mockUserRepository.findAllByFavoriteRecipesContains(testRecipe)).thenReturn(Optional.of(List.of(testAuthor)));
+
+       toTest.deleteById(testRecipe.getId());
+
+       verify(mockRecipeRepository).delete(any());
+    }
+
+    @Test
+    public void testToUpdateRecipe() {
+        InputRecipeDTO updatedRecipeDTO = new InputRecipeDTO();
+        updatedRecipeDTO.setId(1L);
+        updatedRecipeDTO.setImageUrl("something");
+        updatedRecipeDTO.setName("updatedName");
+        updatedRecipeDTO.setCategory(Category.BAKED);
+        when(mockRecipeRepository.getRecipeById(testRecipe.getId())).thenReturn(Optional.of(testRecipe));
+
+        assertEquals(updatedRecipeDTO.getName(), toTest.updateRecipe(updatedRecipeDTO).getName());
+        verify(mockRecipeRepository).save(any());
+    }
+
+}
