@@ -36,7 +36,7 @@ public class ProductService {
     }
 
     @Modifying
-    public void addProduct(InputProductDTO inputProductDTO, String loggedName) {
+    public Product addProduct(InputProductDTO inputProductDTO, String loggedName) {
         UserEntity userEntity = userService.getLoggedUser(loggedName);
         Product product = this.modelMapper.map(inputProductDTO, Product.class);
         product.setUserEntity(userEntity);
@@ -44,23 +44,12 @@ public class ProductService {
         this.productRepository.saveAndFlush(product);
         product.setPosition(product.getId());
         this.productRepository.saveAndFlush(product);
+        return product;
 
     }
 
-    public String getAllProducts(String loggedName) {
-        String currentUsername = userService.getLoggedUser(loggedName).getUsername();
-        Long currentUserId = this.userService.getLoggedUserId(loggedName);
-
-        return this.productRepository.findAllByUserEntityId(currentUserId)
-                .orElseThrow(NoSuchElementException::new)
-                .stream()
-                .map(product -> this.modelMapper.map(product, OutputProductDTO.class))
-                .map(OutputProductDTO::toString)
-                .collect(Collectors.joining(System.lineSeparator()));
-    }
 
     public List<OutputProductDTO> getListedProducts(String loggedName) {
-        String currentUsername =  userService.getLoggedUser(loggedName).getUsername();
         Long currentUserId = this.userService.getLoggedUserId(loggedName);
 
         List<OutputProductDTO> outputProductDTOS = this.productRepository.findAllByUserEntityId(currentUserId)

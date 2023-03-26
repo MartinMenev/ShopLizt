@@ -2,6 +2,8 @@ package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
 import com.example.myshoppingapp.model.enums.Category;
+import com.example.myshoppingapp.model.pictures.ImageEntity;
+import com.example.myshoppingapp.model.products.Product;
 import com.example.myshoppingapp.model.recipes.InputRecipeDTO;
 import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
 import com.example.myshoppingapp.model.recipes.Recipe;
@@ -67,13 +69,14 @@ class RecipeServiceTest {
         testAuthor = new UserEntity();
         testAuthor.setUsername("Martin");
         testAuthor.setId(3L);
+
+
     }
 
     @Test
     public void testAddingRecipe() {
         InputRecipeDTO inputRecipeDTO = new InputRecipeDTO();
         inputRecipeDTO.setId(1L);
-
 
         when(mockUserService.getLoggedUser(name)).thenReturn(new UserEntity());
 
@@ -218,6 +221,80 @@ class RecipeServiceTest {
 
         assertEquals(updatedRecipeDTO.getName(), toTest.updateRecipe(updatedRecipeDTO).getName());
         verify(mockRecipeRepository).save(any());
+    }
+
+    @Test
+    public void testAddingProductToRecipe() {
+        Product testProduct = new Product("bread");
+
+        when(mockRecipeRepository.findById(testRecipe.getId())).thenReturn(Optional.of(testRecipe));
+
+        assertEquals(testProduct.getId(), toTest.addProductToRecipe(testRecipe.getId(), testProduct.getName()).getId());
+        verify(mockRecipeRepository).saveAndFlush(any());
+        verify(mockProductService).saveProduct(any());
+    }
+
+    @Test
+    public void testAddProductToMyList() {
+        String name = "tomato";
+        assertEquals(name, toTest.addProductToMyList(name, testAuthor.getUsername()));
+    }
+
+    @Test
+    public void testToDeleteProductFromRecipe() {
+        Product testProduct = new Product();
+        testRecipe.getProductList().add(testProduct);
+
+        when(mockRecipeRepository.findById(testRecipe.getId())).thenReturn(Optional.of(testRecipe));
+        when(mockProductService.findProductById(testProduct.getId())).thenReturn(testProduct);
+
+        toTest.deleteProductFromRecipe(testRecipe.getId(), testProduct.getId());
+
+        assertFalse(testRecipe.getProductList().contains(testProduct));
+        verify(mockRecipeRepository).saveAndFlush(testRecipe);
+    }
+
+    @Test
+    public void testToAddAllProductsToMyList() {
+        Product testProduct = new Product("bread");
+        testRecipe.getProductList().add(testProduct);
+
+        when(mockRecipeRepository.getRecipeById(testRecipe.getId())).thenReturn(Optional.of(testRecipe));
+        toTest.addAllProductsToMyList(testRecipe.getId(), testAuthor.getUsername());
+
+        verify(mockProductService).addProductToMyList(testProduct.getName(), testAuthor.getUsername());
+
+    }
+
+
+    @Test
+    public void testToSaveRecipeToMyFavoriteList() {
+        UserEntity testUser = new UserEntity();
+        testUser.setUsername("martin");
+
+        when(mockRecipeRepository.findById(testRecipe.getId())).thenReturn(Optional.of(testRecipe));
+        when(mockUserService.addRecipeToFavoriteList(testRecipe, testUser.getUsername())).thenReturn(testRecipe);
+
+        long recipeNumberOfSaves = testRecipe.getNumberOfSaves();
+
+        toTest.saveRecipeToMyFavoriteList(testRecipe.getId(), testUser.getUsername());
+
+        assertEquals(recipeNumberOfSaves + 1, testRecipe.getNumberOfSaves());
+        verify(mockUserService).addRecipeToFavoriteList(testRecipe, testUser.getUsername());
+
+    }
+
+    @Test
+    public void testToAddImageToRecipe() {
+        ImageEntity testImage = new ImageEntity();
+        testImage.setId(1L);
+
+        when(mockImageService.findById(testImage.getId())).thenReturn(Optional.of(testImage));
+
+        when(mockRecipeRepository.findById(testRecipe.getId())).thenReturn(Optional.of(testRecipe));
+
+        assertEquals(testImage,toTest.addImageToRecipe(testImage.getId(), testImage.getId()));
+
     }
 
 }

@@ -85,7 +85,6 @@ public class RecipeService {
                 .filter(recipe -> !this.userService.getLoggedUser(loggedName).getFavoriteRecipes().contains(recipe)
                         && !recipe.getAuthor().equals(this.userService.getLoggedUser(loggedName)))
                 .map(recipe -> modelMapper.map(recipe, OutputRecipeDTO.class))
-                .sorted((a, b) -> b.getId().compareTo(a.getId()))
                 .limit(5)
                 .toList();
     }
@@ -104,13 +103,13 @@ public class RecipeService {
 
     @Transactional
     @Modifying
-    public void addRecipeRating(Long rating, long id) {
+    public Long addRecipeRating(Long rating, long id) {
         if (rating != 0) {
             Recipe recipe = this.recipeRepository.getById(id);
             recipe.addRating(rating);
             this.recipeRepository.saveAndFlush(recipe);
         }
-
+        return rating;
     }
 
     public List<OutputRecipeDTO> showRecipesByLoggedUser(String loggedName) {
@@ -161,11 +160,12 @@ public class RecipeService {
 
 
         this.recipeRepository.delete(recipe);
+
     }
 
     @Modifying
     @Transactional
-    public void updateRecipe(InputRecipeDTO inputRecipeDTO) {
+    public Recipe updateRecipe(InputRecipeDTO inputRecipeDTO) {
         Recipe recipeToUpdate = this.recipeRepository.getRecipeById(inputRecipeDTO.getId()).get();
         recipeToUpdate
                 .setName(inputRecipeDTO.getName())
@@ -180,23 +180,27 @@ public class RecipeService {
 
         this.recipeRepository.save(recipeToUpdate);
 
+      return recipeToUpdate;
+
     }
 
     @Transactional
     @Modifying
-    public void addProductToRecipe(Long id, String productName) {
+    public Product addProductToRecipe(Long id, String productName) {
         Product product = new Product(productName);
         this.productService.saveProduct(product);
 
         Recipe recipeToUpdate = this.recipeRepository.findById(id).get();
         recipeToUpdate.getProductList().add(product);
         this.recipeRepository.saveAndFlush(recipeToUpdate);
+        return product;
     }
 
     @Transactional
     @Modifying
-    public void addProductToMyList(String name, String loggedName) {
+    public String addProductToMyList(String name, String loggedName) {
         this.productService.addProductToMyList(name, loggedName);
+        return name;
     }
 
     @Transactional
@@ -260,10 +264,11 @@ public class RecipeService {
 
     @Transactional
     @Modifying
-    public void addImageToRecipe(long recipeId, long imageId) {
+    public ImageEntity addImageToRecipe(long recipeId, long imageId) {
         ImageEntity imageEntity = this.imageService.findById(imageId).orElseThrow();
         Recipe recipe = this.recipeRepository.findById(recipeId).orElseThrow();
         recipe.addImage(imageEntity);
         this.recipeRepository.saveAndFlush(recipe);
+        return imageEntity;
     }
 }
