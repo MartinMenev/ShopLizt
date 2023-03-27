@@ -62,16 +62,18 @@ public class ProductService {
         return outputProductDTOS.stream().sorted((a, b) -> b.getPosition().compareTo(a.getPosition())).toList();
     }
 
-    public void updateProduct(InputProductDTO inputProductDTO) {
+    public String updateProduct(InputProductDTO inputProductDTO) {
         Long idToUpdate = inputProductDTO.getId();
         String newName = inputProductDTO.getName();
         this.productRepository.updateProductName(idToUpdate, newName);
+        return newName;
     }
 
     @Modifying
     @Transactional
-    public void deleteById(long id) {
+    public Long deleteById(long id) {
         this.productRepository.deleteById(id);
+        return id;
     }
 
     public OutputProductDTO getProductById(Long id) {
@@ -104,12 +106,13 @@ public class ProductService {
 
     @Transactional
     @Modifying
-    public void buyProduct(long id, String loggedName) {
+    public UserEntity buyProduct(long id, String loggedName) {
         Product product = this.productRepository.getProductById(id).orElseThrow(NoSuchElementException::new);
         product.setBoughtOn(LocalDate.now());
         UserEntity userEntity = this.userService.getLoggedUser(loggedName);
         product.setBuyer(userEntity);
         this.productRepository.save(product);
+        return product.getBuyer();
     }
 
     public List<OutputProductDTO> showBoughtProducts(String loggedName) {
@@ -146,11 +149,9 @@ public class ProductService {
         this.productRepository.saveAndFlush(product);
         product.setPosition(product.getId());
         this.productRepository.saveAndFlush(product);
+
     }
 
-    public Product getProductByName(String productName) {
-        return this.productRepository.findByName(productName);
-    }
 
     public Product findProductById(Long productId) {
         return this.productRepository.getProductById(productId).orElseThrow(NoSuchElementException::new);
