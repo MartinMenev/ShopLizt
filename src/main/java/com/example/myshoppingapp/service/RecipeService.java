@@ -3,7 +3,6 @@ package com.example.myshoppingapp.service;
 import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
 import com.example.myshoppingapp.model.enums.Category;
 import com.example.myshoppingapp.model.pictures.ImageEntity;
-import com.example.myshoppingapp.model.pictures.Picture;
 import com.example.myshoppingapp.model.products.Product;
 import com.example.myshoppingapp.model.recipes.InputRecipeDTO;
 import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
@@ -172,11 +171,6 @@ public class RecipeService {
                 .setUrl(inputRecipeDTO.getUrl())
                 .setDescription(inputRecipeDTO.getDescription())
                 .setCategory(inputRecipeDTO.getCategory());
-
-      if (!inputRecipeDTO.getImageUrl().isEmpty()) {
-            Picture picture = new Picture(inputRecipeDTO.getImageUrl(), recipeToUpdate.getAuthor());
-            recipeToUpdate.addPicture(picture);
-       }
 
         this.recipeRepository.save(recipeToUpdate);
 

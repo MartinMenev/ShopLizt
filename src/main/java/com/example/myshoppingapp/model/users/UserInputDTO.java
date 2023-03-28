@@ -18,5 +18,4 @@ public class UserInputDTO implements Serializable {
         private String password;
         private String email;
 
-        private MultipartFile picture;
 }

@@ -4,7 +4,6 @@ import com.example.myshoppingapp.model.BaseEntity;
 import com.example.myshoppingapp.model.comments.Comment;
 import com.example.myshoppingapp.model.enums.Category;
 import com.example.myshoppingapp.model.pictures.ImageEntity;
-import com.example.myshoppingapp.model.pictures.Picture;
 import com.example.myshoppingapp.model.products.Product;
 import com.example.myshoppingapp.model.users.UserEntity;
 import lombok.AllArgsConstructor;
@@ -48,9 +47,6 @@ public class Recipe extends BaseEntity {
    @JoinColumn
    private UserEntity author;
 
-   @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST})
-   @JoinColumn
-   private List<Picture> pictureList;
 
     @OneToMany (cascade = CascadeType.REMOVE)
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -83,7 +79,6 @@ public class Recipe extends BaseEntity {
       this.commentList = new ArrayList<>();
       this.productList = new ArrayList<>();
       this.ratingList = new ArrayList<>();
-      this.pictureList = new ArrayList<>();
       this.imageList = new ArrayList<>();
       this.numberOfSaves = 0;
   }
@@ -136,10 +131,7 @@ public class Recipe extends BaseEntity {
         return this;
     }
 
-    public Recipe addPicture(Picture picture) {
-        this.pictureList.add(picture);
-        return this;
-    }
+
 
     public Recipe addImage (ImageEntity imageEntity) {
       this.imageList.add(imageEntity);

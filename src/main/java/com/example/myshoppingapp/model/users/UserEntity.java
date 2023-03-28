@@ -3,7 +3,6 @@ package com.example.myshoppingapp.model.users;
 import com.example.myshoppingapp.model.BaseEntity;
 import com.example.myshoppingapp.model.enums.UserRole;
 import com.example.myshoppingapp.model.pictures.ImageEntity;
-import com.example.myshoppingapp.model.pictures.Picture;
 import com.example.myshoppingapp.model.products.Product;
 import com.example.myshoppingapp.model.recipes.Recipe;
 import com.example.myshoppingapp.model.roles.RoleEntity;
@@ -39,9 +38,6 @@ public class UserEntity extends BaseEntity {
     @ManyToMany
    @LazyCollection(LazyCollectionOption.FALSE)
     private List<RoleEntity> roles;
-
-    @OneToOne
-    private Picture picture;
 
     @OneToOne (cascade = CascadeType.REMOVE)
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -95,9 +91,5 @@ public class UserEntity extends BaseEntity {
         return false;
     }
 
-    public UserEntity setPicture(Picture picture) {
-        this.picture = picture;
-        return this;
-    }
 
 }

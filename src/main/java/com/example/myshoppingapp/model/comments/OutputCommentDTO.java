@@ -1,6 +1,5 @@
 package com.example.myshoppingapp.model.comments;
 
-import com.example.myshoppingapp.model.pictures.Picture;
 import com.example.myshoppingapp.model.recipes.Recipe;
 import com.example.myshoppingapp.model.users.UserEntity;
 import lombok.AllArgsConstructor;
@@ -34,15 +33,6 @@ public class OutputCommentDTO {
         return this.dateAdded.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
-    public String getAuthorPicUrl() {
-
-        Picture picture = this.author.getPicture();
-        if (picture == null) {
-            return null;
-        }
-
-        return "/images/"+ picture.getPictureUrl();
-    }
 
     public String getRecipeName() {
         return this.recipe.getName();

@@ -2,7 +2,6 @@ package com.example.myshoppingapp.web;
 
 import com.example.myshoppingapp.model.users.UserInputDTO;
 import com.example.myshoppingapp.model.users.UserOutputDTO;
-import com.example.myshoppingapp.service.PictureService;
 import com.example.myshoppingapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,13 +17,12 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService userService;
-    private final PictureService pictureService;
+
 
 
     @Autowired
-    public UserController(UserService userService, PictureService pictureService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.pictureService = pictureService;
     }
 
 

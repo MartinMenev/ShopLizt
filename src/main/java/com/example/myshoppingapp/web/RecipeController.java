@@ -3,7 +3,6 @@ package com.example.myshoppingapp.web;
 import com.example.myshoppingapp.model.recipes.InputRecipeDTO;
 import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
 import com.example.myshoppingapp.service.CommentService;
-import com.example.myshoppingapp.service.PictureService;
 import com.example.myshoppingapp.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -23,15 +22,15 @@ import java.util.List;
 public class RecipeController {
     private final RecipeService recipeService;
     private final CommentService commentService;
-    private final PictureService pictureService;
+
 
 
 
     @Autowired
-    public RecipeController(RecipeService recipeService, CommentService commentService, PictureService pictureService) {
+    public RecipeController(RecipeService recipeService, CommentService commentService) {
         this.recipeService = recipeService;
         this.commentService = commentService;
-        this.pictureService = pictureService;
+
     }
 
     @GetMapping("/add-recipe")
@@ -100,7 +99,6 @@ public class RecipeController {
     public String editRecipe(@PathVariable(value = "id") Long id, Model model) {
         OutputRecipeDTO outputRecipeDTO = recipeService.getRecipeById(id);
         model.addAttribute("recipe", outputRecipeDTO);
-        model.addAttribute("pictures", outputRecipeDTO.getPictureList());
         return "recipe/update-recipe";
     }
 

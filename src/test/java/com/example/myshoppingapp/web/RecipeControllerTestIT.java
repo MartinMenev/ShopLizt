@@ -194,7 +194,6 @@ class RecipeControllerTestIT {
         mockMvc.perform(get("/edit-recipe/{id}", testRecipeDTO.getId()))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("recipe", testRecipeDTO))
-                .andExpect(model().attribute("pictures", testRecipeDTO.getPictureList()))
                 .andExpect(view().name("recipe/update-recipe"));
     }
 

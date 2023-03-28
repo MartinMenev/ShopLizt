@@ -82,7 +82,6 @@ class CommentControllerTestIT {
             roles = {"ADMIN", "USER"}
     )
     void testToDeleteComment() throws Exception {
-        Long id = 4L;
         mockMvc.perform(delete("/delete-comment/{id}", testRecipe.getId()).
                 with(csrf())).
                 andExpect(status().is3xxRedirection()).

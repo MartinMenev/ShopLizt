@@ -1,7 +1,6 @@
 package com.example.myshoppingapp.model.users;
 
 import com.example.myshoppingapp.model.pictures.ImageEntity;
-import com.example.myshoppingapp.model.pictures.Picture;
 import com.example.myshoppingapp.model.recipes.Recipe;
 import com.example.myshoppingapp.model.roles.RoleEntity;
 import lombok.AllArgsConstructor;
@@ -23,7 +22,6 @@ public class UserOutputDTO implements Serializable {
     private String password;
     private String email;
     private List<RoleEntity> roles;
-    private Picture picture;
 
     private ImageEntity imageEntity;
 

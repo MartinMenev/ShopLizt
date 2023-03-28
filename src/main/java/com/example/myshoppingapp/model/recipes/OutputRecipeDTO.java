@@ -3,7 +3,6 @@ package com.example.myshoppingapp.model.recipes;
 import com.example.myshoppingapp.model.comments.Comment;
 import com.example.myshoppingapp.model.enums.Category;
 import com.example.myshoppingapp.model.pictures.ImageEntity;
-import com.example.myshoppingapp.model.pictures.Picture;
 import com.example.myshoppingapp.model.products.Product;
 import com.example.myshoppingapp.model.users.UserEntity;
 import lombok.AllArgsConstructor;
@@ -27,7 +26,6 @@ public class OutputRecipeDTO {
     private Category category;
 
     private double rating;
-    private List<Picture> pictureList;
 
     private List<ImageEntity> imageList;
 
