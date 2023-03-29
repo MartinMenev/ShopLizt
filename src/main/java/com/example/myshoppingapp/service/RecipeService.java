@@ -265,4 +265,8 @@ public class RecipeService {
         this.recipeRepository.saveAndFlush(recipe);
         return imageEntity;
     }
+
+    public Optional<Recipe> getRecipeEntityById(Long recipeId) {
+        return this.recipeRepository.getRecipeById(recipeId);
+    }
 }

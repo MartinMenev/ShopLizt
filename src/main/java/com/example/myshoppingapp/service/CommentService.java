@@ -37,16 +37,15 @@ public class CommentService {
     }
 
 
-    public void addComment(InputCommentDTO inputCommentDTO, Long recipeId, String loggedName ) {
+    public Comment addComment(InputCommentDTO inputCommentDTO, Long recipeId, String loggedName ) {
 
         Comment comment = modelMapper.map(inputCommentDTO, Comment.class);
         UserEntity author = this.userService.getLoggedUser(loggedName);
-        Recipe recipe = this.recipeService.getRecipeRepository().getById(recipeId);
-        comment.setRecipe(recipe);
-        if (author != null) {
+        Optional<Recipe> recipe = this.recipeService.getRecipeEntityById(recipeId);
+        comment.setRecipe(recipe.get());
             comment.setAuthor(author);
             this.commentRepository.saveAndFlush(comment);
-        }
+        return comment;
     }
 
     public List<OutputCommentDTO> showAllComments(Long recipeId) {
@@ -86,10 +85,11 @@ public class CommentService {
 
     @Transactional
     @Modifying
-    public void approveComment(long id) {
+    public Comment approveComment(long id) {
         Comment comment = this.commentRepository.getReferenceById(id);
         comment.setApproved();
         this.commentRepository.saveAndFlush(comment);
+        return comment;
     }
 
     public void deleteCommentsByRecipeId(Long recipeId) {

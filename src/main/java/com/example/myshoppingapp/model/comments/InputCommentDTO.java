@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class InputCommentDTO {
 
+    private Long id;
     @NotNull
     @Size(min = 5, max = 100)
     private String text;
