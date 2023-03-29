@@ -42,6 +42,9 @@ The amazing design was provided by <a href="https://bootstrapmade.com/">Bootstra
 
 ![Comments](https://user-images.githubusercontent.com/104612887/227735189-90c69cca-95ba-4711-bfbd-a72e8e888624.png)
 
+
+## Email
+
 ![Email for Admin approval](https://user-images.githubusercontent.com/104612887/228433003-8704df09-019b-450b-b66d-119977ae50c0.png)
 
 
