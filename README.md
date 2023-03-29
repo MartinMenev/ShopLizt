@@ -15,7 +15,7 @@ This project is still not deployed, but until then, you can find below details a
 # <p id="about">About this project</p>
 
 ShopLizt is a web application that allows users to plan their grocery shopping by creating an items list in advance. 
-It offers an option to add and share recipe ideas with other users, also get inspired by others recommedations.
+It offers an option to add and share recipe ideas with other users, also get inspired by others recommendations.
 
 # <p id="design">Design</p>
 
@@ -41,6 +41,9 @@ The amazing design was provided by <a href="https://bootstrapmade.com/">Bootstra
 ![Recipe details](https://user-images.githubusercontent.com/104612887/227735109-15467118-142a-401c-8568-66220edf34da.png)
 
 ![Comments](https://user-images.githubusercontent.com/104612887/227735189-90c69cca-95ba-4711-bfbd-a72e8e888624.png)
+
+![Email for Admin approval](https://user-images.githubusercontent.com/104612887/228433003-8704df09-019b-450b-b66d-119977ae50c0.png)
+
 
 
 ## Mobile
