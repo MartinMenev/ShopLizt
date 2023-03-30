@@ -181,3 +181,12 @@ Here you can find more about the design: <a href="https://bootstrapmade.com/demo
 
 
 ## Mobile
+
+![img](https://user-images.githubusercontent.com/104612887/228821263-7e99b244-dd1b-4de2-9e10-d6a1fb2e8892.png) 
+![img_2](https://user-images.githubusercontent.com/104612887/228821373-b2872aa4-c260-4263-b924-21df304c9fd9.png)
+![img_3](https://user-images.githubusercontent.com/104612887/228821446-1e408e14-9841-409f-8b71-42c3b4742df4.png)
+![img_4](https://user-images.githubusercontent.com/104612887/228821469-8e82dffa-f7cd-431e-9d12-477bdd219364.png)
+![img_5](https://user-images.githubusercontent.com/104612887/228821566-f52be050-df04-400a-96c9-7f0b2ce7f2cb.png)
+![img_6](https://user-images.githubusercontent.com/104612887/228821626-8d251234-7aa9-44fd-bd05-c338d423b4c4.png)
+![img_7](https://user-images.githubusercontent.com/104612887/228821643-09be6d2e-b69c-4e68-93de-63c34004d4ef.png)
+![img_8](https://user-images.githubusercontent.com/104612887/228821676-5307f2db-23ab-4896-9483-36b3b461737d.png)
