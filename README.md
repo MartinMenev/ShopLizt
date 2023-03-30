@@ -24,7 +24,44 @@ The amazing design was provided by <a href="https://bootstrapmade.com/">Bootstra
  - Here you can find more about the design: <a href="https://bootstrapmade.com/demo/templates/Yummy/">Yummy Design</a>
 
 # <p id="features">Features</p>
+ - <strong>Authentication</strong>
+    - Login
+      - log in with existing account
 
+    - Register
+      - create new account
+ 
+ - <strong>Dashboard (Home page)</strong>
+
+    - My collection (section) 
+      - view your recipe collection (own recipes and favorite list (saved recipes posted by other users)
+      - option to open remove from your Collection
+      - option to add new recipe
+
+    - My shopping list (section)
+      - view your prepared item list (added products so far) 
+      - option to go to your Item list page 
+
+    -	Insiration (section)
+        -	view some of the recently added recipes by others and add them to your Collection
+
+
+
+ - <strong>My Shopping list</strong>
+
+ - <strong>My Collection</strong>
+
+ - <strong>Recipes</strong>
+
+ - <strong>Comments</strong>
+
+ - <strong>Administration</strong>
+
+ - <strong>Profile</strong>
+
+ - <strong>Language</strong>
+    - there is an option to change the language (English - Bulgarian)
+    - only the Navigation bar is translated (to be continued)
 
 
 # <p id="future-features">Future Features</p>
