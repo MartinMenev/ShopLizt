@@ -35,7 +35,7 @@ The amazing design was provided by <a href="https://bootstrapmade.com/">Bootstra
 
     - My collection (section) 
       - view your recipe collection (own recipes and favorite list (saved recipes posted by other users)
-      - option to open remove from your Collection
+      - option to open or remove from your Collection
       - option to add new recipe
 
     - My shopping list (section)
@@ -49,15 +49,62 @@ The amazing design was provided by <a href="https://bootstrapmade.com/">Bootstra
 
  - <strong>My Shopping list</strong>
 
+    - My shopping list
+      - review your item list
+      - add new item (from Navigation bar)
+      - move up/down items so that you can order based on your criterias
+      - delete item 
+      - edit the item text
+      - mark (as done) each item when you buy it in the store
+      
+    - History of bought products (section)
+      - when you mark an item as "Bought", it goes to History table, where you can add it to your shopping list again 
+      - Reuse button-  easily prepare your product list for your next shopping by reviewing the last products you have bought (ordered by recent date)
+		  - delete item from your History list
+
+
+
  - <strong>My Collection</strong>
+  
+      - Users can view their own created recipes and also the receipes they have saved as Favorites
+
 
  - <strong>Recipes</strong>
+ 
+    - Pictures: users can add multiple pictures to their own receipes
+    - Description: users can add and edit the recipe description
+    - Ingredients: 
+        - users can list the needed products for the recipe
+        - other users can add these products to their shopping list, if they decide to cook with recipe
+    - Filter by Categories - users can filter recipes by Category
+    - Search Recipe - users can search (input free text) in all existing recipes and find each recipe containing this text in its title or desciption
+    - Owners of the recipes can delete the recipe
+
+
 
  - <strong>Comments</strong>
 
+      - users can post comment to each recipe
+      - Rating - when posting a comment, users should rate the recipe (1-5)
+      - Last 3 comments are visible below the recipe content
+      - There is an option to view all comments for the recipe
+
+
+
  - <strong>Administration</strong>
 
+      - Admin user(s) can edit all recipes
+      -	Admin user(s) can review all new added comments and should approve or delete any inappropriate comments
+      -	Admin user(s) receive daily emails if there are new added comments, awaitng approval
+      -	Admin user(s) can access the user list (usernames) and can add an Admin role to more users, if needed.
+
+
  - <strong>Profile</strong>
+
+      - users can view their profile (username, registered email, roles)
+      - users can edit their username, email or change their password
+      - users can add an image to their profile
+
 
  - <strong>Language</strong>
     - there is an option to change the language (English - Bulgarian)
@@ -86,6 +133,13 @@ The amazing design was provided by <a href="https://bootstrapmade.com/">Bootstra
 # <p id="tools">Tools</p>
 
 # <p id="tools">Emails</p>
+     - Users receive emails after sucessful registration in the app:
+
+![Email after Registration](https://user-images.githubusercontent.com/104612887/228738463-5d037bab-24e5-4d45-80b6-49b380ef9323.png)
+
+     - Admins receive daily emails if there are new added comments that are still not approved:
+
+![Email for Admin approval](https://user-images.githubusercontent.com/104612887/228433003-8704df09-019b-450b-b66d-119977ae50c0.png)
 
 
 # <p id="application-pictures">Application Pictures</p>
@@ -106,9 +160,6 @@ The amazing design was provided by <a href="https://bootstrapmade.com/">Bootstra
 ![Comments](https://user-images.githubusercontent.com/104612887/227735189-90c69cca-95ba-4711-bfbd-a72e8e888624.png)
 
 
-## Email
-
-![Email for Admin approval](https://user-images.githubusercontent.com/104612887/228433003-8704df09-019b-450b-b66d-119977ae50c0.png)
 
 
 
