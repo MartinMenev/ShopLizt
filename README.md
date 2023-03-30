@@ -31,12 +31,12 @@ Here you can find more about the design: <a href="https://bootstrapmade.com/demo
     - Register
       - create new account
  
-
+ 
  - <strong>Dashboard (Home page)</strong>
 
     - My collection (section) 
-      - view your recipe collection (own recipes and favorite list (saved recipes posted by other users)
-      - option to open or remove from your Collection
+      - view your recipe collection (own recipes and favorite list (saved recipes posted by other users))
+      - option to open or remove a recipe from your Collection
       - option to add new recipe
 
     - My shopping list (section)
@@ -177,7 +177,7 @@ Here you can find more about the design: <a href="https://bootstrapmade.com/demo
 ![Comments](https://user-images.githubusercontent.com/104612887/227735189-90c69cca-95ba-4711-bfbd-a72e8e888624.png)
 
 
-
-
-
 ## Mobile
+
+
+
