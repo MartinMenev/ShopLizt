@@ -23,6 +23,32 @@ The amazing design was provided by <a href="https://bootstrapmade.com/">Bootstra
 
  - Here you can find more about the design: <a href="https://bootstrapmade.com/demo/templates/Yummy/">Yummy Design</a>
 
+# <p id="features">Features</p>
+
+
+
+# <p id="future-features">Future Features</p>
+  - Followers
+    - follow user
+    - unfollow user
+    - block user
+    - unblock user
+  - Design
+    - Improve the design on all pages
+  - Multiple item lists
+    - add an option to have more shopping lists and order them in categories
+  - More options on My Collection page
+    - add categories and filters that can enable users to order their collections
+  - Language
+    - translate all pages into Bulgarian
+   
+
+
+# <p id="project-structure">Project Structure</p>
+
+# <p id="tools">Tools</p>
+
+# <p id="tools">Emails</p>
 
 
 # <p id="application-pictures">Application Pictures</p>
