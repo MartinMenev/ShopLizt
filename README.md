@@ -9,19 +9,19 @@ This project is still not deployed, but until then, you can find below details a
   - <a href="#features">Features</a>
   - <a href="#future-features">Future Features</a>
   - <a href="#project-structure">Project Structure</a>
-  - <a href="#tools">Tools</a>
+  - <a href="#email">Email</a>
   - <a href="#application-pictures">Application Pictures</a>
 
 # <p id="about">About this project</p>
 
-ShopLizt is a web application that allows users to plan their grocery shopping by creating an items list in advance. 
+ShopLizt is a web application that allows users to plan their grocery shopping by creating an items list in advance. <br>
 It offers an option to add and share recipe ideas with other users, also get inspired by others recommendations.
 
 # <p id="design">Design</p>
 
 The amazing design was provided by <a href="https://bootstrapmade.com/">BootstrapMade</a>.
 
- - Here you can find more about the design: <a href="https://bootstrapmade.com/demo/templates/Yummy/">Yummy Design</a>
+Here you can find more about the design: <a href="https://bootstrapmade.com/demo/templates/Yummy/">Yummy Design</a>
 
 # <p id="features">Features</p>
  - <strong>Authentication</strong>
@@ -31,6 +31,7 @@ The amazing design was provided by <a href="https://bootstrapmade.com/">Bootstra
     - Register
       - create new account
  
+
  - <strong>Dashboard (Home page)</strong>
 
     - My collection (section) 
@@ -42,12 +43,12 @@ The amazing design was provided by <a href="https://bootstrapmade.com/">Bootstra
       - view your prepared item list (added products so far) 
       - option to go to your Item list page 
 
-    -	Insiration (section)
-        -	view some of the recently added recipes by others and add them to your Collection
+    -	Inspiration (section)
+        -	view some recently added recipes by others and add them to your Collection
 
 
 
- - <strong>My Shopping list</strong>
+ - <strong>Item list</strong>
 
     - My shopping list
       - review your item list
@@ -59,8 +60,8 @@ The amazing design was provided by <a href="https://bootstrapmade.com/">Bootstra
       
     - History of bought products (section)
       - when you mark an item as "Bought", it goes to History table, where you can add it to your shopping list again 
-      - Reuse button-  easily prepare your product list for your next shopping by reviewing the last products you have bought (ordered by recent date)
-		  - delete item from your History list
+      - Reuse button - return item to your product list for your next shopping by reviewing the last products you have bought (ordered by recent date)
+      - delete item from your History list
 
 
 
@@ -117,22 +118,38 @@ The amazing design was provided by <a href="https://bootstrapmade.com/">Bootstra
     - unfollow user
     - block user
     - unblock user
+    
+
   - Design
     - Improve the design on all pages
+
+
   - Multiple item lists
     - add an option to have more shopping lists and order them in categories
+
+
   - More options on My Collection page
     - add categories and filters that can enable users to order their collections
+
+
   - Language
     - translate all pages into Bulgarian
    
 
 
 # <p id="project-structure">Project Structure</p>
+- Server 
 
-# <p id="tools">Tools</p>
+  - **config** - files used to configure the application
+  - **exceptions** - files containing custom exceptions
+  - **model** - all database models used in the application
+  - **repository** - files directly accessing mySQL database and manipulating data
+  - **service** - all business logic used in the application
+  - **validation** - files containing customs validation logic
+  - **web** - controllers used to handle client requests and make calls to the service layer
 
-# <p id="tools">Emails</p>
+
+# <p id="email">Emails</p>
   - Users receive emails after sucessful registration in the app:
 
 ![Email after Registration](https://user-images.githubusercontent.com/104612887/228738463-5d037bab-24e5-4d45-80b6-49b380ef9323.png)
