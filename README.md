@@ -133,11 +133,11 @@ The amazing design was provided by <a href="https://bootstrapmade.com/">Bootstra
 # <p id="tools">Tools</p>
 
 # <p id="tools">Emails</p>
-     - Users receive emails after sucessful registration in the app:
+  - Users receive emails after sucessful registration in the app:
 
 ![Email after Registration](https://user-images.githubusercontent.com/104612887/228738463-5d037bab-24e5-4d45-80b6-49b380ef9323.png)
 
-     - Admins receive daily emails if there are new added comments that are still not approved:
+  - Admins receive daily emails if there are new added comments that are still not approved:
 
 ![Email for Admin approval](https://user-images.githubusercontent.com/104612887/228433003-8704df09-019b-450b-b66d-119977ae50c0.png)
 
