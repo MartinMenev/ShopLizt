@@ -18,6 +18,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
+import javax.transaction.NotSupportedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -67,7 +68,7 @@ class RecipeServiceTest {
         name = "martin";
 
         testAuthor = new UserEntity();
-        testAuthor.setUsername("Martin");
+        testAuthor.setUsername("martin");
         testAuthor.setId(3L);
 
 
@@ -199,13 +200,16 @@ class RecipeServiceTest {
     }
 
     @Test
-    public void testToDeleteRecipeSuccessfully() {
+    public void testToDeleteRecipeSuccessfullyByAuthor() throws NotSupportedException {
+        testRecipe.setAuthor(testAuthor);
+
+        when(mockUserService.getLoggedUser(name)).thenReturn(testAuthor);
 
         when(mockRecipeRepository.findById(testRecipe.getId())).thenReturn(Optional.of(testRecipe));
 
         when(mockUserRepository.findAllByFavoriteRecipesContains(testRecipe)).thenReturn(Optional.of(List.of(testAuthor)));
 
-       toTest.deleteById(testRecipe.getId());
+       toTest.deleteById(testRecipe.getId(), testAuthor.getUsername());
 
        verify(mockRecipeRepository).delete(any());
     }

@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.transaction.NotSupportedException;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -139,8 +140,9 @@ public class RecipeController {
     }
 
     @DeleteMapping("/delete-recipe/{id}")
-    public String deleteById(@PathVariable(value = "id") long id) {
-        recipeService.deleteById(id);
+    public String deleteById(@PathVariable(value = "id") long id,
+                             Principal user) throws NotSupportedException {
+        recipeService.deleteById(id, user.getName());
         return "redirect:/all-recipes";
     }
 
@@ -173,7 +175,7 @@ public class RecipeController {
 
     @GetMapping("/remove-from-favorites/{id}")
     public String removeFromMyCollection(@PathVariable(value = "id") long id,
-                                         Principal user) {
+                                         Principal user) throws NotSupportedException {
         recipeService.removeRecipeFromMyCollection(id, user.getName());
         return "redirect:/my-collection";
     }

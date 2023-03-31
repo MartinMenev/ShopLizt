@@ -198,7 +198,7 @@ public class UserService {
         ImageEntity image = this.imageService.findById(imageId).orElseThrow();
         UserEntity userEntity = this.getLoggedUser(loggedName);
         if (userEntity.getImageEntity() != null) {
-            this.getImageService().deleteById(userEntity.getImageEntity());
+            this.getImageService().delete(userEntity.getImageEntity());
         }
         userEntity.setImageEntity(image);
         userRepository.saveAndFlush(userEntity);

@@ -29,7 +29,7 @@ public class UserOutputDTO implements Serializable {
 
     public String getRoles() {
         List<String> roleNames = this.roles.stream().map(r -> r.getRole().name()).toList();
-        return String.format(String.join(" ,", roleNames));
+        return String.format(String.join(", ", roleNames));
     }
 
 
