@@ -59,8 +59,15 @@
             <div class="swiper-slide" th:each="picture :${pictures}">
               <a th:if="${recipe.getLatestSavedId()}" class="glightbox" data-gallery="images-gallery"  th:href="@{/db-resources/images/{id}(id=${picture.id})}" >
                 <img th:src="@{/download/{id}(id=${picture.id})}" class="img-fluid rounded-5"   alt="" src="">
-
               </a>
+              <div class="d-flex justify-content-end" th:if="${recipe.getAuthorName() == #authentication.getName() or #authentication.getAuthorities.size() == 2}">
+
+                <form  action="#" th:action="@{/db-resources/images/remove-picture/{id}/{recipeId}(id = ${picture.id}, recipeId = ${recipe.id})}" th:method="DELETE">
+                  <input title="Remove this picture" type="submit" class="btn bg-transparent text-danger" value="x" />
+                </form>
+
+
+              </div>
             </div>
           </div>
           <div class="swiper-pagination m-3"></div>

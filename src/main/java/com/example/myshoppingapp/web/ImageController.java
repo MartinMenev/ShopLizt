@@ -4,11 +4,14 @@ import com.example.myshoppingapp.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 @Controller
 @RequestMapping(value = "/db-resources/images")
@@ -38,6 +41,13 @@ public class ImageController {
         }
     }
 
+    @DeleteMapping("/remove-picture/{id}/{recipeId}")
+    public String deleteComment(@PathVariable(value = "id") long id,
+                                @PathVariable(value = "recipeId") long recipeId,
+                                Principal user) {
+        this.imageService.deleteImage(id, user.getName(), recipeId);
 
+        return "redirect:/recipe/" + recipeId;
+    }
 
 }

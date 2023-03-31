@@ -2,25 +2,35 @@ package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.model.pictures.ImageDownloadModel;
 import com.example.myshoppingapp.model.pictures.ImageEntity;
+import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
+import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.repository.ImageRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class ImageService {
 
   private final ImageRepository imageRepository;
+  private final UserService userService;
+
+  private final RecipeService recipeService;
 
   private final ModelMapper modelMapper;
 
-  public ImageService(ImageRepository imageRepository, ModelMapper modelMapper) {
+  @Lazy
+  public ImageService(ImageRepository imageRepository, UserService userService, RecipeService recipeService, ModelMapper modelMapper) {
     this.imageRepository = imageRepository;
+    this.userService = userService;
+    this.recipeService = recipeService;
     this.modelMapper = modelMapper;
   }
 
@@ -52,7 +62,20 @@ public class ImageService {
 
   @Modifying
   @Transactional
-  public void deleteById(ImageEntity imageEntity) {
-    this.imageRepository.deleteById(imageEntity.getId());
+  public void deleteImage(long id, String name, long recipeId ) {
+    UserEntity loggedUser = this.userService.getLoggedUser(name);
+    OutputRecipeDTO recipe = this.recipeService.getRecipeById(recipeId);
+    ImageEntity image = this.imageRepository.getReferenceById(id);
+
+    if (Objects.equals(loggedUser.getId(), recipe.getAuthor().getId()) || loggedUser.isAdmin()) {
+      this.recipeService.removeImageFromRecipe(recipeId, image);
+
+    }
   }
+
+
+  public void delete(ImageEntity imageEntity) {
+    this.imageRepository.delete(imageEntity);
+  }
+
 }

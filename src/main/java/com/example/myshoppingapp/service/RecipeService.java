@@ -16,10 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.NotSupportedException;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Getter
@@ -143,22 +146,32 @@ public class RecipeService {
 
     @Modifying
     @Transactional
-    public void deleteById(long id) {
+    public void deleteById(long id, String loggedName) throws NotSupportedException {
+        UserEntity loggedUser = userService.getLoggedUser(loggedName);
         Recipe recipe = this.recipeRepository.findById(id).get();
 
-        this.commentService.deleteCommentsByRecipeId(id);
+        if (Objects.equals(loggedUser.getId(), recipe.getAuthor().getId()) || loggedUser.isAdmin()) {
 
-        Optional<List<UserEntity>> userSavedThisRecipe =  userRepository.findAllByFavoriteRecipesContains(recipe);
-        if (userSavedThisRecipe.isPresent()) {
-            for (UserEntity user : userSavedThisRecipe.get()) {
-                user.getFavoriteRecipes().remove(recipe);
-                this.userRepository.save(user);
+            this.commentService.deleteCommentsByRecipeId(id);
+
+            Optional<List<UserEntity>> userSavedThisRecipe =  userRepository.findAllByFavoriteRecipesContains(recipe);
+            if (userSavedThisRecipe.isPresent()) {
+                for (UserEntity user : userSavedThisRecipe.get()) {
+                    user.getFavoriteRecipes().remove(recipe);
+                    this.userRepository.save(user);
+                }
             }
+            this.recipeRepository.delete(recipe);
+
+        } else {
+            throw new NotSupportedException();
         }
 
 
 
-        this.recipeRepository.delete(recipe);
+
+
+
 
     }
 
@@ -242,7 +255,7 @@ public class RecipeService {
 
     @Transactional
     @Modifying
-    public void removeRecipeFromMyCollection(long id, String loggedName) {
+    public void removeRecipeFromMyCollection(long id, String loggedName) throws NotSupportedException {
         Recipe recipeToRemove = this.recipeRepository.findById(id).get();
         UserEntity user = this.userService.getLoggedUser(loggedName);
         if (user.getFavoriteRecipes().contains(recipeToRemove)) {
@@ -252,7 +265,7 @@ public class RecipeService {
             this.recipeRepository.saveAndFlush(recipeToRemove);
             return;
         }
-        this.deleteById(id);
+        this.deleteById(id, loggedName);
     }
 
 
@@ -268,5 +281,15 @@ public class RecipeService {
 
     public Optional<Recipe> getRecipeEntityById(Long recipeId) {
         return this.recipeRepository.getRecipeById(recipeId);
+    }
+
+    @Transactional
+    @Modifying
+    public void removeImageFromRecipe(long recipeId, ImageEntity image) {
+        Recipe recipe = this.recipeRepository.getRecipeById(recipeId).orElseThrow();
+        recipe.getImageList().remove(image);
+
+        this.recipeRepository.saveAndFlush(recipe);
+        this.imageService.delete(image);
     }
 }
