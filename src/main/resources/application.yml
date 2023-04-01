@@ -10,8 +10,6 @@ spring:
             max-file-size: 10MB
             max-request-size: 10MB
 
-
-
     mvc:
         hiddenmethod:
             filter:
@@ -19,7 +17,7 @@ spring:
     sql:
         init:
             mode: never
-    #      should be always on first start
+
 
     jpa:
         database-platform: org.hibernate.dialect.MySQL8Dialect
