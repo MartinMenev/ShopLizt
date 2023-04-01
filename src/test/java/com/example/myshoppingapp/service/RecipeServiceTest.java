@@ -25,8 +25,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -215,6 +214,25 @@ class RecipeServiceTest {
     }
 
     @Test
+    public void testThrowWhenNonAdminNonAuthorTryToDeleteRecipe() throws NotSupportedException {
+        testRecipe.setAuthor(testAuthor);
+
+        UserEntity loggedUser = new UserEntity();
+        loggedUser.setUsername("pesho");
+        loggedUser.setId(143L);
+
+        when(mockUserService.getLoggedUser(loggedUser.getUsername())).thenReturn(loggedUser);
+
+        when(mockRecipeRepository.findById(testRecipe.getId())).thenReturn(Optional.of(testRecipe));
+
+        assertThrows(NotSupportedException.class,
+                () -> toTest.deleteById(testRecipe.getId(), loggedUser.getUsername()));
+
+        verify(mockRecipeRepository, times(0)).delete(any());
+
+    }
+
+    @Test
     public void testToUpdateRecipe() {
         InputRecipeDTO updatedRecipeDTO = new InputRecipeDTO();
         updatedRecipeDTO.setId(1L);
@@ -298,6 +316,21 @@ class RecipeServiceTest {
         when(mockRecipeRepository.findById(testRecipe.getId())).thenReturn(Optional.of(testRecipe));
 
         assertEquals(testImage,toTest.addImageToRecipe(testImage.getId(), testImage.getId()));
+
+    }
+
+    @Test
+    public void testToSuccessfullyDeleteImageFromRecipe() {
+        ImageEntity testImage = new ImageEntity();
+        testRecipe.getImageList().add(testImage);
+        assertTrue(testRecipe.getImageList().contains(testImage));
+
+        when(mockRecipeRepository.getRecipeById(testRecipe.getId())).thenReturn(Optional.of(testRecipe));
+        toTest.removeImageFromRecipe(testRecipe.getId(), testImage);
+
+        assertFalse(testRecipe.getImageList().contains(testImage));
+        verify(mockRecipeRepository, times(1)).saveAndFlush(testRecipe);
+        verify(mockImageService, times(1)).delete(testImage);
 
     }
 
