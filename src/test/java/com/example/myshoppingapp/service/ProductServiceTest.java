@@ -1,9 +1,11 @@
 package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
+import com.example.myshoppingapp.model.enums.UserRole;
 import com.example.myshoppingapp.model.products.InputProductDTO;
 import com.example.myshoppingapp.model.products.OutputProductDTO;
 import com.example.myshoppingapp.model.products.Product;
+import com.example.myshoppingapp.model.roles.RoleEntity;
 import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,10 +25,7 @@ import java.util.Optional;
 
 
 import static org.junit.jupiter.api.Assertions.*;
-
-
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ProductServiceTest {
@@ -100,10 +99,41 @@ class ProductServiceTest {
 
 
     @Test
-    public void testToDeleteProduct() {
-        assertEquals(testProduct.getId(), toTest.deleteById(testProduct.getId()));
+    public void testToDeleteProductByCreator() {
+        testProduct.setUserEntity(testUser);
+
+        when(mockUserService.getLoggedUser(testUser.getUsername())).thenReturn(testUser);
+        when(mockProductRepository.getReferenceById(testProduct.getId())).thenReturn(testProduct);
+
+
+        assertEquals(testProduct.getId(), toTest.deleteById(testProduct.getId(), testUser.getUsername()));
 
     }
+
+    @Test
+    public void testToDeleteProductByAdmin() {
+        testUser.addRole(new RoleEntity(1L, UserRole.ADMIN));
+        testProduct.setUserEntity(new UserEntity());
+
+        when(mockUserService.getLoggedUser(testUser.getUsername())).thenReturn(testUser);
+        when(mockProductRepository.getReferenceById(testProduct.getId())).thenReturn(testProduct);
+
+        assertEquals(testProduct.getId(), toTest.deleteById(testProduct.getId(), testUser.getUsername()));
+
+    }
+
+    @Test
+    public void testShouldFailIfNonAdminNonCreatorTriesToDeleteProduct() {
+        testUser.addRole(new RoleEntity(1L, UserRole.USER));
+        testProduct.setUserEntity(new UserEntity());
+
+        verify(mockProductRepository, times(0)).deleteById(testProduct.getId());
+
+    }
+
+
+
+
 
     @Test
     public void testToGetProductById() {
