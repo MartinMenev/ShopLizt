@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -71,8 +72,14 @@ public class ProductService {
 
     @Modifying
     @Transactional
-    public Long deleteById(long id) {
-        this.productRepository.deleteById(id);
+    public Long deleteById(long id, String username) {
+        UserEntity loggedUser = userService.getLoggedUser(username);
+        Product product = productRepository.getReferenceById(id);
+
+        if (Objects.equals(loggedUser.getId(), product.getUserEntity().getId()) || loggedUser.isAdmin()) {
+            this.productRepository.deleteById(id);
+        }
+
         return id;
     }
 
