@@ -21,9 +21,7 @@ public class ImageService {
 
   private final ImageRepository imageRepository;
   private final UserService userService;
-
   private final RecipeService recipeService;
-
   private final ModelMapper modelMapper;
 
   @Lazy
@@ -35,7 +33,6 @@ public class ImageService {
   }
 
   public long saveImage(MultipartFile file) throws IOException {
-
     ImageEntity imageEntity = new ImageEntity().
         setFileName(file.getOriginalFilename()).
         setContentType(file.getContentType()).

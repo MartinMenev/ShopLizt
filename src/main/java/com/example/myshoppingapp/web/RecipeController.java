@@ -25,8 +25,6 @@ public class RecipeController {
     private final CommentService commentService;
 
 
-
-
     @Autowired
     public RecipeController(RecipeService recipeService, CommentService commentService) {
         this.recipeService = recipeService;
@@ -55,9 +53,6 @@ public class RecipeController {
              recipeService.addRecipe(inputRecipeDTO, user.getName());
         return "redirect:/my-collection";
     }
-
-
-
 
 
     @ModelAttribute(name = "recipeAddModel")

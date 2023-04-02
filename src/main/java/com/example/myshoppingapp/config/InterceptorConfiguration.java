@@ -19,7 +19,7 @@ public class InterceptorConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoggingInterceptor());
-            super.addInterceptors(registry);
+        super.addInterceptors(registry);
         registry.addInterceptor(localeChangeInterceptor);
 
     }

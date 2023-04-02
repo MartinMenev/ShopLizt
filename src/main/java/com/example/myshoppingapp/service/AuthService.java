@@ -20,14 +20,12 @@ import javax.transaction.Transactional;
 @Setter
 @Service
 public class AuthService {
+
     private UserRepository userRepository;
     private ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
-
     private final RoleRepository roleRepository;
-
     private UserDetailsService userDetailsService;
-
     private final EmailService emailService;
 
     @Autowired
@@ -52,12 +50,9 @@ public class AuthService {
         }
         userRepository.save(userEntity);
 
-
             this.emailService.sendRegistrationEmail(registerUserDTO.getEmail(), registerUserDTO.getUsername());
 
     }
-
-
 
 }
 

@@ -17,7 +17,7 @@ public class InputCommentDTO {
 
     private Long id;
     @NotNull
-    @Size(min = 5, max = 100)
+    @Size(min = 5, max = 250)
     private String text;
     private LocalDateTime dateAdded;
 

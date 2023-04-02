@@ -17,7 +17,6 @@ public class CommentController {
     private final RecipeService recipeService;
 
 
-
     @Autowired
     public CommentController(CommentService commentService, RecipeService recipeService) {
         this.commentService = commentService;

@@ -15,11 +15,12 @@ import java.time.LocalDate;
 public class OutputProductDTO implements Serializable{
 
         private Long id;
+
         private String name;
 
         private Long position;
 
-    private LocalDate boughtOn;
+        private LocalDate boughtOn;
 
     @Override
     public String toString() {

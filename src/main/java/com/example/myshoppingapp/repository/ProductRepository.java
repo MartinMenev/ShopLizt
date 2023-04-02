@@ -14,7 +14,6 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     Optional<List<Product>> findAllByUserEntityId(Long id);
 
-
     @Modifying
     @Transactional
     @Query("update Product p set p.name = :newName where p.id = :id")
@@ -23,9 +22,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     public void deleteById(long id);
 
     Optional<Product> getProductById(Long id);
-
-    @Query("select max(p.id) from Product p")
-    Optional <Long> findLatestId();
 
     @Modifying
     @Transactional
@@ -43,5 +39,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<List<Product>> findAllByBuyerId(Long userEntityId);
 
-    Product findByName(String productName);
 }

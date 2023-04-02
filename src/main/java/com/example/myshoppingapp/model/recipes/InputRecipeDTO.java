@@ -19,6 +19,7 @@ public class InputRecipeDTO implements Serializable {
    @NotNull
    @Size(min = 5, max = 100)
     private String name;
+
     private String url;
 
     private String description;

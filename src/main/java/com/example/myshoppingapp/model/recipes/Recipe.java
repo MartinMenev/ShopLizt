@@ -93,11 +93,6 @@ public class Recipe extends BaseEntity {
             .stream()
             .mapToDouble(Double::doubleValue)
             .average().orElse(0);
-//      double sum = 0;
-//      for (Double rating : ratingList) {
-//          sum += rating;
-//          this.rating = sum / ratingList.size();
-//      }
 
   }
 

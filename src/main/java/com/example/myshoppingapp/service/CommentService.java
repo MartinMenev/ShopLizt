@@ -25,7 +25,6 @@ public class CommentService {
     private final RecipeService recipeService;
 
 
-
     @Autowired
     @Lazy
     public CommentService(CommentRepository commentRepository, ModelMapper modelMapper, UserService userService, RecipeService recipeService) {
@@ -38,7 +37,6 @@ public class CommentService {
 
 
     public Comment addComment(InputCommentDTO inputCommentDTO, Long recipeId, String loggedName ) {
-
         Comment comment = modelMapper.map(inputCommentDTO, Comment.class);
         UserEntity author = this.userService.getLoggedUser(loggedName);
         Optional<Recipe> recipe = this.recipeService.getRecipeEntityById(recipeId);

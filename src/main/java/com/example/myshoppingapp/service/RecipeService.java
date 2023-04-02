@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.NotSupportedException;
@@ -29,20 +28,12 @@ import java.util.Optional;
 @Service
 public class RecipeService {
     private final RecipeRepository recipeRepository;
-
     private final UserRepository userRepository;
-
     private final UserService userService;
     private final ModelMapper modelMapper;
-
     private final ProductService productService;
-
     private final ImageService imageService;
-
     private final CommentService commentService;
-
-
-
 
     @Autowired
     public RecipeService(RecipeRepository recipeRepository, UserRepository userRepository, UserService userService,
@@ -56,8 +47,6 @@ public class RecipeService {
         this.imageService = imageService;
         this.commentService = commentService;
     }
-
-
 
     public Long addRecipe(InputRecipeDTO inputRecipeDTO, String loggedName) {
         UserEntity authorId = this.userService.getLoggedUser(loggedName);
@@ -76,7 +65,6 @@ public class RecipeService {
                 map(recipe -> this.modelMapper.map(recipe, OutputRecipeDTO.class));
 
     }
-
 
 
     @Transactional
@@ -102,7 +90,6 @@ public class RecipeService {
     }
 
 
-
     @Transactional
     @Modifying
     public Long addRecipeRating(Long rating, long id) {
@@ -126,9 +113,6 @@ public class RecipeService {
                 .map(recipe -> modelMapper.map(recipe, OutputRecipeDTO.class))
                 .toList();
     }
-
-
-
 
 
     public List<OutputRecipeDTO> getRecipesByCategory(String category) {

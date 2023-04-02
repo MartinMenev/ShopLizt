@@ -33,7 +33,6 @@ public class EmailService {
     try {
       mimeMessageHelper.setFrom("admin@ShopLizt.com");
       mimeMessageHelper.setTo(userEmail);
-      //TODO: i18n
       mimeMessageHelper.setSubject("Welcome to ShopLizt!");
       mimeMessageHelper.setText(generateEmailText(userName), true);
 
@@ -54,7 +53,6 @@ public class EmailService {
       try {
         mimeMessageHelper.setFrom("admin@ShopLizt.com");
         mimeMessageHelper.setTo(userEmail);
-        //TODO: i18n
         mimeMessageHelper.setSubject("New comments awaiting admin-review");
         mimeMessageHelper.setText(generateNewCommentsEmail(numberComments), true);
 

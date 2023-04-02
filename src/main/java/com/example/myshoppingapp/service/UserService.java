@@ -17,8 +17,6 @@ import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,23 +32,15 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-
     private UserRepository userRepository;
     private ProductRepository productRepository;
     private final ModelMapper modelMapper;
-
     private final PasswordEncoder passwordEncoder;
-
     private final UserDetailsService userDetailsService;
-
     private final AuthService authService;
-
     private final RecipeRepository recipeRepository;
-
     private final CommentService commentService;
-
     private final RoleRepository roleRepository;
-
     private final ImageService imageService;
 
 
@@ -139,9 +129,6 @@ public class UserService {
 
     }
 
-
-
-
     public List<Recipe> getLoggedUserFavoriteList (String loggedName) {
        return this.getLoggedUser(loggedName)
                .getFavoriteRecipes();
@@ -204,11 +191,6 @@ public class UserService {
         userRepository.saveAndFlush(userEntity);
         return image;
     }
-
-
-
-
-
 
 }
 

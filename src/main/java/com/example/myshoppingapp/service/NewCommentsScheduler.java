@@ -12,9 +12,7 @@ import java.util.List;
 public class NewCommentsScheduler {
     private final CommentService commentService;
     private final UserService userService;
-
     private final EmailService emailService;
-
     private final Logger LOGGER = LoggerFactory.getLogger(NewCommentsScheduler.class);
 
     public NewCommentsScheduler(CommentService commentService, UserService userService, EmailService emailService) {
