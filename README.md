@@ -176,8 +176,9 @@ Here you can find more about the design: <a href="https://bootstrapmade.com/demo
 
 ![Comments](https://user-images.githubusercontent.com/104612887/227735189-90c69cca-95ba-4711-bfbd-a72e8e888624.png)
 
+![Register Validations](https://user-images.githubusercontent.com/104612887/229354880-d3ab9ff6-b806-41f9-a08b-8e8e0376c089.png)
 
-
+![Login Validation](https://user-images.githubusercontent.com/104612887/229354920-eb2c6171-8e63-476b-aaf2-d44384d11653.png)
 
 
 ## Mobile
