@@ -13,7 +13,7 @@
   </header>
  <!-- End Header -->
 
-  <main id="main">
+  <main id="main-home">
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
@@ -23,26 +23,24 @@
           <h2 data-aos="fade-up">
 
             <div class="section-header">
-              <p th:if="${username == null}" class="text-black display-6"> Hello, guest!
+              <p th:if="${username == null}" class="text-light display-6"> Hello, guest!
               </p>
-              <p th:if="${username != null}" class="text-black display-6">Welcome,
-                <span th:text="${username}"></span>!
+              <p th:if="${username != null}" class="text-light display-6">Welcome,
+                <span class="text-white" th:text="${username}"></span>!
               </p>
             </div>
 
           </h2>
           <ol>
-            <li><a onclick="history.back()">Go back</a></li>
-            <li>Home</li>
+            <li class="text-light"><a  onclick="history.back()">Go back</a></li>
+            <li class="text-light">Home</li>
           </ol>
         </div>
 
       </div>
     </div><!-- End Breadcrumbs -->
 
-    <section id="why-us" class="why-us section-bg " th:if="${username != null}"
-             style="background-image: url('https://images.pexels.com/photos/5945619/pexels-photo-5945619.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1');
-              background-repeat: repeat-y; background-position: center 0">
+    <section id="why-us" class="why-us section-bg " th:if="${username != null}">
       <div class="container justify-content-center " data-aos="fade-up">
         <div class="col-lg-12 justify-content-center" data-aos="fade-up" data-aos-delay="100">
           <div class="row lg-12 mt-3 h-100 justify-content-center">

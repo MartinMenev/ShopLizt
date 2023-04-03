@@ -786,6 +786,7 @@ section {
   height: 100%;
   border: 1px solid rgba(55, 55, 63, 0.1);
   transition: 0.3s;
+  opacity: 0.9;
   background-color: #FFFFFF;
 }
 
@@ -1820,10 +1821,54 @@ table > tbody {
 }
 
 #main-recipes {
-  background: #E6E3E3;
-  background-size: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),
+  url('https://images.pexels.com/photos/5995770/pexels-photo-5995770.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1') ;
+  background-repeat: repeat-y;
+  background-position: center 0;
+  background-size: cover;
 
 }
+
+#main-home {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
+          url('https://images.pexels.com/photos/4461563/pexels-photo-4461563.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1');
+  background-repeat: repeat-y;
+  background-position: center 0;
+  background-size: cover;
+}
+
+#main-collection {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),
+          url('https://images.pexels.com/photos/4033636/pexels-photo-4033636.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1');
+  background-repeat: repeat-y;
+  background-position: center 0;
+  background-size: cover;
+}
+
+#main-list {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),
+          url('https://images.pexels.com/photos/7138765/pexels-photo-7138765.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1');
+  background-repeat: repeat-y;
+  background-position: center 0;
+  background-size: cover;
+}
+
+#main-profile {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),
+          url('https://images.pexels.com/photos/4253320/pexels-photo-4253320.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1');
+  background-repeat: repeat-y;
+  background-position: center 0;
+  background-size: cover;
+}
+
+#main-error {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)),
+          url('https://images.pexels.com/photos/7646662/pexels-photo-7646662.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1');
+  background-repeat: repeat-y;
+  background-position: center 0;
+  background-size: cover;
+}
+
 
 #why-us > div > div > div > div > div > article > section > article.box-head.align-content-center > h3 {
   font-family: cursive;

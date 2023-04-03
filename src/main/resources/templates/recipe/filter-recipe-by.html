@@ -20,7 +20,7 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2 data-aos="fade-up">Inspiration</h2>
+          <h2 data-aos="fade-up" class="text-light">Inspiration</h2>
 
           <!--          buttons-->
           <div class="row justify-content-center">
@@ -66,8 +66,8 @@
       <div class="container aos-init aos-animate" data-aos="fade-up">
 
         <div class="section-header">
-          <h2>Recipes</h2>
-          <p>Category <span th:text="${category}"></span></p>
+          <h2 class="text-light">Recipes</h2>
+          <p>Category <span class="text-light" th:text="${category}"></span></p>
         </div>
 
         <div class="row gy-4 justify-content-center" th:unless="${recipes.isEmpty()}">
@@ -116,7 +116,7 @@
 
         <div class="row gy-4 justify-content-center" th:if="${recipes.isEmpty()}">
           <p class="justify-content-center">
-            <h6 class="text-center">
+            <h6 class="text-center text-light">
               Sorry, we still don't have any recipes with Category: "<span th:text="${category}"></span>" <br>
               But you can review our latest ones and chose from them...
             </h6>
