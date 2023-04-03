@@ -164,13 +164,17 @@ Here you can find more about the design: <a href="https://bootstrapmade.com/demo
 ## Desktop
 ![Index](https://user-images.githubusercontent.com/104612887/227734581-d495bb90-0d5b-4c86-a2c9-1af4e096daf8.png)
 
-![Footer](https://user-images.githubusercontent.com/104612887/227734614-cecf06e1-f8fc-43f8-8068-8cb2adcf9f50.png)
+![iFooter](https://user-images.githubusercontent.com/104612887/229577920-4448226f-7cd7-4c80-b6fb-a81b890d618c.png)
 
-![Recipes](https://user-images.githubusercontent.com/104612887/227734891-de6d7e4e-02a7-4fa4-bb64-cec1d40ac4c8.png)
+![Login page](https://user-images.githubusercontent.com/104612887/229578231-bc245ee4-bcf5-45ef-b84e-a414d0805adb.png)
 
-![Product list](https://user-images.githubusercontent.com/104612887/227734789-1397b30e-8212-43fd-bca9-e2464b1d3107.png)
+![Home](https://user-images.githubusercontent.com/104612887/229578380-b54d9f60-595f-49d2-9169-d41ac06fb689.png)
 
-![Profile](https://user-images.githubusercontent.com/104612887/227734987-a902787f-0dca-4ccf-becf-4c3928338460.png)
+![Recipes](https://user-images.githubusercontent.com/104612887/229579039-aed6c426-c7c5-4a92-9483-822c40621c4f.png)
+
+![Product list](https://user-images.githubusercontent.com/104612887/229580449-3c7aac37-0d32-4788-916b-9a427de6b428.png)
+
+![Profile](https://user-images.githubusercontent.com/104612887/229581379-5e76b67a-3ba5-4777-bc9d-c995f1bdcba2.png)
 
 ![Recipe details](https://user-images.githubusercontent.com/104612887/227735109-15467118-142a-401c-8568-66220edf34da.png)
 
@@ -182,3 +186,15 @@ Here you can find more about the design: <a href="https://bootstrapmade.com/demo
 
 
 ## Mobile
+
+![image](https://user-images.githubusercontent.com/104612887/229582855-cfc54baa-656e-4130-80d0-26e41cff7c23.png) 
+![image](https://user-images.githubusercontent.com/104612887/229582950-835d4df2-5f2e-458b-aad4-0e278062392d.png)
+
+![image](https://user-images.githubusercontent.com/104612887/229582047-df5444ef-9c8a-4610-bd35-03330d7eb494.png)
+![image](https://user-images.githubusercontent.com/104612887/229582197-7f214c44-dbf7-44a0-aef3-001fc867e489.png)
+
+![image](https://user-images.githubusercontent.com/104612887/229582545-1ae41cea-60aa-44fa-9e07-120cc3d2926a.png)
+![image](https://user-images.githubusercontent.com/104612887/229582679-d9d085f0-922d-46ac-976f-2686ac37f882.png)
+
+
+
