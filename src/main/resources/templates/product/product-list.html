@@ -28,8 +28,8 @@
 
           </h2>
           <ol>
-            <li><a onclick="history.back()">Go back</a></li>
-            <li>My Shopping list</li>
+            <li><a  class="text-light" onclick="history.back()">Go back</a></li>
+            <li class="text-light">My Shopping list</li>
           </ol>
         </div>
 
@@ -40,7 +40,7 @@
     <section id="why-us" class="why-us section-bg ">
       <div class="container justify-content-center vh-100 " >
         <div class="row justify-content-center">
-              <div class="col-lg-5 col-md-12 justify-content-center rounded-5 " >
+              <div class="col-lg-6 col-md-12 justify-content-center rounded-5 " >
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 border-dark ">
                   <h2>My shopping list</h2>
                   <h6 th:if="${products.isEmpty()}">
@@ -103,7 +103,7 @@
                 </div>
               </div><!-- End Icon Box -->
 
-              <div class="col-lg-5 justify-content-center rounded-5" th:if="${!boughtProducts.isEmpty()}">
+              <div class="col-lg-6 justify-content-center rounded-5" th:if="${!boughtProducts.isEmpty()}">
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 bg-body-secondary">
                   <h4><i>You might want them again</i></h4>
                   <table class="table table-responsive-sm  rounded-3 bg-body-secondary" >
