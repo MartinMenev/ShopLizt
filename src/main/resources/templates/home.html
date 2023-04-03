@@ -40,7 +40,9 @@
       </div>
     </div><!-- End Breadcrumbs -->
 
-    <section id="why-us" class="why-us section-bg " th:if="${username != null}">
+    <section id="why-us" class="why-us section-bg " th:if="${username != null}"
+             style="background-image: url('https://images.pexels.com/photos/5945619/pexels-photo-5945619.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1');
+              background-repeat: repeat-y; background-position: center 0">
       <div class="container justify-content-center " data-aos="fade-up">
         <div class="col-lg-12 justify-content-center" data-aos="fade-up" data-aos-delay="100">
           <div class="row lg-12 mt-3 h-100 justify-content-center">
@@ -59,11 +61,14 @@
                             <div class="gallery-slider swiper" >
                               <div class="swiper-wrapper align-items-center" >
                                 <div class="swiper-slide" th:each="myRecipe:${myRecipes}">
-                                  <img th:unless="${myRecipe.getLatestSavedId()}" th:src="${myRecipe.imageUrl}" class="img-fluid rounded-3" alt="" src="">
-                                  <img th:if="${myRecipe.getLatestSavedId()}" th:src="@{/download/{id}(id=${myRecipe.getLatestSavedId()})}" class="img-fluid rounded-3" alt="" src="">
+
                                   <a title="Open recipe" class="list-group-item list-group-item-action active bg-transparent border-0"  aria-current="true"
                                      th:href="@{/recipe/{id}(id=${myRecipe.id})}" >
-                                    <div class="d-flex w-100 justify-content-center">
+                                    <img th:unless="${myRecipe.getLatestSavedId()}" th:src="${myRecipe.imageUrl}"  height="120" class="square rounded-3 w-100" alt="" src="">
+                                    <img th:if="${myRecipe.getLatestSavedId()}" th:src="@{/download/{id}(id=${myRecipe.getLatestSavedId()})}" height="120"  class="square rounded-3 w-100" alt="" src="">
+
+
+                                    <div class="d-flex w-100 justify-content-center mt-2">
                                       <h6 class="mb-1 text-body-secondary" th:text="${myRecipe.name}"></h6>
                                     </div>
                                     <div class="rating" >

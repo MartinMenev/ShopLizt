@@ -162,14 +162,14 @@
       <section id="gallery" class="gallery section-bg pb-0">
         <div class="container" data-aos="fade-up">
           <div class="section-header">
-            <h3 class="box-title text-secondary">Some of the latest recipes</h3>
+            <h3 class="box-title text-secondary"><i>Some of the latest recipes</i></h3>
           </div>
           <!--            for each picture...-->
           <div class="gallery-slider swiper" >
             <div class="swiper-wrapper align-items-center" >
               <div class="swiper-slide" th:each="recipe:${recipes}">
-                <img th:unless="${recipe.getLatestSavedId()}" th:src="${recipe.imageUrl}" class="img-fluid rounded-3" alt="" src="">
-                <img th:if="${recipe.getLatestSavedId()}" th:src="@{/download/{id}(id=${recipe.getLatestSavedId()})}" class="img-fluid rounded-3" alt="" src="">
+                <img th:unless="${recipe.getLatestSavedId()}" th:src="${recipe.imageUrl}" height="170" class="square w-100 rounded-3" alt="" src="">
+                <img th:if="${recipe.getLatestSavedId()}" th:src="@{/download/{id}(id=${recipe.getLatestSavedId()})}" height="170" class="square w-100 rounded-3" alt="" src="">
                 <a title="Open recipe" class="list-group-item list-group-item-action active bg-transparent border-0"  aria-current="true"
                    th:href="@{/recipe/{id}(id=${recipe.id})}" >
                   <div class="d-flex w-100 justify-content-center">
