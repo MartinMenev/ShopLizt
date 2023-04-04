@@ -43,7 +43,7 @@
         <div class="col-lg-12 justify-content-center" data-aos="fade-up" data-aos-delay="100">
 
             <div class="row lg-12 justify-content-center">
-              <div class="col-lg-6 justify-content-center rounded-5" data-aos="fade-up" data-aos-delay="200">
+              <div class="col-lg-5 justify-content-center rounded-5" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 border-dark ">
                   <div class="profile-card p-3 py-4">
                     <section>
@@ -63,14 +63,11 @@
                               <input title="Save picture" type="submit" class="btn btn-outline-dark rounded-5 mt-4"
                                      th:value="Submit"/>
                             </form>
-
-
                             <span th:if="${msg != null}" th:text="${msg}"></span>
                           </div>
                         </div>
                       </div>
                     </section>
-
 
                     <form action="#" th:action="@{/update-user}" th:object="${user}" th:method="PATCH">
 
@@ -92,31 +89,18 @@
                     <a onclick="history.back()"
                        class="btn btn-outline-dark text-body-secondary rounded-5">Back</a>
                   </div>
-
-
-
                 </div>
               </div><!-- End Icon Box -->
-
-
             </div>
         </div>
       </div>
     </section>
-
-
-
-
-
-
-
   </main><!-- End #main -->
-
   <!-- ======= Footer ======= -->
+
   <footer>
     <th:block th:include="~{fragments/footer}"></th:block>
   </footer>
 
 </body>
-
 </html>
