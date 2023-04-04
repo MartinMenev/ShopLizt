@@ -172,6 +172,10 @@ Here you can find more about the design: <a href="https://bootstrapmade.com/demo
 
 ![Recipes](https://user-images.githubusercontent.com/104612887/229579039-aed6c426-c7c5-4a92-9483-822c40621c4f.png)
 
+![Not Found message](https://user-images.githubusercontent.com/104612887/229675661-3fe85a18-2bee-422e-891a-f7f58fceca29.png)
+
+![Error](https://user-images.githubusercontent.com/104612887/229676195-ce3f34ed-3bc3-41b1-b98f-b566654217dc.png)
+
 ![Product list](https://user-images.githubusercontent.com/104612887/229580449-3c7aac37-0d32-4788-916b-9a427de6b428.png)
 
 ![Profile](https://user-images.githubusercontent.com/104612887/229581379-5e76b67a-3ba5-4777-bc9d-c995f1bdcba2.png)
