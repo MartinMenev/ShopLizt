@@ -182,6 +182,9 @@ Here you can find more about the design: <a href="https://bootstrapmade.com/demo
 
 ![Recipe details](https://user-images.githubusercontent.com/104612887/227735109-15467118-142a-401c-8568-66220edf34da.png)
 
+![Recipe description](https://user-images.githubusercontent.com/104612887/229873244-77e14802-85fb-4336-843d-b618e033aff7.png)
+
+
 ![Comments](https://user-images.githubusercontent.com/104612887/227735189-90c69cca-95ba-4711-bfbd-a72e8e888624.png)
 
 ![Register Validations](https://user-images.githubusercontent.com/104612887/229354880-d3ab9ff6-b806-41f9-a08b-8e8e0376c089.png)
