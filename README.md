@@ -178,7 +178,7 @@ Here you can find more about the design: <a href="https://bootstrapmade.com/demo
 
 ![Product list](https://user-images.githubusercontent.com/104612887/229580449-3c7aac37-0d32-4788-916b-9a427de6b428.png)
 
-![Profile](https://user-images.githubusercontent.com/104612887/229581379-5e76b67a-3ba5-4777-bc9d-c995f1bdcba2.png)
+![Profile](https://user-images.githubusercontent.com/104612887/229879604-ca2c1cef-7517-4926-b01c-96912218a253.png)
 
 ![Recipe details](https://user-images.githubusercontent.com/104612887/227735109-15467118-142a-401c-8568-66220edf34da.png)
 
