@@ -76,10 +76,10 @@ Here you can find more about the design: <a href="https://bootstrapmade.com/demo
     - Description: users can add and edit the recipe description
     - Ingredients: 
         - users can list the needed products for the recipe
-        - other users can add these products to their shopping list, if they decide to cook with recipe
+        - other users can add these products to their shopping list, if they decide to cook this recipe
     - Filter by Categories - users can filter recipes by Category
     - Search Recipe - users can search (input free text) in all existing recipes and find each recipe containing this text in its title or desciption
-    - Owners of the recipes can delete the recipe
+    - Owners of the recipes and Admin-users can delete the recipe
 
 
 
@@ -94,9 +94,9 @@ Here you can find more about the design: <a href="https://bootstrapmade.com/demo
 
  - <strong>Administration</strong>
 
-      - Admin user(s) can edit all recipes
+      - Admin user(s) can edit or delete all recipes
       -	Admin user(s) can review all new added comments and should approve or delete any inappropriate comments
-      -	Admin user(s) receive daily emails if there are new added comments, awaitng approval
+      -	Admin user(s) receive daily emails if there are new added comments, awaiting approval
       -	Admin user(s) can access the user list (usernames) and can add an Admin role to more users, if needed.
 
 
