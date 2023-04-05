@@ -24,12 +24,12 @@
 
 <!--          buttons-->
           <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 col-sm-8 col-xs-8 justify-content-center">
+            <div class="col-4 justify-content-center">
               <form  th:method="get" th:action="@{/search-recipes}">
                 <input type="text" class="form-control rounded-5 border-dark" id="searchRecipe" placeholder="Search recipe . . ." name="text">
               </form>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-8 col-xs-8 justify-content-center">
+            <div class="col-4  justify-content-center">
               <form  th:method="get" th:action="@{/filter-recipes}">
                 <select class="form-control-color rounded-5 text-center w-100" name = "category" onchange="this.form.submit()">
                   <option value="">  Filter by  </option>
@@ -40,16 +40,13 @@
                 </select>
               </form>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-8 col-xs-8 justify-content-center">
+            <div class="col-4  justify-content-center">
               <button  class="btn btn-outline-dark rounded-5 w-100" >
                 <a  th:href="@{/add-recipe}"
-                    class="button"> <i class="fa-solid fa-book-open-reader"></i> Add recipe </a>
+                    class="button">  Add recipe </a>
               </button>
             </div>
           </div>
-
-
-
           <ol>
             <li><a onclick="history.back()">Go back</a></li>
             <li>My Recipes</li>
@@ -59,17 +56,13 @@
       </div>
 
     </div><!-- End Breadcrumbs -->
-
-
-
-
     <!-- ======= Recipes Section ======= -->
     <section id="chefs" class="chefs section-bg">
       <div class="container aos-init aos-animate" data-aos="fade-up">
 
         <div class="section-header mb-3">
           <h2>Recipes</h2>
-          <p>My <span >Collection</span></p>
+          <p class="text-light">My Collection</p>
         </div>
 
         <div class="row gy-4 justify-content-center" th:unless="${recipes.isEmpty()}">
@@ -80,8 +73,8 @@
 
             <div class="chef-member rounded-4 border-1 bg-body-secondary">
               <div class="member-img bg-body-secondary">
-                <img th:unless="*{getLatestSavedId()}" th:src="*{imageUrl}" width="350" height="250" class="square" alt="">
-                <img th:if="*{getLatestSavedId()}" th:src="@{/download/{id}(id=*{getLatestSavedId()})}" width="350" height="250" class="square" alt="">
+                <img th:unless="*{getLatestSavedId()}" th:src="*{imageUrl}" width="350" height="290" class="square" alt="">
+                <img th:if="*{getLatestSavedId()}" th:src="@{/download/{id}(id=*{getLatestSavedId()})}" width="350" height="290" class="square" alt="">
                 <div class="social">
                   <a title="Remove from My Collection" class="text-danger" th:href="@{/remove-from-favorites/{id}(id = *{id})}">
                     <i class="bi bi-x"> Remove</i> </a>
@@ -106,15 +99,13 @@
               </div>
             </div>
 
-
-
           </div><!-- End Recipes Member -->
 
         </div>
 
         <div class="row gy-4" th:if="${recipes.isEmpty()}">
           <p class="justify-content-center">
-            <h6 class="text-center">
+            <h6 class="text-center text-light">
               Your collection is still empty. <br>
               But you can review our latest ones and chose from them...
             </h6>
@@ -125,18 +116,19 @@
             <section id="gallery" class="gallery section-bg pb-0">
               <div class="container" data-aos="fade-up">
                 <div class="section-header">
-                  <h3 class="box-title text-secondary">Some of the latest recipes</h3>
+                  <h3 class="box-title text-light">Some of the latest recipes</h3>
                 </div>
                 <!--            for each picture...-->
                 <div class="gallery-slider swiper" >
                   <div class="swiper-wrapper align-items-center" >
                     <div class="swiper-slide" th:each="recipe:${allRecipes}">
-                      <img th:unless="${recipe.getLatestSavedId()}" th:src="${recipe.imageUrl}" class="img-fluid rounded-3" alt="" src="">
-                      <img th:if="${recipe.getLatestSavedId()}" th:src="@{/download/{id}(id=${recipe.getLatestSavedId()})}" class="img-fluid rounded-3" alt="" src="">
+
                       <a title="Open recipe" class="list-group-item list-group-item-action active bg-transparent border-0"  aria-current="true"
                          th:href="@{/recipe/{id}(id=${recipe.id})}" >
+                        <img th:unless="${recipe.getLatestSavedId()}" th:src="${recipe.imageUrl}" height="120" class="square rounded-3 w-100" alt="" src="">
+                        <img th:if="${recipe.getLatestSavedId()}" th:src="@{/download/{id}(id=${recipe.getLatestSavedId()})}" height="120" class="square rounded-3 w-100" alt="" src="">
                         <div class="d-flex w-100 justify-content-center">
-                          <h6 class="mb-1 text-body-secondary" th:text="${recipe.name}"></h6>
+                          <h6 class="mb-1 text-light" th:text="${recipe.name}"></h6>
                         </div>
                         <div class="rating" >
                           <span class= "rating" th:if="${recipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></span>

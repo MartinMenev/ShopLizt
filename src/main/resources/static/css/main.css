@@ -776,7 +776,7 @@ section {
 
 .why-us .why-box .more-btn:hover {
   color: var(--color-primary);
-  background: #fff;
+  background: rgba(237, 243, 242, 0.3);
 }
 
 .why-us .icon-box {
@@ -787,7 +787,8 @@ section {
   border: 1px solid rgba(55, 55, 63, 0.1);
   transition: 0.3s;
   opacity: 0.9;
-  background-color: #FFFFFF;
+  background-color: rgb(231, 238, 237);
+  border: darkblue;
 }
 
 .why-us .icon-box i {
@@ -1874,8 +1875,9 @@ table > tbody {
   font-family: cursive;
 }
 
-#why-us > div > div > div > div.col-lg-6.col-md-6.mt-4.aos-init.aos-animate > div {
-  background-color: #deeeee;
+#main-box {
+  background-color: #e3efee;
+  border: darkblue;
 }
 
 textarea {

@@ -59,7 +59,7 @@
                     </form>
                   </div>
                   </h6>
-                  <table class="table table-responsive-sm  rounded-3 bg-white"  th:if="${!products.isEmpty()}">
+                  <table class="table table-responsive-sm  rounded-3 bg-transparent"  th:if="${!products.isEmpty()}">
                     <thead>
                     <tr>
                       <th></th>
@@ -70,35 +70,29 @@
                     <tr   th:each="product:${products}">
                       <td  >
                         <a title="Mark as Done" class="bi-check2-circle" href="#" th:href="@{/buy-product/{id}(id=${product.id})}"></a>
-                        <a th:href="@{#}" class="btn btn-light " th:text="${product.name}"> </a>
+                        <th:block th:text="${product.name}"></th:block>
                       </td>
                       <td>
 
                                               <!--               moveUp Product-->
-                        <a  title="Move up" th:href="@{/moveUpProduct/{position}(position=${product.position})}"  class="btn btn-light"> <i class="bi bi-arrow-up"></i> </a>
-
+                        <a  title="Move up" th:href="@{/moveUpProduct/{position}(position=${product.position})}"  class="btn btn-light bg-transparent"> <i class="bi bi-arrow-up"></i> </a>
 
                           <!--                moveDown Product-->
-                        <a  title="Move down" th:href="@{/moveDownProduct/{position}(position=${product.position})}" class="btn btn-light "> <i class="bi bi-arrow-down"></i> </a>
-
+                        <a  title="Move down" th:href="@{/moveDownProduct/{position}(position=${product.position})}" class="btn btn-light bg-transparent "> <i class="bi bi-arrow-down"></i> </a>
 
                           <!--                update Product&ndash;&gt;-->
-                        <a title="Edit item" th:href="@{/product/updateProduct/{id}(id=${product.id})}" class="btn btn-light "> <i class="bi bi-pencil-square"></i> </a>
-
+                        <a title="Edit item" th:href="@{/product/updateProduct/{id}(id=${product.id})}" class="btn btn-light bg-transparent "> <i class="bi bi-pencil-square"></i> </a>
 
 
                           <!--                remove Product-->
-                        <a title="Delete item" th:href="@{/deleteProduct/{id}(id=${product.id})}" class="btn btn-light">
+                        <a title="Delete item" th:href="@{/deleteProduct/{id}(id=${product.id})}" class="btn btn-light bg-transparent">
                           <i class="fa-solid fa-xmark"></i>
                         </a>
-
 
                       </td>
                     </tr>
                     </tbody>
                   </table>
-
-
 
                 </div>
               </div><!-- End Icon Box -->
@@ -117,22 +111,18 @@
                     <tr   th:each="product:${boughtProducts}">
                       <td  >
                         <a title="Return item to my Shopping list" class="bi bi-arrow-clockwise" href="#" th:href="@{/reuse-product/{id}(id=${product.id})}"></a>
-                        <a th:href="@{#}" class="btn bg-body-secondary " th:text="${product.name}"> </a>
+                        <th:block th:text="${product.name}"></th:block>
                       </td>
                       <td>
-
-                        <a  th:href="@{#}" class="btn bg-body-secondary " th:text="${product.boughtOn}"> </a>
+                        <th:block th:text="${product.boughtOn}"></th:block>
 
                         <!--                remove Product-->
                         <a title="Delete item" th:href="@{/deleteProduct/{id}(id=${product.id})}" class="btn btn-light bg-body-secondary"><i class="fa-solid fa-xmark bg-body-secondary"></i></a>
-
 
                       </td>
                     </tr>
                     </tbody>
                   </table>
-
-
 
                 </div>
               </div><!-- End Icon Box -->
@@ -140,12 +130,6 @@
         </div>
       </div>
     </section>
-
-
-
-
-
-
 
   </main><!-- End #main -->
 
