@@ -40,7 +40,7 @@
     <section id="why-us" class="why-us section-bg">
       <div class="container justify-content-center" >
         <div class="row justify-content-center">
-              <div class="col-lg-5 col-md-12 justify-content-center rounded-5" >
+              <div class="col-lg-8 col-md-12 justify-content-center rounded-5" >
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 ">
                   <h2>Comments to approve</h2>
                   <h6 th:if="${comments.isEmpty()}">
@@ -48,7 +48,7 @@
                     No new comment yet. <br>
                     You can check again later. <br>
                   </h6>
-                  <table class="table table-responsive-sm  rounded-3 bg-white"  th:unless="${comments.isEmpty()}">
+                  <table class="table table-responsive-sm  rounded-3 bg-transparent"  th:unless="${comments.isEmpty()}">
                     <thead>
                     <tr>
                       <th></th>
@@ -58,8 +58,8 @@
                     <tbody>
                     <tr   th:each="comment:${comments}">
                       <td  >
-                        <form title="Mark as Approved" th:action="@{/approve-comment/{id}(id=${comment.id})}" th:method="patch">
-                          <input title="Update item" type="submit" class="btn btn-outline-dark rounded-5" value="Approve" />
+                        <form th:action="@{/approve-comment/{id}(id=${comment.id})}" th:method="patch">
+                          <input title="Mark as Approved" type="submit" class="btn btn-outline-dark rounded-5" value="Approve" />
                         </form>
                       </td>
                       <td>
@@ -82,7 +82,7 @@
                 </div>
               </div><!-- End Icon Box -->
 
-              <div class="col-lg-5 justify-content-center rounded-5" >
+              <div class="col-lg-4 justify-content-center rounded-5" >
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 bg-body-secondary">
                   <h4><i>All Users (not admin)</i></h4>
                   <table class="table table-responsive-sm  rounded-3 bg-body-secondary" >

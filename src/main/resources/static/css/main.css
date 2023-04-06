@@ -1739,10 +1739,10 @@ section {
 
 table > tbody {
   font-family: monospace;
-  font-size: 18px;
+  font-size: 16px;
   text-align: left;
   margin: 2%;
-  padding: 2%;
+  padding: 0;
 }
 
 
