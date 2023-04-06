@@ -100,29 +100,33 @@
               <div class="col-lg-6 justify-content-center rounded-5" th:if="${!boughtProducts.isEmpty()}">
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 bg-body-secondary">
                   <h4><i>You might want them again</i></h4>
-                  <table class="table table-responsive-sm  rounded-3 bg-body-secondary" >
-                    <thead>
-                    <tr>
-                      <th></th>
-                      <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr   th:each="product:${boughtProducts}">
-                      <td  >
-                        <a title="Return item to my Shopping list" class="bi bi-arrow-clockwise" href="#" th:href="@{/reuse-product/{id}(id=${product.id})}"></a>
-                        <th:block th:text="${product.name}"></th:block>
-                      </td>
-                      <td>
-                        <th:block th:text="${product.boughtOn}"></th:block>
 
-                        <!--                remove Product-->
-                        <a title="Delete item" th:href="@{/deleteProduct/{id}(id=${product.id})}" class="btn btn-light bg-body-secondary"><i class="fa-solid fa-xmark bg-body-secondary"></i></a>
+                    <table id="boughtProductsTable" class="table table-responsive-sm  rounded-3 bg-body-secondary"></table>
 
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
+
+<!--                  <table class="table table-responsive-sm  rounded-3 bg-body-secondary" >-->
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                      <th></th>-->
+<!--                      <th></th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                    <tr   th:each="product:${boughtProducts}">-->
+<!--                      <td  >-->
+<!--                        <a title="Return item to my Shopping list" class="bi bi-arrow-clockwise" href="#" th:href="@{/reuse-product/{id}(id=${product.id})}"></a>-->
+<!--                        <th:block th:text="${product.name}"></th:block>-->
+<!--                      </td>-->
+<!--                      <td>-->
+<!--                        <th:block th:text="${product.boughtOn}"></th:block>-->
+
+<!--                        &lt;!&ndash;                remove Product&ndash;&gt;-->
+<!--                        <a title="Delete item" th:href="@{/deleteProduct/{id}(id=${product.id})}" class="btn btn-light bg-body-secondary"><i class="fa-solid fa-xmark bg-body-secondary"></i></a>-->
+
+<!--                      </td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                  </table>-->
 
                 </div>
               </div><!-- End Icon Box -->
@@ -131,6 +135,7 @@
       </div>
     </section>
 
+    <script th:src="@{/js/products.js}"></script>
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
