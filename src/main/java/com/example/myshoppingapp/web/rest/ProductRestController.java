@@ -1,11 +1,12 @@
 package com.example.myshoppingapp.web.rest;
 
+import com.example.myshoppingapp.model.products.InputProductDTO;
 import com.example.myshoppingapp.model.products.OutputProductDTO;
 import com.example.myshoppingapp.service.ProductService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.security.Principal;
 import java.util.List;
 
@@ -23,4 +24,5 @@ public class ProductRestController {
         return ResponseEntity.ok(products);
 
     }
+
 }
