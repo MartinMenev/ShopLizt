@@ -58,9 +58,6 @@
       </div>
     </div><!-- End Breadcrumbs -->
 
-
-
-
     <!-- ======= Recipes Section ======= -->
     <section id="chefs" class="chefs section-bg">
       <div class="container aos-init aos-animate" data-aos="fade-up">
@@ -78,8 +75,10 @@
 
             <div class="chef-member  rounded-4 border-dark bg-body-secondary">
               <div class="member-img bg-body-secondary">
-                <img th:unless="*{getLatestSavedId()}" th:src="*{imageUrl}" width="350" height="250" class="square" alt="">
-                <img th:if="*{getLatestSavedId()}" th:src="@{/download/{id}(id=${recipe.getLatestSavedId()})}" width="350" height="250" class="square" alt="">
+
+                  <img th:unless="*{getLatestSavedId()}" th:src="*{imageUrl}" width="350" height="250" class="square" alt="">
+                  <img th:if="*{getLatestSavedId()}" th:src="@{/download/{id}(id=${recipe.getLatestSavedId()})}" width="350" height="250" class="square" alt="">
+
                 <div class="social">
                   <a title="Add recipe to my Favorite collection" class="button text-success" th:href="@{/save-recipe-to-favorites/{id}(id=*{id})}">
                     <i class="bi bi-suit-heart-fill"> Save </i>
