@@ -2,8 +2,8 @@ package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
 import com.example.myshoppingapp.model.enums.UserRole;
-import com.example.myshoppingapp.model.products.InputProductDTO;
-import com.example.myshoppingapp.model.products.OutputProductDTO;
+import com.example.myshoppingapp.model.products.dto.InputProductDTO;
+import com.example.myshoppingapp.model.products.dto.OutputProductDTO;
 import com.example.myshoppingapp.model.products.Product;
 import com.example.myshoppingapp.model.roles.RoleEntity;
 import com.example.myshoppingapp.model.users.UserEntity;
@@ -11,11 +11,9 @@ import com.example.myshoppingapp.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;

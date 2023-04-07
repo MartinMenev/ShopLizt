@@ -1,4 +1,6 @@
-package com.example.myshoppingapp.validation;
+package com.example.myshoppingapp.validation.loginMatch;
+
+import com.example.myshoppingapp.validation.loginMatch.LoginUserValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

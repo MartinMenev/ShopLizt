@@ -1,6 +1,6 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.model.comments.OutputCommentDTO;
+import com.example.myshoppingapp.model.comments.dto.OutputCommentDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;

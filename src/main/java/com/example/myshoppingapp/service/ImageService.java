@@ -1,8 +1,8 @@
 package com.example.myshoppingapp.service;
 
-import com.example.myshoppingapp.model.pictures.ImageDownloadModel;
+import com.example.myshoppingapp.model.pictures.dto.ImageDownloadModel;
 import com.example.myshoppingapp.model.pictures.ImageEntity;
-import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
+import com.example.myshoppingapp.model.recipes.dto.OutputRecipeDTO;
 import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.repository.ImageRepository;
 import org.modelmapper.ModelMapper;

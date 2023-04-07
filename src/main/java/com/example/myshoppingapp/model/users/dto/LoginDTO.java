@@ -1,6 +1,6 @@
-package com.example.myshoppingapp.model.users;
+package com.example.myshoppingapp.model.users.dto;
 
-import com.example.myshoppingapp.validation.ValidateLoginUser;
+import com.example.myshoppingapp.validation.loginMatch.ValidateLoginUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

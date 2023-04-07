@@ -1,6 +1,6 @@
 package com.example.myshoppingapp.web.rest;
 
-import com.example.myshoppingapp.model.products.OutputProductDTO;
+import com.example.myshoppingapp.model.products.dto.OutputProductDTO;
 import com.example.myshoppingapp.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

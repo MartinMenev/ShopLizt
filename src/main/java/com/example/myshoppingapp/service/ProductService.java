@@ -1,8 +1,8 @@
 package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.exceptions.ObjectNotFoundException;
-import com.example.myshoppingapp.model.products.InputProductDTO;
-import com.example.myshoppingapp.model.products.OutputProductDTO;
+import com.example.myshoppingapp.model.products.dto.InputProductDTO;
+import com.example.myshoppingapp.model.products.dto.OutputProductDTO;
 import com.example.myshoppingapp.model.products.Product;
 import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.repository.ProductRepository;

@@ -1,6 +1,7 @@
-package com.example.myshoppingapp.validation;
+package com.example.myshoppingapp.validation.uniqueUsername;
 
 import com.example.myshoppingapp.repository.UserRepository;
+import com.example.myshoppingapp.validation.uniqueUsername.UniqueUsername;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;

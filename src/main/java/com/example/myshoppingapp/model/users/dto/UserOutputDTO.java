@@ -1,4 +1,4 @@
-package com.example.myshoppingapp.model.users;
+package com.example.myshoppingapp.model.users.dto;
 
 import com.example.myshoppingapp.model.pictures.ImageEntity;
 import com.example.myshoppingapp.model.recipes.Recipe;

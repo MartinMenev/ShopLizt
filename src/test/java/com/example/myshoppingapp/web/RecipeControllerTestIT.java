@@ -1,43 +1,30 @@
 package com.example.myshoppingapp.web;
 
-import com.example.myshoppingapp.model.BaseEntity;
 import com.example.myshoppingapp.model.comments.Comment;
-import com.example.myshoppingapp.model.comments.OutputCommentDTO;
+import com.example.myshoppingapp.model.comments.dto.OutputCommentDTO;
 import com.example.myshoppingapp.model.enums.Category;
 import com.example.myshoppingapp.model.pictures.ImageEntity;
-import com.example.myshoppingapp.model.products.InputProductDTO;
-import com.example.myshoppingapp.model.products.Product;
-import com.example.myshoppingapp.model.recipes.InputRecipeDTO;
-import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
+import com.example.myshoppingapp.model.products.dto.InputProductDTO;
+import com.example.myshoppingapp.model.recipes.dto.InputRecipeDTO;
+import com.example.myshoppingapp.model.recipes.dto.OutputRecipeDTO;
 import com.example.myshoppingapp.model.recipes.Recipe;
 import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.service.CommentService;
-import com.example.myshoppingapp.service.EmailService;
 import com.example.myshoppingapp.service.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.stubbing.OngoingStubbing;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 

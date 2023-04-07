@@ -1,5 +1,6 @@
-package com.example.myshoppingapp.validation;
+package com.example.myshoppingapp.validation.passwordMatch;
 
+import com.example.myshoppingapp.validation.passwordMatch.FieldMatch;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.PropertyAccessorFactory;
 

@@ -1,6 +1,6 @@
-package com.example.myshoppingapp.validation;
+package com.example.myshoppingapp.validation.loginMatch;
 
-import com.example.myshoppingapp.model.users.LoginDTO;
+import com.example.myshoppingapp.model.users.dto.LoginDTO;
 import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.repository.UserRepository;
 import org.modelmapper.ModelMapper;

@@ -1,7 +1,7 @@
 package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.model.enums.UserRole;
-import com.example.myshoppingapp.model.users.RegisterUserDTO;
+import com.example.myshoppingapp.model.users.dto.RegisterUserDTO;
 import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.repository.RoleRepository;
 import com.example.myshoppingapp.repository.UserRepository;

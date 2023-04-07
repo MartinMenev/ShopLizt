@@ -1,8 +1,8 @@
 package com.example.myshoppingapp.service;
 
 import com.example.myshoppingapp.model.comments.Comment;
-import com.example.myshoppingapp.model.comments.InputCommentDTO;
-import com.example.myshoppingapp.model.comments.OutputCommentDTO;
+import com.example.myshoppingapp.model.comments.dto.InputCommentDTO;
+import com.example.myshoppingapp.model.comments.dto.OutputCommentDTO;
 import com.example.myshoppingapp.model.recipes.Recipe;
 import com.example.myshoppingapp.model.users.UserEntity;
 import com.example.myshoppingapp.repository.CommentRepository;

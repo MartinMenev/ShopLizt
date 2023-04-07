@@ -1,4 +1,4 @@
-package com.example.myshoppingapp.model.pictures;
+package com.example.myshoppingapp.model.pictures.dto;
 
 public class ImageDownloadModel {
 

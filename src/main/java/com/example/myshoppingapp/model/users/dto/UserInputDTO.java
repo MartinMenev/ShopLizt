@@ -1,4 +1,4 @@
-package com.example.myshoppingapp.model.users;
+package com.example.myshoppingapp.model.users.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

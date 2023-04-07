@@ -1,7 +1,7 @@
 package com.example.myshoppingapp.web;
 
-import com.example.myshoppingapp.model.products.InputProductDTO;
-import com.example.myshoppingapp.model.products.OutputProductDTO;
+import com.example.myshoppingapp.model.products.dto.InputProductDTO;
+import com.example.myshoppingapp.model.products.dto.OutputProductDTO;
 import com.example.myshoppingapp.model.products.Product;
 import com.example.myshoppingapp.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;

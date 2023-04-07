@@ -1,4 +1,4 @@
-package com.example.myshoppingapp.model.recipes;
+package com.example.myshoppingapp.model.recipes.dto;
 
 import com.example.myshoppingapp.model.enums.Category;
 import lombok.AllArgsConstructor;

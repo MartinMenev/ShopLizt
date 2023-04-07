@@ -1,6 +1,6 @@
 package com.example.myshoppingapp.web;
 
-import com.example.myshoppingapp.model.pictures.ImageUploadModel;
+import com.example.myshoppingapp.model.pictures.dto.ImageUploadModel;
 import com.example.myshoppingapp.service.ImageService;
 import com.example.myshoppingapp.service.RecipeService;
 import com.example.myshoppingapp.service.UserService;

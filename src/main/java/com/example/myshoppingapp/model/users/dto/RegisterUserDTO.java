@@ -1,7 +1,7 @@
-package com.example.myshoppingapp.model.users;
+package com.example.myshoppingapp.model.users.dto;
 
-import com.example.myshoppingapp.validation.FieldMatch;
-import com.example.myshoppingapp.validation.UniqueUsername;
+import com.example.myshoppingapp.validation.passwordMatch.FieldMatch;
+import com.example.myshoppingapp.validation.uniqueUsername.UniqueUsername;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,14 +1,14 @@
 package com.example.myshoppingapp.web;
 
 import com.example.myshoppingapp.model.comments.Comment;
-import com.example.myshoppingapp.model.comments.OutputCommentDTO;
+import com.example.myshoppingapp.model.comments.dto.OutputCommentDTO;
 import com.example.myshoppingapp.model.enums.Category;
 import com.example.myshoppingapp.model.pictures.ImageEntity;
-import com.example.myshoppingapp.model.products.InputProductDTO;
-import com.example.myshoppingapp.model.recipes.OutputRecipeDTO;
+import com.example.myshoppingapp.model.products.dto.InputProductDTO;
+import com.example.myshoppingapp.model.recipes.dto.OutputRecipeDTO;
 import com.example.myshoppingapp.model.recipes.Recipe;
 import com.example.myshoppingapp.model.users.UserEntity;
-import com.example.myshoppingapp.model.users.UserOutputDTO;
+import com.example.myshoppingapp.model.users.dto.UserOutputDTO;
 import com.example.myshoppingapp.service.CommentService;
 import com.example.myshoppingapp.service.ProductService;
 import com.example.myshoppingapp.service.RecipeService;
@@ -23,7 +23,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

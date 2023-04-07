@@ -1,7 +1,7 @@
 package com.example.myshoppingapp.web;
 
-import com.example.myshoppingapp.model.users.UserInputDTO;
-import com.example.myshoppingapp.model.users.UserOutputDTO;
+import com.example.myshoppingapp.model.users.dto.UserInputDTO;
+import com.example.myshoppingapp.model.users.dto.UserOutputDTO;
 import com.example.myshoppingapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
