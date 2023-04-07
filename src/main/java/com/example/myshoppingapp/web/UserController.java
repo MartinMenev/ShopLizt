@@ -47,7 +47,7 @@ public class UserController {
     @DeleteMapping("/delete-profile")
     public String deleteUser(Principal user) {
         userService.deleteUserEntityById(user.getName());
-        return "redirect:/";
+        return "redirect:/users/login";
     }
 
     @GetMapping("/make-admin/{id}")
