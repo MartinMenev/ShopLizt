@@ -21,7 +21,6 @@ public class CommentController {
     public CommentController(CommentService commentService, RecipeService recipeService) {
         this.commentService = commentService;
         this.recipeService = recipeService;
-
     }
 
     @PostMapping("/save-comment/{id}")
@@ -34,7 +33,6 @@ public class CommentController {
 
         commentService.addComment(inputCommentDTO, id, user.getName());
         recipeService.addRecipeRating(rating, id);
-
         return "redirect:/recipe/{id}";
     }
 
@@ -42,7 +40,6 @@ public class CommentController {
     @PatchMapping("/approve-comment/{id}")
     public String approveComment(@PathVariable(value = "id") long id) {
         commentService.approveComment(id);
-
         return "redirect:/admin";
     }
     @ModelAttribute(name = "commentAddModel")
@@ -64,9 +61,6 @@ public class CommentController {
     public String deleteComment(@PathVariable(value = "id") long id,
                                 Principal user) {
         this.commentService.deleteComment(id, user.getName());
-
-
-
         return "redirect:/home";
     }
 

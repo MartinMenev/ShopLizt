@@ -36,7 +36,7 @@ public class ImageController {
             response.setStatus(HttpServletResponse.SC_OK);
         }
         catch(Exception e){
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND); // 404. Add specific catch for specific errors
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
