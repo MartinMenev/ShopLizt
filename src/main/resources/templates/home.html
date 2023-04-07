@@ -56,6 +56,7 @@
                                <h3 th:text="#{navbar_my_collection}" class="box-title text-secondary" style="font-family: cursive;">
                                  My Recipe Collection</h3>
                             </div>
+                            <hr class="bg-hero hr-2 bg-body-secondary w-50 m-auto"/>
                             <!--            for each picture...-->
                             <div class="gallery-slider swiper" >
                               <div class="swiper-wrapper align-items-center" >
@@ -91,7 +92,7 @@
 
 
 
-                        <hr class="bg-hero hr-2 bg-body-secondary  aos-animate"/>
+                        <hr class="bg-hero hr-2 bg-body-secondary"/>
                       </div>
                       <div>
                         <p th:if="${myRecipes.isEmpty()}">
@@ -117,20 +118,20 @@
               </div>
             </div><!-- End Icon Box -->
             <div class="col-lg-4 col-md-6 mt-4" data-aos="fade-up" data-aos-delay="200">
-              <div  class="icon-box rounded-5 h-50 overflow-y-scroll border-dark">
+              <div  class="icon-box rounded-1 h-50 overflow-y-scroll border-dark">
                 <i class="bi bi-basket"></i>
                 <article>
                   <section class="box-info lead-box pt-3">
                     <article class="box-head align-content-center">
                       <h3 class="box-title text-secondary">My Shopping List</h3>
-                      <hr class="bg-hero hr-4 bg-body-secondary aos-animate"/>
+                      <hr class="bg-hero hr-4 bg-body-secondary w-50 m-auto"/>
                     </article>
                     <article class="box-body pt-2 pb-2 text-left">
                       <section class="scroll-holder" >
                         <div class="list-group overflow-auto" th:unless="${products.isEmpty()}" th:each="product:${products}">
                             <a class="list-group-item list-group-item-action active bg-transparent border-0"  aria-current="true"
                                th:href="@{/product-list}" >
-                              <div class="d-flex w-100 m-auto justify-content-left">
+                              <div class="d-flex w-100 mx-auto justify-content-left">
                                 <h6 class="mb-1 text-body-secondary" th:text="${product.name}"></h6>
                               </div>
                             </a>
@@ -143,7 +144,7 @@
                             <i class="bi bi-box-arrow-in-down-left"></i>
                           <div class="col align-content-center" >
                             <form  th:method="post" th:action="@{/add-product}">
-                              <input type="text" class="form-control" id="addItem" placeholder="Add item . . ." name="name">
+                              <input type="text" class="form-control w-50 rounded-5 m-auto border-dark" id="addItem" placeholder="Add item . . ." name="name">
                               <input type="submit"
                                      class="btn btn-outline-dark rounded-5 mt-3"
                                      id="postItem"
@@ -165,48 +166,52 @@
             </div><!-- End Icon Box -->
 
             <div class="col-lg-6  col-md-6 mt-4" data-aos="fade-up" data-aos-delay="200" th:unless="${othersRecipes.isEmpty()}">
-              <div class="icon-box rounded-5 h-50 overflow-y-scroll border-dark">
+              <div class="icon-box rounded-1 h-50 overflow-y-scroll border-dark">
                 <i class="bi bi-suit-heart-fill"></i>
                 <article>
                   <section class="box-info lead-box pt-3">
                     <article class="box-head align-content-center">
                       <h3 class="box-title text-secondary">You might like our recently added recipes</h3>
-                      <hr class="bg-hero hr-4 bg-body-secondary aos-animate"/>
+                      <hr class="bg-hero hr-4 bg-body-secondary w-50 m-auto"/>
                     </article>
                     <article class="box-body pt-2 pb-2 align-content-start align-text-top">
-                      <div class="list-group overflow-auto"  th:each="recipe:${othersRecipes}">
-                        <a title="Open recipe" class="list-group-item list-group-item-action active bg-transparent border-0"  aria-current="true"
-                           th:href="@{/recipe/{id}(id=${recipe.id})}" >
-                          <div class="d-flex w-100 justify-content-between">
-                            <i class="bi bi-pin-angle"></i>
-                            <h6 class="mb-1 text-body-secondary" th:text="${recipe.name}"></h6>
-                            <small th:if="${recipe.getLatestSavedId()}"><img th:src="@{/download/{id}(id=${recipe.getLatestSavedId()})}" width="70" height="40" class="square rounded-1" alt="" src=""></small>
-                            <small th:unless="${recipe.getLatestSavedId()}"> <img th:src="${recipe.imageUrl}"  width="70" height="40" class="square rounded-1"  alt="" src=""></small>
-                          </div>
-                          <div>
-                            <small class="mb-2 text-body-secondary"> shared by
-                              <th:block  th:text="${recipe.getAuthor().getUsername()}"> </th:block>
-                              <th:block  th:text="${recipe.getDays()}"></th:block>
-                              days ago
-                            </small>
-                            <small class="mb-2 text-body-secondary" >
-                              <div class="rating" >
-                                <span class= "rating" th:if="${recipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></span>
-                                <span class= "rating" th:if="${recipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></span>
-                                <span class= "rating" th:if="${recipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></span>
-                                <span class= "rating" th:if="${recipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></span>
-                                <span class= "rating" th:if="${recipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></span>
-                              </div>
-
-                            </small>
-                          </div>
-
-                        </a>
-                        <a title="Add recipe to my Favorite collection" class="button text-success" th:href="@{/save-recipe-to-favorites/{id}(id=${recipe.id})}">
+                      <div class="list-group"  th:each="recipe:${othersRecipes}">
+                        <a title="Add recipe to my Favorite collection" class="btn btn-outline-dark rounded-5 w-25 mt-2 align-content-end"
+                           th:href="@{/save-recipe-to-favorites/{id}(id=${recipe.id})}">
                           <i class="bi bi-suit-heart-fill"> Save </i>
                           <span title="Number of Saves" class ="text-dark" th:unless="${recipe.numberOfSaves == 0}"  >
-                      ( <th:block th:text="${recipe.numberOfSaves}"></th:block> ) </span>
+                            ( <th:block th:text="${recipe.numberOfSaves}"></th:block> ) </span>
                         </a>
+                        <div class="row">
+                        <div class="col-lg-7 mt-4">
+                            <div class="d-flex w-100 justify-content-between">
+                              <i class="bi bi-pin-angle"></i>
+                              <h4 class="mb-1 text-body-secondary" th:text="${recipe.name}"></h4>
+                            </div>
+                              <small class="mb-2 text-body-secondary"> shared by
+                                <th:block  th:text="${recipe.getAuthor().getUsername()}"> </th:block>
+                                <th:block  th:text="${recipe.getDays()}"></th:block>
+                                days ago
+                              </small>
+                              <small class="mb-2 text-body-secondary" >
+                                <div class="rating" >
+                                  <span class= "rating" th:if="${recipe.getRating() > 4.5}"><i class="bi bi-star-fill"></i></span>
+                                  <span class= "rating" th:if="${recipe.getRating() > 3.5}"><i class="bi bi-star-fill"></i></span>
+                                  <span class= "rating" th:if="${recipe.getRating() > 2.5}"><i class="bi bi-star-fill"></i></span>
+                                  <span class= "rating" th:if="${recipe.getRating() > 1.5}"><i class="bi bi-star-fill"></i></span>
+                                  <span class= "rating" th:if="${recipe.getRating() >= 1}"><i class="bi bi-star-fill"></i></span>
+                                </div>
+                              </small>
+                        </div>
+                        <div class="col-lg-5">
+                          <a title="Open recipe" class="list-group-item list-group-item-action active bg-transparent border-0"  aria-current="true"
+                             th:href="@{/recipe/{id}(id=${recipe.id})}" >
+                          <small th:if="${recipe.getLatestSavedId()}"><img th:src="@{/download/{id}(id=${recipe.getLatestSavedId()})}" width="150" height="80" class="square rounded-5" alt="" src=""></small>
+                          <small th:unless="${recipe.getLatestSavedId()}"> <img th:src="${recipe.imageUrl}"  width="150" height="80" class="square rounded-5"  alt="" src=""></small>
+                          </a>
+                        </div>
+
+                        </div>
                         <hr class="bg-hero hr-2 bg-body-secondary aos-animate"/>
                       </div>
                     </article>
@@ -223,11 +228,6 @@
       </div>
     </section>
 
-
-
-
-
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -235,7 +235,5 @@
     <th:block th:include="~{fragments/footer}"></th:block>
   </footer>
 
-
 </body>
-
 </html>
