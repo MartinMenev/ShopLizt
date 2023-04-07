@@ -97,7 +97,7 @@ class UserControllerTestIT {
         mockMvc.perform(delete("/delete-profile")
                         .with(csrf())).
                 andExpect(status().is3xxRedirection()).
-                andExpect((redirectedUrl("/")));
+                andExpect((redirectedUrl("/users/login")));
     }
 
     @Test
