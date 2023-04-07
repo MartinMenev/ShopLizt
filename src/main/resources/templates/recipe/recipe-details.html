@@ -146,8 +146,8 @@
                 <div class="icon-box d-flex flex-column align-items-center rounded-5 mt-10">
                   <h4>Needed products</h4>
 
-                  <a title = "Add All items to your Shopping list" th:href="@{/add-all-products-to-shopping-list/{id}(id =${recipe.id})}" class="btn btn-light " > Add all needed products to your Shopping list</a>
-                  <table class="table table-responsive-sm  rounded-3 bg-white"  >
+                  <a title = "Add All items to my Shopping list" th:href="@{/add-all-products-to-shopping-list/{id}(id =${recipe.id})}" class="btn btn-outline-dark rounded-5" > Add all to my Shopping list</a>
+                  <table class="table table-responsive-sm  rounded-3 bg-transparent"  >
                     <thead>
                     <tr>
                       <th></th>
@@ -157,8 +157,8 @@
                     <tbody>
                     <tr   th:each="product:${recipe.productList}">
                       <td  >
-                        <a title = "Add this item to your Shopping list" class="bi bi-cart-plus" href="#" th:href="@{/add-product-to-shopping-list/{id}/{name}(id = ${recipe.id}, name =${product.name})}"></a>
-                        <a th:href="@{#}" class="btn btn-light " th:text="${product.name}"> </a>
+                        <a title = "Add this item to my Shopping list" class="bi bi-cart-plus" href="#" th:href="@{/add-product-to-shopping-list/{id}/{name}(id = ${recipe.id}, name =${product.name})}"></a>
+                        <th:block  th:text="${product.name}"> </th:block>
                       </td>
                     </tr>
                     </tbody>

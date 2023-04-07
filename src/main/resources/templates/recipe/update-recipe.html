@@ -3,7 +3,7 @@
 
 <head>
   <th:block th:include="~{fragments/head}"></th:block>
-  <title>All Recipes</title>
+  <title>Update Recipe</title>
 </head>
 
 <body>
@@ -23,13 +23,12 @@
           <h2 data-aos="fade-up">
 
             <div class="section-header">
-              <p  th:text="${recipe.name}"></p>
             </div>
 
           </h2>
           <ol>
-            <li><a onclick="history.back()" > Back </a></li>
-            <li>Recipe Details</li>
+            <li class="text-light"><a onclick="history.back()" > Back </a></li>
+            <li class="text-light">Recipe Details</li>
           </ol>
         </div>
 
@@ -41,7 +40,7 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <p th:text="${recipe.name}"></p>
+          <p class="text-light" th:text="${recipe.name}"></p>
         </div>
 <!--            for each picture...-->
         <div class="gallery-slider swiper">
@@ -68,7 +67,7 @@
 
                 <form th:method="post" th:action="@{/addImgToRecipe/{id}(id=*{id})}" enctype="multipart/form-data">
                   <div class="mt-3">
-                    <input  type="file" id="upload-image" class="btn btn-outline-light text-dark bg-transparent" name="img" required="required">
+                    <input  type="file" id="upload-image" class="btn btn-outline-light text-light bg-transparent" name="img" required="required">
                   </div>
                   <input title="Save picture" type="submit" class="btn btn-outline-dark rounded-5 mt-4"
                          th:value="Submit"/>
@@ -77,13 +76,13 @@
 
                 <form action="#" th:action="@{/update-recipe/{id}(id=*{id})}" th:object="${recipe}" th:method="PATCH">
 
-                    <h5 class="mt-4 mb-2"> Title </h5>
+                    <h5 class="mt-4 mb-2 text-light"> Title </h5>
                     <input type="text" th:field="*{name}" class="form-control mb-4 col-4">
-                    <h5 class="mt-2 mb-2"> Description </h5>
+                    <h5 class="mt-2 mb-2 text-light"> Description </h5>
                     <textarea type="text" th:field="*{description}" class="form-control mb-4 col-4" rows="5">
                     </textarea>
 
-                    <h5 class="mt-2 mb-2"> Category </h5>
+                    <h5 class="mt-2 mb-2 text-light"> Category </h5>
                     <select id="category"
                             name="category"
                             class="form-control-color w-25 m-2 rounded-5 text-center">
@@ -97,7 +96,7 @@
                       </option>
                     </select>
 
-                    <h5 class="mt-2 mb-2"> Update Recipe url </h5>
+                    <h5 class="mt-2 mb-2 text-light"> Update Recipe url </h5>
                     <input type="text"  class="form-control mb-4 col-4"
                            id="url"
                            name="url"
@@ -130,7 +129,7 @@
                     Add the first needed product <br>
                     <i class="bi bi-box-arrow-in-down-left"></i>
                   </h6>
-                  <table class="table table-responsive-sm  rounded-3 bg-white"  th:unless="${recipe.productList.isEmpty()}">
+                  <table class="table table-responsive-sm  rounded-3 bg-transparent"  th:unless="${recipe.productList.isEmpty()}">
                     <thead>
                     <tr>
                       <th></th>
@@ -141,18 +140,18 @@
                     <tr   th:each="product:${recipe.productList}">
                       <td  >
                         <a title = "Add this item to your Shopping list" class="bi bi-cart-plus" href="#" th:href="@{/add-product-to-shopping-list/{name}(name =${product.name})}"></a>
-                        <a th:href="@{#}" class="btn btn-light " th:text="${product.name}"> </a>
+                        <th:block  th:text="${product.name}"> </th:block>
                       </td>
                       <td>
                         <!--                remove Product-->
-                        <a title = "Delete this item from Ingredients" th:href="@{/delete-product-from-recipe/{id}/{productId}(id = ${recipe.id}, productId = ${product.id})}"  class="btn btn-light "><i class="fa-solid fa-xmark"></i></a>
+                        <a title = "Delete this item from Ingredients" th:href="@{/delete-product-from-recipe/{id}/{productId}(id = ${recipe.id}, productId = ${product.id})}"  class="btn btn-light bg-transparent"><i class="fa-solid fa-xmark"></i></a>
                       </td>
                     </tr>
                     </tbody>
                   </table>
                   <div class="col-lg-8 justify-content-center">
                     <form  th:method="post" th:action="@{/add-product-to-recipe/{id}(id = ${recipe.id})}">
-                      <input type="text" class="form-control" id="addItems" placeholder="Add item to this recipe . . ." name="productName">
+                      <input type="text" class="form-control rounded-5 border-dark" id="addItems" placeholder="Add item to this recipe . . ." name="productName">
                     </form>
                   </div>
                 </div>
