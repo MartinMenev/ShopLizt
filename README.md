@@ -151,7 +151,7 @@ Here you can find more about the design: <a href="https://bootstrapmade.com/demo
 
 
 # <p id="email">Emails</p>
-  - Users receive emails after sucessful registration in the app:
+  - Users receive emails after successful registration in the app:
 
 ![Email after Registration](https://user-images.githubusercontent.com/104612887/228738463-5d037bab-24e5-4d45-80b6-49b380ef9323.png)
 
