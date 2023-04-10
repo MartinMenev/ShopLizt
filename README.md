@@ -80,6 +80,7 @@ Here you can find more about the design: <a href="https://bootstrapmade.com/demo
     - Filter by Categories - users can filter recipes by Category
     - Search Recipe - users can search (input free text) in all existing recipes and find each recipe containing this text in its title or desciption
     - Owners of the recipes and Admin-users can delete the recipe
+    - Pagination - the recipe list is displayed in Pages (12 recipes visible per page)
 
 
 
