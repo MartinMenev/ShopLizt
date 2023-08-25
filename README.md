@@ -1,10 +1,4 @@
-# ![image](https://user-images.githubusercontent.com/104612887/227734156-42b96841-ff9c-4a66-a420-97a99a2386db.png)
 
-This project is deployed on:
-
-https://my-spring-app-shoplizt.azuremicroservices.io
-
-You can find below details and some application pictures.
 
 # Table of Contents
   - <a href="#about">About this Project</a>
